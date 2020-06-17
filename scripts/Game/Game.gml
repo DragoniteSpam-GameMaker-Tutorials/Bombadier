@@ -1,3 +1,5 @@
+#macro GAME Help.game
+
 function Game() constructor {
     camera = new Camera();
     
