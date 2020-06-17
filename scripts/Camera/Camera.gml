@@ -8,7 +8,7 @@ function Camera() constructor {
     
     Update = function() {
         var mspd = 200;
-        var dt = delta_time / 1000000;
+        var dt = DT;
         if (keyboard_check(vk_left) || keyboard_check(ord("A"))) {
             from.x -= mspd * dt;
             to.x -= mspd * dt;
@@ -30,6 +30,8 @@ function Camera() constructor {
     Render = function() {
         gpu_set_ztestenable(true);
         gpu_set_zwriteenable(true);
+        gpu_set_alphatestenable(true);
+        gpu_set_alphatestref(10);
         
         draw_clear(c_black);
         

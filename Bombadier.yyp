@@ -1,16 +1,19 @@
 {
   "resources": [
-    {"id":{"name":"Camera","path":"scripts/Camera/Camera.yy",},"order":2,},
-    {"id":{"name":"Backbone","path":"objects/Backbone/Backbone.yy",},"order":1,},
-    {"id":{"name":"Math","path":"scripts/Math/Math.yy",},"order":6,},
-    {"id":{"name":"Game","path":"scripts/Game/Game.yy",},"order":0,},
+    {"id":{"name":"spr_ant_red","path":"sprites/spr_ant_red/spr_ant_red.yy",},"order":4,},
+    {"id":{"name":"Camera","path":"scripts/Camera/Camera.yy",},"order":1,},
+    {"id":{"name":"Backbone","path":"objects/Backbone/Backbone.yy",},"order":0,},
+    {"id":{"name":"Math","path":"scripts/Math/Math.yy",},"order":1,},
+    {"id":{"name":"Game","path":"scripts/Game/Game.yy",},"order":2,},
     {"id":{"name":"spr_ant","path":"sprites/spr_ant/spr_ant.yy",},"order":3,},
     {"id":{"name":"Entities","path":"scripts/Entities/Entities.yy",},"order":0,},
+    {"id":{"name":"Waves","path":"scripts/Waves/Waves.yy",},"order":3,},
     {"id":{"name":"load_model","path":"scripts/load_model/load_model.yy",},"order":0,},
     {"id":{"name":"spr_grid","path":"sprites/spr_grid/spr_grid.yy",},"order":2,},
+    {"id":{"name":"macros","path":"scripts/macros/macros.yy",},"order":10,},
     {"id":{"name":"pth_test","path":"paths/pth_test/pth_test.yy",},"order":19,},
     {"id":{"name":"Database","path":"scripts/Database/Database.yy",},"order":4,},
-    {"id":{"name":"Vector","path":"scripts/Vector/Vector.yy",},"order":3,},
+    {"id":{"name":"Vector","path":"scripts/Vector/Vector.yy",},"order":2,},
     {"id":{"name":"rm_test","path":"rooms/rm_test/rm_test.yy",},"order":1,},
   ],
   "Options": [
@@ -41,7 +44,9 @@
   "Folders": [
     {"folderPath":"folders/Core Stuff.yy","order":15,"resourceVersion":"1.0","name":"Core Stuff","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Temporary stuff.yy","order":18,"resourceVersion":"1.0","name":"Temporary stuff","tags":[],"resourceType":"GMFolder",},
-    {"folderPath":"folders/Core Stuff/Game entity stuff.yy","order":5,"resourceVersion":"1.0","name":"Game entity stuff","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/Core Stuff/Gameplay/Game entity stuff.yy","order":0,"resourceVersion":"1.0","name":"Game entity stuff","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/Core Stuff/Gameplay.yy","order":8,"resourceVersion":"1.0","name":"Gameplay","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/Core Stuff/Help.yy","order":9,"resourceVersion":"1.0","name":"Help","tags":[],"resourceType":"GMFolder",},
   ],
   "AudioGroups": [
     {"targets":461609314234257646,"resourceVersion":"1.0","name":"audiogroup_default","resourceType":"GMAudioGroup",},

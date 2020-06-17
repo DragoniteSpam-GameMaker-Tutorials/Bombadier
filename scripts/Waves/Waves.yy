@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Help",
-    "path": "folders/Core Stuff/Help.yy",
+    "name": "Gameplay",
+    "path": "folders/Core Stuff/Gameplay.yy",
   },
   "resourceVersion": "1.0",
-  "name": "Vector",
+  "name": "Waves",
   "tags": [],
   "resourceType": "GMScript",
 }

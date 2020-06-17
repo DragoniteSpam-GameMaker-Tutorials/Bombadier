@@ -2,8 +2,8 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Core Stuff",
-    "path": "folders/Core Stuff.yy",
+    "name": "Gameplay",
+    "path": "folders/Core Stuff/Gameplay.yy",
   },
   "resourceVersion": "1.0",
   "name": "Camera",

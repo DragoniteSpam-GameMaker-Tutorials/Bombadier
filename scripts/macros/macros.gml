@@ -1,0 +1,4 @@
+#macro DT (delta_time / 1000000)
+#macro WAVE_WARMUP_COUNTDOWN 30
+#macro WAVE_FOE_COUNTDOWN 1
+#macro WAVE_COUNTDOWN 15

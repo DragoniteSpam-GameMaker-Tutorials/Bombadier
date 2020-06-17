@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Help",
-    "path": "folders/Core Stuff/Help.yy",
+    "name": "Core Stuff",
+    "path": "folders/Core Stuff.yy",
   },
   "resourceVersion": "1.0",
-  "name": "Vector",
+  "name": "macros",
   "tags": [],
   "resourceType": "GMScript",
 }

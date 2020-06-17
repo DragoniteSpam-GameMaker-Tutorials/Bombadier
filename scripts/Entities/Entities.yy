@@ -3,7 +3,7 @@
   "isCompatibility": false,
   "parent": {
     "name": "Game entity stuff",
-    "path": "folders/Core Stuff/Game entity stuff.yy",
+    "path": "folders/Core Stuff/Gameplay/Game entity stuff.yy",
   },
   "resourceVersion": "1.0",
   "name": "Entities",

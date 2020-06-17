@@ -49,7 +49,7 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
     self.destination = new Vector3(path_get_point_x(self.path, 0), path_get_point_y(self.path, 0), 0);
     
     Update = function() {
-        var dt = delta_time / 1000000;
+        var dt = DT;
         var dir = point_direction(position.x, position.y, destination.x, destination.y);
         position.x = approach(position.x, destination.x, speed * abs(dcos(dir)) * dt);
         position.y = approach(position.y, destination.y, speed * abs(dsin(dir)) * dt);

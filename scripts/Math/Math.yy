@@ -2,8 +2,8 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Core Stuff",
-    "path": "folders/Core Stuff.yy",
+    "name": "Help",
+    "path": "folders/Core Stuff/Help.yy",
   },
   "resourceVersion": "1.0",
   "name": "Math",
