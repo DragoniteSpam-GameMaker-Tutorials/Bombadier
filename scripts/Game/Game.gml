@@ -58,6 +58,9 @@ function Game() constructor {
     tower_pebbles =     new TowerData("Pebble Shooter",     1, 3, 1, 10, 0);
     tower_fire =        new TowerData("Fire Shooter",       2, 1.5, 1, 10, 0);
     
+    vb_tower = load_model("tower.d3d", format);
+    vb_foe = load_model("foe.d3d", format);
+    
     Update = function() {
         camera.Update();
     };
@@ -66,5 +69,17 @@ function Game() constructor {
         camera.Render();
         
         vertex_submit(ground, pr_trianglelist, sprite_get_texture(spr_grid, 0));
+        
+        matrix_set(matrix_world, matrix_build(640, 360, 0, 0, 0, 0, 1, 1, 1));
+        vertex_submit(vb_tower, pr_trianglelist, -1);
+        matrix_set(matrix_world, matrix_build_identity());
+        
+        matrix_set(matrix_world, matrix_build(720, 400, 0, 0, 0, 0, 1, 1, 1));
+        vertex_submit(vb_foe, pr_trianglelist, sprite_get_texture(spr_ant, 0));
+        matrix_set(matrix_world, matrix_build_identity());
+        
+        matrix_set(matrix_world, matrix_build(560, 440, 0, 0, 0, 0, 1, 1, 1));
+        vertex_submit(vb_foe, pr_trianglelist, sprite_get_texture(spr_ant, 0));
+        matrix_set(matrix_world, matrix_build_identity());
     };
 }

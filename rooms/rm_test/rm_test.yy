@@ -45,8 +45,8 @@
     "PhysicsWorldPixToMetres": 0.1,
   },
   "parent": {
-    "name": "Bombadier",
-    "path": "Bombadier.yyp",
+    "name": "Temporary stuff",
+    "path": "folders/Temporary stuff.yy",
   },
   "resourceVersion": "1.0",
   "name": "rm_test",
