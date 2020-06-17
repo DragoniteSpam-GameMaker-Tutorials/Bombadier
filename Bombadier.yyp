@@ -1,12 +1,14 @@
 {
   "resources": [
     {"id":{"name":"Camera","path":"scripts/Camera/Camera.yy",},"order":2,},
-    {"id":{"name":"Help","path":"objects/Help/Help.yy",},"order":1,},
+    {"id":{"name":"Backbone","path":"objects/Backbone/Backbone.yy",},"order":1,},
+    {"id":{"name":"Math","path":"scripts/Math/Math.yy",},"order":6,},
     {"id":{"name":"Game","path":"scripts/Game/Game.yy",},"order":0,},
     {"id":{"name":"spr_ant","path":"sprites/spr_ant/spr_ant.yy",},"order":3,},
     {"id":{"name":"Entities","path":"scripts/Entities/Entities.yy",},"order":0,},
     {"id":{"name":"load_model","path":"scripts/load_model/load_model.yy",},"order":0,},
     {"id":{"name":"spr_grid","path":"sprites/spr_grid/spr_grid.yy",},"order":2,},
+    {"id":{"name":"pth_test","path":"paths/pth_test/pth_test.yy",},"order":19,},
     {"id":{"name":"Database","path":"scripts/Database/Database.yy",},"order":4,},
     {"id":{"name":"Vector","path":"scripts/Vector/Vector.yy",},"order":3,},
     {"id":{"name":"rm_test","path":"rooms/rm_test/rm_test.yy",},"order":1,},

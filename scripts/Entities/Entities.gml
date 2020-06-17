@@ -33,7 +33,7 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
     };
 }
 
-function EntityFoe(x, y, z, class, level) : Entity(x, y, z) constructor {
+function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
     self.class = class;
     self.level = level;
     
@@ -44,8 +44,23 @@ function EntityFoe(x, y, z, class, level) : Entity(x, y, z) constructor {
     self.speed = class.speed;
     self.damage = class.damage;
     
+    self.path = pth_test;
+    self.path_node = 0;
+    self.destination = new Vector3(path_get_point_x(self.path, 0), path_get_point_y(self.path, 0), 0);
+    
     Update = function() {
-        position.y++;
+        var dt = delta_time / 1000000;
+        var dir = point_direction(position.x, position.y, destination.x, destination.y);
+        position.x = approach(position.x, destination.x, speed * abs(dcos(dir)) * dt);
+        position.y = approach(position.y, destination.y, speed * abs(dsin(dir)) * dt);
+        position.z = approach(position.z, destination.z, speed * dt);
+        if (position.x == destination.x && position.y == destination.y && position.z == destination.z) {
+            if (path_get_number(path) > (path_node + 1)) {
+                path_node++;
+                destination.x = path_get_point_x(path, path_node);
+                destination.y = path_get_point_y(path, path_node);
+            }
+        }
     };
     
     Render = function() {
