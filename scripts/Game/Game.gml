@@ -50,6 +50,14 @@ function Game() constructor {
     vertex_end(ground);
     vertex_freeze(ground);
     
+    foe_ant =       new FoeData("Ant",          5, 0, 0, 2, 1, 0);
+    foe_pillbugs =  new FoeData("Pillbugs",     10, 1, 0, 2, 1, 0);
+    foe_spider =    new FoeData("Spider",       10, 0, 1, 2, 1, 0);
+    foe_millipede = new FoeData("Millipede",    20, 0, 0, 1, 1, 0);
+    
+    tower_pebbles =     new TowerData("Pebble Shooter",     1, 3, 1, 10, 0);
+    tower_fire =        new TowerData("Fire Shooter",       2, 1.5, 1, 10, 0);
+    
     Update = function() {
         camera.Update();
     };

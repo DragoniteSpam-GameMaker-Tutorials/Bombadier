@@ -4,6 +4,7 @@
     {"id":{"name":"Help","path":"objects/Help/Help.yy",},"order":1,},
     {"id":{"name":"Game","path":"scripts/Game/Game.yy",},"order":0,},
     {"id":{"name":"spr_grid","path":"sprites/spr_grid/spr_grid.yy",},"order":16,},
+    {"id":{"name":"Database","path":"scripts/Database/Database.yy",},"order":4,},
     {"id":{"name":"Vector","path":"scripts/Vector/Vector.yy",},"order":3,},
     {"id":{"name":"rm_test","path":"rooms/rm_test/rm_test.yy",},"order":14,},
   ],
