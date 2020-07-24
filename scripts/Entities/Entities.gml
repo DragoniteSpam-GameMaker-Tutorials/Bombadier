@@ -12,18 +12,28 @@ function Entity(x, y, z) constructor {
     };
     
     Destroy = function() {
-        
+        var current_index = ds_list_find_index(GAME.all_entities, self);
+        if (current_index > -1) {
+            ds_list_delete(GAME.all_entities, current_index);
+        }
     };
 }
 
 function EntityBullet(x, y, z, vx, vy, vz, bullet_data) : Entity(x, y, z) constructor {
     velocity = new Vector3(vx, vy, vz);
     self.bullet_data = bullet_data;
+    time_to_live = 1;
     
     Update = function() {
         position.x += velocity.x;
         position.y += velocity.y;
         position.z += velocity.z;
+        
+        time_to_live -= DT;
+        
+        if (time_to_live <= 0) {
+            Destroy();
+        }
     };
     
     Render = function() {
@@ -45,7 +55,7 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
                 Shoot(target_foe);
             }
         } else {
-            shot_cooldown -= delta_time / 1000000;
+            shot_cooldown -= DT;
         }
     };
     
