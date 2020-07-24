@@ -10,14 +10,21 @@ function load_model(filename, format) {
     var line = array_create(10, 0);
 
     for (var i = 0; i < n; i++){
-        line[0] = file_text_read_real(file);
-        if (line[0] = 1) continue;
-        line[1] = file_text_read_real(file);
-        if (line[0] == 0 && line[1] == 4) continue;
+        var str = file_text_read_string(file);
+        file_text_readln(file);
         
-    	for (var j = 2; j < 11; j++) {
-    		line[j] = file_text_read_real(file);
-    	}
+        var sstr = "";
+        var index = 0;
+        for (var j = 1; j <= string_length(str); j++) {
+            var c = string_char_at(str, j);
+            if (c == " ") {
+                line[index++] = sstr;
+                sstr = "";
+            } else {
+                sstr += c;
+            }
+        }
+        if (sstr != "") line[index++] = sstr;
         
         if (line[0] == 9) {
             vertex_position_3d(model, line[1], line[2], line[3]);
