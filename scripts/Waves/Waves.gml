@@ -14,7 +14,9 @@ function Wave(class, number, level) constructor {
     Update = function() {
         if (running) {
             if (foe_timer <= 0) {
-                ds_list_add(GAME.all_entities, new EntityFoe(class, level));
+                var foe = new EntityFoe(class, level);
+                ds_list_add(GAME.all_entities, foe);
+                ds_list_add(GAME.all_foes, foe);
                 foe_timer = WAVE_FOE_COUNTDOWN;
                 foes_remaining--;
             }

@@ -16,11 +16,40 @@ function Entity(x, y, z) constructor {
     };
 }
 
+function EntityBullet(x, y, z, vx, vy, vz) : Entity(x, y, z) constructor {
+    velocity = new Vector3(vx, vy, vz);
+    vbuff = load_model("testbullet.d3d", GAME.format);
+    
+    Update = function() {
+        position.x += velocity.x;
+        position.y += velocity.y;
+        position.z += velocity.z;
+    };
+    
+    Render = function() {
+        matrix_set(matrix_world, matrix_build(position.x, position.y, position.z, 0, 0, 0, 1, 1, 1));
+        vertex_submit(vbuff, pr_trianglelist, -1);
+        matrix_set(matrix_world, matrix_build_identity());
+    };
+}
+
 function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
     self.class = class;
     
     Update = function() {
-        rotation.z++;
+        var target_foe = undefined;
+        for (var i = 0; i < ds_list_size(GAME.all_foes); i++) {
+            var foe = GAME.all_foes[| i];
+            if (point_distance_3d(position.x, position.y, position.z, foe.position.x, foe.position.y, foe.position.z) < class.range) {
+                target_foe = foe;
+                break;
+            }
+        }
+        if (target_foe) {
+            var dir = point_direction(position.x, position.y, target_foe.position.x, target_foe.position.y);
+            var bullet = new EntityBullet(position.x, position.y, position.z, 2 * dcos(dir), 2 * -dsin(dir), 0);
+            ds_list_add(GAME.all_entities, bullet);
+        }
     };
     
     Render = function() {

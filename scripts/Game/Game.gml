@@ -61,11 +61,12 @@ function Game() constructor {
     foe_spider =    new FoeData("Spider",       10, 0, 1, 64, 1, spr_ant, load_model("foe.d3d", format));
     foe_millipede = new FoeData("Millipede",    20, 0, 0, 40, 1, spr_ant, load_model("foe.d3d", format));
     
-    tower_pebbles =     new TowerData("Pebble Shooter",     1, 3, 1, 10, load_model("tower.d3d", format));
-    tower_fire =        new TowerData("Fire Shooter",       2, 1.5, 1, 10, load_model("tower.d3d", format));
+    tower_pebbles =     new TowerData("Pebble Shooter",     1, 3 * 32, 1, 10, load_model("tower.d3d", format));
+    tower_fire =        new TowerData("Fire Shooter",       2, 1.5 * 32, 1, 10, load_model("tower.d3d", format));
     #endregion
     
     all_entities = ds_list_create();
+    all_foes = ds_list_create();
     
     all_waves = ds_queue_create();
     ds_queue_enqueue(all_waves,
