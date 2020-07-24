@@ -16,9 +16,9 @@ function Entity(x, y, z) constructor {
     };
 }
 
-function EntityBullet(x, y, z, vx, vy, vz) : Entity(x, y, z) constructor {
+function EntityBullet(x, y, z, vx, vy, vz, bullet_data) : Entity(x, y, z) constructor {
     velocity = new Vector3(vx, vy, vz);
-    vbuff = load_model("testbullet.d3d", GAME.format);
+    self.bullet_data = bullet_data;
     
     Update = function() {
         position.x += velocity.x;
@@ -28,7 +28,7 @@ function EntityBullet(x, y, z, vx, vy, vz) : Entity(x, y, z) constructor {
     
     Render = function() {
         matrix_set(matrix_world, matrix_build(position.x, position.y, position.z, 0, 0, 0, 1, 1, 1));
-        vertex_submit(vbuff, pr_trianglelist, -1);
+        vertex_submit(bullet_data.vbuff, pr_trianglelist, -1);
         matrix_set(matrix_world, matrix_build_identity());
     };
 }
@@ -51,7 +51,7 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
     
     Shoot = function(target_foe) {
         var dir = point_direction(position.x, position.y, target_foe.position.x, target_foe.position.y);
-        var bullet = new EntityBullet(position.x, position.y, position.z, 2 * dcos(dir), 2 * -dsin(dir), 0);
+        var bullet = new EntityBullet(position.x, position.y, position.z, 2 * dcos(dir), 2 * -dsin(dir), 0, class.bullet_data);
         ds_list_add(GAME.all_entities, bullet);
         shot_cooldown = 1 / class.rate;
     };
