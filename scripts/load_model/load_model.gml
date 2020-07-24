@@ -10,7 +10,12 @@ function load_model(filename, format) {
     var line = array_create(10, 0);
 
     for (var i = 0; i < n; i++){
-    	for (var j = 0; j < 11; j++){
+        line[0] = file_text_read_real(file);
+        if (line[0] = 1) continue;
+        line[1] = file_text_read_real(file);
+        if (line[0] == 0 && line[1] == 4) continue;
+        
+    	for (var j = 2; j < 11; j++) {
     		line[j] = file_text_read_real(file);
     	}
         
