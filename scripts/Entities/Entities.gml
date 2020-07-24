@@ -36,19 +36,26 @@ function EntityBullet(x, y, z, vx, vy, vz) : Entity(x, y, z) constructor {
 function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
     self.class = class;
     
+    self.shot_cooldown = 0;
+    
     Update = function() {
-        var target_foe = undefined;
-        for (var i = 0; i < ds_list_size(GAME.all_foes); i++) {
-            var foe = GAME.all_foes[| i];
-            if (point_distance_3d(position.x, position.y, position.z, foe.position.x, foe.position.y, foe.position.z) < class.range) {
-                target_foe = foe;
-                break;
+        if (shot_cooldown <= 0) {
+            var target_foe = undefined;
+            for (var i = 0; i < ds_list_size(GAME.all_foes); i++) {
+                var foe = GAME.all_foes[| i];
+                if (point_distance_3d(position.x, position.y, position.z, foe.position.x, foe.position.y, foe.position.z) < class.range) {
+                    target_foe = foe;
+                    break;
+                }
             }
-        }
-        if (target_foe) {
-            var dir = point_direction(position.x, position.y, target_foe.position.x, target_foe.position.y);
-            var bullet = new EntityBullet(position.x, position.y, position.z, 2 * dcos(dir), 2 * -dsin(dir), 0);
-            ds_list_add(GAME.all_entities, bullet);
+            if (target_foe) {
+                var dir = point_direction(position.x, position.y, target_foe.position.x, target_foe.position.y);
+                var bullet = new EntityBullet(position.x, position.y, position.z, 2 * dcos(dir), 2 * -dsin(dir), 0);
+                ds_list_add(GAME.all_entities, bullet);
+                shot_cooldown = 1 / class.rate;
+            }
+        } else {
+            shot_cooldown -= delta_time / 1000000;
         }
     };
     
