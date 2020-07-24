@@ -1,4 +1,5 @@
 #macro GAME Backbone.game
+show_debug_overlay(true);
 
 function Game() constructor {
     camera = new Camera();
@@ -52,6 +53,8 @@ function Game() constructor {
     vertex_freeze(ground);
     #endregion
     
+    test_ball = load_model("testball.d3d", format);
+    
     #region database
     foe_ant =       new FoeData("Ant",          5, 0, 0, 64, 1, spr_ant, load_model("foe.d3d", format));
     foe_pillbugs =  new FoeData("Pillbugs",     10, 1, 0, 64, 1, spr_ant_red, load_model("foe.d3d", format));
@@ -63,8 +66,6 @@ function Game() constructor {
     #endregion
     
     all_entities = ds_list_create();
-    ds_list_add(all_entities, new EntityTower(640, 360, 0, tower_pebbles));
-    ds_list_add(all_entities, new EntityTower(760, 240, 0, tower_fire));
     
     all_waves = ds_queue_create();
     ds_queue_enqueue(all_waves,
@@ -74,6 +75,8 @@ function Game() constructor {
     wave_current = undefined;
     wave_countdown = WAVE_WARMUP_COUNTDOWN;
     wave_finished = false;
+    
+    player_money = 50;
     
     SendInWave = function() {
         if (ds_queue_empty(all_waves)) {
@@ -86,6 +89,15 @@ function Game() constructor {
     
     Update = function() {
         camera.Update();
+        
+        if (mouse_check_button_pressed(mb_left)) {
+            var position = camera.GetFloorIntersect();
+            var tower_type = tower_pebbles;
+            if (position && player_money >= tower_type.cost) {
+                player_money -= tower_type.cost;
+                ds_list_add(all_entities, new EntityTower(position.x, position.y, position.z, tower_type));
+            }
+        }
         
         if (keyboard_check_pressed(vk_space)) {
             SendInWave();
@@ -116,5 +128,9 @@ function Game() constructor {
         for (var i = 0; i < ds_list_size(all_entities); i++) {
             all_entities[| i].Render();
         }
+    };
+    
+    GUI = function() {
+        draw_text(32, 32, "Player money: " + string(player_money));
     };
 }
