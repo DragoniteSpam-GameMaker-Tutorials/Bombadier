@@ -141,6 +141,9 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
                 path_node++;
                 destination.x = path_get_point_x(path, path_node);
                 destination.y = path_get_point_y(path, path_node);
+            } else {
+                GAME.PlayerDamage(1);
+                Destroy();
             }
         }
     };

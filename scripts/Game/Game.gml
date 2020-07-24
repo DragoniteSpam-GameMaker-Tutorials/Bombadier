@@ -56,8 +56,8 @@ function Game() constructor {
     test_ball = load_model("testball.d3d", format);
     
     #region database
-    foe_ant =       new FoeData("Ant",          5, 0, 0, 32, 1, 2, spr_ant, load_model("foe.d3d", format));
-    foe_pillbugs =  new FoeData("Pillbugs",     10, 1, 0, 64, 1, 3, spr_ant_red, load_model("foe.d3d", format));
+    foe_ant =       new FoeData("Ant",          5, 0, 0, 100, 1, 2, spr_ant, load_model("foe.d3d", format));
+    foe_pillbugs =  new FoeData("Pillbugs",     10, 1, 0, 100, 1, 3, spr_ant_red, load_model("foe.d3d", format));
     foe_spider =    new FoeData("Spider",       10, 0, 1, 64, 1, 4, spr_ant, load_model("foe.d3d", format));
     foe_millipede = new FoeData("Millipede",    20, 0, 0, 40, 1, 4, spr_ant, load_model("foe.d3d", format));
     
@@ -80,6 +80,7 @@ function Game() constructor {
     wave_finished = false;
     
     player_money = 50;
+    player_health = 10;
     
     SendInWave = function() {
         if (ds_queue_empty(all_waves)) {
@@ -87,6 +88,14 @@ function Game() constructor {
         } else {
             wave_current = ds_queue_dequeue(all_waves);
             wave_current.Launch();
+        }
+    };
+    
+    PlayerDamage = function(amount) {
+        player_health -= max(amount, 0);
+        if (player_health < 0) {
+            show_message("aaaaaaaaaaaaaaaaa");
+            game_end();
         }
     };
     
@@ -135,5 +144,6 @@ function Game() constructor {
     
     GUI = function() {
         draw_text(32, 32, "Player money: " + string(player_money));
+        draw_text(32, 64, "Player health: " + string(player_health));
     };
 }
