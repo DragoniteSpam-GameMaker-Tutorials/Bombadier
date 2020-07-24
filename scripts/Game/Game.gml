@@ -53,6 +53,13 @@ function Game() constructor {
     vertex_freeze(ground);
     #endregion
     
+    #region environment objects
+    env_objects = ds_map_create();
+    for (var file = file_find_first("environment/*.d3d", 0); file != ""; file = file_find_next()) {
+        env_objects[? string_replace(file, "000.d3d", "")] = load_model("environment/" + file, format);
+    }
+    #endregion
+    
     test_ball = load_model("testball.d3d", format);
     
     #region database
@@ -69,6 +76,16 @@ function Game() constructor {
     
     all_entities = ds_list_create();
     all_foes = ds_list_create();
+    
+    var key = ds_map_find_first(env_objects);
+    repeat (50) {
+        var ent = new EntityEnv(random(room_width), random(room_height), 0, env_objects[? key]);
+        ds_list_add(all_entities, ent);
+        key = ds_map_find_next(env_objects, key);
+        if (key == undefined) {
+            key = ds_map_find_first(env_objects);
+        }
+    }
     
     all_waves = ds_queue_create();
     ds_queue_enqueue(all_waves,

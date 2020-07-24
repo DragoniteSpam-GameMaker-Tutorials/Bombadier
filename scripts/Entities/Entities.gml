@@ -19,6 +19,17 @@ function Entity(x, y, z) constructor {
     };
 }
 
+function EntityEnv(x, y, z, vbuff) : Entity(x, y, z) constructor {
+    self.vbuff = vbuff;
+    
+    Render = function() {
+        matrix_set(matrix_world, matrix_build(position.x, position.y, position.z, 0, 0, 0, 1, 1, 1));
+        vertex_submit(vbuff, pr_trianglelist, -1);
+        matrix_set(matrix_world, matrix_build_identity());
+        show_debug_message([position.x, position.y, position.z, vbuff]);
+    };
+}
+
 function EntityBullet(x, y, z, vx, vy, vz, bullet_data) : Entity(x, y, z) constructor {
     velocity = new Vector3(vx, vy, vz);
     self.bullet_data = bullet_data;
