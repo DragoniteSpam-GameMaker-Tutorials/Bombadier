@@ -29,6 +29,16 @@ function EntityBullet(x, y, z, vx, vy, vz, bullet_data) : Entity(x, y, z) constr
         position.y += velocity.y;
         position.z += velocity.z;
         
+        for (var i = 0; i < ds_list_size(GAME.all_foes); i++) {
+            var foe = GAME.all_foes[| i];
+            var radius = 12;
+            if (point_distance_3d(position.x, position.y, position.z, foe.position.x, foe.position.y, foe.position.z) <= radius) {
+                foe.Damage(1);
+                Destroy();
+                return;
+            }
+        }
+        
         time_to_live -= DT;
         
         if (time_to_live <= 0) {
@@ -61,7 +71,7 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
     
     Shoot = function(target_foe) {
         var dir = point_direction(position.x, position.y, target_foe.position.x, target_foe.position.y);
-        var bullet = new EntityBullet(position.x, position.y, position.z, 2 * dcos(dir), 2 * -dsin(dir), 0, class.bullet_data);
+        var bullet = new EntityBullet(position.x, position.y, position.z, 6 * dcos(dir), 6 * -dsin(dir), 0, class.bullet_data);
         ds_list_add(GAME.all_entities, bullet);
         shot_cooldown = 1 / class.rate;
     };
@@ -103,6 +113,17 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
     self.path_node = 0;
     self.destination = new Vector3(path_get_point_x(self.path, 0), path_get_point_y(self.path, 0), 0);
     
+    Damage = function(amount) {
+        hp -= max(amount, 0);
+        if (hp < 0) {
+            Destroy();
+        }
+    };
+    
+    Heal = function(amount) {
+        hp = min(hp + max(amount, 0), hp_max);
+    };
+    
     Update = function() {
         var dt = DT;
         var dir = point_direction(position.x, position.y, destination.x, destination.y);
@@ -125,5 +146,16 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
         matrix_set(matrix_world, transform);
         vertex_submit(class.model, pr_trianglelist, sprite_get_texture(class.sprite, 0));
         matrix_set(matrix_world, matrix_build_identity());
+    };
+    
+    Destroy = function() {
+        var current_index = ds_list_find_index(GAME.all_entities, self);
+        if (current_index > -1) {
+            ds_list_delete(GAME.all_entities, current_index);
+        }
+        var current_index = ds_list_find_index(GAME.all_foes, self);
+        if (current_index > -1) {
+            ds_list_delete(GAME.all_foes, current_index);
+        }
     };
 }
