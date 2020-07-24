@@ -26,7 +26,6 @@ function EntityEnv(x, y, z, vbuff) : Entity(x, y, z) constructor {
         matrix_set(matrix_world, matrix_build(position.x, position.y, position.z, 0, 0, 0, 1, 1, 1));
         vertex_submit(vbuff, pr_trianglelist, -1);
         matrix_set(matrix_world, matrix_build_identity());
-        show_debug_message([position.x, position.y, position.z, vbuff]);
     };
 }
 

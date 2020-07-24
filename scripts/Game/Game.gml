@@ -78,8 +78,15 @@ function Game() constructor {
     all_foes = ds_list_create();
     
     var key = ds_map_find_first(env_objects);
-    repeat (50) {
-        var ent = new EntityEnv(random(room_width), random(room_height), 0, env_objects[? key]);
+    repeat (100) {
+        if (choose(false, true)) {
+            var xx = random(room_width);
+            var yy = choose(0, room_height) + random_range(-64, 64);
+        } else {
+            var xx = choose(0, room_width) + random_range(-64, 64);
+            var yy = random(room_height);
+        }
+        var ent = new EntityEnv(xx, yy, 0, env_objects[? key]);
         ds_list_add(all_entities, ent);
         key = ds_map_find_next(env_objects, key);
         if (key == undefined) {
