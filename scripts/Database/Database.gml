@@ -1,10 +1,11 @@
-function FoeData(name, hp, def, mdef, speed, damage, sprite, model) constructor {
+function FoeData(name, hp, def, mdef, speed, damage, reward, sprite, model) constructor {
     self.name = name;
     self.hp = hp;
     self.def = def;
     self.mdef = mdef;
     self.speed = speed;
     self.damage = damage;
+    self.reward = reward;
     self.sprite = sprite;
     self.model = model;
     

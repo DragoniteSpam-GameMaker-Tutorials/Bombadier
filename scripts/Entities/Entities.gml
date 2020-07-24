@@ -108,6 +108,7 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
     self.mdef = class.mdef;
     self.speed = class.speed;
     self.damage = class.damage;
+    self.reward = class.reward;
     
     self.path = pth_test;
     self.path_node = 0;
@@ -116,12 +117,17 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
     Damage = function(amount) {
         hp -= max(amount, 0);
         if (hp < 0) {
-            Destroy();
+            Die();
         }
     };
     
     Heal = function(amount) {
         hp = min(hp + max(amount, 0), hp_max);
+    };
+    
+    Die = function() {
+        GAME.player_money += reward;
+        Destroy();
     };
     
     Update = function() {

@@ -56,10 +56,10 @@ function Game() constructor {
     test_ball = load_model("testball.d3d", format);
     
     #region database
-    foe_ant =       new FoeData("Ant",          5, 0, 0, 32, 1, spr_ant, load_model("foe.d3d", format));
-    foe_pillbugs =  new FoeData("Pillbugs",     10, 1, 0, 64, 1, spr_ant_red, load_model("foe.d3d", format));
-    foe_spider =    new FoeData("Spider",       10, 0, 1, 64, 1, spr_ant, load_model("foe.d3d", format));
-    foe_millipede = new FoeData("Millipede",    20, 0, 0, 40, 1, spr_ant, load_model("foe.d3d", format));
+    foe_ant =       new FoeData("Ant",          5, 0, 0, 32, 1, 2, spr_ant, load_model("foe.d3d", format));
+    foe_pillbugs =  new FoeData("Pillbugs",     10, 1, 0, 64, 1, 3, spr_ant_red, load_model("foe.d3d", format));
+    foe_spider =    new FoeData("Spider",       10, 0, 1, 64, 1, 4, spr_ant, load_model("foe.d3d", format));
+    foe_millipede = new FoeData("Millipede",    20, 0, 0, 40, 1, 4, spr_ant, load_model("foe.d3d", format));
     
     bullet_pebble = new BulletData("Pebble", load_model("testbullet.d3d", format));
     
