@@ -62,6 +62,8 @@ function Game() constructor {
     
     test_ball = load_model("testball.d3d", format);
     
+    skybox_cube = load_model("skybox.d3d", format);
+    
     #region database
     foe_ant =       new FoeData("Ant",          5, 0, 0, 100, 1, 2, spr_ant, load_model("foe.d3d", format));
     foe_pillbugs =  new FoeData("Pillbugs",     10, 1, 0, 100, 1, 3, spr_ant_red, load_model("foe.d3d", format));
@@ -157,10 +159,11 @@ function Game() constructor {
     };
     
     Render = function() {
+        camera.Render();
+        
         cluck_set_light_ambient(0x202020);
         cluck_set_light_direction(0, c_white, -1, -1, -1);
         cluck_apply(shd_cluck_fragment);
-        camera.Render();
         
         vertex_submit(ground, pr_trianglelist, sprite_get_texture(spr_grid, 0));
         

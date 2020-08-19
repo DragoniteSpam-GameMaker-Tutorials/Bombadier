@@ -3,7 +3,7 @@ function Camera() constructor {
     to = new Vector3(640, 0, 0);
     up = new Vector3(0, 0, 1);
     fov = 60;
-    znear = 1;
+    znear = 0.3;
     zfar = 32000;
     
     view_mat = undefined;
@@ -45,8 +45,6 @@ function Camera() constructor {
     };
     
     Render = function() {
-        gpu_set_ztestenable(true);
-        gpu_set_zwriteenable(true);
         gpu_set_alphatestenable(true);
         gpu_set_alphatestref(10);
         
@@ -56,6 +54,14 @@ function Camera() constructor {
         camera_set_view_mat(cam, view_mat);
         camera_set_proj_mat(cam, proj_mat);
         camera_apply(cam);
+        
+        gpu_set_ztestenable(false);
+        gpu_set_zwriteenable(false);
+        matrix_set(matrix_world, matrix_build(from.x, from.y, from.z, 0, 0, 0, 1, 1, 1));
+        vertex_submit(GAME.skybox_cube, pr_trianglelist, sprite_get_texture(spr_skybox, 0));
+        matrix_set(matrix_world, matrix_build_identity());
+        gpu_set_ztestenable(true);
+        gpu_set_zwriteenable(true);
         
         if (floor_intersect) {
             matrix_set(matrix_world, matrix_build(floor_intersect.x, floor_intersect.y, floor_intersect.z, 0, 0, 0, 1, 1, 1));
