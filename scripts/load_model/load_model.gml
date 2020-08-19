@@ -9,7 +9,7 @@ function load_model(filename, format) {
 
     var line = array_create(10, 0);
 
-    for (var i = 0; i < n; i++){
+    for (var i = 0; i < n; i++) {
         var str = file_text_read_string(file);
         file_text_readln(file);
         

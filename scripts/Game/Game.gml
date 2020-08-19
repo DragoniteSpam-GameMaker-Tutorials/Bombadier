@@ -157,6 +157,9 @@ function Game() constructor {
     };
     
     Render = function() {
+        cluck_set_light_ambient(0x202020);
+        cluck_set_light_direction(0, c_white, -1, -1, -1);
+        cluck_apply(shd_cluck_fragment);
         camera.Render();
         
         vertex_submit(ground, pr_trianglelist, sprite_get_texture(spr_grid, 0));
@@ -164,6 +167,7 @@ function Game() constructor {
         for (var i = 0; i < ds_list_size(all_entities); i++) {
             all_entities[| i].Render();
         }
+        shader_reset();
     };
     
     GUI = function() {
