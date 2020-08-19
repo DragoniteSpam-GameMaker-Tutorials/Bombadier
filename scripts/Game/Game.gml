@@ -55,8 +55,12 @@ function Game() constructor {
     
     #region environment objects
     env_objects = ds_map_create();
+    env_object_list = ds_list_create();
     for (var file = file_find_first("environment/*.d3d", 0); file != ""; file = file_find_next()) {
-        env_objects[? string_replace(file, "000.d3d", "")] = load_model("environment/" + file, format);
+        var vbuff = load_model("environment/" + file, format);;
+        var obj_name = string_replace(file, "000.d3d", "");
+        env_objects[? obj_name] = vbuff;
+        ds_list_add(env_object_list, obj_name);
     }
     #endregion
     
@@ -139,6 +143,7 @@ function Game() constructor {
         }
         
         if (gameplay_mode == GameModes.GAMEPLAY) {
+            #region Gameplay stuff
             if (mouse_check_button_pressed(mb_left)) {
                 var position = camera.GetFloorIntersect();
                 var tower_type = tower_pebbles;
@@ -167,8 +172,16 @@ function Game() constructor {
             for (var i = 0; i < ds_list_size(all_entities); i++) {
                 all_entities[| i].Update();
             }
+            #endregion
         } else {
-            
+            #region Editor stuff
+            if (mouse_check_button_pressed(mb_left)) {
+                var position = camera.GetFloorIntersect();
+                var spawn_thing = env_object_list[| irandom(ds_list_size(env_object_list) - 1)];
+                var ent = new EntityEnv(position.x, position.y, 0, env_objects[? spawn_thing]);
+                ds_list_add(all_entities, ent);
+            }
+            #endregion
         }
     };
     
