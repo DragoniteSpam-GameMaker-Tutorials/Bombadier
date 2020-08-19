@@ -12,7 +12,7 @@ function Entity(x, y, z) constructor {
     };
     
     Save = function(save_json, i) {
-        save_json.entities[i] = undefined;
+        save_json.entities[i] = 0;
     };
     
     Destroy = function() {
