@@ -11,6 +11,10 @@ function Entity(x, y, z) constructor {
         
     };
     
+    Save = function(save_json, i) {
+        save_json.entities[i] = undefined;
+    };
+    
     Destroy = function() {
         var current_index = ds_list_find_index(GAME.all_entities, self);
         if (current_index > -1) {
@@ -19,8 +23,18 @@ function Entity(x, y, z) constructor {
     };
 }
 
-function EntityEnv(x, y, z, vbuff) : Entity(x, y, z) constructor {
+function EntityEnv(x, y, z, vbuff, savename) : Entity(x, y, z) constructor {
     self.vbuff = vbuff;
+    self.savename = savename;
+    
+    Save = function(save_json, i) {
+        save_json.entities[i] = {
+            position: position,
+            rotation: rotation,
+            scale: scale,
+            name: savename,
+        };
+    };
     
     Render = function() {
         matrix_set(matrix_world, matrix_build(position.x, position.y, position.z, 0, 0, 0, 1, 1, 1));

@@ -177,13 +177,29 @@ function Game() constructor {
             #region Editor stuff
             if (mouse_check_button_pressed(mb_left)) {
                 var position = camera.GetFloorIntersect();
-                var spawn_thing = env_object_list[| irandom(ds_list_size(env_object_list) - 1)];
-                var ent = new EntityEnv(position.x, position.y, 0, env_objects[? spawn_thing]);
+                var spawn_name = env_object_list[| irandom(ds_list_size(env_object_list) - 1)];
+                var ent = new EntityEnv(position.x, position.y, 0, env_objects[? spawn_name], spawn_name);
                 ds_list_add(all_entities, ent);
+            }
+            
+            if (keyboard_check_pressed(vk_f1)) {
+                SaveMap();
             }
             #endregion
         }
     };
+    
+    SaveMap = function() {
+        var filename = get_save_filename("Bombadier maps|*.bug", "map.bug");
+        if (filename == "") return;
+        
+        var save_json = {
+            entities: array_create(ds_list_size(all_entities), undefined),
+        };
+        for (var i = 0; i < ds_list_size(all_entities); i++) {
+            all_entities[| i].Save(save_json, i);
+        }
+    }
     
     Render = function() {
         camera.Render();
@@ -206,6 +222,7 @@ function Game() constructor {
             draw_text(32, 64, "Player health: " + string(player_health));
         } else {
             draw_text(32, 32, "Click to spawn a thing");
+            draw_text(32, 32, "F1 to save");
         }
     };
 }
