@@ -82,6 +82,7 @@ function Game() constructor {
     
     all_entities = ds_list_create();
     all_foes = ds_list_create();
+    all_towers = ds_list_create();
     
     all_waves = ds_queue_create();
     ds_queue_enqueue(all_waves,
@@ -132,7 +133,9 @@ function Game() constructor {
                 var tower_type = tower_pebbles;
                 if (position && player_money >= tower_type.cost) {
                     player_money -= tower_type.cost;
-                    ds_list_add(all_entities, new EntityTower(position.x, position.y, position.z, tower_type));
+                    var tower = new EntityTower(position.x, position.y, position.z, tower_type);
+                    ds_list_add(all_entities, tower);
+                    ds_list_add(all_towers, tower);
                 }
             }
             
