@@ -82,24 +82,7 @@ function Game() constructor {
     
     all_entities = ds_list_create();
     all_foes = ds_list_create();
-    /*
-    var key = ds_map_find_first(env_objects);
-    repeat (300) {
-        if (choose(false, true)) {
-            var xx = random(room_width);
-            var yy = choose(0, room_height) + random_range(-128, 128);
-        } else {
-            var xx = choose(0, room_width) + random_range(-128, 128);
-            var yy = random(room_height);
-        }
-        var ent = new EntityEnv(xx, yy, 0, env_objects[? key]);
-        ds_list_add(all_entities, ent);
-        key = ds_map_find_next(env_objects, key);
-        if (key == undefined) {
-            key = ds_map_find_first(env_objects);
-        }
-    }
-    */
+    
     all_waves = ds_queue_create();
     ds_queue_enqueue(all_waves,
         new Wave(foe_ant, 8, 1),
@@ -205,7 +188,28 @@ function Game() constructor {
         buffer_poke(buffer, 0, buffer_text, json_string);
         buffer_save(buffer, filename);
         buffer_delete(buffer);
-    }
+    };
+    
+    LoadMap = function(filename) {
+        var buffer = undefined;
+        try {
+            buffer = buffer_load(filename);
+            var json_string = buffer_read(buffer, buffer_text);
+            var load_json = snap_from_json(json_string);
+            for (var i = 0; i < array_length(load_json.entities); i++) {
+                var data = load_json.entities[i];
+                if (is_struct(data)) {
+                    var ent = new EntityEnv(data.position.x, data.position.y, 0, env_objects[? data.name], data.name);
+                    ds_list_add(all_entities, ent);
+                }
+            }
+        } catch (e) {
+        }
+        
+        if (buffer != undefined) {
+            buffer_delete(buffer);
+        }
+    };
     
     Render = function() {
         camera.Render();
@@ -231,4 +235,6 @@ function Game() constructor {
             draw_text(32, 32, "F1 to save");
         }
     };
+    
+    LoadMap("maps\\map1.bug");
 }
