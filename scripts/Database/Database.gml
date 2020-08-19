@@ -14,14 +14,14 @@ function FoeData(name, hp, def, mdef, speed, damage, reward, sprite, model) cons
 }
 
 function TowerData(name, rate, range, damage, cost, model, bullet_data) constructor {
-    self.name = name;    
+    self.name = name;
     self.rate = rate;           // shots per second
     self.range = range;
     self.damage = damage;
     self.cost = cost;
     self.model = model;
     self.bullet_data = bullet_data;
-    
+    // this isn't used for anything and it probably won't be used later
     self.shot_type = 0;
 }
 

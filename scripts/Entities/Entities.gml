@@ -43,9 +43,10 @@ function EntityEnv(x, y, z, vbuff, savename) : Entity(x, y, z) constructor {
     };
 }
 
-function EntityBullet(x, y, z, vx, vy, vz, bullet_data) : Entity(x, y, z) constructor {
+function EntityBullet(x, y, z, vx, vy, vz, bullet_data, damage) : Entity(x, y, z) constructor {
     velocity = new Vector3(vx, vy, vz);
     self.bullet_data = bullet_data;
+    self.damage = damage;
     time_to_live = 1;
     
     Update = function() {
@@ -57,7 +58,7 @@ function EntityBullet(x, y, z, vx, vy, vz, bullet_data) : Entity(x, y, z) constr
             var foe = GAME.all_foes[| i];
             var radius = 12;
             if (point_distance_3d(position.x, position.y, position.z, foe.position.x, foe.position.y, foe.position.z) <= radius) {
-                foe.Damage(1);
+                foe.Damage(damage);
                 Destroy();
                 return;
             }
@@ -82,6 +83,32 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
     
     self.shot_cooldown = 0;
     
+    self.base_rate = class.rate;
+    self.base_range = class.range;
+    self.base_damage = class.damage;
+    self.base_model = class.model;
+    self.base_bullet_data = class.bullet_data;
+    
+    self.mod_rate = 1;
+    self.mod_range = 1;
+    self.mod_damage = 1;
+    
+    self.act_rate = self.base_rate * self.mod_rate;
+    self.act_range = self.base_range * self.mod_range;
+    self.act_damage = self.base_damage * self.mod_damage;
+    
+    SetRateMod = function(value) {
+        act_rate = base_rate * mod_rate;
+    }
+    
+    SetRateMod = function(value) {
+        act_range = base_range * mod_range;
+    }
+    
+    SetRateMod = function(value) {
+        act_damage = base_damage * mod_damage;
+    }
+    
     Update = function() {
         if (shot_cooldown <= 0) {
             var target_foe = GetTarget();
@@ -95,16 +122,16 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
     
     Shoot = function(target_foe) {
         var dir = point_direction(position.x, position.y, target_foe.position.x, target_foe.position.y);
-        var bullet = new EntityBullet(position.x, position.y, position.z, 6 * dcos(dir), 6 * -dsin(dir), 0, class.bullet_data);
+        var bullet = new EntityBullet(position.x, position.y, position.z, 6 * dcos(dir), 6 * -dsin(dir), 0, base_bullet_data, act_damage);
         ds_list_add(GAME.all_entities, bullet);
-        shot_cooldown = 1 / class.rate;
+        shot_cooldown = 1 / act_rate;
     };
     
     GetTarget = function() {
         var target_foe = undefined;
         for (var i = 0; i < ds_list_size(GAME.all_foes); i++) {
             var foe = GAME.all_foes[| i];
-            if (point_distance_3d(position.x, position.y, position.z, foe.position.x, foe.position.y, foe.position.z) < class.range) {
+            if (point_distance_3d(position.x, position.y, position.z, foe.position.x, foe.position.y, foe.position.z) < act_range) {
                 target_foe = foe;
                 break;
             }
@@ -117,7 +144,7 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
         transform = matrix_multiply(transform, matrix_build(0, 0, 0, rotation.x, rotation.y, rotation.z, 1, 1, 1));
         transform = matrix_multiply(transform, matrix_build(position.x, position.y, position.z, 0, 0, 0, 1, 1, 1));
         matrix_set(matrix_world, transform);
-        vertex_submit(class.model, pr_trianglelist, -1);
+        vertex_submit(base_model, pr_trianglelist, -1);
         matrix_set(matrix_world, matrix_build_identity());
     };
 }
