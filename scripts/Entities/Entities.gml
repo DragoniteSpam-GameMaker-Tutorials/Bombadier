@@ -56,7 +56,7 @@ function EntityBullet(x, y, z, vx, vy, vz, bullet_data, damage) : Entity(x, y, z
         
         for (var i = 0; i < ds_list_size(GAME.all_foes); i++) {
             var foe = GAME.all_foes[| i];
-            var radius = 12;
+            var radius = 18;
             if (point_distance_3d(position.x, position.y, position.z, foe.position.x, foe.position.y, foe.position.z) <= radius) {
                 foe.Damage(damage);
                 Destroy();
@@ -101,11 +101,11 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
         act_rate = base_rate * mod_rate;
     }
     
-    SetRateMod = function(value) {
+    SetRangeMod = function(value) {
         act_range = base_range * mod_range;
     }
     
-    SetRateMod = function(value) {
+    SetDamageMod = function(value) {
         act_damage = base_damage * mod_damage;
     }
     
@@ -155,11 +155,31 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
     
     self.hp = class.hp;
     self.hp_max = self.hp;
-    self.def = class.def;
-    self.mdef = class.mdef;
-    self.speed = class.speed;
     self.damage = class.damage;
     self.reward = class.reward;
+    self.base_def = class.def;
+    self.base_mdef = class.mdef;
+    self.base_speed = class.speed;
+    
+    self.mod_def = 1;
+    self.mod_mdef = 1;
+    self.mod_speed = 1;
+    
+    self.act_def = self.base_def * self.mod_def;
+    self.act_mdef = self.base_mdef * self.mod_mdef;
+    self.act_speed = self.base_speed * self.mod_speed;
+    
+    SetDefMod = function(value) {
+        act_def = base_def * mod_def;
+    }
+    
+    SetMdefMod = function(value) {
+        act_mdef = base_mdef * mod_mdef;
+    }
+    
+    SetSpeedMod = function(value) {
+        act_speed = base_speed * mod_speed;
+    }
     
     self.path = pth_test;
     self.path_node = 0;
@@ -184,16 +204,16 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
     Update = function() {
         var dt = DT;
         var dir = point_direction(position.x, position.y, destination.x, destination.y);
-        position.x = approach(position.x, destination.x, speed * abs(dcos(dir)) * dt);
-        position.y = approach(position.y, destination.y, speed * abs(dsin(dir)) * dt);
-        position.z = approach(position.z, destination.z, speed * dt);
+        position.x = approach(position.x, destination.x, act_speed * abs(dcos(dir)) * dt);
+        position.y = approach(position.y, destination.y, act_speed * abs(dsin(dir)) * dt);
+        position.z = approach(position.z, destination.z, act_speed * dt);
         if (position.x == destination.x && position.y == destination.y && position.z == destination.z) {
             if (path_get_number(path) > (path_node + 1)) {
                 path_node++;
                 destination.x = path_get_point_x(path, path_node);
                 destination.y = path_get_point_y(path, path_node);
             } else {
-                GAME.PlayerDamage(1);
+                GAME.PlayerDamage(damage);
                 Destroy();
             }
         }

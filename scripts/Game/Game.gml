@@ -232,7 +232,7 @@ function Game() constructor {
             draw_text(32, 64, "Player health: " + string(player_health));
         } else {
             draw_text(32, 32, "Click to spawn a thing");
-            draw_text(32, 32, "F1 to save");
+            draw_text(32, 64, "F1 to save");
         }
     };
     
