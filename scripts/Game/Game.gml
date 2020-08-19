@@ -199,6 +199,12 @@ function Game() constructor {
         for (var i = 0; i < ds_list_size(all_entities); i++) {
             all_entities[| i].Save(save_json, i);
         }
+        
+        var json_string = snap_to_json(save_json);
+        var buffer = buffer_create(string_length(json_string), buffer_fixed, 1);
+        buffer_poke(buffer, 0, buffer_text, json_string);
+        buffer_save(buffer, filename);
+        buffer_delete(buffer);
     }
     
     Render = function() {

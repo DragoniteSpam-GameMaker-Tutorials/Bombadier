@@ -144,6 +144,7 @@
     {"CopyToMask":-1,"filePath":"datafiles/environment","resourceVersion":"1.0","name":"rock_smallg.000.d3d","resourceType":"GMIncludedFile",},
     {"CopyToMask":-1,"filePath":"datafiles/environment","resourceVersion":"1.0","name":"rock_tallb.000.d3d","resourceType":"GMIncludedFile",},
     {"CopyToMask":-1,"filePath":"datafiles","resourceVersion":"1.0","name":"skybox.d3d","resourceType":"GMIncludedFile",},
+    {"CopyToMask":-1,"filePath":"datafiles/maps","resourceVersion":"1.0","name":"map1.bug","resourceType":"GMIncludedFile",},
   ],
   "MetaData": {
     "IDEVersion": "2.3.0.529",
