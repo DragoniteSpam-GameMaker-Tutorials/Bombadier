@@ -78,7 +78,7 @@ function Game() constructor {
     
     all_entities = ds_list_create();
     all_foes = ds_list_create();
-    
+    /*
     var key = ds_map_find_first(env_objects);
     repeat (300) {
         if (choose(false, true)) {
@@ -95,7 +95,7 @@ function Game() constructor {
             key = ds_map_find_first(env_objects);
         }
     }
-    
+    */
     all_waves = ds_queue_create();
     ds_queue_enqueue(all_waves,
         new Wave(foe_ant, 8, 1),
@@ -107,6 +107,12 @@ function Game() constructor {
     
     player_money = 50;
     player_health = 10;
+    
+    enum GameModes {
+        GAMEPLAY, EDITOR,
+    }
+    
+    gameplay_mode = GameModes.GAMEPLAY;
     
     SendInWave = function() {
         if (ds_queue_empty(all_waves)) {
@@ -128,33 +134,41 @@ function Game() constructor {
     Update = function() {
         camera.Update();
         
-        if (mouse_check_button_pressed(mb_left)) {
-            var position = camera.GetFloorIntersect();
-            var tower_type = tower_pebbles;
-            if (position && player_money >= tower_type.cost) {
-                player_money -= tower_type.cost;
-                ds_list_add(all_entities, new EntityTower(position.x, position.y, position.z, tower_type));
+        if (keyboard_check_pressed(vk_tab)) {
+            gameplay_mode = (gameplay_mode == GameModes.GAMEPLAY) ? GameModes.EDITOR : GameModes.GAMEPLAY;
+        }
+        
+        if (gameplay_mode == GameModes.GAMEPLAY) {
+            if (mouse_check_button_pressed(mb_left)) {
+                var position = camera.GetFloorIntersect();
+                var tower_type = tower_pebbles;
+                if (position && player_money >= tower_type.cost) {
+                    player_money -= tower_type.cost;
+                    ds_list_add(all_entities, new EntityTower(position.x, position.y, position.z, tower_type));
+                }
             }
-        }
-        
-        if (keyboard_check_pressed(vk_space)) {
-            SendInWave();
-        }
-        
-        if (!wave_finished) {
-            wave_countdown -= DT;
-            if (wave_countdown < 0) {
+            
+            if (keyboard_check_pressed(vk_space)) {
                 SendInWave();
-                wave_countdown = WAVE_COUNTDOWN;
             }
-        }
-        
-        if (wave_current) {
-            wave_current.Update();
-        }
-        
-        for (var i = 0; i < ds_list_size(all_entities); i++) {
-            all_entities[| i].Update();
+            
+            if (!wave_finished) {
+                wave_countdown -= DT;
+                if (wave_countdown < 0) {
+                    SendInWave();
+                    wave_countdown = WAVE_COUNTDOWN;
+                }
+            }
+            
+            if (wave_current) {
+                wave_current.Update();
+            }
+            
+            for (var i = 0; i < ds_list_size(all_entities); i++) {
+                all_entities[| i].Update();
+            }
+        } else {
+            
         }
     };
     
@@ -174,7 +188,11 @@ function Game() constructor {
     };
     
     GUI = function() {
-        draw_text(32, 32, "Player money: " + string(player_money));
-        draw_text(32, 64, "Player health: " + string(player_health));
+        if (gameplay_mode == GameModes.GAMEPLAY) {
+            draw_text(32, 32, "Player money: " + string(player_money));
+            draw_text(32, 64, "Player health: " + string(player_health));
+        } else {
+            draw_text(32, 32, "Click to spawn a thing");
+        }
     };
 }
