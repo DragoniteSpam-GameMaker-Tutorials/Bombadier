@@ -80,12 +80,12 @@ function Game() constructor {
     all_foes = ds_list_create();
     
     var key = ds_map_find_first(env_objects);
-    repeat (100) {
+    repeat (300) {
         if (choose(false, true)) {
             var xx = random(room_width);
-            var yy = choose(0, room_height) + random_range(-64, 64);
+            var yy = choose(0, room_height) + random_range(-128, 128);
         } else {
-            var xx = choose(0, room_width) + random_range(-64, 64);
+            var xx = choose(0, room_width) + random_range(-128, 128);
             var yy = random(room_height);
         }
         var ent = new EntityEnv(xx, yy, 0, env_objects[? key]);
