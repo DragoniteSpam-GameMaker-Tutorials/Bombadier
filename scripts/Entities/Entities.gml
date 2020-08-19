@@ -3,6 +3,10 @@ function Entity(x, y, z) constructor {
     rotation = new Vector3(0, 0, 0);
     scale = new Vector3(1, 1, 1);
     
+    BeginUpdate = function() {
+        
+    };
+    
     Update = function() {
         
     };
