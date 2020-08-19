@@ -102,14 +102,17 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
     self.act_damage = self.base_damage * self.mod_damage;
     
     SetRateMod = function(value) {
+        mod_rate = value;
         act_rate = base_rate * mod_rate;
     }
     
     SetRangeMod = function(value) {
+        mod_range = value;
         act_range = base_range * mod_range;
     }
     
     SetDamageMod = function(value) {
+        mod_damage = value;
         act_damage = base_damage * mod_damage;
     }
     
@@ -153,6 +156,37 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
     };
 }
 
+function EntityTowerBuff(x, y, z, class) : EntityTower(x, y, z, class) constructor {
+    Update = function() {
+        if (shot_cooldown <= 0) {
+            var target_friends = GetTarget();
+            for (var i = 0; i < ds_list_size(target_friends); i++) {
+                Buff(target_friends[| i]);
+            }
+            ds_list_destroy(target_friends);
+        } else {
+            shot_cooldown -= DT;
+        }
+    };
+    
+    Buff = function(target_friend) {
+        target_friend.SetRateMod(4);
+        shot_cooldown = 1 / act_rate;
+    };
+    
+    GetTarget = function() {
+        var target_friends = ds_list_create();
+        for (var i = 0; i < ds_list_size(GAME.all_towers); i++) {
+            var friend = GAME.all_towers[| i];
+            if (friend == self) continue;
+            if (point_distance_3d(position.x, position.y, position.z, friend.position.x, friend.position.y, friend.position.z) < act_range) {
+                ds_list_add(target_friends, friend);
+            }
+        }
+        return target_friends;
+    };
+}
+
 function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
     self.class = class;
     self.level = level;
@@ -174,14 +208,17 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
     self.act_speed = self.base_speed * self.mod_speed;
     
     SetDefMod = function(value) {
+        momod_def_damage = value;
         act_def = base_def * mod_def;
     }
     
     SetMdefMod = function(value) {
+        mod_mdef = value;
         act_mdef = base_mdef * mod_mdef;
     }
     
     SetSpeedMod = function(value) {
+        mod_speed = value;
         act_speed = base_speed * mod_speed;
     }
     

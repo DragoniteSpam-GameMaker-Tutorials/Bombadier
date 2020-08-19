@@ -78,6 +78,7 @@ function Game() constructor {
     
     tower_pebbles =     new TowerData("Pebble Shooter",     1, 3 * 32, 1, 10, load_model("tower.d3d", format), bullet_pebble);
     tower_fire =        new TowerData("Fire Shooter",       2, 1.5 * 32, 1, 10, load_model("tower.d3d", format), bullet_pebble);
+    tower_buff =     new TowerData("Friendly Tower",        1, 3 * 32, 1, 10, load_model("tower-buff.d3d", format), bullet_pebble);
     #endregion
     
     all_entities = ds_list_create();
@@ -133,7 +134,12 @@ function Game() constructor {
                 var tower_type = tower_pebbles;
                 if (position && player_money >= tower_type.cost) {
                     player_money -= tower_type.cost;
-                    var tower = new EntityTower(position.x, position.y, position.z, tower_type);
+                    if (keyboard_check(vk_shift)) {
+                        var tower_type = tower_buff;
+                        var tower = new EntityTowerBuff(position.x, position.y, position.z, tower_type);
+                    } else {
+                        var tower = new EntityTower(position.x, position.y, position.z, tower_type);
+                    }
                     ds_list_add(all_entities, tower);
                     ds_list_add(all_towers, tower);
                 }
