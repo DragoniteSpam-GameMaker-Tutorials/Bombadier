@@ -12,6 +12,10 @@ function coll_ray_aabb(aabb, ray) {
     return true;
 }
 
+function coll_ray_invalid(aabb, ray) {
+    return false;
+}
+
 function Ray(origin, direction) constructor {
     self.origin = origin;
     self.direction = direction;

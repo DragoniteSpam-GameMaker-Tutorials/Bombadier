@@ -66,6 +66,8 @@ function EntityBullet(x, y, z, vx, vy, vz, bullet_data, damage) : Entity(x, y, z
     self.damage = damage;
     time_to_live = 1;
     
+    raycast = coll_ray_invalid;
+    
     Update = function() {
         position.x += velocity.x;
         position.y += velocity.y;
