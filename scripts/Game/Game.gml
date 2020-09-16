@@ -85,6 +85,8 @@ function Game() constructor {
     all_foes = ds_list_create();
     all_towers = ds_list_create();
     
+    selected_entity = undefined;
+    
     all_waves = ds_queue_create();
     ds_queue_enqueue(all_waves,
         new Wave(foe_ant, 8, 1),
@@ -151,24 +153,24 @@ function Game() constructor {
             #region Gameplay stuff
             if (mouse_check_button_pressed(mb_left)) {
                 var ray = new Ray(camera.from, camera.mouse_cast);
-                var clicked = undefined;
+                selected_entity = undefined;
                 
                 for (var i = 0; i < ds_list_size(all_towers); i++) {
                     var tower = all_towers[| i];
                     if (tower.raycast(tower.collision, ray)) {
-                        if (!clicked) {
-                            clicked = tower;
+                        if (!selected_entity) {
+                            selected_entity = tower;
                         } else {
                             var this_tower_dist = point_distance_3d(tower.position.x, tower.position.y, tower.position.z, camera.from.x, camera.from.y, camera.from.z);
-                            var other_tower_dist = point_distance_3d(clicked.position.x, clicked.position.y, clicked.position.z, camera.from.x, camera.from.y, camera.from.z);
+                            var other_tower_dist = point_distance_3d(selected_entity.position.x, selected_entity.position.y, selected_entity.position.z, camera.from.x, camera.from.y, camera.from.z);
                             if (this_tower_dist < other_tower_dist) {
-                                clicked = tower;
+                                selected_entity = tower;
                             }
                         }
                     }
                 }
                 
-                if (clicked) {
+                if (selected_entity) {
                     
                 } else {
                     SpawnTower();

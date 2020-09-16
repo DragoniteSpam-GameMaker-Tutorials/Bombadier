@@ -17,6 +17,7 @@
     {"id":{"name":"cluck_set_light_point","path":"scripts/cluck_set_light_point/cluck_set_light_point.yy",},"order":9,},
     {"id":{"name":"cluck_set_light_disable","path":"scripts/cluck_set_light_disable/cluck_set_light_disable.yy",},"order":8,},
     {"id":{"name":"snap_from_binary","path":"scripts/snap_from_binary/snap_from_binary.yy",},"order":2,},
+    {"id":{"name":"shd_selected","path":"shaders/shd_selected/shd_selected.yy",},"order":23,},
     {"id":{"name":"snap_deep_copy","path":"scripts/snap_deep_copy/snap_deep_copy.yy",},"order":1,},
     {"id":{"name":"load_model","path":"scripts/load_model/load_model.yy",},"order":0,},
     {"id":{"name":"spr_grid","path":"sprites/spr_grid/spr_grid.yy",},"order":2,},
