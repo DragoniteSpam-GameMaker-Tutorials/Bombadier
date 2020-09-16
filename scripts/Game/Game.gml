@@ -70,7 +70,7 @@ function Game() constructor {
     
     #region database
     foe_ant =       new FoeData("Ant",          5, 0, 0, 100, 1, 2, spr_ant, load_model("foe.d3d", format));
-    foe_pillbugs =  new FoeData("Pillbugs",     10, 1, 0, 100, 1, 3, spr_ant_red, load_model("foe.d3d", format));
+    foe_pillbugs =  new FoeData("Pillbugs",     10, 1, 0, 50, 1, 3, spr_ant_red, load_model("foe.d3d", format));
     foe_spider =    new FoeData("Spider",       10, 0, 1, 64, 1, 4, spr_ant, load_model("foe.d3d", format));
     foe_millipede = new FoeData("Millipede",    20, 0, 0, 40, 1, 4, spr_ant, load_model("foe.d3d", format));
     
@@ -89,6 +89,9 @@ function Game() constructor {
     ds_queue_enqueue(all_waves,
         new Wave(foe_ant, 8, 1),
         new Wave(foe_pillbugs, 8, 1),
+        new Wave(foe_ant, 10, 2),
+        new Wave(foe_ant, 10, 3),
+        new Wave(foe_pillbugs, 4, 3),
     );
     wave_current = undefined;
     wave_countdown = WAVE_WARMUP_COUNTDOWN;
