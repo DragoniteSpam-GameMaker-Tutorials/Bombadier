@@ -237,10 +237,10 @@ function Game() constructor {
         if (filename == "") return;
         
         var save_json = {
-            entities: array_create(ds_list_size(all_entities), undefined),
+            entities: array_create(ds_list_size(all_env_entities), undefined),
         };
-        for (var i = 0; i < ds_list_size(all_entities); i++) {
-            all_entities[| i].Save(save_json, i);
+        for (var i = 0; i < ds_list_size(all_env_entities); i++) {
+            all_env_entities[| i].Save(save_json, i);
         }
         
         var json_string = snap_to_json(save_json);
@@ -261,6 +261,7 @@ function Game() constructor {
                 if (is_struct(data)) {
                     var ent = new EntityEnv(data.position.x, data.position.y, 0, env_objects[? data.name], data.name);
                     ds_list_add(all_entities, ent);
+                    ds_list_add(all_env_entities, ent);
                 }
             }
         } catch (e) {
@@ -296,5 +297,5 @@ function Game() constructor {
         }
     };
     
-    LoadMap("maps\\map1.bug");
+    LoadMap("maps\\map.bug");
 }
