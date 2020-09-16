@@ -48,15 +48,20 @@ function EntityEnv(x, y, z, vbuff, savename) : Entity(x, y, z) constructor {
     
     Render = function() {
         // set the shader if you are selected
-        if (GAME.selected_entity == self) {
+        if (GAME.selected_entity == self || GAME.editor_hover_entity == self) {
             shader_set(shd_selected);
             shader_set_uniform_f(shader_get_uniform(shd_selected, "time"), current_time / 1000);
+            if (GAME.selected_entity == self) {
+                shader_set_uniform_f(shader_get_uniform(shd_selected, "color"), 1, 1, 1, 1);
+            } else if (GAME.editor_hover_entity == self) {
+                shader_set_uniform_f(shader_get_uniform(shd_selected, "color"), 0, 1, 0, 1);
+            }
         }
         matrix_set(matrix_world, matrix_build(position.x, position.y, position.z, 0, 0, 0, 1, 1, 1));
         vertex_submit(vbuff, pr_trianglelist, -1);
         matrix_set(matrix_world, matrix_build_identity());
         // reset the shader if you are selected
-        if (GAME.selected_entity == self) {
+        if (GAME.selected_entity == self || GAME.editor_hover_entity == self) {
             shader_set(shd_cluck_fragment);
         }
     };
@@ -188,6 +193,7 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
         if (GAME.selected_entity == self) {
             shader_set(shd_selected);
             shader_set_uniform_f(shader_get_uniform(shd_selected, "time"), current_time / 1000);
+            shader_set_uniform_f(shader_get_uniform(shd_selected, "color"), 1, 1, 1, 1);
         }
         var transform = matrix_build(0, 0, 0, 0, 0, 0, scale.x, scale.y, scale.z);
         transform = matrix_multiply(transform, matrix_build(0, 0, 0, rotation.x, rotation.y, rotation.z, 1, 1, 1));

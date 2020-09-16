@@ -86,6 +86,7 @@ function Game() constructor {
     all_env_entities = ds_list_create();
     
     selected_entity = undefined;
+    editor_hover_entity = undefined;
     
     all_waves = ds_queue_create();
     ds_queue_enqueue(all_waves,
@@ -142,7 +143,7 @@ function Game() constructor {
         }
     };
     
-    GetClicked = function(entity_list) {
+    GetUnderCursor = function(entity_list) {
         var ray = new Ray(camera.from, camera.mouse_cast);
         var thing_selected = undefined;
         for (var i = 0; i < ds_list_size(entity_list); i++) {
@@ -172,7 +173,7 @@ function Game() constructor {
         if (gameplay_mode == GameModes.GAMEPLAY) {
             #region Gameplay stuff
             if (mouse_check_button_pressed(mb_left)) {
-                selected_entity = GetClicked(all_towers);
+                selected_entity = GetUnderCursor(all_towers);
                 
                 if (selected_entity) {
                     
@@ -210,8 +211,10 @@ function Game() constructor {
             #endregion
         } else {
             #region Editor stuff
+            editor_hover_entity = GetUnderCursor(all_env_entities);
+            
             if (mouse_check_button_pressed(mb_left)) {
-                selected_entity = GetClicked(all_env_entities);
+                selected_entity = GetUnderCursor(all_env_entities);
                 
                 if (selected_entity) {
                     
@@ -222,6 +225,8 @@ function Game() constructor {
                     ds_list_add(all_entities, ent);
                     ds_list_add(all_env_entities, ent);
                 }
+            } else {
+                
             }
             
             if (keyboard_check_pressed(vk_f1)) {
