@@ -236,6 +236,67 @@ function Game() constructor {
                         if (pos) {
                             selected_entity.Reposition(pos.x, pos.y, pos.z);
                         }
+                    } else {
+                        if (keyboard_check(vk_shift)) {
+                            if (keyboard_check(vk_right)) {
+                                selected_entity.rotation.x++;
+                            }
+                            if (keyboard_check(vk_left)) {
+                                selected_entity.rotation.x--;
+                            }
+                            if (keyboard_check(vk_up)) {
+                                selected_entity.rotation.y--;
+                            }
+                            if (keyboard_check(vk_down)) {
+                                selected_entity.rotation.y++;
+                            }
+                            if (keyboard_check(vk_pageup)) {
+                                selected_entity.rotation.z++;
+                            }
+                            if (keyboard_check(vk_pagedown)) {
+                                selected_entity.rotation.z--;
+                            }
+                            if (keyboard_check(vk_backspace)) {
+                                selected_entity.rotation.x = 0;
+                                selected_entity.rotation.y = 0;
+                                selected_entity.rotation.z = 0;
+                            }
+                        } else if (keyboard_check(vk_control)) {
+                            if (keyboard_check(vk_up)) {
+                                selected_entity.scale.x = min(selected_entity.scale.x + 0.01, 4);
+                                selected_entity.scale.y = min(selected_entity.scale.y + 0.01, 4);
+                                selected_entity.scale.z = min(selected_entity.scale.z + 0.01, 4);
+                            }
+                            if (keyboard_check(vk_down)) {
+                                selected_entity.scale.x = max(selected_entity.scale.x - 0.01, 0.25);
+                                selected_entity.scale.y = max(selected_entity.scale.y - 0.01, 0.25);
+                                selected_entity.scale.z = max(selected_entity.scale.z - 0.01, 0.25);
+                            }
+                            if (keyboard_check(vk_backspace)) {
+                                selected_entity.scale.x = 1;
+                                selected_entity.scale.y = 1;
+                                selected_entity.scale.z = 1;
+                            }
+                        } else {
+                            if (keyboard_check(vk_right)) {
+                                selected_entity.Reposition(selected_entity.position.x + 1, selected_entity.position.y, selected_entity.position.z);
+                            }
+                            if (keyboard_check(vk_left)) {
+                                selected_entity.Reposition(selected_entity.position.x - 1, selected_entity.position.y, selected_entity.position.z);
+                            }
+                            if (keyboard_check(vk_up)) {
+                                selected_entity.Reposition(selected_entity.position.x, selected_entity.position.y - 1, selected_entity.position.z);
+                            }
+                            if (keyboard_check(vk_down)) {
+                                selected_entity.Reposition(selected_entity.position.x, selected_entity.position.y + 1, selected_entity.position.z);
+                            }
+                            if (keyboard_check(vk_pageup)) {
+                                selected_entity.Reposition(selected_entity.position.x, selected_entity.position.y, selected_entity.position.z - 1);
+                            }
+                            if (keyboard_check(vk_pagedown)) {
+                                selected_entity.Reposition(selected_entity.position.x, selected_entity.position.y, selected_entity.position.z + 1);
+                            }
+                        }
                     }
                 }
             }

@@ -14,19 +14,19 @@ function Camera() constructor {
     Update = function() {
         var mspd = 200;
         var dt = DT;
-        if (keyboard_check(vk_left) || keyboard_check(ord("A"))) {
+        if (/*keyboard_check(vk_left) || */keyboard_check(ord("A"))) {
             from.x -= mspd * dt;
             to.x -= mspd * dt;
         }
-        if (keyboard_check(vk_right) || keyboard_check(ord("D"))) {
+        if (/*keyboard_check(vk_right) || */keyboard_check(ord("D"))) {
             from.x += mspd * dt;
             to.x += mspd * dt;
         }
-        if (keyboard_check(vk_up) || keyboard_check(ord("W"))) {
+        if (/*keyboard_check(vk_up) || */keyboard_check(ord("W"))) {
             from.y -= mspd * dt;
             to.y -= mspd * dt;
         }
-        if (keyboard_check(vk_down) || keyboard_check(ord("S"))) {
+        if (/*keyboard_check(vk_down) || */keyboard_check(ord("S"))) {
             from.y += mspd * dt;
             to.y += mspd * dt;
         }
