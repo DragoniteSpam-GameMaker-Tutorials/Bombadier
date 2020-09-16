@@ -237,6 +237,7 @@ function Game() constructor {
                             selected_entity.Reposition(pos.x, pos.y, pos.z);
                         }
                     } else {
+                        #region position, rotation, scale
                         if (keyboard_check(vk_shift)) {
                             if (keyboard_check(vk_right)) {
                                 selected_entity.rotation.x++;
@@ -296,6 +297,12 @@ function Game() constructor {
                             if (keyboard_check(vk_pagedown)) {
                                 selected_entity.Reposition(selected_entity.position.x, selected_entity.position.y, selected_entity.position.z + 1);
                             }
+                        }
+                        #endregion
+                        if (keyboard_check_pressed(vk_delete)) {
+                            ds_list_delete(all_entities, ds_list_find_index(all_entities, selected_entity));
+                            ds_list_delete(all_env_entities, ds_list_find_index(all_env_entities, selected_entity));
+                            selected_entity = undefined;
                         }
                     }
                 }
@@ -380,6 +387,7 @@ function Game() constructor {
                     draw_text(32, 64, "Left, Right, Up, Down, PageUp and Page Down to move the selected thing");
                     draw_text(32, 96, "Hold Shift or Control to affect rotation and scale instead");
                 }
+                draw_text(32, 128, "Delete to delete the selected thing");
             }
             draw_text(window_get_width() - 128, 32, "F1 to save");
         }
