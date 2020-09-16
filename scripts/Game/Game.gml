@@ -168,6 +168,7 @@ function Game() constructor {
         
         if (keyboard_check_pressed(vk_tab)) {
             gameplay_mode = (gameplay_mode == GameModes.GAMEPLAY) ? GameModes.EDITOR : GameModes.GAMEPLAY;
+            selected_entity = undefined;
         }
         
         if (gameplay_mode == GameModes.GAMEPLAY) {
@@ -213,20 +214,22 @@ function Game() constructor {
             #region Editor stuff
             editor_hover_entity = GetUnderCursor(all_env_entities);
             
-            if (mouse_check_button_pressed(mb_left)) {
-                selected_entity = GetUnderCursor(all_env_entities);
-                
-                if (selected_entity) {
-                    
-                } else {
-                    var position = camera.GetFloorIntersect();
-                    var spawn_name = env_object_list[| irandom(ds_list_size(env_object_list) - 1)];
-                    var ent = new EntityEnv(position.x, position.y, 0, env_objects[? spawn_name], spawn_name);
-                    ds_list_add(all_entities, ent);
-                    ds_list_add(all_env_entities, ent);
-                }
+            if (selected_entity) {
+                // code that will run on selected entities
             } else {
-                
+                if (editor_hover_entity) {
+                    if (mouse_check_button_pressed(mb_left)) {
+                        selected_entity = editor_hover_entity;
+                    }
+                } else {
+                    if (mouse_check_button_pressed(mb_left)) {
+                        var position = camera.GetFloorIntersect();
+                        var spawn_name = env_object_list[| irandom(ds_list_size(env_object_list) - 1)];
+                        var ent = new EntityEnv(position.x, position.y, 0, env_objects[? spawn_name], spawn_name);
+                        ds_list_add(all_entities, ent);
+                        ds_list_add(all_env_entities, ent);
+                    }
+                }
             }
             
             if (keyboard_check_pressed(vk_f1)) {
