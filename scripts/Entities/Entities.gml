@@ -35,6 +35,9 @@ function EntityEnv(x, y, z, vbuff, savename) : Entity(x, y, z) constructor {
     self.vbuff = vbuff;
     self.savename = savename;
     
+    self.rotation = new Vector3(0, 0, 0);
+    self.scale = new Vector3(1, 1, 1);
+    
     collision = new BBox(new Vector3(position.x - 8, position.y - 8, position.z), new Vector3(position.x + 8, position.y + 8, position.z + 16));
     
     Reposition = function(x, y, z) {
@@ -79,7 +82,7 @@ function EntityEnv(x, y, z, vbuff, savename) : Entity(x, y, z) constructor {
                 shader_set_uniform_f(shader_get_uniform(shd_selected, "color"), 0, 1, 0, 1);
             }
         }
-        matrix_set(matrix_world, matrix_build(position.x, position.y, position.z, 0, 0, 0, 1, 1, 1));
+        matrix_set(matrix_world, matrix_build(position.x, position.y, position.z, rotation.x, rotation.y, rotation.z, scale.x, scale.y, scale.z));
         vertex_submit(vbuff, pr_trianglelist, -1);
         matrix_set(matrix_world, matrix_build_identity());
         // reset the shader if you are selected
