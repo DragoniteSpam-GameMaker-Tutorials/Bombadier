@@ -65,7 +65,6 @@ function Game() constructor {
     #endregion
     
     test_ball = load_model("testball.d3d", format);
-    
     skybox_cube = load_model("skybox.d3d", format);
     
     #region database
