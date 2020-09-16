@@ -33,6 +33,7 @@
     {"id":{"name":"cluck_override_alpha_testing","path":"scripts/cluck_override_alpha_testing/cluck_override_alpha_testing.yy",},"order":0,},
     {"id":{"name":"cluck_apply","path":"scripts/cluck_apply/cluck_apply.yy",},"order":0,},
     {"id":{"name":"Database","path":"scripts/Database/Database.yy",},"order":4,},
+    {"id":{"name":"Collision","path":"scripts/Collision/Collision.yy",},"order":3,},
     {"id":{"name":"Vector","path":"scripts/Vector/Vector.yy",},"order":2,},
     {"id":{"name":"cluck_set_light_spot","path":"scripts/cluck_set_light_spot/cluck_set_light_spot.yy",},"order":10,},
     {"id":{"name":"cluck_set_alpha_test_enable","path":"scripts/cluck_set_alpha_test_enable/cluck_set_alpha_test_enable.yy",},"order":4,},

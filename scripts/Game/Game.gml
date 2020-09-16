@@ -124,6 +124,22 @@ function Game() constructor {
         }
     };
     
+    SpawnTower = function() {
+        var position = camera.GetFloorIntersect();
+        var tower_type = tower_pebbles;
+        if (position && player_money >= tower_type.cost) {
+            player_money -= tower_type.cost;
+            if (keyboard_check(vk_shift)) {
+                var tower_type = tower_buff;
+                var tower = new EntityTowerBuff(position.x, position.y, position.z, tower_type);
+            } else {
+                var tower = new EntityTower(position.x, position.y, position.z, tower_type);
+            }
+            ds_list_add(all_entities, tower);
+            ds_list_add(all_towers, tower);
+        }
+    };
+    
     Update = function() {
         camera.Update();
         
@@ -134,18 +150,26 @@ function Game() constructor {
         if (gameplay_mode == GameModes.GAMEPLAY) {
             #region Gameplay stuff
             if (mouse_check_button_pressed(mb_left)) {
-                var position = camera.GetFloorIntersect();
-                var tower_type = tower_pebbles;
-                if (position && player_money >= tower_type.cost) {
-                    player_money -= tower_type.cost;
-                    if (keyboard_check(vk_shift)) {
-                        var tower_type = tower_buff;
-                        var tower = new EntityTowerBuff(position.x, position.y, position.z, tower_type);
-                    } else {
-                        var tower = new EntityTower(position.x, position.y, position.z, tower_type);
+                var ray = new Ray(camera.from, camera.mouse_cast);
+                var clicked = undefined;
+                for (var i = 0; i < ds_list_size(all_towers); i++) {
+                    var tower = all_towers[| i];
+                    if (tower.raycast(tower.bbox, ray)) {
+                        if (!clicked) {
+                            clicked = tower;
+                        } else {
+                            var this_tower_dist = point_distance_3d(tower.position.x, tower.position.y, tower.position.z, camera.from.x, camera.from.y, camera.from.z);
+                            var other_tower_dist = point_distance_3d(clicked.position.x, clicked.position.y, clicked.position.z, camera.from.x, camera.from.y, camera.from.z);
+                            if (this_tower_dist < other_tower_dist) {
+                                clicked = tower;
+                            }
+                        }
                     }
-                    ds_list_add(all_entities, tower);
-                    ds_list_add(all_towers, tower);
+                }
+                if (clicked) {
+                    
+                } else {
+                    SpawnTower();
                 }
             }
             
