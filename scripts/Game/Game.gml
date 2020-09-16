@@ -84,6 +84,7 @@ function Game() constructor {
     all_entities = ds_list_create();
     all_foes = ds_list_create();
     all_towers = ds_list_create();
+    all_env_entities = ds_list_create();
     
     selected_entity = undefined;
     
@@ -211,10 +212,17 @@ function Game() constructor {
         } else {
             #region Editor stuff
             if (mouse_check_button_pressed(mb_left)) {
-                var position = camera.GetFloorIntersect();
-                var spawn_name = env_object_list[| irandom(ds_list_size(env_object_list) - 1)];
-                var ent = new EntityEnv(position.x, position.y, 0, env_objects[? spawn_name], spawn_name);
-                ds_list_add(all_entities, ent);
+                selected_entity = GetClicked(all_env_entities);
+                
+                if (selected_entity) {
+                    
+                } else {
+                    var position = camera.GetFloorIntersect();
+                    var spawn_name = env_object_list[| irandom(ds_list_size(env_object_list) - 1)];
+                    var ent = new EntityEnv(position.x, position.y, 0, env_objects[? spawn_name], spawn_name);
+                    ds_list_add(all_entities, ent);
+                    ds_list_add(all_env_entities, ent);
+                }
             }
             
             if (keyboard_check_pressed(vk_f1)) {
