@@ -214,20 +214,28 @@ function Game() constructor {
             #region Editor stuff
             editor_hover_entity = GetUnderCursor(all_env_entities);
             
-            if (selected_entity) {
-                // code that will run on selected entities
-            } else {
+            if (mouse_check_button_pressed(mb_left)) {
                 if (editor_hover_entity) {
-                    if (mouse_check_button_pressed(mb_left)) {
-                        selected_entity = editor_hover_entity;
-                    }
+                    if (selected_entity) selected_entity.Deselect();
+                    selected_entity = editor_hover_entity;
+                    editor_hover_entity.Select();
                 } else {
-                    if (mouse_check_button_pressed(mb_left)) {
-                        var position = camera.GetFloorIntersect();
-                        var spawn_name = env_object_list[| irandom(ds_list_size(env_object_list) - 1)];
-                        var ent = new EntityEnv(position.x, position.y, 0, env_objects[? spawn_name], spawn_name);
-                        ds_list_add(all_entities, ent);
-                        ds_list_add(all_env_entities, ent);
+                    var position = camera.GetFloorIntersect();
+                    var spawn_name = env_object_list[| irandom(ds_list_size(env_object_list) - 1)];
+                    var ent = new EntityEnv(position.x, position.y, 0, env_objects[? spawn_name], spawn_name);
+                    ds_list_add(all_entities, ent);
+                    ds_list_add(all_env_entities, ent);
+                }
+            } else {
+                if (selected_entity) {
+                    if (keyboard_check_pressed(vk_f12)) {
+                        selected_entity.is_moving = !selected_entity.is_moving;
+                    }
+                    if (selected_entity.is_moving) {
+                        var pos = camera.GetFloorIntersect();
+                        if (pos) {
+                            selected_entity.Reposition(pos.x, pos.y, pos.z);
+                        }
                     }
                 }
             }

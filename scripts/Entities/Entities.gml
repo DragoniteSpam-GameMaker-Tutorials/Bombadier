@@ -49,6 +49,16 @@ function EntityEnv(x, y, z, vbuff, savename) : Entity(x, y, z) constructor {
         collision.p2.z = z + 16;
     };
     
+    Select = function() {
+        
+    };
+    
+    Deselect = function() {
+        is_moving = false;
+    };
+    
+    is_moving = false;
+    
     Save = function(save_json, i) {
         save_json.entities[i] = {
             position: position,
