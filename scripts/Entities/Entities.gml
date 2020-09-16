@@ -84,6 +84,7 @@ function EntityBullet(x, y, z, vx, vy, vz, bullet_data, damage) : Entity(x, y, z
 
 function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
     self.class = class;
+    self.level = 1;
     
     self.shot_cooldown = 0;
     
@@ -97,23 +98,42 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
     self.mod_range = 1;
     self.mod_damage = 1;
     
-    self.act_rate = self.base_rate * self.mod_rate;
-    self.act_range = self.base_range * self.mod_range;
-    self.act_damage = self.base_damage * self.mod_damage;
-    
     SetRateMod = function(value) {
         mod_rate = value;
-        act_rate = base_rate * mod_rate;
+        act_rate = CalcRate() * mod_rate;
     }
     
     SetRangeMod = function(value) {
         mod_range = value;
-        act_range = base_range * mod_range;
+        act_range = CalcRange() * mod_range;
     }
     
     SetDamageMod = function(value) {
         mod_damage = value;
-        act_damage = base_damage * mod_damage;
+        act_damage = CalcDamage() * mod_damage;
+    }
+    
+    CalcRate = function() {
+        return base_rate * level;
+    }
+    
+    CalcRange = function() {
+        return base_range * level;
+    }
+    
+    CalcDamage = function() {
+        return base_damage * level;
+    }
+    
+    self.act_rate = CalcRate() * self.mod_rate;
+    self.act_range = CalcRange() * self.mod_range;
+    self.act_damage = CalcDamage() * self.mod_damage;
+    
+    LevelUp = function() {
+        level++;
+        act_rate = CalcRate() * mod_rate;
+        act_range = CalcRange() * mod_range;
+        act_damage = CalcDamage() * mod_damage;
     }
     
     Update = function() {
@@ -203,24 +223,36 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
     self.mod_mdef = 1;
     self.mod_speed = 1;
     
-    self.act_def = self.base_def * self.mod_def;
-    self.act_mdef = self.base_mdef * self.mod_mdef;
-    self.act_speed = self.base_speed * self.mod_speed;
-    
     SetDefMod = function(value) {
         momod_def_damage = value;
-        act_def = base_def * mod_def;
+        act_def = CalcDef() * mod_def;
     }
     
     SetMdefMod = function(value) {
         mod_mdef = value;
-        act_mdef = base_mdef * mod_mdef;
+        act_mdef = CalcMDef() * mod_mdef;
     }
     
     SetSpeedMod = function(value) {
         mod_speed = value;
-        act_speed = base_speed * mod_speed;
+        act_speed = CalcSpeed() * mod_speed;
     }
+    
+    CalcDef = function() {
+        return base_def * level;
+    }
+    
+    CalcMDef = function() {
+        return base_mdef * level;
+    }
+    
+    CalcSpeed = function() {
+        return base_speed;
+    }
+    
+    self.act_def = CalcDef() * self.mod_def;
+    self.act_mdef = CalcMDef() * self.mod_mdef;
+    self.act_speed = CalcSpeed() * self.mod_speed;
     
     self.path = pth_test;
     self.path_node = 0;
