@@ -142,6 +142,26 @@ function Game() constructor {
         }
     };
     
+    GetClicked = function(entity_list) {
+        var ray = new Ray(camera.from, camera.mouse_cast);
+        var thing_selected = undefined;
+        for (var i = 0; i < ds_list_size(entity_list); i++) {
+            var tower = entity_list[| i];
+            if (tower.raycast(tower.collision, ray)) {
+                if (!thing_selected) {
+                    thing_selected = tower;
+                } else {
+                    var this_tower_dist = point_distance_3d(tower.position.x, tower.position.y, tower.position.z, camera.from.x, camera.from.y, camera.from.z);
+                    var other_tower_dist = point_distance_3d(thing_selected.position.x, thing_selected.position.y, thing_selected.position.z, camera.from.x, camera.from.y, camera.from.z);
+                    if (this_tower_dist < other_tower_dist) {
+                        thing_selected = tower;
+                    }
+                }
+            }
+        }
+        return thing_selected;
+    };
+    
     Update = function() {
         camera.Update();
         
@@ -152,23 +172,7 @@ function Game() constructor {
         if (gameplay_mode == GameModes.GAMEPLAY) {
             #region Gameplay stuff
             if (mouse_check_button_pressed(mb_left)) {
-                var ray = new Ray(camera.from, camera.mouse_cast);
-                selected_entity = undefined;
-                
-                for (var i = 0; i < ds_list_size(all_towers); i++) {
-                    var tower = all_towers[| i];
-                    if (tower.raycast(tower.collision, ray)) {
-                        if (!selected_entity) {
-                            selected_entity = tower;
-                        } else {
-                            var this_tower_dist = point_distance_3d(tower.position.x, tower.position.y, tower.position.z, camera.from.x, camera.from.y, camera.from.z);
-                            var other_tower_dist = point_distance_3d(selected_entity.position.x, selected_entity.position.y, selected_entity.position.z, camera.from.x, camera.from.y, camera.from.z);
-                            if (this_tower_dist < other_tower_dist) {
-                                selected_entity = tower;
-                            }
-                        }
-                    }
-                }
+                selected_entity = GetClicked(all_towers);
                 
                 if (selected_entity) {
                     
