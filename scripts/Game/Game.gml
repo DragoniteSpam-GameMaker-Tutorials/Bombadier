@@ -93,7 +93,7 @@ function Game() constructor {
         new Wave(foe_ant, 10, 3),
         new Wave(foe_pillbugs, 4, 3),
     );
-    wave_current = undefined;
+    wave_active = ds_list_create();
     wave_countdown = WAVE_WARMUP_COUNTDOWN;
     wave_finished = false;
     
@@ -110,8 +110,9 @@ function Game() constructor {
         if (ds_queue_empty(all_waves)) {
             wave_finished = true;
         } else {
-            wave_current = ds_queue_dequeue(all_waves);
+            var wave_current = ds_queue_dequeue(all_waves);
             wave_current.Launch();
+            ds_list_add(wave_active, wave_current);
         }
     };
     
@@ -160,8 +161,11 @@ function Game() constructor {
                 }
             }
             
-            if (wave_current) {
-                wave_current.Update();
+            for (var i = ds_list_size(wave_active) - 1; i >= 0; i--) {
+                wave_active[| i].Update();
+                if (wave_active[| i].Finished()) {
+                    ds_list_delete(wave_active, i);
+                }
             }
             
             for (var i = 0; i < ds_list_size(all_entities); i++) {
