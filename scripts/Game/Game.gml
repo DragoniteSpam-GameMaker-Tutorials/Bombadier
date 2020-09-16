@@ -152,9 +152,10 @@ function Game() constructor {
             if (mouse_check_button_pressed(mb_left)) {
                 var ray = new Ray(camera.from, camera.mouse_cast);
                 var clicked = undefined;
+                
                 for (var i = 0; i < ds_list_size(all_towers); i++) {
                     var tower = all_towers[| i];
-                    if (tower.raycast(tower.bbox, ray)) {
+                    if (tower.raycast(tower.collision, ray)) {
                         if (!clicked) {
                             clicked = tower;
                         } else {
@@ -166,6 +167,7 @@ function Game() constructor {
                         }
                     }
                 }
+                
                 if (clicked) {
                     
                 } else {

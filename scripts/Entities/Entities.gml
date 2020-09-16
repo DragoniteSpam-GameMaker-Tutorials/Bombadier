@@ -3,10 +3,7 @@ function Entity(x, y, z) constructor {
     rotation = new Vector3(0, 0, 0);
     scale = new Vector3(1, 1, 1);
     
-    bbox = {
-        p1: new Vector3(position.x - 16, position.y - 16, position.z),
-        p2: new Vector3(position.x + 16, position.y + 16, position.z + 64),
-    };
+    collision = new BBox(new Vector3(position.x - 16, position.y - 16, position.z), new Vector3(position.x + 16, position.y + 16, position.z + 64));
     
     raycast = coll_ray_aabb;
     

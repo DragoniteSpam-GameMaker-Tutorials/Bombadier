@@ -16,3 +16,8 @@ function Ray(origin, direction) constructor {
     self.origin = origin;
     self.direction = direction;
 }
+
+function BBox(p1, p2) constructor {
+    self.p1 = p1;
+    self.p2 = p2;
+}
