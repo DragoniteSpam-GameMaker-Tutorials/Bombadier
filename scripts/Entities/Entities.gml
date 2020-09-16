@@ -37,6 +37,18 @@ function EntityEnv(x, y, z, vbuff, savename) : Entity(x, y, z) constructor {
     
     collision = new BBox(new Vector3(position.x - 8, position.y - 8, position.z), new Vector3(position.x + 8, position.y + 8, position.z + 16));
     
+    Reposition = function(x, y, z) {
+        position.x = x;
+        position.y = y;
+        position.z = z;
+        collision.p1.x = x - 8;
+        collision.p1.y = y - 8;
+        collision.p1.z = z;
+        collision.p2.x = x + 8;
+        collision.p2.y = y + 8;
+        collision.p2.z = z + 16;
+    };
+    
     Save = function(save_json, i) {
         save_json.entities[i] = {
             position: position,
