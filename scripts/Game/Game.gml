@@ -368,8 +368,20 @@ function Game() constructor {
             draw_text(32, 32, "Player money: " + string(player_money));
             draw_text(32, 64, "Player health: " + string(player_health));
         } else {
-            draw_text(32, 32, "Click to spawn a thing");
-            draw_text(32, 64, "F1 to save");
+            draw_text(32, 32, "Click to spawn a thing or select an existing thing");
+            if (selected_entity) {
+                if (keyboard_check(vk_shift)) {
+                    draw_text(32, 64, "Left, Right, Up, Down, PageUp and Page Down to rotate the selected thing");
+                    draw_text(32, 96, "Backspace to reset the rotation");
+                } else if (keyboard_check(vk_control)) {
+                    draw_text(32, 64, "Up and Down to scale the selected thing");
+                    draw_text(32, 96, "Backspace to reset the scale");
+                } else {
+                    draw_text(32, 64, "Left, Right, Up, Down, PageUp and Page Down to move the selected thing");
+                    draw_text(32, 96, "Hold Shift or Control to affect rotation and scale instead");
+                }
+            }
+            draw_text(window_get_width() - 128, 32, "F1 to save");
         }
     };
     
