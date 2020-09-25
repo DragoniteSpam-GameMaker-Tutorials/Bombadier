@@ -404,6 +404,7 @@ function Game() constructor {
                 }
                 draw_text(32, 128, "F12 to move a thing to a new location");
                 draw_text(32, 160, "Delete to delete the selected thing");
+                draw_text(32, 192, string(ds_list_size(all_env_entities)) + " total things");
             }
             draw_text(window_get_width() - 128, 32, "F1 to save");
         }
