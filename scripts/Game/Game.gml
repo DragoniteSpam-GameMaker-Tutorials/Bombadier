@@ -58,7 +58,7 @@ function Game() constructor {
     env_object_list = ds_list_create();
     for (var file = file_find_first("environment/*.d3d", 0); file != ""; file = file_find_next()) {
         var vbuff = load_model("environment/" + file, format);;
-        var obj_name = string_replace(file, "000.d3d", "");
+        var obj_name = string_replace(file, ".000.d3d", "");
         env_objects[? obj_name] = vbuff;
         ds_list_add(env_object_list, obj_name);
     }
@@ -232,6 +232,10 @@ function Game() constructor {
                     var position = camera.GetFloorIntersect();
                     var spawn_name = env_object_list[| editor_model_index];
                     var ent = new EntityEnv(position.x, position.y, 0, env_objects[? spawn_name], spawn_name);
+                    ent.rotation.z = random(360);
+                    ent.scale.x = random_range(0.9, 1.1);
+                    ent.scale.y = ent.scale.x;
+                    ent.scale.z = ent.scale.x;
                     ds_list_add(all_entities, ent);
                     ds_list_add(all_env_entities, ent);
                 }
