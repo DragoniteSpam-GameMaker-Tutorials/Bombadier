@@ -87,6 +87,7 @@ function Game() constructor {
     
     selected_entity = undefined;
     editor_hover_entity = undefined;
+    editor_model_index = 0;
     
     all_waves = ds_queue_create();
     ds_queue_enqueue(all_waves,
@@ -214,6 +215,14 @@ function Game() constructor {
             #region Editor stuff
             editor_hover_entity = GetUnderCursor(all_env_entities);
             
+            if (keyboard_check_pressed(vk_f4)) {
+                editor_model_index = (editor_model_index + ds_list_size(env_object_list) - 1) % ds_list_size(env_object_list);
+            }
+            
+            if (keyboard_check_pressed(vk_f5)) {
+                editor_model_index = (editor_model_index + 1) % ds_list_size(env_object_list);
+            }
+            
             if (mouse_check_button_pressed(mb_left)) {
                 if (editor_hover_entity) {
                     if (selected_entity) selected_entity.Deselect();
@@ -221,7 +230,7 @@ function Game() constructor {
                     editor_hover_entity.Select();
                 } else {
                     var position = camera.GetFloorIntersect();
-                    var spawn_name = env_object_list[| irandom(ds_list_size(env_object_list) - 1)];
+                    var spawn_name = env_object_list[| editor_model_index];
                     var ent = new EntityEnv(position.x, position.y, 0, env_objects[? spawn_name], spawn_name);
                     ds_list_add(all_entities, ent);
                     ds_list_add(all_env_entities, ent);
@@ -375,7 +384,7 @@ function Game() constructor {
             draw_text(32, 32, "Player money: " + string(player_money));
             draw_text(32, 64, "Player health: " + string(player_health));
         } else {
-            draw_text(32, 32, "Click to spawn a thing or select an existing thing");
+            draw_text(32, 32, "Click to spawn a thing (" + env_object_list[| editor_model_index] + ") or select an existing thing");
             if (selected_entity) {
                 if (keyboard_check(vk_shift)) {
                     draw_text(32, 64, "Left, Right, Up, Down, PageUp and Page Down to rotate the selected thing");
@@ -387,7 +396,8 @@ function Game() constructor {
                     draw_text(32, 64, "Left, Right, Up, Down, PageUp and Page Down to move the selected thing");
                     draw_text(32, 96, "Hold Shift or Control to affect rotation and scale instead");
                 }
-                draw_text(32, 128, "Delete to delete the selected thing");
+                draw_text(32, 128, "F12 to move a thing to a new location");
+                draw_text(32, 160, "Delete to delete the selected thing");
             }
             draw_text(window_get_width() - 128, 32, "F1 to save");
         }
