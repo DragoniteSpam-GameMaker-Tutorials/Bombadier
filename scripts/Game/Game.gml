@@ -355,7 +355,9 @@ function Game() constructor {
             for (var i = 0; i < array_length(load_json.entities); i++) {
                 var data = load_json.entities[i];
                 if (is_struct(data)) {
-                    var ent = new EntityEnv(data.position.x, data.position.y, 0, env_objects[? data.name], data.name);
+                    var ent = new EntityEnv(data.position.x, data.position.y, data.position.z, env_objects[? data.name], data.name);
+                    ent.rotation = data.rotation;
+                    ent.scale = data.scale;
                     ds_list_add(all_entities, ent);
                     ds_list_add(all_env_entities, ent);
                 }
