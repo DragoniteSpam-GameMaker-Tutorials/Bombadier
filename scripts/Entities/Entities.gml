@@ -82,12 +82,13 @@ function EntityEnv(x, y, z, vbuff, savename) : Entity(x, y, z) constructor {
                 shader_set_uniform_f(shader_get_uniform(shd_selected, "color"), 0, 1, 0, 1);
             }
         }
+        
         matrix_set(matrix_world, matrix_build(position.x, position.y, position.z, rotation.x, rotation.y, rotation.z, scale.x, scale.y, scale.z));
         vertex_submit(vbuff, pr_trianglelist, -1);
         matrix_set(matrix_world, matrix_build_identity());
         // reset the shader if you are selected
         if (GAME.selected_entity == self || GAME.editor_hover_entity == self) {
-            shader_set(shd_cluck_fragment);
+            cluck_apply(shd_cluck_fragment);
         }
     };
 }
@@ -228,7 +229,7 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
         matrix_set(matrix_world, matrix_build_identity());
         // reset the shader if you are selected
         if (GAME.selected_entity == self) {
-            shader_set(shd_cluck_fragment);
+            cluck_apply(shd_cluck_fragment);
         }
     };
 }
