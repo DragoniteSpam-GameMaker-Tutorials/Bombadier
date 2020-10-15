@@ -427,9 +427,31 @@ function Game() constructor {
         
         if (gameplay_mode == GameModes.EDITOR) {
             if (editor_path_mode) {
+                var draw_the_line = array_length(path_nodes) > 1;
+                if (draw_the_line) {
+                    var vb_path_nodes = vertex_create_buffer();
+                    vertex_begin(vb_path_nodes, format);
+                    var node_hue = 0;
+                    var node_hue_interval = 255 / array_length(path_nodes);
+                }
                 shader_set(shd_cluck_unlit);
                 for (var i = 0; i < array_length(path_nodes); i++) {
-                    if (path_nodes[i] != undefined) path_nodes[i].Render();
+                    var node = path_nodes[i];
+                    if (node != undefined) {
+                        node.Render();
+                        if (draw_the_line) {
+                            vertex_position_3d(vb_path_nodes, node.position.x, node.position.y, node.position.z + 8);
+                            vertex_normal(vb_path_nodes, 0, 0, 1);
+                            vertex_texcoord(vb_path_nodes, 0, 0);
+                            vertex_colour(vb_path_nodes, make_colour_hsv(node_hue, 255, 255), 1);
+                            node_hue += node_hue_interval;
+                        }
+                    }
+                }
+                if (draw_the_line) {
+                    vertex_end(vb_path_nodes);
+                    vertex_submit(vb_path_nodes, pr_linestrip, -1);
+                    vertex_delete_buffer(vb_path_nodes);
                 }
             }
         }
