@@ -374,11 +374,19 @@ function Game() constructor {
         var filename = get_save_filename("Bombadier maps|*.bug", "map.bug");
         if (filename == "") return;
         
+        for (var node_count = array_length(path_nodes) - 1; node_count >= 0; node_count--) {
+            if (path_nodes[node_count] != undefined) break;
+        }
+        
         var save_json = {
             entities: array_create(ds_list_size(all_env_entities), undefined),
+            nodes: array_create(node_count),
         };
         for (var i = 0; i < ds_list_size(all_env_entities); i++) {
             all_env_entities[| i].Save(save_json, i);
+        }
+        for (var i = 0; i < node_count; i++) {
+            save_json.nodes[@ i] = path_nodes[i];
         }
         
         var json_string = json_stringify(save_json);
@@ -404,7 +412,16 @@ function Game() constructor {
                     ds_list_add(all_env_entities, ent);
                 }
             }
+            path_nodes = array_create(array_length(load_json.nodes));
+            for (var i = 0; i < array_length(load_json.nodes); i++) {
+                path_nodes[@ i] = new PathNode(load_json.nodes[i].position);
+            }
         } catch (e) {
+            show_debug_message("Something bad happened loading the file:");
+            show_debug_message(e.message);
+            show_debug_message(e.longMessage);
+            show_debug_message(e.script);
+            show_debug_message(e.stacktrace);
         }
         
         if (buffer != undefined) {

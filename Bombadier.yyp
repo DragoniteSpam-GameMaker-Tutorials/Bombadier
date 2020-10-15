@@ -185,7 +185,6 @@
     {"CopyToMask":-1,"filePath":"datafiles/environment","resourceVersion":"1.0","name":"tree_pinesmallc.000.d3d","resourceType":"GMIncludedFile",},
     {"CopyToMask":-1,"filePath":"datafiles/environment","resourceVersion":"1.0","name":"tree_pinetalld_detailed.000.d3d","resourceType":"GMIncludedFile",},
     {"CopyToMask":-1,"filePath":"datafiles/environment","resourceVersion":"1.0","name":"tree_pinegrounda.000.d3d","resourceType":"GMIncludedFile",},
-    {"CopyToMask":-1,"filePath":"datafiles/maps","resourceVersion":"1.0","name":"map.bug","resourceType":"GMIncludedFile",},
     {"CopyToMask":-1,"filePath":"datafiles/environment","resourceVersion":"1.0","name":"flower_yellowb.000.d3d","resourceType":"GMIncludedFile",},
     {"CopyToMask":-1,"filePath":"datafiles/environment","resourceVersion":"1.0","name":"rock_tallh.000.d3d","resourceType":"GMIncludedFile",},
     {"CopyToMask":-1,"filePath":"datafiles/environment","resourceVersion":"1.0","name":"rock_largec.000.d3d","resourceType":"GMIncludedFile",},
@@ -201,6 +200,7 @@
     {"CopyToMask":-1,"filePath":"datafiles/environment","resourceVersion":"1.0","name":"rock_smallflatb.d3d","resourceType":"GMIncludedFile",},
     {"CopyToMask":-1,"filePath":"datafiles/environment","resourceVersion":"1.0","name":"rock_smallflata.d3d","resourceType":"GMIncludedFile",},
     {"CopyToMask":-1,"filePath":"datafiles/environment","resourceVersion":"1.0","name":"rock_smallflatc.d3d","resourceType":"GMIncludedFile",},
+    {"CopyToMask":-1,"filePath":"datafiles/maps","resourceVersion":"1.0","name":"map.bug","resourceType":"GMIncludedFile",},
   ],
   "MetaData": {
     "IDEVersion": "23.1.1.193",
