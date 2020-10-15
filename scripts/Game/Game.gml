@@ -225,21 +225,14 @@ function Game() constructor {
                 editor_hover_entity = GetUnderCursor(path_nodes);
                 
                 if (mouse_check_button_pressed(mb_left)) {
-                    /*if (editor_hover_entity) {
-                        if (selected_entity) selected_entity.Deselect();
+                    if (editor_hover_entity) {
+                        /*if (selected_entity) selected_entity.Deselect();
                         selected_entity = editor_hover_entity;
-                        editor_hover_entity.Select();
+                        editor_hover_entity.Select();*/
                     } else {
                         var position = camera.GetFloorIntersect();
-                        var spawn_name = env_object_list[| editor_model_index];
-                        var ent = new EntityEnv(position.x, position.y, 0, env_objects[? spawn_name], spawn_name);
-                        ent.rotation.z = random(360);
-                        ent.scale.x = random_range(0.9, 1.1);
-                        ent.scale.y = ent.scale.x;
-                        ent.scale.z = ent.scale.x;
-                        ds_list_add(all_entities, ent);
-                        ds_list_add(all_env_entities, ent);
-                    }*/
+                        array_push(path_nodes, new PathNode(position));
+                    }
                 }
             } else {
                 editor_hover_entity = GetUnderCursor(all_env_entities);
@@ -413,6 +406,15 @@ function Game() constructor {
             all_entities[| i].Render();
         }
         shader_reset();
+        
+        if (gameplay_mode == GameModes.EDITOR) {
+            if (editor_path_mode) {
+                show_debug_message(array_length(path_nodes))
+                for (var i = 0; i < array_length(path_nodes); i++) {
+                    path_nodes[i].Render();
+                }
+            }
+        }
     };
     
     GUI = function() {
