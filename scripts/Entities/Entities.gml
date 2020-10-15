@@ -313,8 +313,9 @@ function EntityFoe(class, level, path) : Entity(0, 0, 0) constructor {
     self.act_speed = CalcSpeed() * self.mod_speed;
     
     self.path = path;
-    self.path_node = 0;
-    self.destination = self.path[0];
+    self.path_node = 1;
+    self.position = self.path[0].position.Clone();
+    self.destination = self.path[1].position.Clone();
     
     Damage = function(amount) {
         hp -= max(amount, 0);
@@ -341,7 +342,7 @@ function EntityFoe(class, level, path) : Entity(0, 0, 0) constructor {
         if (position.x == destination.x && position.y == destination.y && position.z == destination.z) {
             if (array_length(path) > (path_node + 1)) {
                 path_node++;
-                destination = path[path_node];
+                destination = path[path_node].position.Clone();
             } else {
                 GAME.PlayerDamage(damage);
                 Destroy();
