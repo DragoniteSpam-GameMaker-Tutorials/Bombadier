@@ -80,6 +80,8 @@ function Game() constructor {
     tower_buff =     new TowerData("Friendly Tower",        1, 3 * 32, 1, 10, load_model("tower-buff.d3d", format), bullet_pebble);
     #endregion
     
+    path_nodes = array_create();
+    
     all_entities = ds_list_create();
     all_foes = ds_list_create();
     all_towers = ds_list_create();
@@ -91,11 +93,11 @@ function Game() constructor {
     
     all_waves = ds_queue_create();
     ds_queue_enqueue(all_waves,
-        new Wave(foe_ant, 8, 1),
-        new Wave(foe_pillbugs, 8, 1),
-        new Wave(foe_ant, 10, 2),
-        new Wave(foe_ant, 10, 3),
-        new Wave(foe_pillbugs, 4, 3),
+        new Wave(foe_ant, 8, 1, path_nodes),
+        new Wave(foe_pillbugs, 8, 1, path_nodes),
+        new Wave(foe_ant, 10, 2, path_nodes),
+        new Wave(foe_ant, 10, 3,path_nodes),
+        new Wave(foe_pillbugs, 4, 3, path_nodes),
     );
     wave_active = ds_list_create();
     wave_countdown = WAVE_WARMUP_COUNTDOWN;

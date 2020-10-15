@@ -30,7 +30,6 @@
     {"id":{"name":"cluck_set_fog","path":"scripts/cluck_set_fog/cluck_set_fog.yy",},"order":5,},
     {"id":{"name":"cluck_init","path":"scripts/cluck_init/cluck_init.yy",},"order":2,},
     {"id":{"name":"cluck_set_light_direction","path":"scripts/cluck_set_light_direction/cluck_set_light_direction.yy",},"order":7,},
-    {"id":{"name":"pth_test","path":"paths/pth_test/pth_test.yy",},"order":19,},
     {"id":{"name":"cluck_override_alpha_testing","path":"scripts/cluck_override_alpha_testing/cluck_override_alpha_testing.yy",},"order":0,},
     {"id":{"name":"spr_ground","path":"sprites/spr_ground/spr_ground.yy",},"order":0,},
     {"id":{"name":"cluck_apply","path":"scripts/cluck_apply/cluck_apply.yy",},"order":0,},

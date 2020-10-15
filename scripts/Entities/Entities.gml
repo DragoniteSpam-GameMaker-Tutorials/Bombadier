@@ -265,7 +265,7 @@ function EntityTowerBuff(x, y, z, class) : EntityTower(x, y, z, class) construct
     };
 }
 
-function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
+function EntityFoe(class, level, path) : Entity(0, 0, 0) constructor {
     self.class = class;
     self.level = level;
     
@@ -312,9 +312,9 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
     self.act_mdef = CalcMDef() * self.mod_mdef;
     self.act_speed = CalcSpeed() * self.mod_speed;
     
-    self.path = pth_test;
+    self.path = path;
     self.path_node = 0;
-    self.destination = new Vector3(path_get_point_x(self.path, 0), path_get_point_y(self.path, 0), 0);
+    self.destination = self.path[0];
     
     Damage = function(amount) {
         hp -= max(amount, 0);
@@ -339,10 +339,9 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
         position.y = approach(position.y, destination.y, act_speed * abs(dsin(dir)) * dt);
         position.z = approach(position.z, destination.z, act_speed * dt);
         if (position.x == destination.x && position.y == destination.y && position.z == destination.z) {
-            if (path_get_number(path) > (path_node + 1)) {
+            if (array_length(path) > (path_node + 1)) {
                 path_node++;
-                destination.x = path_get_point_x(path, path_node);
-                destination.y = path_get_point_y(path, path_node);
+                destination = path[path_node];
             } else {
                 GAME.PlayerDamage(damage);
                 Destroy();
