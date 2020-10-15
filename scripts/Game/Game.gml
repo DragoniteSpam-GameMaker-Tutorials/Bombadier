@@ -219,6 +219,7 @@ function Game() constructor {
             #region Editor stuff
             if (keyboard_check_pressed(vk_f2)) {
                 editor_path_mode = !editor_path_mode;
+                selected_entity = undefined;
             }
             
             if (editor_path_mode) {
@@ -226,9 +227,7 @@ function Game() constructor {
                 
                 if (mouse_check_button_pressed(mb_left)) {
                     if (editor_hover_entity) {
-                        /*if (selected_entity) selected_entity.Deselect();
                         selected_entity = editor_hover_entity;
-                        editor_hover_entity.Select();*/
                     } else {
                         var position = camera.GetFloorIntersect();
                         array_push(path_nodes, new PathNode(position));
@@ -405,16 +404,17 @@ function Game() constructor {
         for (var i = 0; i < ds_list_size(all_entities); i++) {
             all_entities[| i].Render();
         }
-        shader_reset();
         
         if (gameplay_mode == GameModes.EDITOR) {
             if (editor_path_mode) {
-                show_debug_message(array_length(path_nodes))
+                shader_set(shd_cluck_unlit);
                 for (var i = 0; i < array_length(path_nodes); i++) {
                     path_nodes[i].Render();
                 }
             }
         }
+        
+        shader_reset();
     };
     
     GUI = function() {

@@ -49,7 +49,7 @@ function PathNode(position) constructor {
             shader_set(shd_selected);
             shader_set_uniform_f(shader_get_uniform(shd_selected, "time"), current_time / 1000);
             if (GAME.selected_entity == self) {
-                shader_set_uniform_f(shader_get_uniform(shd_selected, "color"), 1, 1, 1, 1);
+                shader_set_uniform_f(shader_get_uniform(shd_selected, "color"), 0, 0, 1, 1);
             } else if (GAME.editor_hover_entity == self) {
                 shader_set_uniform_f(shader_get_uniform(shd_selected, "color"), 0, 1, 0, 1);
             }
@@ -60,7 +60,7 @@ function PathNode(position) constructor {
         matrix_set(matrix_world, matrix_build_identity());
         // reset the shader if you are selected
         if (GAME.selected_entity == self || GAME.editor_hover_entity == self) {
-            cluck_apply(shd_cluck_fragment);
+            shader_set(shd_cluck_unlit);
         }
     };
 }
