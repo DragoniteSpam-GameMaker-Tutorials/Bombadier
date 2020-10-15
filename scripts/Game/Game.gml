@@ -381,7 +381,7 @@ function Game() constructor {
             all_env_entities[| i].Save(save_json, i);
         }
         
-        var json_string = snap_to_json(save_json);
+        var json_string = json_stringify(save_json);
         var buffer = buffer_create(string_length(json_string), buffer_fixed, 1);
         buffer_poke(buffer, 0, buffer_text, json_string);
         buffer_save(buffer, filename);
@@ -393,7 +393,7 @@ function Game() constructor {
         try {
             buffer = buffer_load(filename);
             var json_string = buffer_read(buffer, buffer_text);
-            var load_json = snap_from_json(json_string);
+            var load_json = json_parse(json_string);
             for (var i = 0; i < array_length(load_json.entities); i++) {
                 var data = load_json.entities[i];
                 if (is_struct(data)) {
