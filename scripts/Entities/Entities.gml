@@ -340,7 +340,7 @@ function EntityFoe(class, level, path) : Entity(0, 0, 0) constructor {
         position.y = approach(position.y, destination.y, act_speed * abs(dsin(dir)) * dt);
         position.z = approach(position.z, destination.z, act_speed * dt);
         if (position.x == destination.x && position.y == destination.y && position.z == destination.z) {
-            if (array_length(path) > (path_node + 1)) {
+            if (array_length(path) > (path_node + 1) && path[path_node + 1] != undefined) {
                 path_node++;
                 destination = path[path_node].position.Clone();
             } else {

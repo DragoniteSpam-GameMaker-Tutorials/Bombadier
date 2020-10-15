@@ -153,14 +153,16 @@ function Game() constructor {
         var n = is_array(entity_list) ? array_length(entity_list) : ds_list_size(entity_list);
         for (var i = 0; i < n; i++) {
             var tower = is_array(entity_list) ? entity_list[i] : entity_list[| i];
-            if (tower.raycast(tower.collision, ray)) {
-                if (!thing_selected) {
-                    thing_selected = tower;
-                } else {
-                    var this_tower_dist = point_distance_3d(tower.position.x, tower.position.y, tower.position.z, camera.from.x, camera.from.y, camera.from.z);
-                    var other_tower_dist = point_distance_3d(thing_selected.position.x, thing_selected.position.y, thing_selected.position.z, camera.from.x, camera.from.y, camera.from.z);
-                    if (this_tower_dist < other_tower_dist) {
+            if (tower != undefined) {
+                if (tower.raycast(tower.collision, ray)) {
+                    if (!thing_selected) {
                         thing_selected = tower;
+                    } else {
+                        var this_tower_dist = point_distance_3d(tower.position.x, tower.position.y, tower.position.z, camera.from.x, camera.from.y, camera.from.z);
+                        var other_tower_dist = point_distance_3d(thing_selected.position.x, thing_selected.position.y, thing_selected.position.z, camera.from.x, camera.from.y, camera.from.z);
+                        if (this_tower_dist < other_tower_dist) {
+                            thing_selected = tower;
+                        }
                     }
                 }
             }
@@ -230,7 +232,25 @@ function Game() constructor {
                         selected_entity = editor_hover_entity;
                     } else {
                         var position = camera.GetFloorIntersect();
-                        array_push(path_nodes, new PathNode(position));
+                        for (var i = 0; i < array_length(path_nodes) + 1; i++) {
+                            if (i == array_length(path_nodes) || path_nodes[i] == undefined) {
+                                path_nodes[@ i] = new PathNode(position);
+                                break;
+                            }
+                        }
+                    }
+                }
+                if (keyboard_check_pressed(vk_delete)) {
+                    if (selected_entity) {
+                        for (var i = 0; i < array_length(path_nodes); i++) {
+                            if (path_nodes[i] == selected_entity) {
+                                for (var j = i; j < array_length(path_nodes) - 1; j++) {
+                                    path_nodes[j] = path_nodes[j + 1];
+                                }
+                                path_nodes[array_length(path_nodes) - 1] = undefined;
+                                break;
+                            }
+                        }
                     }
                 }
             } else {
@@ -409,7 +429,7 @@ function Game() constructor {
             if (editor_path_mode) {
                 shader_set(shd_cluck_unlit);
                 for (var i = 0; i < array_length(path_nodes); i++) {
-                    path_nodes[i].Render();
+                    if (path_nodes[i] != undefined) path_nodes[i].Render();
                 }
             }
         }
