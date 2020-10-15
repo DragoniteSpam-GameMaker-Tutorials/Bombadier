@@ -377,7 +377,7 @@ function Game() constructor {
         cluck_set_light_direction(0, c_white, -1, -1, -1);
         cluck_apply(shd_cluck_fragment);
         
-        vertex_submit(ground, pr_trianglelist, sprite_get_texture(spr_grid, 0));
+        vertex_submit(ground, pr_trianglelist, sprite_get_texture(spr_ground, 0));
         
         for (var i = 0; i < ds_list_size(all_entities); i++) {
             all_entities[| i].Render();
