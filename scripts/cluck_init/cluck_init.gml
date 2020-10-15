@@ -1,4 +1,4 @@
-global.__cluck_alpha_ref = 1;
+global.__cluck_alpha_ref = 0.9;
 global.__cluck_alpha_test = 1;
 
 global.__cluck_light_ambient = c_white;
