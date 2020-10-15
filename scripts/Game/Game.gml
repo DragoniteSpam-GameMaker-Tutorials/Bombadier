@@ -89,6 +89,7 @@ function Game() constructor {
     
     selected_entity = undefined;
     editor_hover_entity = undefined;
+    editor_path_mode = false;
     editor_model_index = 0;
     
     all_waves = ds_queue_create();
@@ -149,8 +150,9 @@ function Game() constructor {
     GetUnderCursor = function(entity_list) {
         var ray = new Ray(camera.from, camera.mouse_cast);
         var thing_selected = undefined;
-        for (var i = 0; i < ds_list_size(entity_list); i++) {
-            var tower = entity_list[| i];
+        var n = is_array(entity_list) ? array_length(entity_list) : ds_list_size(entity_list);
+        for (var i = 0; i < n; i++) {
+            var tower = is_array(entity_list) ? entity_list[i] : entity_list[| i];
             if (tower.raycast(tower.collision, ray)) {
                 if (!thing_selected) {
                     thing_selected = tower;
@@ -215,109 +217,135 @@ function Game() constructor {
             #endregion
         } else {
             #region Editor stuff
-            editor_hover_entity = GetUnderCursor(all_env_entities);
-            
-            if (keyboard_check_pressed(vk_f4)) {
-                editor_model_index = (editor_model_index + ds_list_size(env_object_list) - 1) % ds_list_size(env_object_list);
+            if (keyboard_check_pressed(vk_f2)) {
+                editor_path_mode = !editor_path_mode;
             }
             
-            if (keyboard_check_pressed(vk_f5)) {
-                editor_model_index = (editor_model_index + 1) % ds_list_size(env_object_list);
-            }
-            
-            if (mouse_check_button_pressed(mb_left)) {
-                if (editor_hover_entity) {
-                    if (selected_entity) selected_entity.Deselect();
-                    selected_entity = editor_hover_entity;
-                    editor_hover_entity.Select();
-                } else {
-                    var position = camera.GetFloorIntersect();
-                    var spawn_name = env_object_list[| editor_model_index];
-                    var ent = new EntityEnv(position.x, position.y, 0, env_objects[? spawn_name], spawn_name);
-                    ent.rotation.z = random(360);
-                    ent.scale.x = random_range(0.9, 1.1);
-                    ent.scale.y = ent.scale.x;
-                    ent.scale.z = ent.scale.x;
-                    ds_list_add(all_entities, ent);
-                    ds_list_add(all_env_entities, ent);
+            if (editor_path_mode) {
+                editor_hover_entity = GetUnderCursor(path_nodes);
+                
+                if (mouse_check_button_pressed(mb_left)) {
+                    /*if (editor_hover_entity) {
+                        if (selected_entity) selected_entity.Deselect();
+                        selected_entity = editor_hover_entity;
+                        editor_hover_entity.Select();
+                    } else {
+                        var position = camera.GetFloorIntersect();
+                        var spawn_name = env_object_list[| editor_model_index];
+                        var ent = new EntityEnv(position.x, position.y, 0, env_objects[? spawn_name], spawn_name);
+                        ent.rotation.z = random(360);
+                        ent.scale.x = random_range(0.9, 1.1);
+                        ent.scale.y = ent.scale.x;
+                        ent.scale.z = ent.scale.x;
+                        ds_list_add(all_entities, ent);
+                        ds_list_add(all_env_entities, ent);
+                    }*/
                 }
             } else {
-                if (selected_entity) {
-                    if (keyboard_check_pressed(vk_f12)) {
-                        selected_entity.is_moving = !selected_entity.is_moving;
-                    }
-                    if (selected_entity.is_moving) {
-                        var pos = camera.GetFloorIntersect();
-                        if (pos) {
-                            selected_entity.Reposition(pos.x, pos.y, pos.z);
-                        }
+                editor_hover_entity = GetUnderCursor(all_env_entities);
+                
+                if (keyboard_check_pressed(vk_f4)) {
+                    editor_model_index = (editor_model_index + ds_list_size(env_object_list) - 1) % ds_list_size(env_object_list);
+                }
+                
+                if (keyboard_check_pressed(vk_f5)) {
+                    editor_model_index = (editor_model_index + 1) % ds_list_size(env_object_list);
+                }
+                
+                if (mouse_check_button_pressed(mb_left)) {
+                    if (editor_hover_entity) {
+                        if (selected_entity) selected_entity.Deselect();
+                        selected_entity = editor_hover_entity;
+                        editor_hover_entity.Select();
                     } else {
-                        #region position, rotation, scale
-                        if (keyboard_check(vk_shift)) {
-                            if (keyboard_check(vk_right)) {
-                                selected_entity.rotation.x++;
-                            }
-                            if (keyboard_check(vk_left)) {
-                                selected_entity.rotation.x--;
-                            }
-                            if (keyboard_check(vk_up)) {
-                                selected_entity.rotation.y--;
-                            }
-                            if (keyboard_check(vk_down)) {
-                                selected_entity.rotation.y++;
-                            }
-                            if (keyboard_check(vk_pageup)) {
-                                selected_entity.rotation.z++;
-                            }
-                            if (keyboard_check(vk_pagedown)) {
-                                selected_entity.rotation.z--;
-                            }
-                            if (keyboard_check(vk_backspace)) {
-                                selected_entity.rotation.x = 0;
-                                selected_entity.rotation.y = 0;
-                                selected_entity.rotation.z = 0;
-                            }
-                        } else if (keyboard_check(vk_control)) {
-                            if (keyboard_check(vk_up)) {
-                                selected_entity.scale.x = min(selected_entity.scale.x + 0.01, 4);
-                                selected_entity.scale.y = min(selected_entity.scale.y + 0.01, 4);
-                                selected_entity.scale.z = min(selected_entity.scale.z + 0.01, 4);
-                            }
-                            if (keyboard_check(vk_down)) {
-                                selected_entity.scale.x = max(selected_entity.scale.x - 0.01, 0.25);
-                                selected_entity.scale.y = max(selected_entity.scale.y - 0.01, 0.25);
-                                selected_entity.scale.z = max(selected_entity.scale.z - 0.01, 0.25);
-                            }
-                            if (keyboard_check(vk_backspace)) {
-                                selected_entity.scale.x = 1;
-                                selected_entity.scale.y = 1;
-                                selected_entity.scale.z = 1;
+                        var position = camera.GetFloorIntersect();
+                        var spawn_name = env_object_list[| editor_model_index];
+                        var ent = new EntityEnv(position.x, position.y, 0, env_objects[? spawn_name], spawn_name);
+                        ent.rotation.z = random(360);
+                        ent.scale.x = random_range(0.9, 1.1);
+                        ent.scale.y = ent.scale.x;
+                        ent.scale.z = ent.scale.x;
+                        ds_list_add(all_entities, ent);
+                        ds_list_add(all_env_entities, ent);
+                    }
+                } else {
+                    if (selected_entity) {
+                        if (keyboard_check_pressed(vk_f12)) {
+                            selected_entity.is_moving = !selected_entity.is_moving;
+                        }
+                        if (selected_entity.is_moving) {
+                            var pos = camera.GetFloorIntersect();
+                            if (pos) {
+                                selected_entity.Reposition(pos.x, pos.y, pos.z);
                             }
                         } else {
-                            if (keyboard_check(vk_right)) {
-                                selected_entity.Reposition(selected_entity.position.x + 1, selected_entity.position.y, selected_entity.position.z);
+                            #region position, rotation, scale
+                            if (keyboard_check(vk_shift)) {
+                                if (keyboard_check(vk_right)) {
+                                    selected_entity.rotation.x++;
+                                }
+                                if (keyboard_check(vk_left)) {
+                                    selected_entity.rotation.x--;
+                                }
+                                if (keyboard_check(vk_up)) {
+                                    selected_entity.rotation.y--;
+                                }
+                                if (keyboard_check(vk_down)) {
+                                    selected_entity.rotation.y++;
+                                }
+                                if (keyboard_check(vk_pageup)) {
+                                    selected_entity.rotation.z++;
+                                }
+                                if (keyboard_check(vk_pagedown)) {
+                                    selected_entity.rotation.z--;
+                                }
+                                if (keyboard_check(vk_backspace)) {
+                                    selected_entity.rotation.x = 0;
+                                    selected_entity.rotation.y = 0;
+                                    selected_entity.rotation.z = 0;
+                                }
+                            } else if (keyboard_check(vk_control)) {
+                                if (keyboard_check(vk_up)) {
+                                    selected_entity.scale.x = min(selected_entity.scale.x + 0.01, 4);
+                                    selected_entity.scale.y = min(selected_entity.scale.y + 0.01, 4);
+                                    selected_entity.scale.z = min(selected_entity.scale.z + 0.01, 4);
+                                }
+                                if (keyboard_check(vk_down)) {
+                                    selected_entity.scale.x = max(selected_entity.scale.x - 0.01, 0.25);
+                                    selected_entity.scale.y = max(selected_entity.scale.y - 0.01, 0.25);
+                                    selected_entity.scale.z = max(selected_entity.scale.z - 0.01, 0.25);
+                                }
+                                if (keyboard_check(vk_backspace)) {
+                                    selected_entity.scale.x = 1;
+                                    selected_entity.scale.y = 1;
+                                    selected_entity.scale.z = 1;
+                                }
+                            } else {
+                                if (keyboard_check(vk_right)) {
+                                    selected_entity.Reposition(selected_entity.position.x + 1, selected_entity.position.y, selected_entity.position.z);
+                                }
+                                if (keyboard_check(vk_left)) {
+                                    selected_entity.Reposition(selected_entity.position.x - 1, selected_entity.position.y, selected_entity.position.z);
+                                }
+                                if (keyboard_check(vk_up)) {
+                                    selected_entity.Reposition(selected_entity.position.x, selected_entity.position.y - 1, selected_entity.position.z);
+                                }
+                                if (keyboard_check(vk_down)) {
+                                    selected_entity.Reposition(selected_entity.position.x, selected_entity.position.y + 1, selected_entity.position.z);
+                                }
+                                if (keyboard_check(vk_pageup)) {
+                                    selected_entity.Reposition(selected_entity.position.x, selected_entity.position.y, selected_entity.position.z - 1);
+                                }
+                                if (keyboard_check(vk_pagedown)) {
+                                    selected_entity.Reposition(selected_entity.position.x, selected_entity.position.y, selected_entity.position.z + 1);
+                                }
                             }
-                            if (keyboard_check(vk_left)) {
-                                selected_entity.Reposition(selected_entity.position.x - 1, selected_entity.position.y, selected_entity.position.z);
+                            #endregion
+                            if (keyboard_check_pressed(vk_delete)) {
+                                ds_list_delete(all_entities, ds_list_find_index(all_entities, selected_entity));
+                                ds_list_delete(all_env_entities, ds_list_find_index(all_env_entities, selected_entity));
+                                selected_entity = undefined;
                             }
-                            if (keyboard_check(vk_up)) {
-                                selected_entity.Reposition(selected_entity.position.x, selected_entity.position.y - 1, selected_entity.position.z);
-                            }
-                            if (keyboard_check(vk_down)) {
-                                selected_entity.Reposition(selected_entity.position.x, selected_entity.position.y + 1, selected_entity.position.z);
-                            }
-                            if (keyboard_check(vk_pageup)) {
-                                selected_entity.Reposition(selected_entity.position.x, selected_entity.position.y, selected_entity.position.z - 1);
-                            }
-                            if (keyboard_check(vk_pagedown)) {
-                                selected_entity.Reposition(selected_entity.position.x, selected_entity.position.y, selected_entity.position.z + 1);
-                            }
-                        }
-                        #endregion
-                        if (keyboard_check_pressed(vk_delete)) {
-                            ds_list_delete(all_entities, ds_list_find_index(all_entities, selected_entity));
-                            ds_list_delete(all_env_entities, ds_list_find_index(all_env_entities, selected_entity));
-                            selected_entity = undefined;
                         }
                     }
                 }
@@ -392,23 +420,27 @@ function Game() constructor {
             draw_text(32, 32, "Player money: " + string(player_money));
             draw_text(32, 64, "Player health: " + string(player_health));
         } else {
-            draw_text(32, 32, "Click to spawn a thing (" + env_object_list[| editor_model_index] + ") or select an existing thing");
-            if (selected_entity) {
-                if (keyboard_check(vk_shift)) {
-                    draw_text(32, 64, "Left, Right, Up, Down, PageUp and Page Down to rotate the selected thing");
-                    draw_text(32, 96, "Backspace to reset the rotation");
-                } else if (keyboard_check(vk_control)) {
-                    draw_text(32, 64, "Up and Down to scale the selected thing");
-                    draw_text(32, 96, "Backspace to reset the scale");
-                } else {
-                    draw_text(32, 64, "Left, Right, Up, Down, PageUp and Page Down to move the selected thing");
-                    draw_text(32, 96, "Hold Shift or Control to affect rotation and scale instead");
+            if (editor_path_mode) {
+                draw_text(32, 32, "Click to spawn or select a path node");
+            } else {
+                draw_text(32, 32, "Click to spawn a thing (" + env_object_list[| editor_model_index] + ") or select an existing thing; F4 and F5 cycle through models");
+                if (selected_entity) {
+                    if (keyboard_check(vk_shift)) {
+                        draw_text(32, 64, "Left, Right, Up, Down, PageUp and Page Down to rotate the selected thing");
+                        draw_text(32, 96, "Backspace to reset the rotation");
+                    } else if (keyboard_check(vk_control)) {
+                        draw_text(32, 64, "Up and Down to scale the selected thing");
+                        draw_text(32, 96, "Backspace to reset the scale");
+                    } else {
+                        draw_text(32, 64, "Left, Right, Up, Down, PageUp and Page Down to move the selected thing");
+                        draw_text(32, 96, "Hold Shift or Control to affect rotation and scale instead");
+                    }
+                    draw_text(32, 128, "F12 to move a thing to a new location");
+                    draw_text(32, 160, "Delete to delete the selected thing");
+                    draw_text(32, 192, string(ds_list_size(all_env_entities)) + " total things");
                 }
-                draw_text(32, 128, "F12 to move a thing to a new location");
-                draw_text(32, 160, "Delete to delete the selected thing");
-                draw_text(32, 192, string(ds_list_size(all_env_entities)) + " total things");
+                draw_text(window_get_width() - 128, 32, "F1 to save");
             }
-            draw_text(window_get_width() - 128, 32, "F1 to save");
         }
     };
     
