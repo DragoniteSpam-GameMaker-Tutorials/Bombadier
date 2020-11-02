@@ -1,8 +1,7 @@
-function Wave(class, number, level, path) constructor {
+function Wave(class, number, level) constructor {
     self.class = class;
     self.number = number;
     self.level = level;
-    self.path = path;
     
     self.status = EWaveStatuses.NOT_STARTED;
     self.foe_timer = 0;
@@ -15,7 +14,7 @@ function Wave(class, number, level, path) constructor {
     Update = function() {
         if (status == EWaveStatuses.RUNNING) {
             if (foe_timer <= 0) {
-                var foe = new EntityFoe(class, level, path);
+                var foe = new EntityFoe(class, level);
                 ds_list_add(GAME.all_entities, foe);
                 ds_list_add(GAME.all_foes, foe);
                 foe_timer = WAVE_FOE_COUNTDOWN;

@@ -12,8 +12,8 @@ function Vector3() constructor {
     self.a = (argument_count > 3) ? argument[2] : undefined;
     self.b = (argument_count > 4) ? argument[3] : undefined;
     self.c = (argument_count > 5) ? argument[4] : undefined;
-    
-    static Clone = function() {
-        return json_parse(json_stringify(self));
-    }
+}
+
+function clone(what) {
+    return json_parse(json_stringify(what));
 }
