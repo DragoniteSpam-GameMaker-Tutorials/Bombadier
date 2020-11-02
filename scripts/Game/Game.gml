@@ -488,9 +488,7 @@ function Game() constructor {
             draw_text(32, 64, "Player health: " + string(player_health));
             
             for (var i = 0; i < ds_list_size(ui_elements_game); i++) {
-                with (ui_elements_game[| i]) {
-                    draw_self();
-                }
+                ui_elements_game[| i].Render();
             }
             
         } else {
