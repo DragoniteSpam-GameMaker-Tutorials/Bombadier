@@ -77,9 +77,9 @@ function EntityEnv(x, y, z, vbuff, savename) : Entity(x, y, z) constructor {
             shader_set(shd_selected);
             shader_set_uniform_f(shader_get_uniform(shd_selected, "time"), current_time / 1000);
             if (GAME.selected_entity == self) {
-                shader_set_uniform_f(shader_get_uniform(shd_selected, "color"), 1, 1, 1, 1);
+                shader_set_uniform_f(shader_get_uniform(shd_selected, "color"), c_env_r, c_env_g, c_env_b, 1);
             } else if (GAME.editor_hover_entity == self) {
-                shader_set_uniform_f(shader_get_uniform(shd_selected, "color"), 0, 1, 0, 1);
+                shader_set_uniform_f(shader_get_uniform(shd_selected, "color"), c_env_hover_r, c_env_hover_g, c_env_hover_b, 1);
             }
         }
         
@@ -216,10 +216,14 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
     
     Render = function() {
         // set the shader if you are selected
-        if (GAME.selected_entity == self) {
+        if (GAME.selected_entity == self || GAME.selected_entity_hover == self) {
             shader_set(shd_selected);
             shader_set_uniform_f(shader_get_uniform(shd_selected, "time"), current_time / 1000);
-            shader_set_uniform_f(shader_get_uniform(shd_selected, "color"), 1, 1, 1, 1);
+            if (GAME.selected_entity == self) {
+                shader_set_uniform_f(shader_get_uniform(shd_selected, "color"), c_tower_r, c_tower_g, c_tower_b, 1);
+            } else if (GAME.selected_entity_hover == self) {
+                shader_set_uniform_f(shader_get_uniform(shd_selected, "color"), c_tower_hover_r, c_tower_hover_g, c_tower_hover_b, 1);
+            }
         }
         var transform = matrix_build(0, 0, 0, 0, 0, 0, scale.x, scale.y, scale.z);
         transform = matrix_multiply(transform, matrix_build(0, 0, 0, rotation.x, rotation.y, rotation.z, 1, 1, 1));
@@ -228,7 +232,7 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
         vertex_submit(base_model, pr_trianglelist, -1);
         matrix_set(matrix_world, matrix_build_identity());
         // reset the shader if you are selected
-        if (GAME.selected_entity == self) {
+        if (GAME.selected_entity == self || GAME.selected_entity_hover == self) {
             cluck_apply(shd_cluck_fragment);
         }
     };

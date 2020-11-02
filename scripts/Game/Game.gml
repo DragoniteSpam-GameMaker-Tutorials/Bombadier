@@ -88,6 +88,7 @@ function Game() constructor {
     all_env_entities = ds_list_create();
     
     selected_entity = undefined;
+    selected_entity_hover = undefined;
     editor_hover_entity = undefined;
     editor_path_mode = false;
     editor_model_index = 0;
@@ -185,13 +186,16 @@ function Game() constructor {
         
         if (gameplay_mode == GameModes.GAMEPLAY) {
             #region Gameplay stuff
-            if (!player_cursor_over_ui && mouse_check_button_pressed(mb_left)) {
-                selected_entity = GetUnderCursor(all_towers);
-                
-                if (selected_entity) {
-                    
-                } else {
-                    SpawnTower();
+            selected_entity_hover = undefined;
+            if (!player_cursor_over_ui) {
+                selected_entity_hover = GetUnderCursor(all_towers);
+                if (mouse_check_button_pressed(mb_left)) {
+                    selected_entity = selected_entity_hover;
+                    if (selected_entity) {
+                        
+                    } else {
+                        SpawnTower();
+                    }
                 }
             }
             
@@ -452,7 +456,7 @@ function Game() constructor {
         if (floor_intersect && player_tower_spawn) {
             shader_set(shd_selected);
             shader_set_uniform_f(shader_get_uniform(shd_selected, "time"), current_time / 1000);
-            shader_set_uniform_f(shader_get_uniform(shd_selected, "color"), 1, 1, 1, 1);
+            shader_set_uniform_f(shader_get_uniform(shd_selected, "color"), c_phantom_tower_r, c_phantom_tower_g, c_phantom_tower_b, 1);
             matrix_set(matrix_world, matrix_build(floor_intersect.x, floor_intersect.y, 0, 0, 0, 0, 1, 1, 1));
             vertex_submit(player_tower_spawn.model, pr_trianglelist, -1);
             matrix_set(matrix_world, matrix_build_identity());
