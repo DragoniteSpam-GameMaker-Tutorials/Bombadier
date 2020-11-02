@@ -1,5 +1,14 @@
 Render = function() {
-    draw_rectangle_9s(sprite_index, 0, x, y, sprite_width, sprite_height);
+    var subimg = 0;
+    
+    if (point_in_rectangle(mouse_x, mouse_y, x, y, x + sprite_width, y + sprite_height)) {
+        var subimg = 1;
+        if (mouse_check_button_pressed(mb_left)) {
+            show_message("aaaaaaaaaa!")
+        }
+    }
+    
+    draw_rectangle_9s(sprite_index, subimg, x, y, sprite_width, sprite_height);
     draw_set_font(fnt_game_buttons);
     draw_set_colour(c_black);
     draw_set_halign(fa_center);
