@@ -197,7 +197,8 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
     
     Shoot = function(target_foe) {
         var dir = point_direction(position.x, position.y, target_foe.position.x, target_foe.position.y);
-        var bullet = new EntityBullet(position.x, position.y, position.z, 6 * dcos(dir), 6 * -dsin(dir), 0, base_bullet_data, act_damage);
+        var shot_velocity = 10;
+        var bullet = new EntityBullet(position.x, position.y, position.z, shot_velocity * dcos(dir), shot_velocity * -dsin(dir), 0, base_bullet_data, act_damage);
         ds_list_add(GAME.all_entities, bullet);
         shot_cooldown = 1 / act_rate;
     };
