@@ -107,6 +107,7 @@ function Game() constructor {
     player_money = 50;
     player_health = 10;
     
+    player_cursor_over_ui = false;
     player_tower_spawn = undefined;
     
     ui_elements_game = ds_list_create();
@@ -184,7 +185,7 @@ function Game() constructor {
         
         if (gameplay_mode == GameModes.GAMEPLAY) {
             #region Gameplay stuff
-            if (mouse_check_button_pressed(mb_left)) {
+            if (!player_cursor_over_ui && mouse_check_button_pressed(mb_left)) {
                 selected_entity = GetUnderCursor(all_towers);
                 
                 if (selected_entity) {
@@ -446,6 +447,18 @@ function Game() constructor {
             all_entities[| i].Render();
         }
         
+        var floor_intersect = camera.GetFloorIntersect();
+        
+        if (floor_intersect && player_tower_spawn) {
+            shader_set(shd_selected);
+            shader_set_uniform_f(shader_get_uniform(shd_selected, "time"), current_time / 1000);
+            shader_set_uniform_f(shader_get_uniform(shd_selected, "color"), 1, 1, 1, 1);
+            matrix_set(matrix_world, matrix_build(floor_intersect.x, floor_intersect.y, 0, 0, 0, 0, 1, 1, 1));
+            vertex_submit(player_tower_spawn.model, pr_trianglelist, -1);
+            matrix_set(matrix_world, matrix_build_identity());
+            cluck_apply(shd_cluck_fragment);
+        }
+        
         if (gameplay_mode == GameModes.EDITOR) {
             if (editor_path_mode) {
                 var draw_the_line = array_length(path_nodes) > 1;
@@ -484,6 +497,8 @@ function Game() constructor {
         if (gameplay_mode == GameModes.GAMEPLAY) {
             draw_text(32, 32, "Player money: " + string(player_money));
             draw_text(32, 64, "Player health: " + string(player_health));
+            
+            player_cursor_over_ui = false;
             
             for (var i = 0; i < ds_list_size(ui_elements_game); i++) {
                 ui_elements_game[| i].Render();
