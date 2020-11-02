@@ -107,6 +107,8 @@ function Game() constructor {
     player_money = 50;
     player_health = 10;
     
+    player_tower_spawn = undefined;
+    
     ui_elements_game = ds_list_create();
     with (UIButton) {
         ds_list_add(other.ui_elements_game, id);
@@ -139,17 +141,13 @@ function Game() constructor {
     
     SpawnTower = function() {
         var position = camera.GetFloorIntersect();
-        var tower_type = tower_pebbles;
-        if (position && player_money >= tower_type.cost) {
-            player_money -= tower_type.cost;
-            if (keyboard_check(vk_shift)) {
-                var tower_type = tower_buff;
-                var tower = new EntityTowerBuff(position.x, position.y, position.z, tower_type);
-            } else {
-                var tower = new EntityTower(position.x, position.y, position.z, tower_type);
-            }
+        
+        if (player_tower_spawn && position && player_money >= player_tower_spawn.cost) {
+            player_money -= player_tower_spawn.cost;
+            var tower = new EntityTower(position.x, position.y, position.z, player_tower_spawn);
             ds_list_add(all_entities, tower);
             ds_list_add(all_towers, tower);
+            player_tower_spawn = undefined;
         }
     };
     
