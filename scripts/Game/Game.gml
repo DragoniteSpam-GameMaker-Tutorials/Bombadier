@@ -107,6 +107,12 @@ function Game() constructor {
     player_money = 50;
     player_health = 10;
     
+    ui_elements_game = ds_list_create();
+    with (UIButton) {
+        ds_list_add(other.ui_elements_game, id);
+        visible = false;
+    }
+    
     enum GameModes {
         GAMEPLAY, EDITOR,
     }
@@ -480,6 +486,13 @@ function Game() constructor {
         if (gameplay_mode == GameModes.GAMEPLAY) {
             draw_text(32, 32, "Player money: " + string(player_money));
             draw_text(32, 64, "Player health: " + string(player_health));
+            
+            for (var i = 0; i < ds_list_size(ui_elements_game); i++) {
+                with (ui_elements_game[| i]) {
+                    draw_self();
+                }
+            }
+            
         } else {
             if (editor_path_mode) {
                 draw_text(32, 32, "Click to spawn or select a path node");
