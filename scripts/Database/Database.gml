@@ -56,4 +56,6 @@ function ModelData(name, vbuff) constructor {
     }
     
     collision = new BBox(new Vector3(xmin, ymin, zmin), new Vector3(xmax, ymax, zmax));
+    
+    solid = ((xmin - xmax) * (ymin - ymax)) >= 256;
 }

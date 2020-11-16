@@ -6,6 +6,7 @@ function Entity(x, y, z) constructor {
     collision = new BBox(new Vector3(position.x - 16, position.y - 16, position.z), new Vector3(position.x + 16, position.y + 16, position.z + 64));
     
     raycast = coll_ray_aabb;
+    solid = true;
     
     BeginUpdate = function() {
         
@@ -24,15 +25,17 @@ function Entity(x, y, z) constructor {
     };
     
     AddCollision = function() {
-        var xmin = min(collision.p1.x * scale.x, collision.p2.x * scale.x);
-        var ymin = min(collision.p1.y * scale.y, collision.p2.y * scale.y);
-        var xmax = max(collision.p1.x * scale.x, collision.p2.x * scale.x);
-        var ymax = max(collision.p1.y * scale.y, collision.p2.y * scale.y);
-        var cell_xmin = xmin div GRID_CELL_SIZE;
-        var cell_ymin = ymin div GRID_CELL_SIZE;
-        var cell_xmax = ceil(xmax / GRID_CELL_SIZE);
-        var cell_ymax = ceil(ymax / GRID_CELL_SIZE);
-        ds_grid_set_region(GAME.collision_grid, cell_xmin, cell_ymin, cell_xmax, cell_ymax, GRID_COLLISION_FILLED);
+        if (solid) {
+            var xmin = min(collision.p1.x * scale.x, collision.p2.x * scale.x);
+            var ymin = min(collision.p1.y * scale.y, collision.p2.y * scale.y);
+            var xmax = max(collision.p1.x * scale.x, collision.p2.x * scale.x);
+            var ymax = max(collision.p1.y * scale.y, collision.p2.y * scale.y);
+            var cell_xmin = xmin div GRID_CELL_SIZE;
+            var cell_ymin = ymin div GRID_CELL_SIZE;
+            var cell_xmax = ceil(xmax / GRID_CELL_SIZE);
+            var cell_ymax = ceil(ymax / GRID_CELL_SIZE);
+            ds_grid_set_region(GAME.collision_grid, cell_xmin, cell_ymin, cell_xmax, cell_ymax, GRID_COLLISION_FILLED);
+        }
     };
     
     Save = function(save_json, i) {
@@ -49,6 +52,7 @@ function Entity(x, y, z) constructor {
 
 function EntityEnv(x, y, z, model, savename) : Entity(x, y, z) constructor {
     self.model = model;
+    self.solid = model.solid;
     self.savename = savename;
     
     self.rotation = new Vector3(0, 0, 0);
@@ -119,6 +123,7 @@ function EntityBullet(x, y, z, vx, vy, vz, bullet_data, damage) : Entity(x, y, z
     velocity = new Vector3(vx, vy, vz);
     self.bullet_data = bullet_data;
     self.damage = damage;
+    self.solid = false;
     time_to_live = 1;
     
     raycast = coll_ray_invalid;
@@ -389,7 +394,6 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
     AddToMap = function() {
         ds_list_add(GAME.all_entities, self);
         ds_list_add(GAME.all_foes, self);
-        AddCollision();
     };
     
     Update = function() {
