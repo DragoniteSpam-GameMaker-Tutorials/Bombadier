@@ -535,5 +535,8 @@ function Game() constructor {
                 draw_text(window_get_width() - 128, 32, "F1 to save");
             }
         }
+        if (keyboard_check(vk_f11)) {
+            debug_draw_collision(32, 32);
+        }
     };
 }
