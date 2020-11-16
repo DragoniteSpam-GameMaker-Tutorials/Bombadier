@@ -19,6 +19,14 @@ function Entity(x, y, z) constructor {
         
     };
     
+    AddToMap = function() {
+        
+    };
+    
+    AddCollision = function() {
+        
+    };
+    
     Save = function(save_json, i) {
         save_json.entities[i] = 0;
     };
@@ -58,6 +66,11 @@ function EntityEnv(x, y, z, vbuff, savename) : Entity(x, y, z) constructor {
     
     Deselect = function() {
         is_moving = false;
+    };
+    
+    AddToMap = function() {
+        ds_list_add(GAME.all_entities, self);
+        ds_list_add(GAME.all_env_entities, self);
     };
     
     is_moving = false;
@@ -100,6 +113,10 @@ function EntityBullet(x, y, z, vx, vy, vz, bullet_data, damage) : Entity(x, y, z
     time_to_live = 1;
     
     raycast = coll_ray_invalid;
+    
+    AddToMap = function() {
+        ds_list_add(GAME.all_entities, self);
+    };
     
     Update = function() {
         position.x += velocity.x;
@@ -184,6 +201,11 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
         act_damage = CalcDamage() * mod_damage;
     }
     
+    AddToMap = function() {
+        ds_list_add(GAME.all_entities, self);
+        ds_list_add(GAME.all_towers, self);
+    };
+    
     Update = function() {
         if (shot_cooldown <= 0) {
             var target_foe = GetTarget();
@@ -199,7 +221,7 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
         var dir = point_direction(position.x, position.y, target_foe.position.x, target_foe.position.y);
         var shot_velocity = 10;
         var bullet = new EntityBullet(position.x, position.y, position.z, shot_velocity * dcos(dir), shot_velocity * -dsin(dir), 0, base_bullet_data, act_damage);
-        ds_list_add(GAME.all_entities, bullet);
+        bullet.AddToMap();
         shot_cooldown = 1 / act_rate;
     };
     
@@ -336,6 +358,11 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
     Die = function() {
         GAME.player_money += reward;
         Destroy();
+    };
+    
+    AddToMap = function() {
+        ds_list_add(GAME.all_entities, self);
+        ds_list_add(GAME.all_foes, self);
     };
     
     Update = function() {

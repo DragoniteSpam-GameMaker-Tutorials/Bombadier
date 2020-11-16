@@ -148,8 +148,7 @@ function Game() constructor {
         if (player_tower_spawn && position && player_money >= player_tower_spawn.cost) {
             player_money -= player_tower_spawn.cost;
             var tower = new EntityTower(position.x, position.y, position.z, player_tower_spawn);
-            ds_list_add(all_entities, tower);
-            ds_list_add(all_towers, tower);
+            tower.AddToMap();
             player_tower_spawn = undefined;
         }
     };
@@ -287,8 +286,7 @@ function Game() constructor {
                         ent.scale.x = random_range(0.9, 1.1);
                         ent.scale.y = ent.scale.x;
                         ent.scale.z = ent.scale.x;
-                        ds_list_add(all_entities, ent);
-                        ds_list_add(all_env_entities, ent);
+                        ent.AddToMap();
                     }
                 } else {
                     if (selected_entity) {
@@ -424,8 +422,7 @@ function Game() constructor {
                     var ent = new EntityEnv(data.position.x, data.position.y, data.position.z, env_objects[? data.name], data.name);
                     ent.rotation = data.rotation;
                     ent.scale = data.scale;
-                    ds_list_add(all_entities, ent);
-                    ds_list_add(all_env_entities, ent);
+                    ent.AddToMap();
                 }
             }
             path_nodes = array_create(array_length(load_json.nodes));
@@ -539,6 +536,4 @@ function Game() constructor {
             }
         }
     };
-    
-    LoadMap("maps\\map.bug");
 }
