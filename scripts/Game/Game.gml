@@ -57,7 +57,7 @@ function Game() constructor {
     env_objects = ds_map_create();
     env_object_list = ds_list_create();
     for (var file = file_find_first("environment/*.d3d", 0); file != ""; file = file_find_next()) {
-        var vbuff = load_model("environment/" + file, format);;
+        var vbuff = load_model("environment/" + file, format);
         var obj_name = string_replace(file, ".000.d3d", "");
         env_objects[? obj_name] = vbuff;
         ds_list_add(env_object_list, obj_name);
@@ -145,12 +145,26 @@ function Game() constructor {
     SpawnTower = function() {
         var position = camera.GetFloorIntersect();
         
-        if (player_tower_spawn && position && player_money >= player_tower_spawn.cost) {
-            player_money -= player_tower_spawn.cost;
+        if (position) {
             var tower = new EntityTower(position.x, position.y, position.z, player_tower_spawn);
-            tower.AddToMap();
-            player_tower_spawn = undefined;
+            if (player_tower_spawn && player_money >= player_tower_spawn.cost && CollisionFree(tower)) {
+                player_money -= player_tower_spawn.cost;
+                tower.AddToMap();
+                player_tower_spawn = undefined;
+            }
         }
+    };
+    
+    CollisionFree = function(entity) {
+        var xmin = min(entity.collision.p1.x * entity.scale.x, entity.collision.p2.x * entity.scale.x);
+        var ymin = min(entity.collision.p1.y * entity.scale.y, entity.collision.p2.y * entity.scale.y);
+        var xmax = max(entity.collision.p1.x * entity.scale.x, entity.collision.p2.x * entity.scale.x);
+        var ymax = max(entity.collision.p1.y * entity.scale.y, entity.collision.p2.y * entity.scale.y);
+        var cell_xmin = xmin div GRID_CELL_SIZE;
+        var cell_ymin = ymin div GRID_CELL_SIZE;
+        var cell_xmax = ceil(xmax / GRID_CELL_SIZE);
+        var cell_ymax = ceil(ymax / GRID_CELL_SIZE);
+        return (ds_grid_get_max(collision_grid, cell_xmin, cell_ymin, cell_xmax, cell_ymax) == GRID_COLLISION_FREE);
     };
     
     GetUnderCursor = function(entity_list) {

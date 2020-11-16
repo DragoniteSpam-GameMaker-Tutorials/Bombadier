@@ -6,9 +6,9 @@ function load_model(filename, format) {
     var version = file_text_read_real(file);
     var n = file_text_read_real(file);
     file_text_readln(file);
-
+    
     var line = array_create(10, 0);
-
+    
     for (var i = 0; i < n; i++) {
         var str = file_text_read_string(file);
         file_text_readln(file);
