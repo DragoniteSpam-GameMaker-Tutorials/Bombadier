@@ -81,7 +81,7 @@ function Game() constructor {
     tower_buff =     new TowerData("Friendly Tower",        1, 3 * 32, 1, 10, load_model("tower-buff.d3d", format), bullet_pebble);
     #endregion
     
-    path_nodes = array_create();
+    path_nodes = array_create(0);
     
     all_entities = ds_list_create();
     all_foes = ds_list_create();
@@ -146,10 +146,9 @@ function Game() constructor {
         var position = camera.GetFloorIntersect();
         
         if (position) {
-            var tower = new EntityTower(position.x, position.y, position.z, player_tower_spawn);
-            if (player_tower_spawn && player_money >= player_tower_spawn.cost && CollisionFree(tower)) {
-                player_money -= player_tower_spawn.cost;
-                tower.AddToMap();
+            if (player_tower_spawn && player_money >= player_tower_spawn.class.cost && CollisionFree(player_tower_spawn)) {
+                player_money -= player_tower_spawn.class.cost;
+                player_tower_spawn.AddToMap();
                 player_tower_spawn = undefined;
             }
         }
@@ -212,6 +211,14 @@ function Game() constructor {
             #region Gameplay stuff
             selected_entity_hover = undefined;
             if (!player_cursor_over_ui) {
+                var floor_intersect = camera.GetFloorIntersect();
+                if (player_tower_spawn && floor_intersect) {
+                    player_tower_spawn.Reposition(floor_intersect.x, floor_intersect.y, floor_intersect.z);
+                }
+                
+                
+                
+                
                 selected_entity_hover = GetUnderCursor(all_towers);
                 if (mouse_check_button_pressed(mb_left)) {
                     selected_entity = selected_entity_hover;
@@ -479,14 +486,13 @@ function Game() constructor {
             all_entities[| i].Render();
         }
         
-        var floor_intersect = camera.GetFloorIntersect();
-        
-        if (floor_intersect && player_tower_spawn) {
+        if (player_tower_spawn) {
+            var can_build = CollisionFree(player_tower_spawn);
             shader_set(shd_selected);
             shader_set_uniform_f(shader_get_uniform(shd_selected, "time"), current_time / 1000);
-            shader_set_uniform_color(shader_get_uniform(shd_selected, "color"), c_phantom_tower);
-            matrix_set(matrix_world, matrix_build(floor_intersect.x, floor_intersect.y, 0, 0, 0, 0, 1, 1, 1));
-            vertex_submit(player_tower_spawn.model, pr_trianglelist, -1);
+            shader_set_uniform_color(shader_get_uniform(shd_selected, "color"), can_build ? c_phantom_tower : c_phantom_tower_unavailable);
+            matrix_set(matrix_world, matrix_build(player_tower_spawn.position.x, player_tower_spawn.position.y, 0, 0, 0, 0, 1, 1, 1));
+            vertex_submit(player_tower_spawn.class.model, pr_trianglelist, -1);
             matrix_set(matrix_world, matrix_build_identity());
             cluck_apply(shd_cluck_fragment);
         }

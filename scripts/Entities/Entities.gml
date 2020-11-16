@@ -176,6 +176,18 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
     self.mod_range = 1;
     self.mod_damage = 1;
     
+    Reposition = function(x, y, z) {
+        position.x = x;
+        position.y = y;
+        position.z = z;
+        collision.p1.x = x - 16;
+        collision.p1.y = y - 16;
+        collision.p1.z = z;
+        collision.p2.x = x + 16;
+        collision.p2.y = y + 16;
+        collision.p2.z = z + 64;
+    };
+    
     SetRateMod = function(value) {
         mod_rate = value;
         act_rate = CalcRate() * mod_rate;

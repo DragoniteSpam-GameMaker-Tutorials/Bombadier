@@ -8,6 +8,7 @@
 #macro GRID_COLLISION_FILLED 1
 
 #macro c_phantom_tower c_white
+#macro c_phantom_tower_unavailable c_red
 #macro c_tower c_white
 #macro c_tower_hover c_lime
 #macro c_env c_white
