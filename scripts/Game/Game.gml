@@ -190,6 +190,13 @@ function Game() constructor {
         return thing_selected;
     };
     
+    ResetCollisionData = function() {
+        ds_grid_clear(collision_grid, GRID_COLLISION_FREE);
+        for (var i = 0; i < ds_list_size(all_entities); i++) {
+            all_entities[| i].AddCollision();
+        }
+    };
+    
     Update = function() {
         camera.Update();
         
@@ -197,10 +204,7 @@ function Game() constructor {
             gameplay_mode = (gameplay_mode == GameModes.GAMEPLAY) ? GameModes.EDITOR : GameModes.GAMEPLAY;
             selected_entity = undefined;
             if (gameplay_mode == GameModes.GAMEPLAY) {
-                ds_grid_clear(collision_grid, GRID_COLLISION_FREE);
-                for (var i = 0; i < ds_list_size(all_entities); i++) {
-                    all_entities[| i].AddCollision();
-                }
+                ResetCollisionData();
             }
         }
         
@@ -480,7 +484,7 @@ function Game() constructor {
         if (floor_intersect && player_tower_spawn) {
             shader_set(shd_selected);
             shader_set_uniform_f(shader_get_uniform(shd_selected, "time"), current_time / 1000);
-            shader_set_uniform_f(shader_get_uniform(shd_selected, "color"), c_phantom_tower_r, c_phantom_tower_g, c_phantom_tower_b, 1);
+            shader_set_uniform_color(shader_get_uniform(shd_selected, "color"), c_phantom_tower);
             matrix_set(matrix_world, matrix_build(floor_intersect.x, floor_intersect.y, 0, 0, 0, 0, 1, 1, 1));
             vertex_submit(player_tower_spawn.model, pr_trianglelist, -1);
             matrix_set(matrix_world, matrix_build_identity());

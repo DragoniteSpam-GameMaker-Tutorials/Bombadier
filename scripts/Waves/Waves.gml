@@ -48,9 +48,9 @@ function PathNode(position) constructor {
             shader_set(shd_selected);
             shader_set_uniform_f(shader_get_uniform(shd_selected, "time"), current_time / 1000);
             if (GAME.selected_entity == self) {
-                shader_set_uniform_f(shader_get_uniform(shd_selected, "color"), c_path_r, c_path_g, c_path_b, 1);
+                shader_set_uniform_color(shader_get_uniform(shd_selected, "color"), c_path);
             } else if (GAME.editor_hover_entity == self) {
-                shader_set_uniform_f(shader_get_uniform(shd_selected, "color"), c_path_hover_r, c_path_hover_g, c_path_hover_b, 1);
+                shader_set_uniform_color(shader_get_uniform(shd_selected, "color"), c_path_hover);
             }
         }
         

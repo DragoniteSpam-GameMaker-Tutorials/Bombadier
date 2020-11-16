@@ -99,9 +99,9 @@ function EntityEnv(x, y, z, vbuff, savename) : Entity(x, y, z) constructor {
             shader_set(shd_selected);
             shader_set_uniform_f(shader_get_uniform(shd_selected, "time"), current_time / 1000);
             if (GAME.selected_entity == self) {
-                shader_set_uniform_f(shader_get_uniform(shd_selected, "color"), c_env_r, c_env_g, c_env_b, 1);
+                shader_set_uniform_color(shader_get_uniform(shd_selected, "color"), c_env);
             } else if (GAME.editor_hover_entity == self) {
-                shader_set_uniform_f(shader_get_uniform(shd_selected, "color"), c_env_hover_r, c_env_hover_g, c_env_hover_b, 1);
+                shader_set_uniform_color(shader_get_uniform(shd_selected, "color"), c_env_hover);
             }
         }
         
@@ -257,9 +257,9 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
             shader_set(shd_selected);
             shader_set_uniform_f(shader_get_uniform(shd_selected, "time"), current_time / 1000);
             if (GAME.selected_entity == self) {
-                shader_set_uniform_f(shader_get_uniform(shd_selected, "color"), c_tower_r, c_tower_g, c_tower_b, 1);
+                shader_set_uniform_color(shader_get_uniform(shd_selected, "color"), c_tower);
             } else if (GAME.selected_entity_hover == self) {
-                shader_set_uniform_f(shader_get_uniform(shd_selected, "color"), c_tower_hover_r, c_tower_hover_g, c_tower_hover_b, 1);
+                shader_set_uniform_color(shader_get_uniform(shd_selected, "color"), c_tower_hover);
             }
         }
         var transform = matrix_build(0, 0, 0, 0, 0, 0, scale.x, scale.y, scale.z);
