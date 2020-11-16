@@ -194,6 +194,11 @@ function Game() constructor {
         for (var i = 0; i < ds_list_size(all_entities); i++) {
             all_entities[| i].AddCollision();
         }
+        for (var i = 0; i < array_length(path_nodes); i++) {
+            if (path_nodes[i]) {
+                path_nodes[i].AddCollision();
+            }
+        }
     };
     
     Update = function() {
@@ -215,9 +220,6 @@ function Game() constructor {
                 if (player_tower_spawn && floor_intersect) {
                     player_tower_spawn.Reposition(floor_intersect.x, floor_intersect.y, floor_intersect.z);
                 }
-                
-                
-                
                 
                 selected_entity_hover = GetUnderCursor(all_towers);
                 if (mouse_check_button_pressed(mb_left)) {
