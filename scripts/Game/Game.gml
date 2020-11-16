@@ -65,8 +65,8 @@ function Game() constructor {
     collision_grid = ds_grid_create(10, 10);
     #endregion
     
-    test_ball = load_model("testball.d3d", format);
-    skybox_cube = load_model("skybox.d3d", format);
+    test_ball = load_model("testball.d3d", format).vbuff;
+    skybox_cube = load_model("skybox.d3d", format).vbuff;
     
     #region database
     foe_ant =       new FoeData("Ant",          5, 0, 0, 100, 1, 2, spr_ant, load_model("foe.d3d", format));
@@ -494,7 +494,7 @@ function Game() constructor {
             shader_set_uniform_f(shader_get_uniform(shd_selected, "time"), current_time / 1000);
             shader_set_uniform_color(shader_get_uniform(shd_selected, "color"), can_build ? c_phantom_tower : c_phantom_tower_unavailable);
             matrix_set(matrix_world, matrix_build(player_tower_spawn.position.x, player_tower_spawn.position.y, 0, 0, 0, 0, 1, 1, 1));
-            vertex_submit(player_tower_spawn.class.model, pr_trianglelist, -1);
+            vertex_submit(player_tower_spawn.class.model.vbuff, pr_trianglelist, -1);
             matrix_set(matrix_world, matrix_build_identity());
             cluck_apply(shd_cluck_fragment);
         }

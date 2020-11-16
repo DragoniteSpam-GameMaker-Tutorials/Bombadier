@@ -25,7 +25,12 @@ function TowerData(name, rate, range, damage, cost, model, bullet_data) construc
     self.shot_type = 0;
 }
 
-function BulletData(name, vbuff) constructor {
+function BulletData(name, model) constructor {
+    self.name = name;
+    self.model = model;
+}
+
+function ModelData(name, vbuff) constructor {
     self.name = name;
     self.vbuff = vbuff;
 }

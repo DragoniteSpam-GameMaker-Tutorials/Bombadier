@@ -62,12 +62,6 @@ function Camera() constructor {
         matrix_set(matrix_world, matrix_build_identity());
         gpu_set_ztestenable(true);
         gpu_set_zwriteenable(true);
-        /*
-        if (floor_intersect) {
-            matrix_set(matrix_world, matrix_build(floor_intersect.x, floor_intersect.y, floor_intersect.z, 0, 0, 0, 1, 1, 1));
-            vertex_submit(GAME.test_ball, pr_trianglelist, -1);
-            matrix_set(matrix_world, matrix_build_identity());
-        }*/
     };
     
     GetFloorIntersect = function() {

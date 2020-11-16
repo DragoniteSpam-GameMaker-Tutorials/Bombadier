@@ -47,8 +47,8 @@ function Entity(x, y, z) constructor {
     };
 }
 
-function EntityEnv(x, y, z, vbuff, savename) : Entity(x, y, z) constructor {
-    self.vbuff = vbuff;
+function EntityEnv(x, y, z, model, savename) : Entity(x, y, z) constructor {
+    self.model = model;
     self.savename = savename;
     
     self.rotation = new Vector3(0, 0, 0);
@@ -106,7 +106,7 @@ function EntityEnv(x, y, z, vbuff, savename) : Entity(x, y, z) constructor {
         }
         
         matrix_set(matrix_world, matrix_build(position.x, position.y, position.z, rotation.x, rotation.y, rotation.z, scale.x, scale.y, scale.z));
-        vertex_submit(vbuff, pr_trianglelist, -1);
+        vertex_submit(model.vbuff, pr_trianglelist, -1);
         matrix_set(matrix_world, matrix_build_identity());
         // reset the shader if you are selected
         if (GAME.selected_entity == self || GAME.editor_hover_entity == self) {
@@ -155,7 +155,7 @@ function EntityBullet(x, y, z, vx, vy, vz, bullet_data, damage) : Entity(x, y, z
     
     Render = function() {
         matrix_set(matrix_world, matrix_build(position.x, position.y, position.z, 0, 0, 0, 1, 1, 1));
-        vertex_submit(bullet_data.vbuff, pr_trianglelist, -1);
+        vertex_submit(bullet_data.model.vbuff, pr_trianglelist, -1);
         matrix_set(matrix_world, matrix_build_identity());
     };
 }
@@ -278,7 +278,7 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
         transform = matrix_multiply(transform, matrix_build(0, 0, 0, rotation.x, rotation.y, rotation.z, 1, 1, 1));
         transform = matrix_multiply(transform, matrix_build(position.x, position.y, position.z, 0, 0, 0, 1, 1, 1));
         matrix_set(matrix_world, transform);
-        vertex_submit(base_model, pr_trianglelist, -1);
+        vertex_submit(base_model.vbuff, pr_trianglelist, -1);
         matrix_set(matrix_world, matrix_build_identity());
         // reset the shader if you are selected
         if (GAME.selected_entity == self || GAME.selected_entity_hover == self) {
@@ -414,7 +414,7 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
         transform = matrix_multiply(transform, matrix_build(0, 0, 0, rotation.x, rotation.y, rotation.z, 1, 1, 1));
         transform = matrix_multiply(transform, matrix_build(position.x, position.y, position.z, 0, 0, 0, 1, 1, 1));
         matrix_set(matrix_world, transform);
-        vertex_submit(class.model, pr_trianglelist, sprite_get_texture(class.sprite, 0));
+        vertex_submit(class.model.vbuff, pr_trianglelist, sprite_get_texture(class.sprite, 0));
         matrix_set(matrix_world, matrix_build_identity());
     };
     

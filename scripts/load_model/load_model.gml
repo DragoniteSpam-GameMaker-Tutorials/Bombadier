@@ -37,5 +37,5 @@ function load_model(filename, format) {
     file_text_close(file);
     vertex_end(model);
     
-    return model;
+    return new ModelData(filename, model);
 }
