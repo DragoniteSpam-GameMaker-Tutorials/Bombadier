@@ -24,7 +24,15 @@ function Entity(x, y, z) constructor {
     };
     
     AddCollision = function() {
-        
+        var xmin = min(collision.p1.x * scale.x, collision.p2.x * scale.x);
+        var ymin = min(collision.p1.y * scale.y, collision.p2.y * scale.y);
+        var xmax = max(collision.p1.x * scale.x, collision.p2.x * scale.x);
+        var ymax = max(collision.p1.y * scale.y, collision.p2.y * scale.y);
+        var cell_xmin = xmin div GRID_CELL_SIZE;
+        var cell_ymin = ymin div GRID_CELL_SIZE;
+        var cell_xmax = ceil(xmax / GRID_CELL_SIZE);
+        var cell_ymax = ceil(ymax / GRID_CELL_SIZE);
+        ds_grid_set_region(GAME.collision_grid, cell_xmin, cell_ymin, cell_xmax, cell_ymax, GRID_COLLISION_FILLED);
     };
     
     Save = function(save_json, i) {
@@ -71,6 +79,7 @@ function EntityEnv(x, y, z, vbuff, savename) : Entity(x, y, z) constructor {
     AddToMap = function() {
         ds_list_add(GAME.all_entities, self);
         ds_list_add(GAME.all_env_entities, self);
+        AddCollision();
     };
     
     is_moving = false;
@@ -204,6 +213,7 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
     AddToMap = function() {
         ds_list_add(GAME.all_entities, self);
         ds_list_add(GAME.all_towers, self);
+        AddCollision();
     };
     
     Update = function() {
@@ -363,6 +373,7 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
     AddToMap = function() {
         ds_list_add(GAME.all_entities, self);
         ds_list_add(GAME.all_foes, self);
+        AddCollision();
     };
     
     Update = function() {
