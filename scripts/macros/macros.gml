@@ -3,6 +3,10 @@
 #macro WAVE_FOE_COUNTDOWN 1
 #macro WAVE_COUNTDOWN 15
 
+#macro GRID_CELL_SIZE 4
+#macro GRID_COLLISION_FREE 0
+#macro GRID_COLLISION_FILLED 1
+
 #macro c_phantom_tower_r 1
 #macro c_phantom_tower_g 1
 #macro c_phantom_tower_b 1

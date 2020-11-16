@@ -62,6 +62,7 @@ function Game() constructor {
         env_objects[? obj_name] = vbuff;
         ds_list_add(env_object_list, obj_name);
     }
+    collision_grid = ds_grid_create(10, 10);
     #endregion
     
     test_ball = load_model("testball.d3d", format);
@@ -411,6 +412,12 @@ function Game() constructor {
             buffer = buffer_load(filename);
             var json_string = buffer_read(buffer, buffer_text);
             var load_json = json_parse(json_string);
+            
+            var ww = room_width div GRID_CELL_SIZE;
+            var hh = room_height div GRID_CELL_SIZE;
+            ds_grid_resize(collision_grid, ww, hh);
+            ds_grid_clear(collision_grid, GRID_COLLISION_FREE);
+            
             for (var i = 0; i < array_length(load_json.entities); i++) {
                 var data = load_json.entities[i];
                 if (is_struct(data)) {
