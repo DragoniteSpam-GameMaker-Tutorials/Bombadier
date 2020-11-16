@@ -423,8 +423,8 @@ function Game() constructor {
             for (var i = 0; i < array_length(load_json.nodes); i++) {
                 path_nodes[@ i] = new PathNode(load_json.nodes[i].position);
             }
-            var ww = room_width div COLLISION_GRID_SIZE;
-            var hh = room_height div COLLISION_GRID_SIZE;
+            var ww = room_width div 4;
+            var hh = room_height div 4;
             ds_grid_resize(collision_grid, ww, hh);
             ds_grid_clear(collision_grid, 0);
         } catch (e) {

@@ -3,8 +3,6 @@
 #macro WAVE_FOE_COUNTDOWN 1
 #macro WAVE_COUNTDOWN 15
 
-#macro COLLISION_GRID_SIZE 4
-
 #macro c_phantom_tower_r 1
 #macro c_phantom_tower_g 1
 #macro c_phantom_tower_b 1
