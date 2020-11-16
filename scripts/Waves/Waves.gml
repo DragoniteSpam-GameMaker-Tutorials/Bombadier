@@ -15,8 +15,7 @@ function Wave(class, number, level) constructor {
         if (status == EWaveStatuses.RUNNING) {
             if (foe_timer <= 0) {
                 var foe = new EntityFoe(class, level);
-                ds_list_add(GAME.all_entities, foe);
-                ds_list_add(GAME.all_foes, foe);
+                foe.AddToMap();
                 foe_timer = WAVE_FOE_COUNTDOWN;
                 foes_remaining--;
             }

@@ -62,6 +62,7 @@ function Game() constructor {
         env_objects[? obj_name] = vbuff;
         ds_list_add(env_object_list, obj_name);
     }
+    collision_grid = ds_grid_create(10, 10);
     #endregion
     
     test_ball = load_model("testball.d3d", format);
@@ -147,8 +148,7 @@ function Game() constructor {
         if (player_tower_spawn && position && player_money >= player_tower_spawn.cost) {
             player_money -= player_tower_spawn.cost;
             var tower = new EntityTower(position.x, position.y, position.z, player_tower_spawn);
-            ds_list_add(all_entities, tower);
-            ds_list_add(all_towers, tower);
+            tower.AddToMap();
             player_tower_spawn = undefined;
         }
     };
@@ -286,8 +286,7 @@ function Game() constructor {
                         ent.scale.x = random_range(0.9, 1.1);
                         ent.scale.y = ent.scale.x;
                         ent.scale.z = ent.scale.x;
-                        ds_list_add(all_entities, ent);
-                        ds_list_add(all_env_entities, ent);
+                        ent.AddToMap();
                     }
                 } else {
                     if (selected_entity) {
@@ -417,14 +416,17 @@ function Game() constructor {
                     var ent = new EntityEnv(data.position.x, data.position.y, data.position.z, env_objects[? data.name], data.name);
                     ent.rotation = data.rotation;
                     ent.scale = data.scale;
-                    ds_list_add(all_entities, ent);
-                    ds_list_add(all_env_entities, ent);
+                    ent.AddToMap();
                 }
             }
             path_nodes = array_create(array_length(load_json.nodes));
             for (var i = 0; i < array_length(load_json.nodes); i++) {
                 path_nodes[@ i] = new PathNode(load_json.nodes[i].position);
             }
+            var ww = room_width div 4;
+            var hh = room_height div 4;
+            ds_grid_resize(collision_grid, ww, hh);
+            ds_grid_clear(collision_grid, 0);
         } catch (e) {
             show_debug_message("Something bad happened loading the file:");
             show_debug_message(e.message);
@@ -532,6 +534,4 @@ function Game() constructor {
             }
         }
     };
-    
-    LoadMap("maps\\map.bug");
 }
