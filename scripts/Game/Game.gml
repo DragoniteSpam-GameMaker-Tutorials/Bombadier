@@ -410,6 +410,10 @@ function Game() constructor {
             buffer = buffer_load(filename);
             var json_string = buffer_read(buffer, buffer_text);
             var load_json = json_parse(json_string);
+            var ww = room_width div COLLISION_GRID_SIZE;
+            var hh = room_height div COLLISION_GRID_SIZE;
+            ds_grid_resize(collision_grid, ww, hh);
+            ds_grid_clear(collision_grid, 0);
             for (var i = 0; i < array_length(load_json.entities); i++) {
                 var data = load_json.entities[i];
                 if (is_struct(data)) {
@@ -423,10 +427,6 @@ function Game() constructor {
             for (var i = 0; i < array_length(load_json.nodes); i++) {
                 path_nodes[@ i] = new PathNode(load_json.nodes[i].position);
             }
-            var ww = room_width div COLLISION_GRID_SIZE;
-            var hh = room_height div COLLISION_GRID_SIZE;
-            ds_grid_resize(collision_grid, ww, hh);
-            ds_grid_clear(collision_grid, 0);
         } catch (e) {
             show_debug_message("Something bad happened loading the file:");
             show_debug_message(e.message);
@@ -513,6 +513,7 @@ function Game() constructor {
         } else {
             if (editor_path_mode) {
                 draw_text(32, 32, "Click to spawn or select a path node");
+                draw_text(32, 64, "Hold F11 to see what the collision grid looks like");
             } else {
                 draw_text(32, 32, "Click to spawn a thing (" + env_object_list[| editor_model_index] + ") or select an existing thing; F4 and F5 cycle through models");
                 if (selected_entity) {
@@ -529,8 +530,13 @@ function Game() constructor {
                     draw_text(32, 128, "F12 to move a thing to a new location");
                     draw_text(32, 160, "Delete to delete the selected thing");
                     draw_text(32, 192, string(ds_list_size(all_env_entities)) + " total things");
+                } else {
+                    draw_text(32, 64, "Hold F11 to see what the collision grid looks like");
                 }
                 draw_text(window_get_width() - 128, 32, "F1 to save");
+            }
+            if (keyboard_check(vk_f11)) {
+                debug_draw_collision();
             }
         }
     };
