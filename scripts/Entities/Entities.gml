@@ -127,6 +127,10 @@ function EntityBullet(x, y, z, vx, vy, vz, bullet_data, damage) : Entity(x, y, z
         ds_list_add(GAME.all_entities, self);
     };
     
+    AddCollision = function() {
+        
+    };
+    
     Update = function() {
         position.x += velocity.x;
         position.y += velocity.y;

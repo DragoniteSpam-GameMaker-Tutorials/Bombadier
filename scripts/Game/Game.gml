@@ -196,6 +196,12 @@ function Game() constructor {
         if (keyboard_check_pressed(vk_tab)) {
             gameplay_mode = (gameplay_mode == GameModes.GAMEPLAY) ? GameModes.EDITOR : GameModes.GAMEPLAY;
             selected_entity = undefined;
+            if (gameplay_mode == GameModes.GAMEPLAY) {
+                ds_grid_clear(collision_grid, GRID_COLLISION_FREE);
+                for (var i = 0; i < ds_list_size(all_entities); i++) {
+                    all_entities[| i].AddCollision();
+                }
+            }
         }
         
         if (gameplay_mode == GameModes.GAMEPLAY) {
