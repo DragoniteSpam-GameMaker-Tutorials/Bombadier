@@ -145,11 +145,28 @@ function Game() constructor {
     SpawnTower = function() {
         var position = camera.GetFloorIntersect();
         
-        if (player_tower_spawn && position && player_money >= player_tower_spawn.cost) {
+        var tower = new EntityTower(position.x, position.y, position.z, player_tower_spawn);
+        
+        if (player_tower_spawn && position && player_money >= player_tower_spawn.cost && CollisionFree(tower)) {
             player_money -= player_tower_spawn.cost;
-            var tower = new EntityTower(position.x, position.y, position.z, player_tower_spawn);
             tower.AddToMap();
             player_tower_spawn = undefined;
+        }
+    };
+    
+    CollisionFree = function(entity) {
+        var xmin = min(entity.collision.p1.x * entity.scale.x, entity.collision.p2.x * entity.scale.x);
+        var ymin = min(entity.collision.p1.y * entity.scale.y, entity.collision.p2.y * entity.scale.y);
+        var xmax = max(entity.collision.p1.x * entity.scale.x, entity.collision.p2.x * entity.scale.x);
+        var ymax = max(entity.collision.p1.y * entity.scale.y, entity.collision.p2.y * entity.scale.y);
+        var cell_xmin = xmin div COLLISION_GRID_SIZE;
+        var cell_ymin = ymin div COLLISION_GRID_SIZE;
+        var cell_xmax = ceil(xmax / COLLISION_GRID_SIZE);
+        var cell_ymax = ceil(ymax / COLLISION_GRID_SIZE);
+        if (ds_grid_get_max(collision_grid, cell_xmin, cell_ymin, cell_xmax, cell_ymax) == 1) {
+            return false;
+        } else {
+            return true;
         }
     };
     
