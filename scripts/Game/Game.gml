@@ -74,11 +74,16 @@ function Game() constructor {
     foe_spider =    new FoeData("Spider",       10, 0, 1, 64, 1, 4, spr_ant, load_model("foe.d3d", format));
     foe_millipede = new FoeData("Millipede",    20, 0, 0, 40, 1, 4, spr_ant, load_model("foe.d3d", format));
     
-    bullet_pebble = new BulletData("Pebble", load_model("testbullet.d3d", format));
+    bullet_pebble =     new BulletData("Pebble", load_model("testbullet.d3d", format));
+    bullet_fire =       new BulletDataFire("Fire", load_model("bullet-fire.d3d", format));
     
-    tower_pebbles =     new TowerData("Pebble Shooter",     1, 3 * 32, 1, 10, load_model("tower.d3d", format), bullet_pebble);
-    tower_fire =        new TowerData("Fire Shooter",       2, 1.5 * 32, 1, 10, load_model("tower.d3d", format), bullet_pebble);
-    tower_buff =     new TowerData("Friendly Tower",        1, 3 * 32, 1, 10, load_model("tower-buff.d3d", format), bullet_pebble);
+    tower_pebbles =     new TowerData("Pebble Shooter",     1, 3 * 32, 1, 10, load_model("tower-pebble.d3d", format), bullet_pebble);
+    tower_fire =        new TowerData("Fire Shooter",       0.5, 3 * 32, 1, 40, load_model("tower-fire.d3d", format), bullet_fire);
+    
+    tower_magnify =     new TowerData("Magnifying Glass",   0, 1.5 * 32, 1, 40, load_model("tower.d3d", format), bullet_pebble);
+    tower_spray =       new TowerData("Bug Spray",          1, 4 * 32, 0, 40, load_model("tower.d3d", format), bullet_pebble);
+    
+    //tower_buff =     new TowerData("Friendly Tower",        1, 3 * 32, 1, 10, load_model("tower-buff.d3d", format), bullet_pebble);
     #endregion
     
     path_nodes = array_create(0);
@@ -106,7 +111,7 @@ function Game() constructor {
     wave_countdown = WAVE_WARMUP_COUNTDOWN;
     wave_finished = false;
     
-    player_money = 50;
+    player_money = 75;
     player_health = 10;
     
     player_cursor_over_ui = false;
