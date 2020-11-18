@@ -146,6 +146,7 @@ function EntityBullet(x, y, z, vx, vy, vz, bullet_data, damage) : Entity(x, y, z
             var radius = 18;
             if (point_distance_3d(position.x, position.y, position.z, foe.position.x, foe.position.y, foe.position.z) <= radius) {
                 foe.Damage(damage);
+                bullet_data.OnHit(foe);
                 Destroy();
                 return;
             }
@@ -339,6 +340,12 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
     self.mod_mdef = 1;
     self.mod_speed = 1;
     
+    self.status_burn = 0;
+    
+    Burn = function() {
+        status_burn = BURN_DURATION;
+    };
+    
     SetDefMod = function(value) {
         momod_def_damage = value;
         act_def = CalcDef() * mod_def;
@@ -410,6 +417,11 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
                 GAME.PlayerDamage(damage);
                 Destroy();
             }
+        }
+        
+        if (status_burn > 0) {
+            Damage(BURN_DPS * DT);
+            status_burn -= DT;
         }
     };
     

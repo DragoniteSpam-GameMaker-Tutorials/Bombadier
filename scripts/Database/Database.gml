@@ -28,6 +28,16 @@ function TowerData(name, rate, range, damage, cost, model, bullet_data) construc
 function BulletData(name, model) constructor {
     self.name = name;
     self.model = model;
+    
+    self.OnHit = function(target) {
+        
+    };
+}
+
+function BulletDataFire(name, model) : BulletData(name, model) constructor {
+    self.OnHit = function(target) {
+        target.Burn();
+    };
 }
 
 function ModelData(name, vbuff) constructor {
