@@ -209,6 +209,45 @@ function EntityBulletBugSprayCloud(x, y, z, bullet_data) : EntityBullet(x, y, z,
     };
 };
 
+function EntityBulletFlyPaper(x, y, z, bullet_data) : EntityBullet(x, y, z, 0, 0, 0, bullet_data, 0) constructor {
+    lifetime = 2;
+    radius = 40;
+    
+    Reposition = function(x, y, z) {
+        position.x = x;
+        position.y = y;
+        position.z = z;
+        collision.p1.x = x - 16;
+        collision.p1.y = y - 16;
+        collision.p1.z = z;
+        collision.p2.x = x + 16;
+        collision.p2.y = y + 16;
+        collision.p2.z = z + 32;
+    };
+    
+    Update = function() {
+        for (var i = 0; i < ds_list_size(GAME.all_foes); i++) {
+            var foe = GAME.all_foes[| i];
+            if (point_distance_3d(position.x, position.y, position.z, foe.position.x, foe.position.y, foe.position.z) < radius) {
+                //foe.Poison();
+                break;
+            }
+        }
+        
+        lifetime -= DT;
+        if (lifetime <= 0) {
+            Destroy();
+        }
+    };
+    
+    Render = function() {
+        var transform = matrix_build(position.x, position.y, position.z, 0, 0, 0, 1, 1, 1);
+        matrix_set(matrix_world, transform);
+        vertex_submit(bullet_data.model.vbuff, pr_trianglelist, -1);
+        matrix_set(matrix_world, matrix_build_identity());
+    };
+};
+
 function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
     self.class = class;
     self.level = 1;
@@ -388,22 +427,21 @@ function EntityTowerSpray(x, y, z, class) : EntityTower(x, y, z, class) construc
                 return;
             }
         }
-        show_debug_message("no thing was spawned")
     };
 }
 
 function EntityTowerFlyPaper(x, y, z, class) : EntityTower(x, y, z, class) constructor {
     Update = function() {
-        /*if (shot_cooldown <= 0) {
-            SpawnSpray();
+        if (shot_cooldown <= 0) {
+            Dispense();
         } else {
             shot_cooldown -= DT;
-        }*/
+        }
     };
-    /*
-    SpawnSpray = function() {
+    
+    Dispense = function() {
         shot_cooldown = 1 / act_rate;
-        var cloud = new EntityBulletBugSprayCloud(0, 0, 0, base_bullet_data);
+        var cloud = new EntityBulletFlyPaper(0, 0, 0, base_bullet_data);
         repeat (15) {
             var dist = random_range(12, act_range);
             var dir = random(360);
@@ -413,8 +451,7 @@ function EntityTowerFlyPaper(x, y, z, class) : EntityTower(x, y, z, class) const
                 return;
             }
         }
-        show_debug_message("no thing was spawned")
-    };*/
+    };
 }
 
 function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
