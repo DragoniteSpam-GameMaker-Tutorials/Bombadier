@@ -222,7 +222,7 @@ function EntityBulletFlyPaper(x, y, z, bullet_data) : EntityBullet(x, y, z, 0, 0
         for (var i = 0; i < ds_list_size(GAME.all_foes); i++) {
             var foe = GAME.all_foes[| i];
             if (point_distance_3d(position.x, position.y, position.z, foe.position.x, foe.position.y, foe.position.z) < radius) {
-                //foe.Poison();
+                foe.Slow();
                 break;
             }
         }
@@ -458,13 +458,19 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
     
     self.status_burn = 0;
     self.status_poison = 0;
+    self.status_slow = 0;
     
     Burn = function() {
         status_burn = BURN_DURATION;
     };
     
     Poison = function() {
-        status_poison = BURN_DURATION;
+        status_poison = POISON_DURATION;
+    };
+    
+    Slow = function() {
+        status_slow = SLOW_DURATION;
+        SetSpeedMod(SLOW_FACTOR);
     };
     
     SetDefMod = function(value) {
@@ -548,6 +554,13 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
         if (status_poison > 0) {
             Damage(POISON_DPS * DT);
             status_poison -= DT;
+        }
+        
+        if (status_slow > 0) {
+            status_slow -= DT;
+            if (status_slow <= 0) {
+                SetSpeedMod(1);
+            }
         }
     };
     
