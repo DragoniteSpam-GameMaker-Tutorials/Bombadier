@@ -200,13 +200,6 @@ function EntityBulletBugSprayCloud(x, y, z, bullet_data) : EntityBullet(x, y, z,
             Destroy();
         }
     };
-    
-    Render = function() {
-        var transform = matrix_build(position.x, position.y, position.z, 0, 0, 0, 1, 1, 1);
-        matrix_set(matrix_world, transform);
-        vertex_submit(bullet_data.model.vbuff, pr_trianglelist, -1);
-        matrix_set(matrix_world, matrix_build_identity());
-    };
 };
 
 function EntityBulletFlyPaper(x, y, z, bullet_data) : EntityBullet(x, y, z, 0, 0, 0, bullet_data, 0) constructor {
@@ -238,13 +231,6 @@ function EntityBulletFlyPaper(x, y, z, bullet_data) : EntityBullet(x, y, z, 0, 0
         if (lifetime <= 0) {
             Destroy();
         }
-    };
-    
-    Render = function() {
-        var transform = matrix_build(position.x, position.y, position.z, 0, 0, 0, 1, 1, 1);
-        matrix_set(matrix_world, transform);
-        vertex_submit(bullet_data.model.vbuff, pr_trianglelist, -1);
-        matrix_set(matrix_world, matrix_build_identity());
     };
 };
 
