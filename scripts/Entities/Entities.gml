@@ -170,6 +170,45 @@ function EntityBullet(x, y, z, vx, vy, vz, bullet_data, damage) : Entity(x, y, z
     };
 }
 
+function EntityBulletBugSprayCloud(x, y, z, bullet_data) : EntityBullet(x, y, z, 0, 0, 0, bullet_data, 0) constructor {
+    lifetime = 2;
+    radius = 40;
+    
+    Reposition = function(x, y, z) {
+        position.x = x;
+        position.y = y;
+        position.z = z;
+        collision.p1.x = x - 16;
+        collision.p1.y = y - 16;
+        collision.p1.z = z;
+        collision.p2.x = x + 16;
+        collision.p2.y = y + 16;
+        collision.p2.z = z + 32;
+    };
+    
+    Update = function() {
+        for (var i = 0; i < ds_list_size(GAME.all_foes); i++) {
+            var foe = GAME.all_foes[| i];
+            if (point_distance_3d(position.x, position.y, position.z, foe.position.x, foe.position.y, foe.position.z) < radius) {
+                foe.Poison();
+                break;
+            }
+        }
+        
+        lifetime -= DT;
+        if (lifetime <= 0) {
+            Destroy();
+        }
+    };
+    
+    Render = function() {
+        var transform = matrix_build(position.x, position.y, position.z, 0, 0, 0, 1, 1, 1);
+        matrix_set(matrix_world, transform);
+        vertex_submit(bullet_data.model.vbuff, pr_trianglelist, -1);
+        matrix_set(matrix_world, matrix_build_identity());
+    };
+};
+
 function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
     self.class = class;
     self.level = 1;
@@ -339,8 +378,8 @@ function EntityTowerSpray(x, y, z, class) : EntityTower(x, y, z, class) construc
     
     SpawnSpray = function() {
         shot_cooldown = 1 / act_rate;
-        var cloud = new EntBugSprayCloud(0, 0, 0);
-        repeat (10) {
+        var cloud = new EntityBulletBugSprayCloud(0, 0, 0, base_bullet_data);
+        repeat (15) {
             var dist = random_range(12, act_range);
             var dir = random(360);
             cloud.Reposition(position.x + dist * dcos(dir), position.y - dist * dsin(dir), position.z);
@@ -484,42 +523,3 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
         }
     };
 }
-
-function EntBugSprayCloud(x, y, z) : Entity(x, y, z) constructor {
-    lifetime = 2;
-    radius = 40;
-    
-    Reposition = function(x, y, z) {
-        position.x = x;
-        position.y = y;
-        position.z = z;
-        collision.p1.x = x - 16;
-        collision.p1.y = y - 16;
-        collision.p1.z = z;
-        collision.p2.x = x + 16;
-        collision.p2.y = y + 16;
-        collision.p2.z = z + 32;
-    };
-    
-    Update = function() {
-        for (var i = 0; i < ds_list_size(GAME.all_foes); i++) {
-            var foe = GAME.all_foes[| i];
-            if (point_distance_3d(position.x, position.y, position.z, foe.position.x, foe.position.y, foe.position.z) < radius) {
-                foe.Poison();
-                break;
-            }
-        }
-        
-        lifetime -= DT;
-        if (lifetime <= 0) {
-            Destroy();
-        }
-    };
-    
-    Render = function() {
-        var transform = matrix_build(position.x, position.y, position.z, 0, 0, 0, 1, 1, 1);
-        matrix_set(matrix_world, transform);
-        vertex_submit(GAME.bug_spray_cloud, pr_trianglelist, -1);
-        matrix_set(matrix_world, matrix_build_identity());
-    };
-};

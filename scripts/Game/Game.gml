@@ -68,8 +68,6 @@ function Game() constructor {
     test_ball = load_model("testball.d3d", format).vbuff;
     skybox_cube = load_model("skybox.d3d", format).vbuff;
     
-    bug_spray_cloud = load_model("bugspray.d3d", format).vbuff;
-    
     #region database
     foe_ant =       new FoeData("Ant",          5, 0, 0, 100, 1, 2, spr_ant, load_model("foe.d3d", format));
     foe_pillbugs =  new FoeData("Pillbugs",     10, 1, 0, 50, 1, 3, spr_ant_red, load_model("foe.d3d", format));
@@ -78,12 +76,14 @@ function Game() constructor {
     
     bullet_pebble =     new BulletData("Pebble", load_model("testbullet.d3d", format));
     bullet_fire =       new BulletDataFire("Fire", load_model("bullet-fire.d3d", format));
+    bullet_bug_spray =  new BulletData("Bug Spray", load_model("bugspray.d3d", format));
     
     tower_pebbles =     new TowerData("Pebble Shooter",     1, 3 * 32, 1, 10, load_model("tower-pebble.d3d", format), bullet_pebble);
     tower_fire =        new TowerData("Fire Shooter",       0.5, 3 * 32, 1, 40, load_model("tower-fire.d3d", format), bullet_fire);
     
     tower_magnify =     new TowerData("Magnifying Glass",   0, 1.5 * 32, 1, 40, load_model("tower.d3d", format), bullet_pebble);
-    tower_spray =       new TowerData("Bug Spray",          1, 4 * 32, 0, 40, load_model("tower-spray.d3d", format), bullet_pebble);
+    tower_spray =       new TowerData("Bug Spray",          1, 4 * 32, 0, 40, load_model("tower-spray.d3d", format), bullet_bug_spray);
+    tower_flypaper =    new TowerData("Fly Paper Dispenser",1, 4 * 32, 0, 40, load_model("tower-spray.d3d", format), bullet_pebble);
     
     //tower_buff =     new TowerData("Friendly Tower",        1, 3 * 32, 1, 10, load_model("tower-buff.d3d", format), bullet_pebble);
     #endregion
