@@ -30,12 +30,12 @@ function Entity(x, y, z) constructor {
             var ymin = min(collision.p1.y * scale.y, collision.p2.y * scale.y);
             var xmax = max(collision.p1.x * scale.x, collision.p2.x * scale.x);
             var ymax = max(collision.p1.y * scale.y, collision.p2.y * scale.y);
-            var cell_xmin = xmin div GRID_CELL_SIZE;
-            var cell_ymin = ymin div GRID_CELL_SIZE;
-            var cell_xmax = ceil(xmax / GRID_CELL_SIZE);
-            var cell_ymax = ceil(ymax / GRID_CELL_SIZE);
-            for (var i = xmin; i <= xmax; i++) {
-                for (var j = ymin; j <= ymax; j++) {
+            var cell_xmin = clamp(xmin div GRID_CELL_SIZE, 0, ds_grid_width(GAME.collision_grid) - 1);
+            var cell_ymin = clamp(ymin div GRID_CELL_SIZE, 0, ds_grid_height(GAME.collision_grid) - 1);
+            var cell_xmax = clamp(ceil(xmax / GRID_CELL_SIZE), 0, ds_grid_width(GAME.collision_grid) - 1);
+            var cell_ymax = clamp(ceil(ymax / GRID_CELL_SIZE), 0, ds_grid_height(GAME.collision_grid) - 1);
+            for (var i = cell_xmin; i <= cell_xmax; i++) {
+                for (var j = cell_ymin; j <= cell_ymax; j++) {
                     GAME.collision_grid[# i, j] = max(GAME.collision_grid[# i, j], GRID_COLLISION_FILLED);
                 }
             }
@@ -339,7 +339,17 @@ function EntityTowerSpray(x, y, z, class) : EntityTower(x, y, z, class) construc
     
     SpawnSpray = function() {
         shot_cooldown = 1 / act_rate;
-        ds_list_add(GAME.all_entities, new EntBugSprayCloud(position.x + random_range(-32, 32), position.y + random_range(-32, 32), position.z + random_range(-32, 32)));
+        var cloud = new EntBugSprayCloud(0, 0, 0);
+        repeat (10) {
+            var dist = random_range(12, act_range);
+            var dir = random(360);
+            cloud.Reposition(position.x + dist * dcos(dir), position.y - dist * dsin(dir), position.z);
+            if (GAME.CollisionIsPath(cloud)) {
+                ds_list_add(GAME.all_entities, cloud);
+                return;
+            }
+        }
+        show_debug_message("no thing was spawned")
     };
 }
 
@@ -466,6 +476,18 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
 }
 
 function EntBugSprayCloud(x, y, z) : Entity(x, y, z) constructor {
+    Reposition = function(x, y, z) {
+        position.x = x;
+        position.y = y;
+        position.z = z;
+        collision.p1.x = x - 16;
+        collision.p1.y = y - 16;
+        collision.p1.z = z;
+        collision.p2.x = x + 16;
+        collision.p2.y = y + 16;
+        collision.p2.z = z + 32;
+    };
+    
     Render = function() {
         var transform = matrix_build(position.x, position.y, position.z, 0, 0, 0, 1, 1, 1);
         matrix_set(matrix_world, transform);
