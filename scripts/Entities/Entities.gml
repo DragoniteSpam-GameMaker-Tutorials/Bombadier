@@ -324,6 +324,20 @@ function EntityTowerBuff(x, y, z, class) : EntityTower(x, y, z, class) construct
     };
 }
 
+function EntityTowerSpray(x, y, z, class) : EntityTower(x, y, z, class) constructor {
+    Update = function() {
+        if (shot_cooldown <= 0) {
+            SpawnSpray();
+        } else {
+            shot_cooldown -= DT;
+        }
+    };
+    
+    SpawnSpray = function() {
+        shot_cooldown = 1 / act_rate;
+    };
+}
+
 function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
     self.class = class;
     self.level = level;

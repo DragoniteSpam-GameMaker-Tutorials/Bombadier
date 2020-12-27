@@ -81,7 +81,7 @@ function Game() constructor {
     tower_fire =        new TowerData("Fire Shooter",       0.5, 3 * 32, 1, 40, load_model("tower-fire.d3d", format), bullet_fire);
     
     tower_magnify =     new TowerData("Magnifying Glass",   0, 1.5 * 32, 1, 40, load_model("tower.d3d", format), bullet_pebble);
-    tower_spray =       new TowerData("Bug Spray",          1, 4 * 32, 0, 40, load_model("tower.d3d", format), bullet_pebble);
+    tower_spray =       new TowerData("Bug Spray",          2, 4 * 32, 0, 40, load_model("tower-spray.d3d", format), bullet_pebble);
     
     //tower_buff =     new TowerData("Friendly Tower",        1, 3 * 32, 1, 10, load_model("tower-buff.d3d", format), bullet_pebble);
     #endregion
