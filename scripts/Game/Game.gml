@@ -68,6 +68,8 @@ function Game() constructor {
     test_ball = load_model("testball.d3d", format).vbuff;
     skybox_cube = load_model("skybox.d3d", format).vbuff;
     
+    bug_spray_cloud = load_model("bugspray.d3d", format).vbuff;
+    
     #region database
     foe_ant =       new FoeData("Ant",          5, 0, 0, 100, 1, 2, spr_ant, load_model("foe.d3d", format));
     foe_pillbugs =  new FoeData("Pillbugs",     10, 1, 0, 50, 1, 3, spr_ant_red, load_model("foe.d3d", format));

@@ -335,6 +335,7 @@ function EntityTowerSpray(x, y, z, class) : EntityTower(x, y, z, class) construc
     
     SpawnSpray = function() {
         shot_cooldown = 1 / act_rate;
+        ds_list_add(GAME.all_entities, new EntBugSprayCloud(position.x + random_range(-32, 32), position.y + random_range(-32, 32), position.z + random_range(-32, 32)));
     };
 }
 
@@ -459,3 +460,12 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
         }
     };
 }
+
+function EntBugSprayCloud(x, y, z) : Entity(x, y, z) constructor {
+    Render = function() {
+        var transform = matrix_build(position.x, position.y, position.z, 0, 0, 0, 1, 1, 1);
+        matrix_set(matrix_world, transform);
+        vertex_submit(GAME.bug_spray_cloud, pr_trianglelist, -1);
+        matrix_set(matrix_world, matrix_build_identity());
+    };
+};
