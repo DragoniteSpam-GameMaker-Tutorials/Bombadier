@@ -476,6 +476,8 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
 }
 
 function EntBugSprayCloud(x, y, z) : Entity(x, y, z) constructor {
+    lifetime = 2;
+    
     Reposition = function(x, y, z) {
         position.x = x;
         position.y = y;
@@ -486,6 +488,13 @@ function EntBugSprayCloud(x, y, z) : Entity(x, y, z) constructor {
         collision.p2.x = x + 16;
         collision.p2.y = y + 16;
         collision.p2.z = z + 32;
+    };
+    
+    Update = function() {
+        lifetime -= DT;
+        if (lifetime <= 0) {
+            Destroy();
+        }
     };
     
     Render = function() {
