@@ -191,7 +191,6 @@ function EntityBulletBugSprayCloud(x, y, z, bullet_data) : EntityBullet(x, y, z,
             var foe = GAME.all_foes[| i];
             if (point_distance_3d(position.x, position.y, position.z, foe.position.x, foe.position.y, foe.position.z) < radius) {
                 bullet_data.OnHit(foe);
-                break;
             }
         }
         
@@ -203,8 +202,8 @@ function EntityBulletBugSprayCloud(x, y, z, bullet_data) : EntityBullet(x, y, z,
 };
 
 function EntityBulletFlyPaper(x, y, z, bullet_data) : EntityBullet(x, y, z, 0, 0, 0, bullet_data, 0) constructor {
-    lifetime = 2;
     radius = 40;
+    hits_remaining = 2;
     
     Reposition = function(x, y, z) {
         position.x = x;
@@ -222,14 +221,15 @@ function EntityBulletFlyPaper(x, y, z, bullet_data) : EntityBullet(x, y, z, 0, 0
         for (var i = 0; i < ds_list_size(GAME.all_foes); i++) {
             var foe = GAME.all_foes[| i];
             if (point_distance_3d(position.x, position.y, position.z, foe.position.x, foe.position.y, foe.position.z) < radius) {
+                if (foe.status_slow <= 0) {
+                    hits_remaining--;
+                }
                 bullet_data.OnHit(foe);
-                break;
+                if (hits_remaining <= 0) {
+                    Destroy();
+                    return;
+                }
             }
-        }
-        
-        lifetime -= DT;
-        if (lifetime <= 0) {
-            Destroy();
         }
     };
 };
