@@ -370,9 +370,14 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
     self.mod_speed = 1;
     
     self.status_burn = 0;
+    self.status_poison = 0;
     
     Burn = function() {
         status_burn = BURN_DURATION;
+    };
+    
+    Poison = function() {
+        status_poison = BURN_DURATION;
     };
     
     SetDefMod = function(value) {
@@ -452,6 +457,11 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
             Damage(BURN_DPS * DT);
             status_burn -= DT;
         }
+        
+        if (status_poison > 0) {
+            Damage(POISON_DPS * DT);
+            status_poison -= DT;
+        }
     };
     
     Render = function() {
@@ -495,7 +505,7 @@ function EntBugSprayCloud(x, y, z) : Entity(x, y, z) constructor {
         for (var i = 0; i < ds_list_size(GAME.all_foes); i++) {
             var foe = GAME.all_foes[| i];
             if (point_distance_3d(position.x, position.y, position.z, foe.position.x, foe.position.y, foe.position.z) < radius) {
-                foe.Burn();
+                foe.Poison();
                 break;
             }
         }
