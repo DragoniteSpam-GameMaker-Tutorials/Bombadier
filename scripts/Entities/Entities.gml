@@ -190,7 +190,7 @@ function EntityBulletBugSprayCloud(x, y, z, bullet_data) : EntityBullet(x, y, z,
         for (var i = 0; i < ds_list_size(GAME.all_foes); i++) {
             var foe = GAME.all_foes[| i];
             if (point_distance_3d(position.x, position.y, position.z, foe.position.x, foe.position.y, foe.position.z) < radius) {
-                foe.Poison();
+                bullet_data.OnHit(foe);
                 break;
             }
         }
@@ -222,7 +222,7 @@ function EntityBulletFlyPaper(x, y, z, bullet_data) : EntityBullet(x, y, z, 0, 0
         for (var i = 0; i < ds_list_size(GAME.all_foes); i++) {
             var foe = GAME.all_foes[| i];
             if (point_distance_3d(position.x, position.y, position.z, foe.position.x, foe.position.y, foe.position.z) < radius) {
-                foe.Slow();
+                bullet_data.OnHit(foe);
                 break;
             }
         }

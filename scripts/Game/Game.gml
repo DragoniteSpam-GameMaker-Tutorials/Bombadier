@@ -74,10 +74,16 @@ function Game() constructor {
     foe_spider =    new FoeData("Spider",       10, 0, 1, 64, 1, 4, spr_ant, load_model("foe.d3d", format));
     foe_millipede = new FoeData("Millipede",    20, 0, 0, 40, 1, 4, spr_ant, load_model("foe.d3d", format));
     
-    bullet_pebble =     new BulletData("Pebble", load_model("testbullet.d3d", format));
-    bullet_fire =       new BulletDataFire("Fire", load_model("bullet-fire.d3d", format));
-    bullet_bug_spray =  new BulletData("Bug Spray", load_model("bugspray.d3d", format));
-    bullet_fly_paper =  new BulletData("Fly Paper", load_model("flypaper.d3d", format));
+    bullet_pebble =     new BulletData("Pebble", load_model("testbullet.d3d", format), function(target) { });
+    bullet_fire =       new BulletData("Fire", load_model("bullet-fire.d3d", format), function(target) {
+        target.Burn();
+    });
+    bullet_bug_spray =  new BulletData("Bug Spray", load_model("bugspray.d3d", format), function(target) {
+        target.Poison();
+    });
+    bullet_fly_paper =  new BulletData("Fly Paper", load_model("flypaper.d3d", format), function(target) {
+        target.Slow();
+    });
     
     tower_pebbles =     new TowerData("Pebble Shooter",     1, 3 * 32, 1, 10, load_model("tower-pebble.d3d", format), bullet_pebble);
     tower_fire =        new TowerData("Fire Shooter",       0.5, 3 * 32, 1, 40, load_model("tower-fire.d3d", format), bullet_fire);
