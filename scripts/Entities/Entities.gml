@@ -392,6 +392,31 @@ function EntityTowerSpray(x, y, z, class) : EntityTower(x, y, z, class) construc
     };
 }
 
+function EntityTowerFlyPaper(x, y, z, class) : EntityTower(x, y, z, class) constructor {
+    Update = function() {
+        /*if (shot_cooldown <= 0) {
+            SpawnSpray();
+        } else {
+            shot_cooldown -= DT;
+        }*/
+    };
+    /*
+    SpawnSpray = function() {
+        shot_cooldown = 1 / act_rate;
+        var cloud = new EntityBulletBugSprayCloud(0, 0, 0, base_bullet_data);
+        repeat (15) {
+            var dist = random_range(12, act_range);
+            var dir = random(360);
+            cloud.Reposition(position.x + dist * dcos(dir), position.y - dist * dsin(dir), position.z);
+            if (GAME.CollisionIsPath(cloud)) {
+                ds_list_add(GAME.all_entities, cloud);
+                return;
+            }
+        }
+        show_debug_message("no thing was spawned")
+    };*/
+}
+
 function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
     self.class = class;
     self.level = level;
