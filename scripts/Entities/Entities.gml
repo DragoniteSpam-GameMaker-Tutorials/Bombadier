@@ -201,9 +201,10 @@ function EntityBulletBugSprayCloud(x, y, z, bullet_data) : EntityBullet(x, y, z,
     };
 };
 
-function EntityBulletFlyPaper(x, y, z, bullet_data) : EntityBullet(x, y, z, 0, 0, 0, bullet_data, 0) constructor {
+function EntityBulletFlyPaper(x, y, z, bullet_data, parent_tower) : EntityBullet(x, y, z, 0, 0, 0, bullet_data, 0) constructor {
     radius = 40;
     hits_remaining = 2;
+    parent = parent_tower;
     
     Reposition = function(x, y, z) {
         position.x = x;
@@ -227,6 +228,7 @@ function EntityBulletFlyPaper(x, y, z, bullet_data) : EntityBullet(x, y, z, 0, 0
                 bullet_data.OnHit(foe);
                 if (hits_remaining <= 0) {
                     Destroy();
+                    parent.paper_count--;
                     return;
                 }
             }
@@ -417,6 +419,8 @@ function EntityTowerSpray(x, y, z, class) : EntityTower(x, y, z, class) construc
 }
 
 function EntityTowerFlyPaper(x, y, z, class) : EntityTower(x, y, z, class) constructor {
+    self.paper_count = 0;
+    
     Update = function() {
         if (shot_cooldown <= 0) {
             Dispense();
@@ -426,14 +430,19 @@ function EntityTowerFlyPaper(x, y, z, class) : EntityTower(x, y, z, class) const
     };
     
     Dispense = function() {
+        if (self.paper_count >= 2) {
+            return;
+        }
+        
         shot_cooldown = 1 / act_rate;
-        var cloud = new EntityBulletFlyPaper(0, 0, 0, base_bullet_data);
+        var paper = new EntityBulletFlyPaper(0, 0, 0, base_bullet_data, self);
         repeat (15) {
             var dist = random_range(12, act_range);
             var dir = random(360);
-            cloud.Reposition(position.x + dist * dcos(dir), position.y - dist * dsin(dir), position.z);
-            if (GAME.CollisionIsPath(cloud)) {
-                ds_list_add(GAME.all_entities, cloud);
+            paper.Reposition(position.x + dist * dcos(dir), position.y - dist * dsin(dir), position.z);
+            if (GAME.CollisionIsPath(paper)) {
+                ds_list_add(GAME.all_entities, paper);
+                self.paper_count++;
                 return;
             }
         }
