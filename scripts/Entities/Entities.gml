@@ -420,6 +420,7 @@ function EntityTowerSpray(x, y, z, class) : EntityTower(x, y, z, class) construc
 
 function EntityTowerFlyPaper(x, y, z, class) : EntityTower(x, y, z, class) constructor {
     self.paper_count = 0;
+    self.paper_limit = 2;
     
     Update = function() {
         if (shot_cooldown <= 0) {
@@ -430,7 +431,7 @@ function EntityTowerFlyPaper(x, y, z, class) : EntityTower(x, y, z, class) const
     };
     
     Dispense = function() {
-        if (self.paper_count >= 2) {
+        if (paper_count >= paper_limit) {
             return;
         }
         
@@ -442,7 +443,7 @@ function EntityTowerFlyPaper(x, y, z, class) : EntityTower(x, y, z, class) const
             paper.Reposition(position.x + dist * dcos(dir), position.y - dist * dsin(dir), position.z);
             if (GAME.CollisionIsPath(paper)) {
                 ds_list_add(GAME.all_entities, paper);
-                self.paper_count++;
+                paper_count++;
                 return;
             }
         }
