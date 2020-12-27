@@ -477,6 +477,7 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
 
 function EntBugSprayCloud(x, y, z) : Entity(x, y, z) constructor {
     lifetime = 2;
+    radius = 40;
     
     Reposition = function(x, y, z) {
         position.x = x;
@@ -491,6 +492,14 @@ function EntBugSprayCloud(x, y, z) : Entity(x, y, z) constructor {
     };
     
     Update = function() {
+        for (var i = 0; i < ds_list_size(GAME.all_foes); i++) {
+            var foe = GAME.all_foes[| i];
+            if (point_distance_3d(position.x, position.y, position.z, foe.position.x, foe.position.y, foe.position.z) < radius) {
+                foe.Burn();
+                break;
+            }
+        }
+        
         lifetime -= DT;
         if (lifetime <= 0) {
             Destroy();
