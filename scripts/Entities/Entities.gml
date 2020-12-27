@@ -34,7 +34,11 @@ function Entity(x, y, z) constructor {
             var cell_ymin = ymin div GRID_CELL_SIZE;
             var cell_xmax = ceil(xmax / GRID_CELL_SIZE);
             var cell_ymax = ceil(ymax / GRID_CELL_SIZE);
-            ds_grid_set_region(GAME.collision_grid, cell_xmin, cell_ymin, cell_xmax, cell_ymax, GRID_COLLISION_FILLED);
+            for (var i = xmin; i <= xmax; i++) {
+                for (var j = ymin; j <= ymax; j++) {
+                    GAME.collision_grid[# i, j] = max(GAME.collision_grid[# i, j], GRID_COLLISION_FILLED);
+                }
+            }
         }
     };
     

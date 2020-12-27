@@ -47,7 +47,7 @@ function PathNode(position) constructor {
         var cell_ymin = collision.p1.y div GRID_CELL_SIZE;
         var cell_xmax = ceil(collision.p2.x / GRID_CELL_SIZE);
         var cell_ymax = ceil(collision.p2.y / GRID_CELL_SIZE);
-        ds_grid_set_region(GAME.collision_grid, cell_xmin, cell_ymin, cell_xmax, cell_ymax, GRID_COLLISION_FILLED);
+        ds_grid_set_region(GAME.collision_grid, cell_xmin, cell_ymin, cell_xmax, cell_ymax, GRID_COLLISION_PATH);
     };
     
     AddCollision();

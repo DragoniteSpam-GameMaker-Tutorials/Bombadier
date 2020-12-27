@@ -173,6 +173,18 @@ function Game() constructor {
         return (ds_grid_get_max(collision_grid, cell_xmin, cell_ymin, cell_xmax, cell_ymax) == GRID_COLLISION_FREE);
     };
     
+    CollisionIsPath = function(entity) {
+        var xmin = min(entity.collision.p1.x * entity.scale.x, entity.collision.p2.x * entity.scale.x);
+        var ymin = min(entity.collision.p1.y * entity.scale.y, entity.collision.p2.y * entity.scale.y);
+        var xmax = max(entity.collision.p1.x * entity.scale.x, entity.collision.p2.x * entity.scale.x);
+        var ymax = max(entity.collision.p1.y * entity.scale.y, entity.collision.p2.y * entity.scale.y);
+        var cell_xmin = xmin div GRID_CELL_SIZE;
+        var cell_ymin = ymin div GRID_CELL_SIZE;
+        var cell_xmax = ceil(xmax / GRID_CELL_SIZE);
+        var cell_ymax = ceil(ymax / GRID_CELL_SIZE);
+        return (ds_grid_get_max(collision_grid, cell_xmin, cell_ymin, cell_xmax, cell_ymax) == GRID_COLLISION_PATH);
+    };
+    
     GetUnderCursor = function(entity_list) {
         var ray = new Ray(camera.from, camera.mouse_cast);
         var thing_selected = undefined;

@@ -9,6 +9,7 @@
 #macro GRID_CELL_SIZE 4
 #macro GRID_COLLISION_FREE 0
 #macro GRID_COLLISION_FILLED 1
+#macro GRID_COLLISION_PATH 2
 
 #macro c_phantom_tower c_white
 #macro c_phantom_tower_unavailable c_red
