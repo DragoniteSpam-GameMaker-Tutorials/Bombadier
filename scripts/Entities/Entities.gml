@@ -365,6 +365,7 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
     
     Sell = function() {
         Destroy();
+        GAME.player_money += class.cost;
     };
 }
 
