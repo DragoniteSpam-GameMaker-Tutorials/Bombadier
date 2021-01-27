@@ -362,6 +362,10 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
             cluck_apply(shd_cluck_fragment);
         }
     };
+    
+    Sell = function() {
+        Destroy();
+    };
 }
 
 function EntityTowerBuff(x, y, z, class) : EntityTower(x, y, z, class) constructor {
