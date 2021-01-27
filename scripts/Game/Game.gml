@@ -126,9 +126,14 @@ function Game() constructor {
     player_cursor_over_ui = false;
     player_tower_spawn = undefined;
     
-    ui_elements_game = ds_list_create();
+    all_ui_elements = { };
     with (UIButton) {
-        ds_list_add(other.ui_elements_game, id);
+        var list = other.all_ui_elements[$ string(depth)];
+        if (list == undefined) {
+            list = ds_list_create();
+            other.all_ui_elements[$ string(depth)] = list;
+        }
+        ds_list_add(list, id);
         visible = false;
     }
     
@@ -566,8 +571,9 @@ function Game() constructor {
             
             player_cursor_over_ui = false;
             
-            for (var i = 0; i < ds_list_size(ui_elements_game); i++) {
-                ui_elements_game[| i].Render();
+            var layer_elements = all_ui_elements[$ layer_get_depth("UI_Game")];
+            for (var i = 0; i < ds_list_size(layer_elements); i++) {
+                layer_elements[| i].Render();
             }
             
         } else {
