@@ -127,7 +127,7 @@ function Game() constructor {
     player_tower_spawn = undefined;
     
     all_ui_elements = { };
-    with (UIButton) {
+    with (ParentUI) {
         var list = other.all_ui_elements[$ string(depth)];
         if (list == undefined) {
             list = ds_list_create();
