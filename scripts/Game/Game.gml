@@ -571,7 +571,11 @@ function Game() constructor {
             
             player_cursor_over_ui = false;
             
-            var layer_elements = all_ui_elements[$ layer_get_depth("UI_Game")];
+            if (selected_entity == undefined) {
+                var layer_elements = all_ui_elements[$ layer_get_depth("UI_Game")];
+            } else {
+                var layer_elements = all_ui_elements[$ layer_get_depth("UI_Tower_Select")];
+            }
             for (var i = 0; i < ds_list_size(layer_elements); i++) {
                 layer_elements[| i].Render();
             }
