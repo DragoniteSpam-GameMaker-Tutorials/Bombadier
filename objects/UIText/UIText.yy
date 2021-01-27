@@ -11,7 +11,7 @@
     "name": "ParentUI",
     "path": "objects/ParentUI/ParentUI.yy",
   },
-  "physicsObject": false,
+  "physicsObject": true,
   "physicsSensor": false,
   "physicsShape": 1,
   "physicsGroup": 1,
