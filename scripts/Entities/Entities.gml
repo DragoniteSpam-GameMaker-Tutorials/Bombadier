@@ -237,6 +237,7 @@ function EntityBulletFlyPaper(x, y, z, bullet_data, parent_tower) : EntityBullet
 };
 
 function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
+    self.name = class.name;
     self.class = class;
     self.level = 1;
     
