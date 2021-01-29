@@ -207,6 +207,7 @@ function EntityBulletBird(x, y, z, bullet_data, nest, nest_radius) : EntityBulle
     self.nest = nest;
     self.nest_radius = nest_radius;
     self.nest_angle = 270;
+    damage_cooldown = 1 / nest.act_rate;
     
     Reposition = function(x, y, z) {
         position.x = x;
@@ -215,15 +216,21 @@ function EntityBulletBird(x, y, z, bullet_data, nest, nest_radius) : EntityBulle
     };
     
     Update = function() {
-        for (var i = 0; i < ds_list_size(GAME.all_foes); i++) {
-            var foe = GAME.all_foes[| i];
-            if (point_distance_3d(position.x, position.y, position.z, foe.position.x, foe.position.y, foe.position.z) < attack_radius) {
-                foe.Damage(nest.act_damage);
-                bullet_data.OnHit(foe);
+        if (damage_cooldown <= 0) {
+            for (var i = 0; i < ds_list_size(GAME.all_foes); i++) {
+                var foe = GAME.all_foes[| i];
+                if (point_distance_3d(position.x, position.y, position.z, foe.position.x, foe.position.y, foe.position.z) < attack_radius) {
+                    foe.Damage(nest.act_damage);
+                    bullet_data.OnHit(foe);
+                    damage_cooldown = 1 / nest.act_rate;
+                    break;
+                }
             }
         }
         
-        var linear_velocity = 100;
+        damage_cooldown -= DT;
+        
+        var linear_velocity = 180;
         
         Reposition(nest.position.x + nest_radius * dcos(nest_angle), nest.position.y - nest_radius * dsin(nest_angle), nest.position.z + 16);
         nest_angle += linear_velocity / nest_radius;
