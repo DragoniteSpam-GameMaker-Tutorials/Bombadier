@@ -294,6 +294,10 @@ function Game() constructor {
                 }
             }
             
+            if (mouse_check_button_pressed(mb_right)) {
+                selected_entity = undefined;
+            }
+            
             if (keyboard_check_pressed(vk_space)) {
                 SendInWave();
             }
