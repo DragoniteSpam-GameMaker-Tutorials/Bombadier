@@ -84,6 +84,7 @@ function Game() constructor {
     bullet_fly_paper =  new BulletData("Fly Paper", load_model("flypaper.d3d", format), function(target) {
         target.Slow();
     });
+    bullet_bird =       new BulletData("Bird", load_model("testbullet.d3d", format), function(target) { });
     
     tower_pebbles =     new TowerData("Pebble Shooter",     1, 3 * 32, 1, 10, load_model("tower-pebble.d3d", format), bullet_pebble);
     tower_fire =        new TowerData("Fire Shooter",       0.5, 3 * 32, 1, 40, load_model("tower-fire.d3d", format), bullet_fire);
@@ -92,7 +93,7 @@ function Game() constructor {
     tower_spray =       new TowerData("Bug Spray",          1, 4 * 32, 0, 40, load_model("tower-spray.d3d", format), bullet_bug_spray);
     tower_flypaper =    new TowerData("Fly Paper Dispenser",1, 4 * 32, 0, 40, load_model("tower-flypaper.d3d", format), bullet_fly_paper);
     
-    tower_bird =        new TowerData("Bird Nest",          0.5, 4 * 32, 5, 40, load_model("tower-bird.d3d", format), bullet_pebble);
+    tower_bird =        new TowerData("Bird Nest",          0.5, 4 * 32, 5, 40, load_model("tower-bird.d3d", format), bullet_bird);
     #endregion
     
     path_nodes = array_create(0);

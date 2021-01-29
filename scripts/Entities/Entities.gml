@@ -218,6 +218,7 @@ function EntityBulletBird(x, y, z, bullet_data, nest, nest_radius) : EntityBulle
         for (var i = 0; i < ds_list_size(GAME.all_foes); i++) {
             var foe = GAME.all_foes[| i];
             if (point_distance_3d(position.x, position.y, position.z, foe.position.x, foe.position.y, foe.position.z) < attack_radius) {
+                foe.Damage(nest.act_damage);
                 bullet_data.OnHit(foe);
             }
         }
