@@ -201,6 +201,31 @@ function EntityBulletBugSprayCloud(x, y, z, bullet_data) : EntityBullet(x, y, z,
     };
 };
 
+function EntityBulletBird(x, y, z, bullet_data) : EntityBullet(x, y, z, 0, 0, 0, bullet_data, 0) constructor {
+    lifetime = 2;
+    radius = 32;
+    
+    Reposition = function(x, y, z) {
+        position.x = x;
+        position.y = y;
+        position.z = z;
+    };
+    
+    Update = function() {
+        for (var i = 0; i < ds_list_size(GAME.all_foes); i++) {
+            var foe = GAME.all_foes[| i];
+            if (point_distance_3d(position.x, position.y, position.z, foe.position.x, foe.position.y, foe.position.z) < radius) {
+                bullet_data.OnHit(foe);
+            }
+        }
+        
+        lifetime -= DT;
+        if (lifetime <= 0) {
+            Destroy();
+        }
+    };
+};
+
 function EntityBulletFlyPaper(x, y, z, bullet_data, parent_tower) : EntityBullet(x, y, z, 0, 0, 0, bullet_data, 0) constructor {
     radius = 40;
     hits_remaining = 2;
