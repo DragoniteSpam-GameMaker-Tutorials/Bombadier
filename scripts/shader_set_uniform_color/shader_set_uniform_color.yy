@@ -2,8 +2,8 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Bombadier",
-    "path": "Bombadier.yyp",
+    "name": "Graphical stuff",
+    "path": "folders/Graphical stuff.yy",
   },
   "resourceVersion": "1.0",
   "name": "shader_set_uniform_color",

@@ -68,8 +68,8 @@
     {"visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default","resourceVersion":"1.0","name":"442b16fc-f6e7-4be6-9fe3-8185a66af6ac","tags":[],"resourceType":"GMImageLayer",},
   ],
   "parent": {
-    "name": "Graphical stuff",
-    "path": "folders/Graphical stuff.yy",
+    "name": "User interface stuff",
+    "path": "folders/Graphical stuff/User interface stuff.yy",
   },
   "resourceVersion": "1.0",
   "name": "spr_text_label",

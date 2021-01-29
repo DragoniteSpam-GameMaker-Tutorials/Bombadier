@@ -21,8 +21,8 @@
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "Bombadier",
-    "path": "Bombadier.yyp",
+    "name": "User interface stuff",
+    "path": "folders/Graphical stuff/User interface stuff.yy",
   },
   "resourceVersion": "1.0",
   "name": "ParentUI",

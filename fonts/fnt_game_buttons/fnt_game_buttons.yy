@@ -296,8 +296,8 @@
   "canGenerateBitmap": true,
   "maintainGms1Font": false,
   "parent": {
-    "name": "Bombadier",
-    "path": "Bombadier.yyp",
+    "name": "User interface stuff",
+    "path": "folders/Graphical stuff/User interface stuff.yy",
   },
   "resourceVersion": "1.0",
   "name": "fnt_game_buttons",
