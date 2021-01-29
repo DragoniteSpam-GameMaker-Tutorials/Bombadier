@@ -612,7 +612,9 @@ function Game() constructor {
             
             player_cursor_over_ui = false;
             
-            var layer_elements = ActiveGUILayer().elements;
+            var ui_layer = ActiveGUILayer();
+            var layer_elements = ui_layer.elements;
+            ui_layer.block_raycast.Render();
             for (var i = 0; i < ds_list_size(layer_elements); i++) {
                 layer_elements[| i].Render();
             }
