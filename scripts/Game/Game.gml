@@ -92,7 +92,7 @@ function Game() constructor {
     tower_spray =       new TowerData("Bug Spray",          1, 4 * 32, 0, 40, load_model("tower-spray.d3d", format), bullet_bug_spray);
     tower_flypaper =    new TowerData("Fly Paper Dispenser",1, 4 * 32, 0, 40, load_model("tower-flypaper.d3d", format), bullet_fly_paper);
     
-    //tower_buff =     new TowerData("Friendly Tower",        1, 3 * 32, 1, 10, load_model("tower-buff.d3d", format), bullet_pebble);
+    tower_bird =        new TowerData("Bird Nest",          0.5, 4 * 32, 5, 40, load_model("tower-bird.d3d", format), bullet_pebble);
     #endregion
     
     path_nodes = array_create(0);
