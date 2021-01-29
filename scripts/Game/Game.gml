@@ -128,13 +128,25 @@ function Game() constructor {
     
     all_ui_elements = { };
     with (ParentUI) {
-        var list = other.all_ui_elements[$ string(depth)];
-        if (list == undefined) {
-            list = ds_list_create();
-            other.all_ui_elements[$ string(depth)] = list;
+        var layers = other.all_ui_elements[$ string(depth)];
+        if (layers == undefined) {
+            layers = {
+                elements: ds_list_create(),
+                block_raycast: undefined,
+            };
+            other.all_ui_elements[$ string(depth)] = layers;
         }
-        ds_list_add(list, id);
+        ds_list_add(layers.elements, id);
         visible = false;
+    }
+    with (UIBlockRaycast) {
+        var layers = other.all_ui_elements[$ string(depth)];
+        if (layers != undefined) {
+            layers.block_raycast = id;
+            visible = false;
+        } else {
+            instance_destroy();
+        }
     }
     
     enum GameModes {
@@ -572,9 +584,9 @@ function Game() constructor {
             player_cursor_over_ui = false;
             
             if (selected_entity == undefined) {
-                var layer_elements = all_ui_elements[$ layer_get_depth("UI_Game")];
+                var layer_elements = all_ui_elements[$ layer_get_depth("UI_Game")].elements;
             } else {
-                var layer_elements = all_ui_elements[$ layer_get_depth("UI_Tower_Select")];
+                var layer_elements = all_ui_elements[$ layer_get_depth("UI_Tower_Select")].elements;
             }
             for (var i = 0; i < ds_list_size(layer_elements); i++) {
                 layer_elements[| i].Render();
