@@ -210,6 +210,16 @@ function Game() constructor {
     };
     
     GetUnderCursor = function(entity_list) {
+        var ui_layer = ActiveGUILayer();
+        if (ui_layer != undefined) {
+            var mx = window_mouse_get_x();
+            var my = window_mouse_get_y();
+            var block = ui_layer.block_raycast;
+            if (mx > block.bbox_left && mx < block.bbox_right && my > block.bbox_top && my < block.bbox_bottom) {
+                return undefined;
+            }
+        }
+        
         var ray = new Ray(camera.from, camera.mouse_cast);
         var thing_selected = undefined;
         var n = is_array(entity_list) ? array_length(entity_list) : ds_list_size(entity_list);
@@ -576,6 +586,16 @@ function Game() constructor {
         shader_reset();
     };
     
+    ActiveGUILayer = function() {
+        if (gameplay_mode == GameModes.EDITOR) {
+            return undefined;
+        }
+        if (selected_entity != undefined) {
+            return all_ui_elements[$ layer_get_depth("UI_Tower_Select")];
+        }
+        return all_ui_elements[$ layer_get_depth("UI_Game")];
+    };
+    
     GUI = function() {
         if (gameplay_mode == GameModes.GAMEPLAY) {
             draw_text(32, 32, "Player money: " + string(player_money));
@@ -583,15 +603,10 @@ function Game() constructor {
             
             player_cursor_over_ui = false;
             
-            if (selected_entity == undefined) {
-                var layer_elements = all_ui_elements[$ layer_get_depth("UI_Game")].elements;
-            } else {
-                var layer_elements = all_ui_elements[$ layer_get_depth("UI_Tower_Select")].elements;
-            }
+            var layer_elements = ActiveGUILayer().elements;
             for (var i = 0; i < ds_list_size(layer_elements); i++) {
                 layer_elements[| i].Render();
             }
-            
         } else {
             if (editor_path_mode) {
                 draw_text(32, 32, "Click to spawn or select a path node");
