@@ -201,9 +201,12 @@ function EntityBulletBugSprayCloud(x, y, z, bullet_data) : EntityBullet(x, y, z,
     };
 };
 
-function EntityBulletBird(x, y, z, bullet_data) : EntityBullet(x, y, z, 0, 0, 0, bullet_data, 0) constructor {
+function EntityBulletBird(x, y, z, bullet_data, nest, nest_radius) : EntityBullet(x, y, z, 0, 0, 0, bullet_data, 0) constructor {
     lifetime = 2;
-    radius = 32;
+    attack_radius = 32;
+    self.nest = nest;
+    self.nest_radius = nest_radius;
+    self.nest_angle = 270;
     
     Reposition = function(x, y, z) {
         position.x = x;
@@ -214,10 +217,13 @@ function EntityBulletBird(x, y, z, bullet_data) : EntityBullet(x, y, z, 0, 0, 0,
     Update = function() {
         for (var i = 0; i < ds_list_size(GAME.all_foes); i++) {
             var foe = GAME.all_foes[| i];
-            if (point_distance_3d(position.x, position.y, position.z, foe.position.x, foe.position.y, foe.position.z) < radius) {
+            if (point_distance_3d(position.x, position.y, position.z, foe.position.x, foe.position.y, foe.position.z) < attack_radius) {
                 bullet_data.OnHit(foe);
             }
         }
+        
+        Reposition(nest.position.x + nest_radius * dcos(nest_angle), nest.position.y - nest_radius * dsin(nest_angle), nest.position.z + 16);
+        nest_angle++;
         
         lifetime -= DT;
         if (lifetime <= 0) {
@@ -449,7 +455,7 @@ function EntityTowerBird(x, y, z, class) : EntityTower(x, y, z, class) construct
         shot_cooldown = 1 / act_rate;
         var dist = 32;
         var dir = 270;
-        var bird = new EntityBulletBird(0, 0, 0, base_bullet_data);
+        var bird = new EntityBulletBird(0, 0, 0, base_bullet_data, self, dist);
         bird.Reposition(position.x + dist * dcos(dir), position.y - dist * dsin(dir), position.z + 16);
         ds_list_add(GAME.all_entities, bird);
     };
