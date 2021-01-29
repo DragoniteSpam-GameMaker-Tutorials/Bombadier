@@ -209,15 +209,22 @@ function Game() constructor {
         return (ds_grid_get_max(collision_grid, cell_xmin, cell_ymin, cell_xmax, cell_ymax) == GRID_COLLISION_PATH);
     };
     
-    GetUnderCursor = function(entity_list) {
+    GetRaycastBlocked = function() {
         var ui_layer = ActiveGUILayer();
         if (ui_layer != undefined) {
             var mx = window_mouse_get_x();
             var my = window_mouse_get_y();
             var block = ui_layer.block_raycast;
             if (mx > block.bbox_left && mx < block.bbox_right && my > block.bbox_top && my < block.bbox_bottom) {
-                return undefined;
+                return true;
             }
+        }
+        return false;
+    };
+    
+    GetUnderCursor = function(entity_list) {
+        if (GetRaycastBlocked()) {
+            return undefined;
         }
         
         var ray = new Ray(camera.from, camera.mouse_cast);
@@ -274,13 +281,15 @@ function Game() constructor {
                     player_tower_spawn.Reposition(floor_intersect.x, floor_intersect.y, floor_intersect.z);
                 }
                 
-                selected_entity_hover = GetUnderCursor(all_towers);
-                if (mouse_check_button_pressed(mb_left)) {
-                    selected_entity = selected_entity_hover;
-                    if (selected_entity) {
+                if (!GetRaycastBlocked()) {
+                    selected_entity_hover = GetUnderCursor(all_towers);
+                    if (mouse_check_button_pressed(mb_left)) {
+                        selected_entity = selected_entity_hover;
+                        if (selected_entity) {
                         
-                    } else {
-                        SpawnTower();
+                        } else {
+                            SpawnTower();
+                        }
                     }
                 }
             }
