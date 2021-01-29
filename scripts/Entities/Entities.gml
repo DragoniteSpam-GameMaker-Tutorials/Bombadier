@@ -222,8 +222,10 @@ function EntityBulletBird(x, y, z, bullet_data, nest, nest_radius) : EntityBulle
             }
         }
         
+        var linear_velocity = 100;
+        
         Reposition(nest.position.x + nest_radius * dcos(nest_angle), nest.position.y - nest_radius * dsin(nest_angle), nest.position.z + 16);
-        nest_angle++;
+        nest_angle += linear_velocity / nest_radius;
     };
 };
 
