@@ -241,7 +241,7 @@ function EntityBulletBird(x, y, z, bullet_data, nest, nest_radius) : EntityBulle
     };
     
     Render = function() {
-        matrix_set(matrix_world, matrix_build(position.x, position.y, position.z, 0, 0, 0, 1, 1, 1));
+        matrix_set(matrix_world, matrix_build(position.x, position.y, position.z, 0, 0, nest_angle + 180, 1, 1, 1));
         vertex_submit(bullet_data.anim_frames[floor(anim_frame) % array_length(bullet_data.anim_frames)].vbuff, pr_trianglelist, -1);
         matrix_set(matrix_world, matrix_build_identity());
     };
