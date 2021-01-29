@@ -365,7 +365,25 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
     
     Sell = function() {
         Destroy();
+        RemoveCollision();
+        ds_list_add(GAME.all_towers, self);
         GAME.player_money += class.cost;
+    };
+    
+    RemoveCollision = function() {
+        var xmin = min(collision.p1.x * scale.x, collision.p2.x * scale.x);
+        var ymin = min(collision.p1.y * scale.y, collision.p2.y * scale.y);
+        var xmax = max(collision.p1.x * scale.x, collision.p2.x * scale.x);
+        var ymax = max(collision.p1.y * scale.y, collision.p2.y * scale.y);
+        var cell_xmin = clamp(xmin div GRID_CELL_SIZE, 0, ds_grid_width(GAME.collision_grid) - 1);
+        var cell_ymin = clamp(ymin div GRID_CELL_SIZE, 0, ds_grid_height(GAME.collision_grid) - 1);
+        var cell_xmax = clamp(ceil(xmax / GRID_CELL_SIZE), 0, ds_grid_width(GAME.collision_grid) - 1);
+        var cell_ymax = clamp(ceil(ymax / GRID_CELL_SIZE), 0, ds_grid_height(GAME.collision_grid) - 1);
+        for (var i = cell_xmin; i <= cell_xmax; i++) {
+            for (var j = cell_ymin; j <= cell_ymax; j++) {
+                GAME.collision_grid[# i, j] = GRID_COLLISION_FREE;
+            }
+        }
     };
 }
 
