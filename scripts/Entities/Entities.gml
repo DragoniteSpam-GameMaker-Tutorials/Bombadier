@@ -208,6 +208,7 @@ function EntityBulletBird(x, y, z, bullet_data, nest, nest_radius) : EntityBulle
     self.nest_radius = nest_radius;
     self.nest_angle = 270;
     damage_cooldown = 1 / nest.act_rate;
+    anim_frame = 0;
     
     Reposition = function(x, y, z) {
         position.x = x;
@@ -230,10 +231,19 @@ function EntityBulletBird(x, y, z, bullet_data, nest, nest_radius) : EntityBulle
         
         damage_cooldown -= DT;
         
-        var linear_velocity = 180;
+        var linear_velocity = 160;
         
         Reposition(nest.position.x + nest_radius * dcos(nest_angle), nest.position.y - nest_radius * dsin(nest_angle), nest.position.z + 16);
         nest_angle += linear_velocity / nest_radius;
+        
+        var anim_speed = 4;
+        anim_frame += anim_speed * DT;
+    };
+    
+    Render = function() {
+        matrix_set(matrix_world, matrix_build(position.x, position.y, position.z, 0, 0, 0, 1, 1, 1));
+        vertex_submit(bullet_data.anim_frames[floor(anim_frame) % array_length(bullet_data.anim_frames)].vbuff, pr_trianglelist, -1);
+        matrix_set(matrix_world, matrix_build_identity());
     };
 };
 
