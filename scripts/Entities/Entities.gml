@@ -387,37 +387,6 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
     };
 }
 
-function EntityTowerBuff(x, y, z, class) : EntityTower(x, y, z, class) constructor {
-    Update = function() {
-        if (shot_cooldown <= 0) {
-            var target_friends = GetTarget();
-            for (var i = 0; i < ds_list_size(target_friends); i++) {
-                Buff(target_friends[| i]);
-            }
-            ds_list_destroy(target_friends);
-        } else {
-            shot_cooldown -= DT;
-        }
-    };
-    
-    Buff = function(target_friend) {
-        target_friend.SetRateMod(4);
-        shot_cooldown = 1 / act_rate;
-    };
-    
-    GetTarget = function() {
-        var target_friends = ds_list_create();
-        for (var i = 0; i < ds_list_size(GAME.all_towers); i++) {
-            var friend = GAME.all_towers[| i];
-            if (friend == self) continue;
-            if (point_distance_3d(position.x, position.y, position.z, friend.position.x, friend.position.y, friend.position.z) < act_range) {
-                ds_list_add(target_friends, friend);
-            }
-        }
-        return target_friends;
-    };
-}
-
 function EntityTowerSpray(x, y, z, class) : EntityTower(x, y, z, class) constructor {
     Update = function() {
         if (shot_cooldown <= 0) {
@@ -439,6 +408,25 @@ function EntityTowerSpray(x, y, z, class) : EntityTower(x, y, z, class) construc
                 return;
             }
         }
+    };
+}
+
+function EntityTowerBird(x, y, z, class) : EntityTower(x, y, z, class) constructor {
+    Update = function() {
+        if (shot_cooldown <= 0) {
+            SpawnBird();
+        } else {
+            shot_cooldown -= DT;
+        }
+    };
+    
+    SpawnBird = function() {
+        shot_cooldown = 1 / act_rate;
+        var dist = 32;
+        var dir = 270;
+        var bird = new EntityBulletBird(0, 0, 0, base_bullet_data);
+        bird.Reposition(position.x + dist * dcos(dir), position.y - dist * dsin(dir), position.z + 16);
+        ds_list_add(GAME.all_entities, bird);
     };
 }
 
