@@ -224,11 +224,6 @@ function EntityBulletBird(x, y, z, bullet_data, nest, nest_radius) : EntityBulle
         
         Reposition(nest.position.x + nest_radius * dcos(nest_angle), nest.position.y - nest_radius * dsin(nest_angle), nest.position.z + 16);
         nest_angle++;
-        
-        lifetime -= DT;
-        if (lifetime <= 0) {
-            Destroy();
-        }
     };
 };
 
@@ -443,21 +438,23 @@ function EntityTowerSpray(x, y, z, class) : EntityTower(x, y, z, class) construc
 }
 
 function EntityTowerBird(x, y, z, class) : EntityTower(x, y, z, class) constructor {
+    birds = [ ];
+    bird_limit = 3;
+    
     Update = function() {
-        if (shot_cooldown <= 0) {
-            SpawnBird();
+        if (shot_cooldown <= 0 && array_length(birds) < bird_limit) {
+            HatchBird();
         } else {
             shot_cooldown -= DT;
         }
     };
     
-    SpawnBird = function() {
+    HatchBird = function() {
         shot_cooldown = 1 / act_rate;
-        var dist = 32;
-        var dir = 270;
+        var dist = 32 + array_length(birds) * 16;
         var bird = new EntityBulletBird(0, 0, 0, base_bullet_data, self, dist);
-        bird.Reposition(position.x + dist * dcos(dir), position.y - dist * dsin(dir), position.z + 16);
         ds_list_add(GAME.all_entities, bird);
+        array_push(birds, bird);
     };
 }
 
