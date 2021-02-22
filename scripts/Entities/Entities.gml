@@ -433,6 +433,39 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
     };
 }
 
+function EntityTowerGlass(x, y, z, class) : EntityTower(x, y, z, class) constructor {
+    Update = function() {
+        
+    };
+    
+    Shoot = function(target_foe) {
+        
+    };
+    
+    Render = function() {
+        // set the shader if you are selected
+        if (GAME.selected_entity == self || GAME.selected_entity_hover == self) {
+            shader_set(shd_selected);
+            shader_set_uniform_f(shader_get_uniform(shd_selected, "time"), current_time / 1000);
+            if (GAME.selected_entity == self) {
+                shader_set_uniform_color(shader_get_uniform(shd_selected, "color"), c_tower);
+            } else if (GAME.selected_entity_hover == self) {
+                shader_set_uniform_color(shader_get_uniform(shd_selected, "color"), c_tower_hover);
+            }
+        }
+        var transform = matrix_build(0, 0, 0, 0, 0, 0, scale.x, scale.y, scale.z);
+        transform = matrix_multiply(transform, matrix_build(0, 0, 0, rotation.x, rotation.y, rotation.z, 1, 1, 1));
+        transform = matrix_multiply(transform, matrix_build(position.x, position.y, position.z, 0, 0, 0, 1, 1, 1));
+        matrix_set(matrix_world, transform);
+        vertex_submit(base_model.vbuff, pr_trianglelist, -1);
+        matrix_set(matrix_world, matrix_build_identity());
+        // reset the shader if you are selected
+        if (GAME.selected_entity == self || GAME.selected_entity_hover == self) {
+            cluck_apply(shd_cluck_fragment);
+        }
+    };
+}
+
 function EntityTowerSpray(x, y, z, class) : EntityTower(x, y, z, class) constructor {
     Update = function() {
         if (shot_cooldown <= 0) {
