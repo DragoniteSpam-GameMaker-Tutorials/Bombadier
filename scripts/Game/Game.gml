@@ -72,10 +72,11 @@ function Game() constructor {
     magnifying_glass_glass = load_model("tower-glass-glass.d3d", format).vbuff;
     
     #region database
-    foe_ant =       new FoeData("Ant",          5, 0, 0, 100, 1, 2, spr_ant, load_model("foe.d3d", format));
-    foe_pillbugs =  new FoeData("Pillbugs",     10, 1, 0, 50, 1, 3, spr_ant_red, load_model("foe.d3d", format));
-    foe_spider =    new FoeData("Spider",       10, 0, 1, 64, 1, 4, spr_ant, load_model("foe.d3d", format));
-    foe_millipede = new FoeData("Millipede",    20, 0, 0, 40, 1, 4, spr_ant, load_model("foe.d3d", format));
+    foe_ant =       new FoeData("Ant",               5, 0, 0, 100, 1, 2, spr_foe_ant,           load_model("foe.d3d", format));
+    foe_pillbugs =  new FoeData("Pillbug",          10, 1, 0,  50, 1, 3, spr_foe_pillbug,       load_model("foe.d3d", format));
+    foe_gnat =    new FoeData("Midge",               1, 0, 1, 100, 1, 2, spr_foe_gnat,          load_model("foe.d3d", format));
+    foe_aphid = new FoeData("Aphid",                 3, 0, 0,  50, 1, 1, spr_foe_aphid,         load_model("foe.d3d", format));
+    foe_grasshopper = new FoeData("Grasshopper",    20, 0, 0, 150, 2, 8, spr_foe_grasshopper,   load_model("foe.d3d", format));
     
     bullet_pebble =     new BulletData("Pebble", load_model("testbullet.d3d", format), function(target) { });
     bullet_fire =       new BulletData("Fire", load_model("bullet-fire.d3d", format), function(target) {

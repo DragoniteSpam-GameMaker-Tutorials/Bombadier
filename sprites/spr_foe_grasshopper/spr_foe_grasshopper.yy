@@ -7,9 +7,9 @@
   "edgeFiltering": false,
   "collisionTolerance": 0,
   "swfPrecision": 2.525,
-  "bbox_left": 5,
-  "bbox_right": 62,
-  "bbox_top": 28,
+  "bbox_left": 1,
+  "bbox_right": 59,
+  "bbox_top": 16,
   "bbox_bottom": 59,
   "HTile": false,
   "VTile": false,
@@ -24,12 +24,12 @@
   "gridX": 0,
   "gridY": 0,
   "frames": [
-    {"compositeImage":{"FrameId":{"name":"ad50a41f-0a69-425b-b818-8da0d28dbad2","path":"sprites/spr_ant_red/spr_ant_red.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
-        {"FrameId":{"name":"ad50a41f-0a69-425b-b818-8da0d28dbad2","path":"sprites/spr_ant_red/spr_ant_red.yy",},"LayerId":{"name":"b7232f70-d25d-4982-a809-6d46c6d9d55c","path":"sprites/spr_ant_red/spr_ant_red.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
-      ],"parent":{"name":"spr_ant_red","path":"sprites/spr_ant_red/spr_ant_red.yy",},"resourceVersion":"1.0","name":"ad50a41f-0a69-425b-b818-8da0d28dbad2","tags":[],"resourceType":"GMSpriteFrame",},
+    {"compositeImage":{"FrameId":{"name":"6cd8e2a0-c66d-465d-80fc-9c1653b37a9c","path":"sprites/spr_foe_grasshopper/spr_foe_grasshopper.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
+        {"FrameId":{"name":"6cd8e2a0-c66d-465d-80fc-9c1653b37a9c","path":"sprites/spr_foe_grasshopper/spr_foe_grasshopper.yy",},"LayerId":{"name":"3fb37b7e-137f-45f1-b966-f7fbe0623f81","path":"sprites/spr_foe_grasshopper/spr_foe_grasshopper.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+      ],"parent":{"name":"spr_foe_grasshopper","path":"sprites/spr_foe_grasshopper/spr_foe_grasshopper.yy",},"resourceVersion":"1.0","name":"6cd8e2a0-c66d-465d-80fc-9c1653b37a9c","tags":[],"resourceType":"GMSpriteFrame",},
   ],
   "sequence": {
-    "spriteId": {"name":"spr_ant_red","path":"sprites/spr_ant_red/spr_ant_red.yy",},
+    "spriteId": {"name":"spr_foe_grasshopper","path":"sprites/spr_foe_grasshopper/spr_foe_grasshopper.yy",},
     "timeUnits": 1,
     "playback": 1,
     "playbackSpeed": 30.0,
@@ -41,7 +41,7 @@
     "moments": {"Keyframes":[],"resourceVersion":"1.0","resourceType":"KeyframeStore<MomentsEventKeyframe>",},
     "tracks": [
       {"name":"frames","spriteId":null,"keyframes":{"Keyframes":[
-            {"id":"c7efee21-5cee-46bd-b064-ac0504fc6e65","Key":0.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"ad50a41f-0a69-425b-b818-8da0d28dbad2","path":"sprites/spr_ant_red/spr_ant_red.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
+            {"id":"22cbbae1-e431-46c0-86bc-11d3a8185bf1","Key":0.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"6cd8e2a0-c66d-465d-80fc-9c1653b37a9c","path":"sprites/spr_foe_grasshopper/spr_foe_grasshopper.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
           ],"resourceVersion":"1.0","resourceType":"KeyframeStore<SpriteFrameKeyframe>",},"trackColour":0,"inheritsTrackColour":true,"builtinName":0,"traits":0,"interpolation":1,"tracks":[],"events":[],"modifiers":[],"isCreationTrack":false,"resourceVersion":"1.0","tags":[],"resourceType":"GMSpriteFramesTrack",},
     ],
     "visibleRange": null,
@@ -58,22 +58,22 @@
     "yorigin": 0,
     "eventToFunction": {},
     "eventStubScript": null,
-    "parent": {"name":"spr_ant_red","path":"sprites/spr_ant_red/spr_ant_red.yy",},
+    "parent": {"name":"spr_foe_grasshopper","path":"sprites/spr_foe_grasshopper/spr_foe_grasshopper.yy",},
     "resourceVersion": "1.3",
-    "name": "spr_ant_red",
+    "name": "spr_foe_grasshopper",
     "tags": [],
     "resourceType": "GMSequence",
   },
   "layers": [
-    {"visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default","resourceVersion":"1.0","name":"b7232f70-d25d-4982-a809-6d46c6d9d55c","tags":[],"resourceType":"GMImageLayer",},
+    {"visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default","resourceVersion":"1.0","name":"3fb37b7e-137f-45f1-b966-f7fbe0623f81","tags":[],"resourceType":"GMImageLayer",},
   ],
   "nineSlice": null,
   "parent": {
-    "name": "Temporary stuff",
-    "path": "folders/Temporary stuff.yy",
+    "name": "foes",
+    "path": "folders/Temporary stuff/foes.yy",
   },
   "resourceVersion": "1.0",
-  "name": "spr_ant_red",
+  "name": "spr_foe_grasshopper",
   "tags": [],
   "resourceType": "GMSprite",
 }
