@@ -1,4 +1,4 @@
-function FoeData(name, hp, def, mdef, speed, damage, reward, sprite, model) constructor {
+function FoeData(name, hp, def, mdef, speed, damage, reward, sprite, model, entity_type) constructor {
     self.name = name;
     self.hp = hp;
     self.def = def;
@@ -11,6 +11,8 @@ function FoeData(name, hp, def, mdef, speed, damage, reward, sprite, model) cons
     
     self.weaknesses = 0;
     self.immunities = 0;
+    
+    self.entity_type = entity_type;
 }
 
 function TowerData(name, rate, range, damage, cost, model, bullet_data) constructor {
