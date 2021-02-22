@@ -1,5 +1,6 @@
 {
   "resources": [
+    {"id":{"name":"shd_passthrough","path":"shaders/shd_passthrough/shd_passthrough.yy",},"order":15,},
     {"id":{"name":"cluck_set_light_ambient","path":"scripts/cluck_set_light_ambient/cluck_set_light_ambient.yy",},"order":6,},
     {"id":{"name":"spr_nineslice","path":"sprites/spr_nineslice/spr_nineslice.yy",},"order":4,},
     {"id":{"name":"shader_set_uniform_color","path":"scripts/shader_set_uniform_color/shader_set_uniform_color.yy",},"order":8,},
@@ -7,6 +8,7 @@
     {"id":{"name":"shd_cluck_fragment","path":"shaders/shd_cluck_fragment/shd_cluck_fragment.yy",},"order":0,},
     {"id":{"name":"Camera","path":"scripts/Camera/Camera.yy",},"order":1,},
     {"id":{"name":"Backbone","path":"objects/Backbone/Backbone.yy",},"order":0,},
+    {"id":{"name":"Drawing","path":"scripts/Drawing/Drawing.yy",},"order":4,},
     {"id":{"name":"Math","path":"scripts/Math/Math.yy",},"order":1,},
     {"id":{"name":"cluck_exception","path":"scripts/cluck_exception/cluck_exception.yy",},"order":1,},
     {"id":{"name":"spr_block_raycast","path":"sprites/spr_block_raycast/spr_block_raycast.yy",},"order":3,},
@@ -224,6 +226,7 @@
     {"CopyToMask":-1,"filePath":"datafiles","resourceVersion":"1.0","name":"bullet-bird-up.d3d","resourceType":"GMIncludedFile",},
     {"CopyToMask":-1,"filePath":"datafiles","resourceVersion":"1.0","name":"tower-glass.d3d","resourceType":"GMIncludedFile",},
     {"CopyToMask":-1,"filePath":"datafiles","resourceVersion":"1.0","name":"tower-glass-beam.d3d","resourceType":"GMIncludedFile",},
+    {"CopyToMask":-1,"filePath":"datafiles","resourceVersion":"1.0","name":"tower-glass-glass.d3d","resourceType":"GMIncludedFile",},
   ],
   "MetaData": {
     "IDEVersion": "23.1.1.249",

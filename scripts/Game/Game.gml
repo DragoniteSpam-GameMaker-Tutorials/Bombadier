@@ -69,6 +69,7 @@ function Game() constructor {
     skybox_cube = load_model("skybox.d3d", format).vbuff;
     
     magnifying_glass_beam = load_model("tower-glass-beam.d3d", format).vbuff;
+    magnifying_glass_glass = load_model("tower-glass-glass.d3d", format).vbuff;
     
     #region database
     foe_ant =       new FoeData("Ant",          5, 0, 0, 100, 1, 2, spr_ant, load_model("foe.d3d", format));
@@ -155,6 +156,8 @@ function Game() constructor {
             instance_destroy();
         }
     }
+    
+    semi_transparent_stuff = ds_list_create();
     
     enum GameModes {
         GAMEPLAY, EDITOR,
@@ -551,6 +554,8 @@ function Game() constructor {
     Render = function() {
         camera.Render();
         
+        ds_list_clear(semi_transparent_stuff);
+        
         gpu_set_cullmode(cull_counterclockwise);
         cluck_set_light_ambient(0x202020);
         cluck_set_light_direction(0, c_white, -1, -1, -1);
@@ -604,6 +609,17 @@ function Game() constructor {
             }
         }
         
+        for (var i = 0; i < ds_list_size(semi_transparent_stuff); i++) {
+            var thing_to_draw = semi_transparent_stuff[| i];
+            shader_set(thing_to_draw.shader);
+            if (thing_to_draw.shader_uniforms != undefined) {
+                shader_set_uniform_f_array(shader_get_uniform(thing_to_draw.shader, thing_to_draw.shader_uniforms.name), thing_to_draw.shader_uniforms.elements);
+            }
+            matrix_set(matrix_world, thing_to_draw.matrix);
+            vertex_submit(thing_to_draw.vbuff, pr_trianglelist, -1);
+        }
+        
+        matrix_set(matrix_world, matrix_build_identity());
         shader_reset();
     };
     
