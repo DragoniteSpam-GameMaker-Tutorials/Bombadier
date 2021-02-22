@@ -551,6 +551,7 @@ function Game() constructor {
     Render = function() {
         camera.Render();
         
+        gpu_set_cullmode(cull_counterclockwise);
         cluck_set_light_ambient(0x202020);
         cluck_set_light_direction(0, c_white, -1, -1, -1);
         cluck_apply(shd_cluck_fragment);

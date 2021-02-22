@@ -460,11 +460,11 @@ function EntityTowerGlass(x, y, z, class) : EntityTower(x, y, z, class) construc
         transform = matrix_multiply(transform, matrix_build(position.x, position.y, position.z, 0, 0, 0, 1, 1, 1));
         matrix_set(matrix_world, transform);
         vertex_submit(base_model.vbuff, pr_trianglelist, -1);
-        shader_set(shd_magnifying_glass_beam);
         if (target_foe != undefined) {
+            shader_set(shd_magnifying_glass_beam);
             shader_set_uniform_f(shader_get_uniform(shd_magnifying_glass_beam, "targetPosition"), target_foe.position.x, target_foe.position.y, target_foe.position.z);
+            vertex_submit(GAME.magnifying_glass_beam, pr_trianglelist, -1);
         }
-        vertex_submit(GAME.magnifying_glass_beam, pr_trianglelist, -1);
         matrix_set(matrix_world, matrix_build_identity());
         cluck_apply(shd_cluck_fragment);
     };
