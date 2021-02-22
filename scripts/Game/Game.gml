@@ -130,7 +130,7 @@ function Game() constructor {
     );
     wave_active = ds_list_create();
     wave_countdown = WAVE_WARMUP_COUNTDOWN;
-    wave_finished = false;
+    waves_remain = true;
     
     player_money = 75;
     player_health = 10;
@@ -171,7 +171,7 @@ function Game() constructor {
     
     SendInWave = function() {
         if (ds_queue_empty(all_waves)) {
-            wave_finished = true;
+            waves_remain = false;
         } else {
             var wave_current = ds_queue_dequeue(all_waves);
             wave_current.Launch();
@@ -316,11 +316,10 @@ function Game() constructor {
                 SendInWave();
             }
             
-            if (!wave_finished) {
+            if (wave_countdown > 0 && waves_remain) {
                 wave_countdown -= DT;
-                if (wave_countdown < 0) {
+                if (wave_countdown <= 0) {
                     SendInWave();
-                    wave_countdown = WAVE_COUNTDOWN;
                 }
             }
             
@@ -328,6 +327,9 @@ function Game() constructor {
                 wave_active[| i].Update();
                 if (wave_active[| i].Finished()) {
                     ds_list_delete(wave_active, i);
+                    if (ds_list_empty(wave_active)) {
+                        wave_countdown = WAVE_COUNTDOWN;
+                    }
                 }
             }
             
