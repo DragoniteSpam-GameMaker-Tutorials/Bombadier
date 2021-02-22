@@ -701,3 +701,16 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
         }
     };
 }
+
+function EntityFoeMidge(class, level) : EntityFoe(class, level) constructor {
+    self.shield = 1;
+    
+    self._oldDamage = Damage;
+    Damage = function(amount) {
+        if (self.shield > 0) {
+            self.shield--;
+            return;
+        }
+        self._oldDamage(amount);
+    };
+}
