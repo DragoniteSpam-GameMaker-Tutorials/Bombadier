@@ -181,7 +181,7 @@ function Game() constructor {
     
     PlayerDamage = function(amount) {
         player_health -= max(amount, 0);
-        if (player_health < 0) {
+        if (player_health <= 0) {
             show_message("aaaaaaaaaaaaaaaaa");
             game_end();
         }
