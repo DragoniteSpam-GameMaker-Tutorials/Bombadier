@@ -119,11 +119,14 @@ function Game() constructor {
     
     all_waves = ds_queue_create();
     ds_queue_enqueue(all_waves,
-        new Wave(foe_ant, 8, 1),
-        new Wave(foe_pillbugs, 8, 1),
-        new Wave(foe_ant, 10, 2),
-        new Wave(foe_ant, 10, 3),
-        new Wave(foe_pillbugs, 4, 3),
+        new Wave(foe_ant,            8, 1, 1),
+        new Wave(foe_pillbugs,       8, 1, 1),
+        new Wave(foe_aphid,         40, 1, 4),
+        new Wave(foe_ant,           10, 3, 1),
+        new Wave(foe_grasshopper,    4, 3, 0.5),
+        new Wave(foe_gnat,          20, 2, 2),
+        new Wave(foe_aphid,         60, 3, 4),
+        new Wave(foe_grasshopper,    5, 8, 0.5),
     );
     wave_active = ds_list_create();
     wave_countdown = WAVE_WARMUP_COUNTDOWN;
