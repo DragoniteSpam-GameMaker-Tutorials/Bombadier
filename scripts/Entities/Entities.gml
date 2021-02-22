@@ -462,6 +462,7 @@ function EntityTowerGlass(x, y, z, class) : EntityTower(x, y, z, class) construc
         transform = matrix_multiply(transform, matrix_build(position.x, position.y, position.z, 0, 0, 0, 1, 1, 1));
         matrix_set(matrix_world, transform);
         vertex_submit(base_model.vbuff, pr_trianglelist, -1);
+        vertex_submit(GAME.magnifying_glass_beam, pr_trianglelist, -1);
         matrix_set(matrix_world, matrix_build_identity());
         // reset the shader if you are selected
         if (GAME.selected_entity == self || GAME.selected_entity_hover == self) {
