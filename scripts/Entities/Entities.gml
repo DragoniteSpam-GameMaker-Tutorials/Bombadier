@@ -437,7 +437,7 @@ function EntityTowerGlass(x, y, z, class) : EntityTower(x, y, z, class) construc
     Update = function() {
         var target_foe = GetTarget();
         if (target_foe) {
-            //Shoot(target_foe);
+            target_foe.Damage(self.act_damage * DT);
             rotation.z = point_direction(self.position.x, self.position.y, target_foe.position.x, target_foe.position.y);
         }
     };
