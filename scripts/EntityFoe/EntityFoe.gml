@@ -133,15 +133,33 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
     
     RenderHealthBar = function() {
         var f = max(hp / hp_max, 0.125);
-        if (f < 1) {
+        if (f < 1 || status_poison || status_burn || status_slow) {
             shader_set(shd_billboard);
-            matrix_set(matrix_world, matrix_build(position.x, position.y, position.z + 48, 0, 0, 0, 1, 1, 1));
             gpu_set_zwriteenable(false);
-            draw_sprite(spr_healthbar, 0, 0, 0);
-            var ww = sprite_get_width(spr_healthbar_fill);
-            var hh = sprite_get_height(spr_healthbar_fill);
+            
+            var transform = matrix_build(position.x, position.y, position.z + 48, 0, 0, 0, 1, 1, 1);
+            matrix_set(matrix_world, transform);
+            var s = 0.25;
+            draw_sprite_ext(spr_healthbar, 0, 0, 0, s, s, 0, c_white, 1);
+            var ww = sprite_get_width(spr_healthbar_fill) * s;
+            var hh = sprite_get_height(spr_healthbar_fill) * s;
+            draw_sprite_stretched(spr_healthbar_fill, 0, -ww / 2, -hh / 2, ww * f, hh);
+            var xx = -ww / 2;
+            var yoff = -12;
+            if (status_poison) {
+                draw_sprite_ext(spr_status_poison, 0, xx, yoff, s, s, 0, c_white, 1);
+                xx += 12;
+            }
+            if (status_burn) {
+                draw_sprite_ext(spr_status_burn, 0, xx, yoff, s, s, 0, c_white, 1);
+                xx += 12;
+            }
+            if (status_slow) {
+                draw_sprite_ext(spr_status_slow, 0, xx, yoff, s, s, 0, c_white, 1);
+                xx += 12;
+            }
+            
             gpu_set_zwriteenable(true);
-            draw_sprite_stretched(spr_healthbar_fill, 0, -ww * (1 - f) / 2, 0, ww * f, hh);
             shader_reset();
             matrix_set(matrix_world, matrix_build_identity());
         }
