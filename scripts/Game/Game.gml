@@ -573,6 +573,10 @@ function Game() constructor {
             all_entities[| i].Render();
         }
         
+        for (var i = 0; i < ds_list_size(all_foes); i++) {
+            all_foes[| i].RenderHealthBar();
+        }
+        
         if (player_tower_spawn) {
             var can_build = CollisionFree(player_tower_spawn);
             shader_set(shd_selected);
