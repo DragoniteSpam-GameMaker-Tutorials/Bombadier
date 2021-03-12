@@ -9,6 +9,7 @@
     {"id":{"name":"Camera","path":"scripts/Camera/Camera.yy",},"order":1,},
     {"id":{"name":"Backbone","path":"objects/Backbone/Backbone.yy",},"order":0,},
     {"id":{"name":"Drawing","path":"scripts/Drawing/Drawing.yy",},"order":4,},
+    {"id":{"name":"spr_healthbar","path":"sprites/spr_healthbar/spr_healthbar.yy",},"order":9,},
     {"id":{"name":"Math","path":"scripts/Math/Math.yy",},"order":1,},
     {"id":{"name":"cluck_exception","path":"scripts/cluck_exception/cluck_exception.yy",},"order":1,},
     {"id":{"name":"spr_block_raycast","path":"sprites/spr_block_raycast/spr_block_raycast.yy",},"order":3,},
