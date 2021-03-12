@@ -132,17 +132,19 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
     };
     
     RenderHealthBar = function() {
-        shader_set(shd_billboard);
-        matrix_set(matrix_world, matrix_build(position.x, position.y, position.z + 48, 0, 0, 0, 1, 1, 1));
-        gpu_set_zwriteenable(false);
-        draw_sprite(spr_healthbar, 0, 0, 0);
         var f = max(hp / hp_max, 0.125);
-        var ww = sprite_get_width(spr_healthbar_fill);
-        var hh = sprite_get_height(spr_healthbar_fill);
-        gpu_set_zwriteenable(true);
-        draw_sprite_stretched(spr_healthbar_fill, 0, -ww * (1 - f) / 2, 0, ww * f, hh);
-        shader_reset();
-        matrix_set(matrix_world, matrix_build_identity());
+        if (f < 1) {
+            shader_set(shd_billboard);
+            matrix_set(matrix_world, matrix_build(position.x, position.y, position.z + 48, 0, 0, 0, 1, 1, 1));
+            gpu_set_zwriteenable(false);
+            draw_sprite(spr_healthbar, 0, 0, 0);
+            var ww = sprite_get_width(spr_healthbar_fill);
+            var hh = sprite_get_height(spr_healthbar_fill);
+            gpu_set_zwriteenable(true);
+            draw_sprite_stretched(spr_healthbar_fill, 0, -ww * (1 - f) / 2, 0, ww * f, hh);
+            shader_reset();
+            matrix_set(matrix_world, matrix_build_identity());
+        }
     };
     
     Destroy = function() {
