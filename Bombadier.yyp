@@ -13,6 +13,7 @@
     {"id":{"name":"Math","path":"scripts/Math/Math.yy",},"order":1,},
     {"id":{"name":"cluck_exception","path":"scripts/cluck_exception/cluck_exception.yy",},"order":1,},
     {"id":{"name":"spr_block_raycast","path":"sprites/spr_block_raycast/spr_block_raycast.yy",},"order":3,},
+    {"id":{"name":"spr_healthbar_fill","path":"sprites/spr_healthbar_fill/spr_healthbar_fill.yy",},"order":10,},
     {"id":{"name":"shd_magnifying_glass_beam","path":"shaders/shd_magnifying_glass_beam/shd_magnifying_glass_beam.yy",},"order":14,},
     {"id":{"name":"Game","path":"scripts/Game/Game.yy",},"order":2,},
     {"id":{"name":"spr_foe_grasshopper","path":"sprites/spr_foe_grasshopper/spr_foe_grasshopper.yy",},"order":3,},
