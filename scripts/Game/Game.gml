@@ -643,10 +643,21 @@ function Game() constructor {
         return all_ui_elements[$ layer_get_depth("UI_Game")];
     };
     
+    GetGUILayer = function(name) {
+        return all_ui_elements[$ layer_get_depth(name)];
+    };
+    
     GUI = function() {
         if (gameplay_mode == GameModes.GAMEPLAY) {
             draw_text(32, 32, "Player money: " + string(player_money));
             draw_text(32, 64, "Player health: " + string(player_health));
+            
+            var main_ui_layer = GetGUILayer("UI_Game_Overlay");
+            var layer_elements = main_ui_layer.elements;
+            main_ui_layer.block_raycast.Render();
+            for (var i = 0; i < ds_list_size(layer_elements); i++) {
+                layer_elements[| i].Render();
+            }
             
             player_cursor_over_ui = false;
             
