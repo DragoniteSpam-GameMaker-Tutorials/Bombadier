@@ -181,6 +181,15 @@ function Game() constructor {
         }
     };
     
+    SendInWaveEarly = function() {
+        if (wave_countdown > 0) {
+            player_money += ceil(wave_countdown);
+        } else {
+            player_money += WAVE_COUNTDOWN;
+        }
+        SendInWave();
+    };
+    
     PlayerDamage = function(amount) {
         player_health -= max(amount, 0);
         if (player_health <= 0) {
@@ -315,7 +324,7 @@ function Game() constructor {
             }
             
             if (keyboard_check_pressed(vk_space)) {
-                SendInWave();
+                SendInWaveEarly();
             }
             
             if (wave_countdown > 0 && waves_remain) {

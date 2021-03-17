@@ -1,3 +1,3 @@
 OnClick = function() {
-    GAME.SendInWave();
+    GAME.SendInWaveEarly();
 }
