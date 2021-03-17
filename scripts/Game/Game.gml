@@ -173,6 +173,7 @@ function Game() constructor {
         if (ds_queue_empty(all_waves)) {
             waves_remain = false;
         } else {
+            wave_countdown = -1;
             var wave_current = ds_queue_dequeue(all_waves);
             wave_current.Launch();
             ds_list_add(wave_active, wave_current);
