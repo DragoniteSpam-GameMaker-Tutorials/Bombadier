@@ -128,6 +128,7 @@ function Game() constructor {
         new Wave(foe_aphid,         60, 6, 4),
         new Wave(foe_grasshopper,    4, 5, 0.5),
     );
+    wave_total = ds_queue_size(all_waves);
     wave_active = ds_list_create();
     wave_countdown = WAVE_WARMUP_COUNTDOWN;
     waves_remain = true;
