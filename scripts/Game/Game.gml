@@ -94,14 +94,14 @@ function Game() constructor {
         load_model("bullet-bird-up.d3d", format)
     ];
     
-    tower_pebbles =     new TowerData("Pebble Shooter",     1, 3 * 32, 1, 10, load_model("tower-pebble.d3d", format), bullet_pebble);
-    tower_fire =        new TowerData("Fire Shooter",       0.5, 3 * 32, 1, 40, load_model("tower-fire.d3d", format), bullet_fire);
+    tower_pebbles =     new TowerData("Pebble Shooter",       1,   3 * 32,   1, 10, load_model("tower-pebble.d3d", format), bullet_pebble);
+    tower_fire =        new TowerData("Fire Shooter",       0.5,   3 * 32,   1, 15, load_model("tower-fire.d3d", format), bullet_fire);
     
-    tower_magnify =     new TowerData("Magnifying Glass",   0, 2.5 * 32, 2, 40, load_model("tower-glass.d3d", format), bullet_pebble);
-    tower_spray =       new TowerData("Bug Spray",          1, 4 * 32, 0, 40, load_model("tower-spray.d3d", format), bullet_bug_spray);
-    tower_flypaper =    new TowerData("Fly Paper Dispenser",1, 4 * 32, 0, 40, load_model("tower-flypaper.d3d", format), bullet_fly_paper);
+    tower_magnify =     new TowerData("Magnifying Glass",     0, 2.5 * 32,   5, 40, load_model("tower-glass.d3d", format), bullet_pebble);
+    tower_spray =       new TowerData("Bug Spray",            1,   4 * 32,   0, 40, load_model("tower-spray.d3d", format), bullet_bug_spray);
+    tower_flypaper =    new TowerData("Fly Paper Dispenser",  1,   4 * 32,   0, 60, load_model("tower-flypaper.d3d", format), bullet_fly_paper);
     
-    tower_bird =        new TowerData("Bird Nest",          0.5, 4 * 32, 5, 40, load_model("tower-bird.d3d", format), bullet_bird);
+    tower_bird =        new TowerData("Bird Nest",          0.5,   4 * 32,   8, 80, load_model("tower-bird.d3d", format), bullet_bird);
     #endregion
     
     path_nodes = array_create(0);
@@ -124,9 +124,9 @@ function Game() constructor {
         new Wave(foe_aphid,         40, 1, 4),
         new Wave(foe_ant,           10, 3, 1),
         new Wave(foe_grasshopper,    4, 3, 0.5),
-        new Wave(foe_gnat,          20, 2, 2),
-        new Wave(foe_aphid,         60, 3, 4),
-        new Wave(foe_grasshopper,    5, 8, 0.5),
+        new Wave(foe_gnat,          60, 3, 2),
+        new Wave(foe_aphid,         60, 6, 4),
+        new Wave(foe_grasshopper,    4, 5, 0.5),
     );
     wave_active = ds_list_create();
     wave_countdown = WAVE_WARMUP_COUNTDOWN;
