@@ -350,7 +350,7 @@ function Game() constructor {
                         }
                     }
                 }
-            
+                
                 for (var i = 0; i < ds_list_size(all_entities); i++) {
                     all_entities[| i].BeginUpdate();
                 }

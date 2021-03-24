@@ -1,5 +1,6 @@
 Render = function() {
     var subimg = 0;
+    Update();
     
     if (point_in_rectangle(mouse_x, mouse_y, x, y, x + sprite_width, y + sprite_height)) {
         var subimg = 1;
@@ -9,7 +10,7 @@ Render = function() {
         GAME.player_cursor_over_ui = true;
     }
     
-    draw_sprite_stretched(sprite_index, subimg, x, y, sprite_width, sprite_height);
+    draw_sprite_stretched_ext(sprite_index, subimg, x, y, sprite_width, sprite_height, color_tint, 1);
     draw_set_font(fnt_game_buttons);
     draw_set_colour(c_black);
     draw_set_halign(fa_center);
@@ -17,7 +18,12 @@ Render = function() {
     draw_text(x + sprite_width / 2, y + sprite_height / 2, text);
     draw_set_halign(fa_left);
     draw_set_valign(fa_top);
-}
+};
 
 OnClick = function() {
-}
+    
+};
+
+Update = function() {
+    
+};
