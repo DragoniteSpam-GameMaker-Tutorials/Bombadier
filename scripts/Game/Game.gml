@@ -133,6 +133,8 @@ function Game() constructor {
     wave_countdown = WAVE_WARMUP_COUNTDOWN;
     waves_remain = true;
     
+    game_speed = 1;
+    
     player_money = 75;
     player_health = 10;
     
@@ -169,6 +171,10 @@ function Game() constructor {
     }
     
     gameplay_mode = GameModes.GAMEPLAY;
+    
+    SetGameSpeed = function(speed) {
+        self.game_speed = speed;
+    };
     
     SendInWave = function() {
         if (ds_queue_empty(all_waves)) {
@@ -334,22 +340,24 @@ function Game() constructor {
                 }
             }
             
-            for (var i = ds_list_size(wave_active) - 1; i >= 0; i--) {
-                wave_active[| i].Update();
-                if (wave_active[| i].Finished()) {
-                    ds_list_delete(wave_active, i);
-                    if (ds_list_empty(wave_active)) {
-                        wave_countdown = WAVE_COUNTDOWN;
+            repeat (self.game_speed) {
+                for (var i = ds_list_size(wave_active) - 1; i >= 0; i--) {
+                    wave_active[| i].Update();
+                    if (wave_active[| i].Finished()) {
+                        ds_list_delete(wave_active, i);
+                        if (ds_list_empty(wave_active)) {
+                            wave_countdown = WAVE_COUNTDOWN;
+                        }
                     }
                 }
-            }
             
-            for (var i = 0; i < ds_list_size(all_entities); i++) {
-                all_entities[| i].BeginUpdate();
-            }
+                for (var i = 0; i < ds_list_size(all_entities); i++) {
+                    all_entities[| i].BeginUpdate();
+                }
             
-            for (var i = 0; i < ds_list_size(all_entities); i++) {
-                all_entities[| i].Update();
+                for (var i = 0; i < ds_list_size(all_entities); i++) {
+                    all_entities[| i].Update();
+                }
             }
             #endregion
         } else {
