@@ -148,6 +148,12 @@ function Game() constructor {
             layers = {
                 elements: ds_list_create(),
                 block_raycast: undefined,
+                Render: function() {
+                    block_raycast.Render();
+                    for (var i = 0; i < ds_list_size(elements); i++) {
+                        elements[| i].Render();
+                    }
+                },
             };
             other.all_ui_elements[$ string(depth)] = layers;
         }
@@ -333,14 +339,17 @@ function Game() constructor {
                 SendInWaveEarly();
             }
             
-            if (wave_countdown > 0 && waves_remain) {
-                wave_countdown -= DT;
-                if (wave_countdown <= 0) {
-                    SendInWave();
-                }
-            }
-            
+            // Speed up the game by running the update tick multiple times per step
             repeat (self.game_speed) {
+                // Check to see if a new wave should be launched
+                if (wave_countdown > 0 && waves_remain) {
+                    wave_countdown -= DT;
+                    if (wave_countdown <= 0) {
+                        SendInWave();
+                    }
+                }
+                
+                // Check to see if the currently active wave(s) can still update
                 for (var i = ds_list_size(wave_active) - 1; i >= 0; i--) {
                     wave_active[| i].Update();
                     if (wave_active[| i].Finished()) {
@@ -374,6 +383,8 @@ function Game() constructor {
                     if (editor_hover_entity) {
                         selected_entity = editor_hover_entity;
                     } else {
+                        // Spawn a path node at the location of the cursor on the floor
+                        // (and append it to the end of the list)
                         var position = camera.GetFloorIntersect();
                         for (var i = 0; i < array_length(path_nodes) + 1; i++) {
                             if (i == array_length(path_nodes) || path_nodes[i] == undefined) {
@@ -579,6 +590,14 @@ function Game() constructor {
     Render = function() {
         camera.Render();
         
+        gpu_set_ztestenable(false);
+        gpu_set_zwriteenable(false);
+        matrix_set(matrix_world, matrix_build(camera.from.x, camera.from.y, camera.from.z, 0, 0, 0, 1, 1, 1));
+        vertex_submit(skybox_cube, pr_trianglelist, sprite_get_texture(spr_skybox, 0));
+        matrix_set(matrix_world, matrix_build_identity());
+        gpu_set_ztestenable(true);
+        gpu_set_zwriteenable(true);
+        
         ds_list_clear(semi_transparent_stuff);
         
         gpu_set_cullmode(cull_counterclockwise);
@@ -622,6 +641,7 @@ function Game() constructor {
                     if (node != undefined) {
                         node.Render();
                         if (draw_the_line) {
+                            // rainbow path node connections
                             vertex_position_3d(vb_path_nodes, node.position.x, node.position.y, node.position.z + 8);
                             vertex_normal(vb_path_nodes, 0, 0, 1);
                             vertex_texcoord(vb_path_nodes, 0, 0);
@@ -638,6 +658,7 @@ function Game() constructor {
             }
         }
         
+        // semi-transparent stuff gets drawn last because the depth buffer sucks
         for (var i = 0; i < ds_list_size(semi_transparent_stuff); i++) {
             var thing_to_draw = semi_transparent_stuff[| i];
             shader_set(thing_to_draw.shader);
@@ -652,6 +673,7 @@ function Game() constructor {
         shader_reset();
     };
     
+    // These are the UI layers that may be turned on or off during gameplay
     ActiveGUILayer = function() {
         if (gameplay_mode == GameModes.EDITOR) {
             return undefined;
@@ -671,21 +693,10 @@ function Game() constructor {
             draw_text(32, 32, "Player money: " + string(player_money));
             draw_text(32, 64, "Player health: " + string(player_health));
             
-            var main_ui_layer = GetGUILayer("UI_Game_Overlay");
-            var layer_elements = main_ui_layer.elements;
-            main_ui_layer.block_raycast.Render();
-            for (var i = 0; i < ds_list_size(layer_elements); i++) {
-                layer_elements[| i].Render();
-            }
+            GetGUILayer("UI_Game_Overlay").Render();
+            ActiveGUILayer().Render();
             
             player_cursor_over_ui = false;
-            
-            var ui_layer = ActiveGUILayer();
-            var layer_elements = ui_layer.elements;
-            ui_layer.block_raycast.Render();
-            for (var i = 0; i < ds_list_size(layer_elements); i++) {
-                layer_elements[| i].Render();
-            }
         } else {
             if (editor_path_mode) {
                 draw_text(32, 32, "Click to spawn or select a path node");
@@ -706,7 +717,10 @@ function Game() constructor {
                     draw_text(32, 160, "Delete to delete the selected thing");
                     draw_text(32, 192, string(ds_list_size(all_env_entities)) + " total things");
                 }
-                draw_text(window_get_width() - 128, 32, "F1 to save");
+                draw_set_halign(fa_right);
+                draw_text(window_get_width() - 32, 32, "F1 to save");
+                draw_text(window_get_width() - 32, 64, "F2 to view/hide path nodes");
+                draw_set_halign(fa_left);
             }
         }
         if (keyboard_check(vk_f11)) {

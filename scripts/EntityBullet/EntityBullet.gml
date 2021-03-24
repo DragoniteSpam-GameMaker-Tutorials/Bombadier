@@ -45,6 +45,7 @@ function EntityBullet(x, y, z, vx, vy, vz, bullet_data, damage) : Entity(x, y, z
     };
 }
 
+// Clouds last for (x) seconds or (y) hits on the foe
 function EntityBulletBugSprayCloud(x, y, z, bullet_data) : EntityBullet(x, y, z, 0, 0, 0, bullet_data, 0) constructor {
     lifetime = 2;
     radius = 40;

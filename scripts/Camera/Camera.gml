@@ -54,14 +54,6 @@ function Camera() constructor {
         camera_set_view_mat(cam, view_mat);
         camera_set_proj_mat(cam, proj_mat);
         camera_apply(cam);
-        
-        gpu_set_ztestenable(false);
-        gpu_set_zwriteenable(false);
-        matrix_set(matrix_world, matrix_build(from.x, from.y, from.z, 0, 0, 0, 1, 1, 1));
-        vertex_submit(GAME.skybox_cube, pr_trianglelist, sprite_get_texture(spr_skybox, 0));
-        matrix_set(matrix_world, matrix_build_identity());
-        gpu_set_ztestenable(true);
-        gpu_set_zwriteenable(true);
     };
     
     GetFloorIntersect = function() {

@@ -90,6 +90,7 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
         shot_cooldown = 1 / act_rate;
     };
     
+    // Get the foe in range that's farthest down the track
     GetTarget = function() {
         var target_foe = undefined;
         for (var i = 0; i < ds_list_size(GAME.all_foes); i++) {
@@ -129,7 +130,7 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
         Destroy();
         RemoveCollision();
         ds_list_add(GAME.all_towers, self);
-        GAME.player_money += class.cost;
+        GAME.player_money += ceil(class.cost * 0.9);
     };
     
     RemoveCollision = function() {
