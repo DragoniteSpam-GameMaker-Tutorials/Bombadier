@@ -187,7 +187,8 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
     }
     
     toString = function() {
-        return "Shots: " + string(self.stats.shots) + "\n" +
+        return self.name + " (Lv. " + string(self.level) + ")\n" +
+            "Shots: " + string(self.stats.shots) + "\n" +
             "Damange dealt: " + string(self.stats.damage);
     };
 }
