@@ -92,6 +92,7 @@ function Game() constructor {
     bullet_fly_paper =  new BulletData("Fly Paper", load_model("flypaper.d3d", format), function(target) {
         if (self.parent_tower.level >= 3) {
             target.Immobilize();
+            self.parent_tower.stats.stuns++;
         }
         
         if (self.parent_tower.level >= 2) {

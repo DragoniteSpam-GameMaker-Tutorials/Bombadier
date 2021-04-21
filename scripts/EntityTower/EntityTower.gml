@@ -324,6 +324,13 @@ function EntityTowerFlyPaper(x, y, z, class) : EntityTower(x, y, z, class) const
     self.paper_count = 0;
     self.paper_limit = 2;
     
+    self.stats = {
+        papers: 0,
+        hits: 0,
+        duration: 0,
+        stuns: 0,
+    };
+    
     Update = function() {
         if (shot_cooldown <= 0) {
             Dispense();
@@ -336,7 +343,7 @@ function EntityTowerFlyPaper(x, y, z, class) : EntityTower(x, y, z, class) const
         if (paper_count >= paper_limit) {
             return;
         }
-        
+        self.stats.papers++;
         shot_cooldown = 1 / act_rate;
         var paper = new EntityBulletFlyPaper(0, 0, 0, base_bullet_data, self);
         repeat (15) {
@@ -349,5 +356,19 @@ function EntityTowerFlyPaper(x, y, z, class) : EntityTower(x, y, z, class) const
                 return;
             }
         }
+    };
+    
+    toString = function() {
+        var value = self.name + " (Lv. " + string(self.level) + ")\n" +
+            "Papers dispensed: " + string(self.stats.papers) + "\n" +
+            "Victims: " + string(self.stats.hits) + "\n" +
+            "Slow duration: " + string_format(self.stats.duration, 1, 1);
+        
+        if (self.level >= 3) {
+            value += "\n" +
+                "Immobilizations: " + string(self.stats.stuns);
+        }
+        
+        return value;
     };
 }

@@ -156,7 +156,8 @@ function EntityBulletFlyPaper(x, y, z, bullet_data, parent_tower) : EntityBullet
             var foe = GAME.all_foes[| i];
             if (point_distance_3d(position.x, position.y, position.z, foe.position.x, foe.position.y, foe.position.z) < radius) {
                 if (foe.status_slow <= 0) {
-                    hits_remaining--;
+                    self.hits_remaining--;
+                    self.parent_tower.stats.hits++;
                 }
                 OnHit(foe);
                 if (hits_remaining <= 0) {
