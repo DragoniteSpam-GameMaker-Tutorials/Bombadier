@@ -49,10 +49,10 @@ function EntityBullet(x, y, z, vx, vy, vz, bullet_data, damage, parent_tower) : 
 }
 
 // Clouds last for (x) seconds or (y) hits on the foe
-function EntityBulletBugSprayCloud(x, y, z, bullet_data) : EntityBullet(x, y, z, 0, 0, 0, bullet_data, 0) constructor {
-    lifetime = 2;
-    radius = 40;
-    hits_remaining = 2;
+function EntityBulletBugSprayCloud(x, y, z, bullet_data, lifetime, max_hits) : EntityBullet(x, y, z, 0, 0, 0, bullet_data, 0) constructor {
+    self.lifetime = lifetime;
+    self.radius = 40;
+    self.hits_remaining = max_hits;
     
     Reposition = function(x, y, z) {
         position.x = x;
