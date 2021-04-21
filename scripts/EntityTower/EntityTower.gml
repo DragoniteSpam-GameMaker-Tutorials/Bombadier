@@ -160,6 +160,12 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
         self.SetDamageMod();
         self.SetRangeMod();
     };
+    
+    CanBeUpgraded = function() {
+        if (self.level >= MAX_TOWER_LEVEL) return false;
+        if (GAME.player_money < self.class.cost[self.level]) return false;
+        return true;
+    };
 }
 
 function EntityTowerGlass(x, y, z, class) : EntityTower(x, y, z, class) constructor {

@@ -3,6 +3,8 @@
 #macro WAVE_FOE_COUNTDOWN 1
 #macro WAVE_COUNTDOWN 15
 
+#macro MAX_TOWER_LEVEL 3
+
 #macro BURN_DURATION 2
 #macro BURN_DPS 2
 
