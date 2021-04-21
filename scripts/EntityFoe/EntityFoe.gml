@@ -132,16 +132,19 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
         }
         
         if (status_burn > 0) {
+            self.whodunnit_burn.stats.damage += BURN_DPS * DT;
             Damage(BURN_DPS * DT);
             status_burn -= DT;
         }
         
         if (status_poison > 0) {
+            self.whodunnit_poison.stats.damage += POISON_DPS * DT;
             Damage(POISON_DPS * DT);
             status_poison -= DT;
         }
         
         if (status_slow > 0) {
+            self.whodunnit_slow.stats.duration += DT;
             status_slow -= DT;
             if (status_slow <= 0) {
                 SetSpeedMod(1);
