@@ -196,10 +196,17 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
 function EntityTowerGlass(x, y, z, class) : EntityTower(x, y, z, class) constructor {
     self.target_foe = undefined;
     
+    self.stats = {
+        duration: 0,
+        damage: 0,
+    };
+    
     Update = function() {
         target_foe = GetTarget();
         if (target_foe) {
             target_foe.Damage(self.act_damage * DT);
+            self.stats.damage += self.act_damage * DT;
+            self.stats.duration += DT;
             if (self.level >= 3) {
                 target_foe.Burn();
             }
@@ -240,6 +247,12 @@ function EntityTowerGlass(x, y, z, class) : EntityTower(x, y, z, class) construc
         }
         matrix_set(matrix_world, matrix_build_identity());
         cluck_apply(shd_cluck_fragment);
+    };
+    
+    toString = function() {
+        return self.name + " (Lv. " + string(self.level) + ")\n" +
+            "Focus duration: " + string_format(self.stats.duration, 1, 1) + " s\n" +
+            "Damange dealt: " + string_format(self.stats.damage, 1, 1);
     };
 }
 
