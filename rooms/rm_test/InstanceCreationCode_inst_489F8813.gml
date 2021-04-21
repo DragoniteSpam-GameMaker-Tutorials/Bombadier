@@ -1,5 +1,6 @@
 GetText = function() {
-    if (GAME.selected_entity != undefined) {
-        text = GAME.selected_entity.name;
+    var tower = GAME.selected_entity;
+    if (tower != undefined) {
+        text = tower.name + " (Lv. " + string(tower.level) + ")";
     }
 };
