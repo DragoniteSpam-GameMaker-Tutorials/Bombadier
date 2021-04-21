@@ -1,13 +1,19 @@
+enabled = true;
+
 Render = function() {
     var subimg = 0;
     Update();
     
-    if (point_in_rectangle(mouse_x, mouse_y, x, y, x + sprite_width, y + sprite_height)) {
-        var subimg = 1;
-        if (mouse_check_button_pressed(mb_left)) {
-            OnClick();
+    if (enabled) {
+        if (point_in_rectangle(mouse_x, mouse_y, x, y, x + sprite_width, y + sprite_height)) {
+            subimg = 1;
+            if (mouse_check_button_pressed(mb_left)) {
+                OnClick();
+            }
+            GAME.player_cursor_over_ui = true;
         }
-        GAME.player_cursor_over_ui = true;
+    } else {
+        subimg = 1;
     }
     
     draw_sprite_stretched_ext(sprite_index, subimg, x, y, sprite_width, sprite_height, color_tint, 1);
