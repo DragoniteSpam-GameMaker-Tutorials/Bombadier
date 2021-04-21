@@ -49,7 +49,7 @@ function EntityBullet(x, y, z, vx, vy, vz, bullet_data, damage, parent_tower) : 
 }
 
 // Clouds last for (x) seconds or (y) hits on the foe
-function EntityBulletBugSprayCloud(x, y, z, bullet_data, lifetime, max_hits) : EntityBullet(x, y, z, 0, 0, 0, bullet_data, 0) constructor {
+function EntityBulletBugSprayCloud(x, y, z, bullet_data, lifetime, max_hits, parent_tower) : EntityBullet(x, y, z, 0, 0, 0, bullet_data, 0, parent_tower) constructor {
     self.lifetime = lifetime;
     self.radius = 40;
     self.hits_remaining = max_hits;
@@ -73,7 +73,7 @@ function EntityBulletBugSprayCloud(x, y, z, bullet_data, lifetime, max_hits) : E
                 if (foe.status_poison <= 0) {
                     hits_remaining--;
                 }
-                bullet_data.OnHit(foe);
+                OnHit(foe);
                 if (hits_remaining <= 0) {
                     Destroy();
                     return;
@@ -88,14 +88,13 @@ function EntityBulletBugSprayCloud(x, y, z, bullet_data, lifetime, max_hits) : E
     };
 };
 
-function EntityBulletBird(x, y, z, bullet_data, nest, nest_radius) : EntityBullet(x, y, z, 0, 0, 0, bullet_data, 0) constructor {
-    lifetime = 2;
-    attack_radius = 32;
-    self.nest = nest;
+function EntityBulletBird(x, y, z, bullet_data, parent_tower, nest_radius) : EntityBullet(x, y, z, 0, 0, 0, bullet_data, 0, parent_tower) constructor {
+    self.lifetime = 2;
+    self.attack_radius = 32;
     self.nest_radius = nest_radius;
     self.nest_angle = 270;
-    damage_cooldown = 1 / nest.act_rate;
-    anim_frame = 0;
+    self.damage_cooldown = 1 / parent_tower.act_rate;
+    self.anim_frame = 0;
     
     Reposition = function(x, y, z) {
         position.x = x;
@@ -108,9 +107,9 @@ function EntityBulletBird(x, y, z, bullet_data, nest, nest_radius) : EntityBulle
             for (var i = 0; i < ds_list_size(GAME.all_foes); i++) {
                 var foe = GAME.all_foes[| i];
                 if (point_distance_3d(position.x, position.y, position.z, foe.position.x, foe.position.y, foe.position.z) < attack_radius) {
-                    foe.Damage(nest.act_damage);
-                    bullet_data.OnHit(foe);
-                    damage_cooldown = 1 / nest.act_rate;
+                    foe.Damage(parent_tower.act_damage);
+                    OnHit(foe);
+                    damage_cooldown = 1 / parent_tower.act_rate;
                     break;
                 }
             }
@@ -120,7 +119,7 @@ function EntityBulletBird(x, y, z, bullet_data, nest, nest_radius) : EntityBulle
         
         var linear_velocity = 160;
         
-        Reposition(nest.position.x + nest_radius * dcos(nest_angle), nest.position.y - nest_radius * dsin(nest_angle), nest.position.z + 16);
+        Reposition(parent_tower.position.x + nest_radius * dcos(nest_angle), parent_tower.position.y - nest_radius * dsin(nest_angle), parent_tower.position.z + 16);
         nest_angle += linear_velocity / nest_radius;
         
         var anim_speed = 4;
@@ -134,10 +133,9 @@ function EntityBulletBird(x, y, z, bullet_data, nest, nest_radius) : EntityBulle
     };
 };
 
-function EntityBulletFlyPaper(x, y, z, bullet_data, parent_tower) : EntityBullet(x, y, z, 0, 0, 0, bullet_data, 0) constructor {
-    radius = 40;
-    hits_remaining = 2;
-    parent = parent_tower;
+function EntityBulletFlyPaper(x, y, z, bullet_data, parent_tower) : EntityBullet(x, y, z, 0, 0, 0, bullet_data, 0, parent_tower) constructor {
+    self.radius = 40;
+    self.hits_remaining = 2;
     
     Reposition = function(x, y, z) {
         position.x = x;
@@ -158,10 +156,10 @@ function EntityBulletFlyPaper(x, y, z, bullet_data, parent_tower) : EntityBullet
                 if (foe.status_slow <= 0) {
                     hits_remaining--;
                 }
-                bullet_data.OnHit(foe);
+                OnHit(foe);
                 if (hits_remaining <= 0) {
                     Destroy();
-                    parent.paper_count--;
+                    parent_tower.paper_count--;
                     return;
                 }
             }

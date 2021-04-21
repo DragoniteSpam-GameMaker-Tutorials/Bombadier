@@ -242,7 +242,7 @@ function EntityTowerSpray(x, y, z, class) : EntityTower(x, y, z, class) construc
         shot_cooldown = 1 / act_rate;
         var lifespan = (self.level >= 2) ? 3 : 2;
         var max_hits = (self.level >= 2) ? 3 : 2;
-        var cloud = new EntityBulletBugSprayCloud(0, 0, 0, base_bullet_data, lifespan, max_hits);
+        var cloud = new EntityBulletBugSprayCloud(0, 0, 0, base_bullet_data, lifespan, max_hits, self);
         repeat (15) {
             var dist = random_range(12, act_range);
             var dir = random(360);
