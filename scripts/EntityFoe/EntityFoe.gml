@@ -17,6 +17,7 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
     self.status_burn = 0;
     self.status_poison = 0;
     self.status_slow = 0;
+    self.status_immobilize = 0;
     
     Burn = function(duration) {
         if (duration == undefined) duration = BURN_DURATION;
@@ -32,6 +33,11 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
         if (factor == undefined) factor = SLOW_FACTOR;
         status_slow = duration;
         SetSpeedMod(factor);
+    };
+    
+    Immobilize = function(duration) {
+        if (duration == undefined) duration = IMMOBILIZE_DURATION;
+        status_immobilize = duration;
     };
     
     SetDefMod = function(value) {
@@ -92,19 +98,25 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
     };
     
     Update = function() {
-        var dt = DT;
-        var dir = point_direction(position.x, position.y, destination.x, destination.y);
-        position.x = approach(position.x, destination.x, act_speed * abs(dcos(dir)) * dt);
-        position.y = approach(position.y, destination.y, act_speed * abs(dsin(dir)) * dt);
-        position.z = approach(position.z, destination.z, act_speed * dt);
-        if (position.x == destination.x && position.y == destination.y && position.z == destination.z) {
-            if (array_length(path) > (path_node + 1) && path[path_node + 1] != undefined) {
-                path_node++;
-                destination = clone(path[path_node].position);
-            } else {
-                GAME.PlayerDamage(damage);
-                Destroy();
+        if (self.status_immobilize == 0) {
+            var dt = DT;
+            var dir = point_direction(position.x, position.y, destination.x, destination.y);
+            position.x = approach(position.x, destination.x, act_speed * abs(dcos(dir)) * dt);
+            position.y = approach(position.y, destination.y, act_speed * abs(dsin(dir)) * dt);
+            position.z = approach(position.z, destination.z, act_speed * dt);
+            if (position.x == destination.x && position.y == destination.y && position.z == destination.z) {
+                if (array_length(path) > (path_node + 1) && path[path_node + 1] != undefined) {
+                    path_node++;
+                    destination = clone(path[path_node].position);
+                } else {
+                    GAME.PlayerDamage(damage);
+                    Destroy();
+                }
             }
+        }
+        
+        if (status_immobilize > 0) {
+            status_immobilize -= DT;
         }
         
         if (status_burn > 0) {

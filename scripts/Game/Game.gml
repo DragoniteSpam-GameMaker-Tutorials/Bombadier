@@ -90,7 +90,15 @@ function Game() constructor {
         target.Poison();
     });
     bullet_fly_paper =  new BulletData("Fly Paper", load_model("flypaper.d3d", format), function(target) {
-        target.Slow();
+        if (self.parent_tower.level >= 3) {
+            target.Immobilize();
+        }
+        
+        if (self.parent_tower.level >= 2) {
+            target.Slow(SLOW_DURATION * 1.5, SLOW_FACTOR * 0.75);
+        } else {
+            target.Slow();
+        }
     });
     bullet_bird =       new BulletData("Bird", load_model("bullet-bird-down.d3d", format), function(target) { });
     bullet_bird.anim_frames = [
@@ -131,7 +139,7 @@ function Game() constructor {
                         /* rate  */ [1, 1, 1],
                         /* range */ [4 * 32, 4 * 32, 4 * 32],
                         /* dmg   */ [0, 0, 0],
-                        /* cost  */ [60, 60, 60],
+                        /* cost  */ [60, 100, 100],
                             load_model("tower-flypaper.d3d", format), bullet_fly_paper
                         );
     tower_bird =        new TowerData("Bird Nest",
