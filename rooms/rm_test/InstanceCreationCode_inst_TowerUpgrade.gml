@@ -5,11 +5,14 @@ OnClick = function() {
 };
 
 Update = function() {
+    var tower = GAME.selected_entity;
     enabled = false;
-    if (GAME.selected_entity != undefined && instanceof(GAME.selected_entity) == "EntityTower") {
+    text = "Upgrade";
+    if (tower != undefined && instanceof(tower) == "EntityTower") {
         // Yes I know this is the longest way of doing this operation
-        if (GAME.selected_entity.CanBeUpgraded()) {
+        if (tower.CanBeUpgraded()) {
             enabled = true;
+            text = "Upgrade ($" + string(tower.class.cost[tower.level]) + ")";
         } else {
             enabled = false;
         }
