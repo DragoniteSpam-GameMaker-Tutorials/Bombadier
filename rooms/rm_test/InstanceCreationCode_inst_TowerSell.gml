@@ -4,3 +4,13 @@ OnClick = function() {
         GAME.selected_entity = undefined;
     }
 };
+
+Update = function() {
+    var tower = GAME.selected_entity;
+    enabled = false;
+    text = "Sell";
+    if (tower != undefined && instanceof(tower) == "EntityTower") {
+        enabled = true;
+        text = "Sell ($" + string(tower.GetSellValue()) + ")";
+    }
+};
