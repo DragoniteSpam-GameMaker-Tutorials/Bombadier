@@ -1,9 +1,10 @@
-function EntityBullet(x, y, z, vx, vy, vz, bullet_data, damage) : Entity(x, y, z) constructor {
-    velocity = new Vector3(vx, vy, vz);
+function EntityBullet(x, y, z, vx, vy, vz, bullet_data, damage, parent_tower) : Entity(x, y, z) constructor {
+    self.velocity = new Vector3(vx, vy, vz);
     self.bullet_data = bullet_data;
     self.damage = damage;
     self.solid = false;
-    time_to_live = 1;
+    self.time_to_live = 1;
+    self.parent_tower = parent_tower;
     
     raycast = coll_ray_invalid;
     
@@ -15,6 +16,8 @@ function EntityBullet(x, y, z, vx, vy, vz, bullet_data, damage) : Entity(x, y, z
         
     };
     
+    OnHit = method(self, method_get_index(bullet_data.OnHit));
+    
     Update = function() {
         position.x += velocity.x;
         position.y += velocity.y;
@@ -25,7 +28,7 @@ function EntityBullet(x, y, z, vx, vy, vz, bullet_data, damage) : Entity(x, y, z
             var radius = 18;
             if (point_distance_3d(position.x, position.y, position.z, foe.position.x, foe.position.y, foe.position.z) <= radius) {
                 foe.Damage(damage);
-                bullet_data.OnHit(foe);
+                OnHit(foe);
                 Destroy();
                 return;
             }
