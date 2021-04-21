@@ -81,24 +81,24 @@ function Game() constructor {
     bullet_pebble =     new BulletData("Pebble", load_model("testbullet.d3d", format), function(target) { });
     bullet_fire =       new BulletData("Fire", load_model("bullet-fire.d3d", format), function(target) {
         if (self.parent_tower.level >= 3) {
-            target.Burn(BURN_DURATION * 2);
+            target.Burn(BURN_DURATION * 2, self.parent_tower);
         } else {
-            target.Burn(BURN_DURATION);
+            target.Burn(BURN_DURATION, self.parent_tower);
         }
     });
     bullet_bug_spray =  new BulletData("Bug Spray", load_model("bugspray.d3d", format), function(target) {
-        target.Poison();
+        target.Poison(POISON_DURATION, self.parent_tower);
     });
     bullet_fly_paper =  new BulletData("Fly Paper", load_model("flypaper.d3d", format), function(target) {
         if (self.parent_tower.level >= 3) {
-            target.Immobilize();
+            target.Immobilize(self.parent_tower);
             self.parent_tower.stats.stuns++;
         }
         
         if (self.parent_tower.level >= 2) {
-            target.Slow(SLOW_DURATION * 1.5, SLOW_FACTOR * 0.75);
+            target.Slow(SLOW_DURATION * 1.5, SLOW_FACTOR * 0.75, self.parent_tower);
         } else {
-            target.Slow();
+            target.Slow(SLOW_DURATION, SLOW_FACTOR, self.parent_tower);
         }
     });
     bullet_bird =       new BulletData("Bird", load_model("bullet-bird-down.d3d", format), function(target) { });

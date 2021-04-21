@@ -19,28 +19,37 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
     self.status_slow = 0;
     self.status_immobilize = 0;
     self.has_been_immobilized = false;
+    self.whodunnit_burn = undefined;
+    self.whodunnit_poison = undefined;
+    self.whodunnit_slow = undefined;
+    self.whodunnit_immobilize = undefined;
     
-    Burn = function(duration) {
+    Burn = function(duration, whodunnit) {
         if (duration == undefined) duration = BURN_DURATION;
-        status_burn = duration;
+        self.status_burn = duration;
+        self.whodunnit_burn = whodunnit;
     };
     
-    Poison = function() {
-        status_poison = POISON_DURATION;
+    Poison = function(duration, whodunnit) {
+        if (duration == undefined) duration = POISON_DURATION;
+        self.status_poison = duration;
+        self.whodunnit_poison = whodunnit;
     };
     
-    Slow = function(duration, factor) {
+    Slow = function(duration, factor, whodunnit) {
         if (duration == undefined) duration = BURN_DURATION;
         if (factor == undefined) factor = SLOW_FACTOR;
-        status_slow = duration;
-        SetSpeedMod(factor);
+        self.status_slow = duration;
+        self.SetSpeedMod(factor);
+        self.whodunnit_slow = whodunnit;
     };
     
-    Immobilize = function(duration) {
+    Immobilize = function(duration, whodunnit) {
         if (duration == undefined) duration = IMMOBILIZE_DURATION;
-        if (has_been_immobilized) return;
-        status_immobilize = duration;
-        has_been_immobilized = true;
+        if (self.has_been_immobilized) return;
+        self.status_immobilize = duration;
+        self.has_been_immobilized = true;
+        self.whodunnit_immobilize = whodunnit;
     };
     
     SetDefMod = function(value) {
