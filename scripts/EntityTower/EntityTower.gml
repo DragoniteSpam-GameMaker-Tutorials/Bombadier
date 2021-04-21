@@ -185,6 +185,11 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
         NOT_ENOUGH_MONEY,
         YES_YOU_CAN,
     }
+    
+    toString = function() {
+        return "Shots: " + string(self.stats.shots) + "\n" +
+            "Damange dealt: " + string(self.stats.damage);
+    };
 }
 
 function EntityTowerGlass(x, y, z, class) : EntityTower(x, y, z, class) constructor {
