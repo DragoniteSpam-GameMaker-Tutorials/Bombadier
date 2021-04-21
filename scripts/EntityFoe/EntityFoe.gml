@@ -27,9 +27,11 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
         status_poison = POISON_DURATION;
     };
     
-    Slow = function() {
-        status_slow = SLOW_DURATION;
-        SetSpeedMod(SLOW_FACTOR);
+    Slow = function(duration, factor) {
+        if (duration == undefined) duration = BURN_DURATION;
+        if (factor == undefined) factor = SLOW_FACTOR;
+        status_slow = duration;
+        SetSpeedMod(factor);
     };
     
     SetDefMod = function(value) {
