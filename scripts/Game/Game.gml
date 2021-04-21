@@ -115,9 +115,9 @@ function Game() constructor {
     
     tower_magnify =     new TowerData("Magnifying Glass",
                         /* rate  */ [0, 0, 0],
-                        /* range */ [2.5 * 32, 2.5 * 32, 2.5 * 32],
-                        /* dmg   */ [5, 5, 5],
-                        /* cost  */ [40, 40, 40],
+                        /* range */ [2.5 * 32, 3 * 32, 3 * 32],
+                        /* dmg   */ [5, 8, 8],
+                        /* cost  */ [50, 150, 200],
                             load_model("tower-glass.d3d", format), bullet_pebble
                         );
     tower_spray =       new TowerData("Bug Spray",
