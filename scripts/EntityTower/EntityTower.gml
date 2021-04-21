@@ -130,9 +130,15 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
         Destroy();
         RemoveCollision();
         ds_list_add(GAME.all_towers, self);
+        GAME.player_money += GetSellValue();
+    };
+    
+    GetSellValue = function() {
+        var value = 0;
         for (var i = 0; i < self.level; i++) {
-            GAME.player_money += ceil(class.cost[i] * 0.9);
+            value += ceil(class.cost[i] * 0.9);
         }
+        return value;
     };
     
     RemoveCollision = function() {
