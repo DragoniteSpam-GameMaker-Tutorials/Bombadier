@@ -121,10 +121,10 @@ function Game() constructor {
                             load_model("tower-glass.d3d", format), bullet_pebble
                         );
     tower_spray =       new TowerData("Bug Spray",
-                        /* rate  */ [1, 1, 1],
+                        /* rate  */ [1, 1, 2],
                         /* range */ [4 * 32, 4 * 32, 4 * 32],
                         /* dmg   */ [0, 0, 0],
-                        /* cost  */ [40, 40, 40],
+                        /* cost  */ [40, 60, 80],
                             load_model("tower-spray.d3d", format), bullet_bug_spray
                         );
     tower_flypaper =    new TowerData("Fly Paper Dispenser",
