@@ -188,7 +188,9 @@ function EntityTowerGlass(x, y, z, class) : EntityTower(x, y, z, class) construc
         target_foe = GetTarget();
         if (target_foe) {
             target_foe.Damage(self.act_damage * DT);
-            target_foe.Burn();
+            if (self.level >= 3) {
+                target_foe.Burn();
+            }
             rotation.z = point_direction(self.position.x, self.position.y, target_foe.position.x, target_foe.position.y);
         }
     };
