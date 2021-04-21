@@ -8,7 +8,7 @@ Update = function() {
     var tower = GAME.selected_entity;
     enabled = false;
     text = "Upgrade";
-    if (tower != undefined && instanceof(tower) == "EntityTower") {
+    if (tower != undefined) {
         var upgrade_status = tower.CanBeUpgraded();
         switch (upgrade_status) {
             case ReasonsWhyYouCantUpgradeATower.YES_YOU_CAN:

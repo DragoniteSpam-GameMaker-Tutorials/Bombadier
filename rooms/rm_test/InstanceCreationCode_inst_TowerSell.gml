@@ -9,7 +9,7 @@ Update = function() {
     var tower = GAME.selected_entity;
     enabled = false;
     text = "Sell";
-    if (tower != undefined && instanceof(tower) == "EntityTower") {
+    if (tower != undefined) {
         enabled = true;
         text = "Sell ($" + string(tower.GetSellValue()) + ")";
     }
