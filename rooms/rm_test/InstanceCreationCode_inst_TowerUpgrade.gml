@@ -1,5 +1,5 @@
 OnClick = function() {
-    if (GAME.selected_entity != undefined && instanceof(GAME.selected_entity) == "EntityTower") {
+    if (GAME.selected_entity != undefined) {
         GAME.selected_entity.Upgrade();
     }
 };
