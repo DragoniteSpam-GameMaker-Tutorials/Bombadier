@@ -189,7 +189,7 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
     toString = function() {
         return self.name + " (Lv. " + string(self.level) + ")\n" +
             "Shots: " + string(self.stats.shots) + "\n" +
-            "Damange dealt: " + string(self.stats.damage);
+            "Damange dealt: " + string_format(self.stats.damage, 1, 1);
     };
 }
 
@@ -257,6 +257,12 @@ function EntityTowerGlass(x, y, z, class) : EntityTower(x, y, z, class) construc
 }
 
 function EntityTowerSpray(x, y, z, class) : EntityTower(x, y, z, class) constructor {
+    self.stats = {
+        clouds: 0,
+        hits: 0,
+        damage: 0,
+    };
+    
     Update = function() {
         if (shot_cooldown <= 0) {
             SpawnSpray();
@@ -266,6 +272,7 @@ function EntityTowerSpray(x, y, z, class) : EntityTower(x, y, z, class) construc
     };
     
     SpawnSpray = function() {
+        self.stats.clouds++;
         shot_cooldown = 1 / act_rate;
         var lifespan = (self.level >= 2) ? 3 : 2;
         var max_hits = (self.level >= 2) ? 3 : 2;
@@ -279,6 +286,13 @@ function EntityTowerSpray(x, y, z, class) : EntityTower(x, y, z, class) construc
                 return;
             }
         }
+    };
+    
+    toString = function() {
+        return self.name + " (Lv. " + string(self.level) + ")\n" +
+            "Clouds spawned: " + string(self.stats.clouds) + "\n" +
+            "Victims: " + string(self.stats.hits) + "\n" +
+            "Damange dealt: " + string_format(self.stats.damage, 1, 1);
     };
 }
 
