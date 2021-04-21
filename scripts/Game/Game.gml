@@ -80,7 +80,11 @@ function Game() constructor {
     
     bullet_pebble =     new BulletData("Pebble", load_model("testbullet.d3d", format), function(target) { });
     bullet_fire =       new BulletData("Fire", load_model("bullet-fire.d3d", format), function(target) {
-        target.Burn();
+        if (self.parent_tower.level >= 3) {
+            target.Burn(BURN_DURATION * 2);
+        } else {
+            target.Burn(BURN_DURATION);
+        }
     });
     bullet_bug_spray =  new BulletData("Bug Spray", load_model("bugspray.d3d", format), function(target) {
         target.Poison();
@@ -95,17 +99,17 @@ function Game() constructor {
     ];
     
     tower_pebbles =     new TowerData("Pebble Shooter",
-                        /* rate  */ [1, 1, 1],
+                        /* rate  */ [1, 1, 2],
                         /* range */ [3 * 32, 3 * 32, 3 * 32],
-                        /* dmg   */ [1, 1, 1],
-                        /* cost  */ [10, 10, 10],
+                        /* dmg   */ [1, 2, 2],
+                        /* cost  */ [10, 40, 50],
                             load_model("tower-pebble.d3d", format), bullet_pebble
                         );
     tower_fire =        new TowerData("Fire Shooter",
-                        /* rate  */ [0.5, 0.5, 0.5],
-                        /* range */ [3 * 32, 3 * 32, 3 * 32],
+                        /* rate  */ [0.5, 0.75, 0.5],
+                        /* range */ [3 * 32, 3.5 * 32, 3.5 * 32],
                         /* dmg   */ [1, 1, 1],
-                        /* cost  */ [15, 15, 15],
+                        /* cost  */ [15, 40, 60],
                             load_model("tower-fire.d3d", format), bullet_fire
                         );
     

@@ -18,8 +18,9 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
     self.status_poison = 0;
     self.status_slow = 0;
     
-    Burn = function() {
-        status_burn = BURN_DURATION;
+    Burn = function(duration) {
+        if (duration == undefined) duration = BURN_DURATION;
+        status_burn = duration;
     };
     
     Poison = function() {
