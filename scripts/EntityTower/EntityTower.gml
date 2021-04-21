@@ -15,6 +15,11 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
     self.mod_range = 1;
     self.mod_damage = 1;
     
+    self.stats = {
+        shots: 0,
+        damage: 0,
+    };
+    
     Reposition = function(x, y, z) {
         position.x = x;
         position.y = y;
@@ -88,6 +93,7 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
         var bullet = new EntityBullet(position.x, position.y, position.z, shot_velocity * dcos(dir), shot_velocity * -dsin(dir), 0, base_bullet_data, act_damage, self);
         bullet.AddToMap();
         shot_cooldown = 1 / act_rate;
+        self.stats.shots++;
     };
     
     // Get the foe in range that's farthest down the track

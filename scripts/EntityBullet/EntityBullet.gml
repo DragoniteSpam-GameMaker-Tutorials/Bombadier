@@ -28,6 +28,7 @@ function EntityBullet(x, y, z, vx, vy, vz, bullet_data, damage, parent_tower) : 
             var radius = 18;
             if (point_distance_3d(position.x, position.y, position.z, foe.position.x, foe.position.y, foe.position.z) <= radius) {
                 foe.Damage(damage);
+                self.parent_tower.stats.damage += damage;
                 OnHit(foe);
                 Destroy();
                 return;
