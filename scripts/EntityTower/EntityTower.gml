@@ -260,6 +260,9 @@ function EntityTowerBird(x, y, z, class) : EntityTower(x, y, z, class) construct
     bird_limit = 3;
     
     Update = function() {
+        if (self.level >= 3) {
+            bird_limit = 4;
+        }
         if (shot_cooldown <= 0 && array_length(birds) < bird_limit) {
             HatchBird();
         } else {

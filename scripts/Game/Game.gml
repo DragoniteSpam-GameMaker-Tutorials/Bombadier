@@ -135,10 +135,10 @@ function Game() constructor {
                             load_model("tower-flypaper.d3d", format), bullet_fly_paper
                         );
     tower_bird =        new TowerData("Bird Nest",
-                        /* rate  */ [0.5, 0.5, 0.5],
+                        /* rate  */ [0.5, 1, 1],
                         /* range */ [4 * 32, 4 * 32, 4 * 32],
-                        /* dmg   */ [8, 8, 8],
-                        /* cost  */ [80, 80, 80],
+                        /* dmg   */ [8, 12, 12],
+                        /* cost  */ [60, 80, 120],
                             load_model("tower-bird.d3d", format), bullet_bird
                         );
     #endregion
