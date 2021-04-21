@@ -18,6 +18,7 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
     self.status_poison = 0;
     self.status_slow = 0;
     self.status_immobilize = 0;
+    self.has_been_immobilized = false;
     
     Burn = function(duration) {
         if (duration == undefined) duration = BURN_DURATION;
@@ -37,7 +38,9 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
     
     Immobilize = function(duration) {
         if (duration == undefined) duration = IMMOBILIZE_DURATION;
+        if (has_been_immobilized) return;
         status_immobilize = duration;
+        has_been_immobilized = true;
     };
     
     SetDefMod = function(value) {
@@ -98,7 +101,7 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
     };
     
     Update = function() {
-        if (self.status_immobilize == 0) {
+        if (self.status_immobilize <= 0) {
             var dt = DT;
             var dir = point_direction(position.x, position.y, destination.x, destination.y);
             position.x = approach(position.x, destination.x, act_speed * abs(dcos(dir)) * dt);
