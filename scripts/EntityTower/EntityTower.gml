@@ -163,10 +163,16 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
     };
     
     CanBeUpgraded = function() {
-        if (self.level >= MAX_TOWER_LEVEL) return false;
-        if (GAME.player_money < self.class.cost[self.level]) return false;
-        return true;
+        if (self.level >= MAX_TOWER_LEVEL) return ReasonsWhyYouCantUpgradeATower.MAX_LEVEL;
+        if (GAME.player_money < self.class.cost[self.level]) return ReasonsWhyYouCantUpgradeATower.NOT_ENOUGH_MONEY;
+        return ReasonsWhyYouCantUpgradeATower.YES_YOU_CAN;
     };
+    
+    enum ReasonsWhyYouCantUpgradeATower {
+        MAX_LEVEL,
+        NOT_ENOUGH_MONEY,
+        YES_YOU_CAN,
+    }
 }
 
 function EntityTowerGlass(x, y, z, class) : EntityTower(x, y, z, class) constructor {

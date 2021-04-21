@@ -9,12 +9,20 @@ Update = function() {
     enabled = false;
     text = "Upgrade";
     if (tower != undefined && instanceof(tower) == "EntityTower") {
-        // Yes I know this is the longest way of doing this operation
-        if (tower.CanBeUpgraded()) {
-            enabled = true;
-            text = "Upgrade ($" + string(tower.class.cost[tower.level]) + ")";
-        } else {
-            enabled = false;
+        var upgrade_status = tower.CanBeUpgraded();
+        switch (upgrade_status) {
+            case ReasonsWhyYouCantUpgradeATower.YES_YOU_CAN:
+                enabled = true;
+                text = "Upgrade ($" + string(tower.class.cost[tower.level]) + ")";
+                break;
+            case ReasonsWhyYouCantUpgradeATower.MAX_LEVEL:
+                enabled = false;
+                text = "(Max Level)";
+                break;
+            case ReasonsWhyYouCantUpgradeATower.NOT_ENOUGH_MONEY:
+                enabled = false;
+                text = "Upgrade ($" + string(tower.class.cost[tower.level]) + ")";
+                break;
         }
     }
 };
