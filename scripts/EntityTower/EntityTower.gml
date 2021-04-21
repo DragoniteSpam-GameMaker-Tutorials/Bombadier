@@ -28,35 +28,35 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
     };
     
     SetRateMod = function(value) {
-        mod_rate = value;
+        if (value != undefined) mod_rate = value;
         act_rate = CalcRate() * mod_rate;
     }
     
     SetRangeMod = function(value) {
-        mod_range = value;
+        if (value != undefined) mod_range = value;
         act_range = CalcRange() * mod_range;
     }
     
     SetDamageMod = function(value) {
-        mod_damage = value;
+        if (value != undefined) mod_damage = value;
         act_damage = CalcDamage() * mod_damage;
     }
     
     CalcRate = function() {
-        return base_rate * level;
+        return base_rate;
     }
     
     CalcRange = function() {
-        return base_range * level;
+        return base_range;
     }
     
     CalcDamage = function() {
-        return base_damage * level;
+        return base_damage;
     }
     
-    self.act_rate = CalcRate() * self.mod_rate;
-    self.act_range = CalcRange() * self.mod_range;
-    self.act_damage = CalcDamage() * self.mod_damage;
+    SetRateMod();
+    SetRangeMod();
+    SetDamageMod();
     
     LevelUp = function() {
         level++;
@@ -152,7 +152,13 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
     };
     
     Upgrade = function() {
-        
+        self.level++;
+        self.base_rate = self.class.rate[self.level - 1];
+        self.base_range = self.class.range[self.level - 1];
+        self.base_damage = self.class.damage[self.level - 1];
+        self.SetRateMod();
+        self.SetDamageMod();
+        self.SetRangeMod();
     };
 }
 
