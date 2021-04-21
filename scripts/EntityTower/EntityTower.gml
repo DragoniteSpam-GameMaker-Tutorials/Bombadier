@@ -5,9 +5,9 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
     
     self.shot_cooldown = 0;
     
-    self.base_rate = class.rate;
-    self.base_range = class.range;
-    self.base_damage = class.damage;
+    self.base_rate = class.rate[0];
+    self.base_range = class.range[0];
+    self.base_damage = class.damage[0];
     self.base_model = class.model;
     self.base_bullet_data = class.bullet_data;
     
@@ -130,7 +130,9 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
         Destroy();
         RemoveCollision();
         ds_list_add(GAME.all_towers, self);
-        GAME.player_money += ceil(class.cost * 0.9);
+        for (var i = 0; i < self.level; i++) {
+            GAME.player_money += ceil(class.cost[i] * 0.9);
+        }
     };
     
     RemoveCollision = function() {
@@ -147,6 +149,10 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
                 GAME.collision_grid[# i, j] = GRID_COLLISION_FREE;
             }
         }
+    };
+    
+    Upgrade = function() {
+        
     };
 }
 

@@ -94,14 +94,49 @@ function Game() constructor {
         load_model("bullet-bird-up.d3d", format)
     ];
     
-    tower_pebbles =     new TowerData("Pebble Shooter",       1,   3 * 32,   1, 10, load_model("tower-pebble.d3d", format), bullet_pebble);
-    tower_fire =        new TowerData("Fire Shooter",       0.5,   3 * 32,   1, 15, load_model("tower-fire.d3d", format), bullet_fire);
+    tower_pebbles =     new TowerData("Pebble Shooter",
+                        /* rate  */ [1, 1, 1],
+                        /* range */ [3 * 32, 3 * 32, 3 * 32],
+                        /* dmg   */ [1, 1, 1],
+                        /* cost  */ [10, 10, 10],
+                            load_model("tower-pebble.d3d", format), bullet_pebble
+                        );
+    tower_fire =        new TowerData("Fire Shooter",
+                        /* rate  */ [0.5, 0.5, 0.5],
+                        /* range */ [3 * 32, 3 * 32, 3 * 32],
+                        /* dmg   */ [1, 1, 1],
+                        /* cost  */ [15, 15, 15],
+                            load_model("tower-fire.d3d", format), bullet_fire
+                        );
     
-    tower_magnify =     new TowerData("Magnifying Glass",     0, 2.5 * 32,   5, 40, load_model("tower-glass.d3d", format), bullet_pebble);
-    tower_spray =       new TowerData("Bug Spray",            1,   4 * 32,   0, 40, load_model("tower-spray.d3d", format), bullet_bug_spray);
-    tower_flypaper =    new TowerData("Fly Paper Dispenser",  1,   4 * 32,   0, 60, load_model("tower-flypaper.d3d", format), bullet_fly_paper);
-    
-    tower_bird =        new TowerData("Bird Nest",          0.5,   4 * 32,   8, 80, load_model("tower-bird.d3d", format), bullet_bird);
+    tower_magnify =     new TowerData("Magnifying Glass",
+                        /* rate  */ [0, 0, 0],
+                        /* range */ [2.5 * 32, 2.5 * 32, 2.5 * 32],
+                        /* dmg   */ [5, 5, 5],
+                        /* cost  */ [40, 40, 40],
+                            load_model("tower-glass.d3d", format), bullet_pebble
+                        );
+    tower_spray =       new TowerData("Bug Spray",
+                        /* rate  */ [1, 1, 1],
+                        /* range */ [4 * 32, 4 * 32, 4 * 32],
+                        /* dmg   */ [0, 0, 0],
+                        /* cost  */ [40, 40, 40],
+                            load_model("tower-spray.d3d", format), bullet_bug_spray
+                        );
+    tower_flypaper =    new TowerData("Fly Paper Dispenser",
+                        /* rate  */ [1, 1, 1],
+                        /* range */ [4 * 32, 4 * 32, 4 * 32],
+                        /* dmg   */ [0, 0, 0],
+                        /* cost  */ [60, 60, 60],
+                            load_model("tower-flypaper.d3d", format), bullet_fly_paper
+                        );
+    tower_bird =        new TowerData("Bird Nest",
+                        /* rate  */ [0.5, 0.5, 0.5],
+                        /* range */ [4 * 32, 4 * 32, 4 * 32],
+                        /* dmg   */ [8, 8, 8],
+                        /* cost  */ [80, 80, 80],
+                            load_model("tower-bird.d3d", format), bullet_bird
+                        );
     #endregion
     
     path_nodes = array_create(0);
@@ -214,8 +249,8 @@ function Game() constructor {
         var position = camera.GetFloorIntersect();
         
         if (position) {
-            if (player_tower_spawn && player_money >= player_tower_spawn.class.cost && CollisionFree(player_tower_spawn)) {
-                player_money -= player_tower_spawn.class.cost;
+            if (player_tower_spawn && player_money >= player_tower_spawn.class.cost[0] && CollisionFree(player_tower_spawn)) {
+                player_money -= player_tower_spawn.class.cost[0];
                 player_tower_spawn.AddToMap();
                 player_tower_spawn = undefined;
             }
