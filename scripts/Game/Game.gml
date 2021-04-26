@@ -405,8 +405,9 @@ function Game() constructor {
                 new_normal[2] /= normal_magnitude;
                 
                 var triangle_to_camera = dot_product_3d(new_normal[0], new_normal[1], new_normal[2], cam_x, cam_y, cam_z);
+                var triangle_to_ground = dot_product_3d(new_normal[0], new_normal[1], new_normal[2], 0, 0, -1);
                 
-                if (triangle_to_camera < 0.8) {
+                if (triangle_to_camera < 0.8 && triangle_to_ground < 0.75) {
                     vertex_position_3d(vbuff, new_position[0], new_position[1], new_position[2]);
                     vertex_normal(vbuff, new_normal[0], new_normal[1], new_normal[2]);
                     vertex_texcoord(vbuff, xt, yt);
