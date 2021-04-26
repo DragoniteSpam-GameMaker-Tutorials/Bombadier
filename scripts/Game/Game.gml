@@ -424,6 +424,10 @@ function Game() constructor {
                 selected_entity = undefined;
             }
             
+            if (keyboard_check_pressed(vk_f3)) {
+                show_message("fusing everything");
+            }
+            
             if (editor_path_mode) {
                 editor_hover_entity = GetUnderCursor(path_nodes);
                 
@@ -768,6 +772,7 @@ function Game() constructor {
                 draw_set_halign(fa_right);
                 draw_text(window_get_width() - 32, 32, "F1 to save");
                 draw_text(window_get_width() - 32, 64, "F2 to view/hide path nodes");
+                draw_text(window_get_width() - 32, 96, "F3 to fuse all of the environment entities together");
                 draw_set_halign(fa_left);
             }
         }
