@@ -837,9 +837,6 @@ function Game() constructor {
     
     GUI = function() {
         if (gameplay_mode == GameModes.GAMEPLAY) {
-            draw_text(32, 32, "Player money: " + string(player_money));
-            draw_text(32, 64, "Player health: " + string(player_health));
-            
             GetGUILayer("UI_Game_Overlay").Render();
             ActiveGUILayer().Render();
             
