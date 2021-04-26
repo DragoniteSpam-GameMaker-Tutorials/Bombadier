@@ -3,7 +3,7 @@ attribute vec3 in_Normal;                    // (x,y,z)
 attribute vec2 in_TextureCoord;              // (u,v)
 attribute vec4 in_Colour;                    // (r,g,b,a)
 
-#define MAX_LIGHTS 16
+#define MAX_LIGHTS 2
 #define LIGHT_DIRECTIONAL 1.
 #define LIGHT_POINT 2.
 #define LIGHT_SPOT 3.
@@ -25,22 +25,9 @@ void CommonFogSetup();
 void CommonLight(inout vec4 baseColor, in vec3 position, in vec3 normal) {
     vec4 lightColor = vec4(lightAmbientColor, 1.);
     
-    CommonLightEvaluate(0, lightColor, position, normal);
-    CommonLightEvaluate(1, lightColor, position, normal);
-    CommonLightEvaluate(2, lightColor, position, normal);
-    CommonLightEvaluate(3, lightColor, position, normal);
-    CommonLightEvaluate(4, lightColor, position, normal);
-    CommonLightEvaluate(5, lightColor, position, normal);
-    CommonLightEvaluate(6, lightColor, position, normal);
-    CommonLightEvaluate(7, lightColor, position, normal);
-    CommonLightEvaluate(8, lightColor, position, normal);
-    CommonLightEvaluate(9, lightColor, position, normal);
-    CommonLightEvaluate(10, lightColor, position, normal);
-    CommonLightEvaluate(11, lightColor, position, normal);
-    CommonLightEvaluate(12, lightColor, position, normal);
-    CommonLightEvaluate(13, lightColor, position, normal);
-    CommonLightEvaluate(14, lightColor, position, normal);
-    CommonLightEvaluate(15, lightColor, position, normal);
+    for (int i = 0; i < MAX_LIGHTS; i++) {
+        CommonLightEvaluate(i, lightColor, position, normal);
+    }
     
     baseColor *= clamp(lightColor, vec4(0.), vec4(1.));
 }

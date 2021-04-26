@@ -1,4 +1,4 @@
-#define MAX_LIGHTS 16
+#define MAX_LIGHTS 2
 #define LIGHT_DIRECTIONAL 1.
 #define LIGHT_POINT 2.
 #define LIGHT_SPOT 3.
@@ -29,22 +29,9 @@ void CommonFog(inout vec4 baseColor);
 void CommonLight(inout vec4 baseColor) {
     vec4 lightColor = vec4(lightAmbientColor, 1.);
     
-    CommonLightEvaluate(0, lightColor);
-    CommonLightEvaluate(1, lightColor);
-    CommonLightEvaluate(2, lightColor);
-    CommonLightEvaluate(3, lightColor);
-    CommonLightEvaluate(4, lightColor);
-    CommonLightEvaluate(5, lightColor);
-    CommonLightEvaluate(6, lightColor);
-    CommonLightEvaluate(7, lightColor);
-    CommonLightEvaluate(8, lightColor);
-    CommonLightEvaluate(9, lightColor);
-    CommonLightEvaluate(10, lightColor);
-    CommonLightEvaluate(11, lightColor);
-    CommonLightEvaluate(12, lightColor);
-    CommonLightEvaluate(13, lightColor);
-    CommonLightEvaluate(14, lightColor);
-    CommonLightEvaluate(15, lightColor);
+    for (int i = 0; i < MAX_LIGHTS; i++) {
+        CommonLightEvaluate(i, lightColor);
+    }
     
     baseColor *= clamp(lightColor, vec4(0.), vec4(1.));
 }
