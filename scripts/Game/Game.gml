@@ -53,6 +53,12 @@ function Game() constructor {
     vertex_freeze(ground);
     #endregion
     
+    fused = {
+        raw: undefined,
+        vbuff: undefined,
+        collision: ds_grid_create(10, 10),
+    };
+    
     #region environment objects
     env_objects = ds_map_create();
     env_object_list = ds_list_create();
@@ -63,7 +69,6 @@ function Game() constructor {
         ds_list_add(env_object_list, obj_name);
     }
     collision_grid = ds_grid_create(10, 10);
-    collision_grid_fused = ds_grid_create(10, 10);
     #endregion
     
     test_ball = load_model("testball.d3d", format).vbuff;
@@ -159,7 +164,6 @@ function Game() constructor {
     all_foes = ds_list_create();
     all_towers = ds_list_create();
     all_env_entities = ds_list_create();
-    all_fused_environment_stuff = undefined;
     
     selected_entity = undefined;
     selected_entity_hover = undefined;
@@ -283,7 +287,7 @@ function Game() constructor {
         var cell_ymax = ceil(ymax / GRID_CELL_SIZE);
         
         var collision_grid_state = ds_grid_get_max(collision_grid, cell_xmin, cell_ymin, cell_xmax, cell_ymax) == GRID_COLLISION_FREE;
-        var collision_grid_fused_state = ds_grid_get_max(collision_grid_fused, cell_xmin, cell_ymin, cell_xmax, cell_ymax) == GRID_COLLISION_FREE;
+        var collision_grid_fused_state = ds_grid_get_max(fused.collision, cell_xmin, cell_ymin, cell_xmax, cell_ymax) == GRID_COLLISION_FREE;
         return (collision_grid_state && collision_grid_fused_state);
     };
     
@@ -354,10 +358,10 @@ function Game() constructor {
     FuseMapEntities = function() {
         var vbuff = vertex_create_buffer();
         vertex_begin(vbuff, format);
-        ds_grid_clear(collision_grid_fused, GRID_COLLISION_FREE);
+        ds_grid_clear(fused.collision, GRID_COLLISION_FREE);
         
         var actual_collision_grid = collision_grid;
-        collision_grid = collision_grid_fused;
+        collision_grid = fused.collision;
         
         for (var i = 0; i < ds_list_size(all_env_entities); i++) {
             var ent = all_env_entities[| i];
@@ -407,8 +411,16 @@ function Game() constructor {
         vertex_end(vbuff);
         ds_list_clear(all_env_entities);
         
-        all_fused_environment_stuff = vbuff;
+        if (fused.raw != undefined) {
+            buffer_delete(fused.raw);
+        }
+        if (fused.vbuff) {
+            vertex_delete_buffer(fused.vbuff);
+        }
         
+        fused.vbuff = vbuff;
+        fused.raw = buffer_create_from_vertex_buffer(vbuff, buffer_fixed, 1);
+        vertex_freeze(vbuff);
         collision_grid = actual_collision_grid;
     };
     
@@ -652,7 +664,7 @@ function Game() constructor {
         var save_json = {
             entities: array_create(ds_list_size(all_env_entities), undefined),
             nodes: array_create(node_count),
-            fused_collision: ds_grid_write(collision_grid_fused),
+            fused_collision: ds_grid_write(fused.collision),
         };
         for (var i = 0; i < ds_list_size(all_env_entities); i++) {
             all_env_entities[| i].Save(save_json, i);
@@ -667,9 +679,7 @@ function Game() constructor {
         buffer_save(buffer, filename);
         buffer_delete(buffer);
         
-        var fused_buffer = buffer_create_from_vertex_buffer(all_fused_environment_stuff, buffer_fixed, 1);
-        buffer_save(fused_buffer, filename_change_ext(filename, ".fused"));
-        buffer_delete(fused_buffer);
+        buffer_save(fused.raw, filename_change_ext(filename, ".fused"));
     };
     
     LoadMap = function(filename) {
@@ -683,8 +693,8 @@ function Game() constructor {
             var hh = room_height div GRID_CELL_SIZE;
             ds_grid_resize(collision_grid, ww, hh);
             ds_grid_clear(collision_grid, GRID_COLLISION_FREE);
-            ds_grid_resize(collision_grid_fused, ww, hh);
-            ds_grid_clear(collision_grid_fused, GRID_COLLISION_FREE);
+            ds_grid_resize(fused.collision, ww, hh);
+            ds_grid_clear(fused.collision, GRID_COLLISION_FREE);
             
             for (var i = 0; i < array_length(load_json.entities); i++) {
                 var data = load_json.entities[i];
@@ -700,12 +710,12 @@ function Game() constructor {
                 path_nodes[@ i] = new PathNode(load_json.nodes[i].position);
             }
             
-            ds_grid_read(collision_grid_fused, load_json.fused_collision);
+            ds_grid_read(fused.collision, load_json.fused_collision);
             
             if (file_exists(filename_change_ext(filename, ".fused"))) {
-                var fused_buffer = buffer_load(filename_change_ext(filename, ".fused"));
-                all_fused_environment_stuff = vertex_create_buffer_from_buffer(fused_buffer, format);
-                buffer_delete(fused_buffer);
+                fused.raw = buffer_load(filename_change_ext(filename, ".fused"));
+                fused.vbuff = vertex_create_buffer_from_buffer(fused.raw, format);
+                vertex_freeze(fused.vbuff);
             }
         } catch (e) {
             show_debug_message("Something bad happened loading the file:");
@@ -740,8 +750,8 @@ function Game() constructor {
         
         vertex_submit(ground, pr_trianglelist, sprite_get_texture(spr_ground, 0));
         
-        if (all_fused_environment_stuff != undefined) {
-            vertex_submit(all_fused_environment_stuff, pr_trianglelist, -1);
+        if (fused.vbuff != undefined) {
+            vertex_submit(fused.vbuff, pr_trianglelist, -1);
         }
         
         for (var i = 0; i < ds_list_size(all_entities); i++) {
