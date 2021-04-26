@@ -363,6 +363,14 @@ function Game() constructor {
         var actual_collision_grid = collision_grid;
         collision_grid = fused.collision;
         
+        var cam_x = camera.to.x - camera.from.x;
+        var cam_y = camera.to.y - camera.from.y;
+        var cam_z = camera.to.z - camera.from.z;
+        var cam_magnitude = point_distance_3d(0, 0, 0, cam_x, cam_y, cam_z);
+        cam_x /= cam_magnitude;
+        cam_y /= cam_magnitude;
+        cam_z /= cam_magnitude;
+        
         for (var i = 0; i < ds_list_size(all_env_entities); i++) {
             var ent = all_env_entities[| i];
             
@@ -396,10 +404,14 @@ function Game() constructor {
                 new_normal[1] /= normal_magnitude;
                 new_normal[2] /= normal_magnitude;
                 
-                vertex_position_3d(vbuff, new_position[0], new_position[1], new_position[2]);
-                vertex_normal(vbuff, new_normal[0], new_normal[1], new_normal[2]);
-                vertex_texcoord(vbuff, xt, yt);
-                vertex_color(vbuff, cc & 0xffffff, (cc >> 24) / 255);
+                var triangle_to_camera = dot_product_3d(new_normal[0], new_normal[1], new_normal[2], cam_x, cam_y, cam_z);
+                
+                if (triangle_to_camera < 0.8) {
+                    vertex_position_3d(vbuff, new_position[0], new_position[1], new_position[2]);
+                    vertex_normal(vbuff, new_normal[0], new_normal[1], new_normal[2]);
+                    vertex_texcoord(vbuff, xt, yt);
+                    vertex_color(vbuff, cc & 0xffffff, (cc >> 24) / 255);
+                }
             }
             
             buffer_delete(raw_buffer);
@@ -417,6 +429,8 @@ function Game() constructor {
         if (fused.vbuff) {
             vertex_delete_buffer(fused.vbuff);
         }
+        
+        show_message(vertex_get_number(vbuff))
         
         fused.vbuff = vbuff;
         fused.raw = buffer_create_from_vertex_buffer(vbuff, buffer_fixed, 1);

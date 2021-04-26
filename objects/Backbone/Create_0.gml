@@ -1,3 +1,3 @@
 game = new Game();
-game.LoadMap("maps\\test.bug");
+game.LoadMap("maps\\map.bug");
 depth = 0;
