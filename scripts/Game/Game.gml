@@ -743,7 +743,7 @@ function Game() constructor {
         
         ds_list_clear(semi_transparent_stuff);
         
-        gpu_set_cullmode(cull_noculling);
+        gpu_set_cullmode(cull_counterclockwise);
         cluck_set_light_ambient(0x202020);
         cluck_set_light_direction(0, c_white, -1, -1, -1);
         cluck_apply(shd_cluck_fragment);
