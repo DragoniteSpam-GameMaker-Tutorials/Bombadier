@@ -652,6 +652,7 @@ function Game() constructor {
         var save_json = {
             entities: array_create(ds_list_size(all_env_entities), undefined),
             nodes: array_create(node_count),
+            fused_collision: ds_grid_write(collision_grid_fused),
         };
         for (var i = 0; i < ds_list_size(all_env_entities); i++) {
             all_env_entities[| i].Save(save_json, i);
@@ -665,6 +666,10 @@ function Game() constructor {
         buffer_poke(buffer, 0, buffer_text, json_string);
         buffer_save(buffer, filename);
         buffer_delete(buffer);
+        
+        var fused_buffer = buffer_create_from_vertex_buffer(all_fused_environment_stuff, buffer_fixed, 1);
+        buffer_save(fused_buffer, filename_change_ext(filename, ".fused"));
+        buffer_delete(fused_buffer);
     };
     
     LoadMap = function(filename) {
