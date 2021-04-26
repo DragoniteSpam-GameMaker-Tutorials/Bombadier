@@ -699,6 +699,14 @@ function Game() constructor {
             for (var i = 0; i < array_length(load_json.nodes); i++) {
                 path_nodes[@ i] = new PathNode(load_json.nodes[i].position);
             }
+            
+            ds_grid_read(collision_grid_fused, load_json.fused_collision);
+            
+            if (file_exists(filename_change_ext(filename, ".fused"))) {
+                var fused_buffer = buffer_load(filename_change_ext(filename, ".fused"));
+                all_fused_environment_stuff = vertex_create_buffer_from_buffer(fused_buffer, format);
+                buffer_delete(fused_buffer);
+            }
         } catch (e) {
             show_debug_message("Something bad happened loading the file:");
             show_debug_message(e.message);

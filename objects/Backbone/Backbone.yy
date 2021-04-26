@@ -26,8 +26,8 @@
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "Help",
-    "path": "folders/Core Stuff/Help.yy",
+    "name": "Core Stuff",
+    "path": "folders/Core Stuff.yy",
   },
   "resourceVersion": "1.0",
   "name": "Backbone",
