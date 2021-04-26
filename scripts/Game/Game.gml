@@ -346,6 +346,57 @@ function Game() constructor {
         }
     };
     
+    FuseMapEntities = function() {
+        var vbuff = vertex_create_buffer();
+        vertex_begin(vbuff, format);
+        
+        for (var i = 0; i < ds_list_size(all_env_entities); i++) {
+            var ent = all_env_entities[| i];
+            
+            var raw_buffer = buffer_create_from_vertex_buffer(ent.model.vbuff, buffer_fixed, 1);
+            var entity_matrix = matrix_build(
+                ent.position.x, ent.position.y, ent.position.z,
+                ent.rotation.x, ent.rotation.y, ent.rotation.z,
+                ent.scale.x, ent.scale.y, ent.scale.z
+            );
+            var entity_matrix_normals = matrix_build(
+                0, 0, 0,
+                ent.rotation.x, ent.rotation.y, ent.rotation.z,
+                ent.scale.x, ent.scale.y, ent.scale.z
+            );
+            
+            for (var j = 0; j < buffer_get_size(raw_buffer); j += 36) {
+                var xx = buffer_peek(raw_buffer, j +  0, buffer_f32);
+                var yy = buffer_peek(raw_buffer, j +  4, buffer_f32);
+                var zz = buffer_peek(raw_buffer, j +  8, buffer_f32);
+                var nx = buffer_peek(raw_buffer, j + 12, buffer_f32);
+                var ny = buffer_peek(raw_buffer, j + 16, buffer_f32);
+                var nz = buffer_peek(raw_buffer, j + 20, buffer_f32);
+                var xt = buffer_peek(raw_buffer, j + 24, buffer_f32);
+                var yt = buffer_peek(raw_buffer, j + 28, buffer_f32);
+                var cc = buffer_peek(raw_buffer, j + 32, buffer_f32);
+                
+                var new_position = matrix_transform_vertex(entity_matrix, xx, yy, zz);
+                var new_normal = matrix_transform_vertex(entity_matrix_normals, nx, ny, nz);
+                var normal_magnitude = point_distance_3d(0, 0, 0, new_normal[0], new_normal[1], new_normal[2]);
+                new_normal[0] /= normal_magnitude;
+                new_normal[1] /= normal_magnitude;
+                new_normal[2] /= normal_magnitude;
+                
+                vertex_position_3d(vbuff, new_position[0], new_position[1], new_position[2]);
+                vertex_normal(vbuff, new_normal[0], new_normal[1], new_normal[2]);
+                vertex_texcoord(vbuff, xt, yt);
+                vertex_color(vbuff, cc & 0xffffff, (cc >> 24) / 255);
+            }
+            
+            buffer_delete(raw_buffer);
+            ds_list_delete(all_entities, ds_list_find_index(all_entities, ent));
+        }
+        
+        vertex_end(vbuff);
+        ds_list_clear(all_env_entities);
+    };
+    
     Update = function() {
         camera.Update();
         
@@ -425,7 +476,7 @@ function Game() constructor {
             }
             
             if (keyboard_check_pressed(vk_f3)) {
-                show_message("fusing everything");
+                FuseMapEntities();
             }
             
             if (editor_path_mode) {
