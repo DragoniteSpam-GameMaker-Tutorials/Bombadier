@@ -63,6 +63,7 @@ function Game() constructor {
         ds_list_add(env_object_list, obj_name);
     }
     collision_grid = ds_grid_create(10, 10);
+    collision_grid_fused = ds_grid_create(10, 10);
     #endregion
     
     test_ball = load_model("testball.d3d", format).vbuff;
@@ -280,7 +281,10 @@ function Game() constructor {
         var cell_ymin = ymin div GRID_CELL_SIZE;
         var cell_xmax = ceil(xmax / GRID_CELL_SIZE);
         var cell_ymax = ceil(ymax / GRID_CELL_SIZE);
-        return (ds_grid_get_max(collision_grid, cell_xmin, cell_ymin, cell_xmax, cell_ymax) == GRID_COLLISION_FREE);
+        
+        var collision_grid_state = ds_grid_get_max(collision_grid, cell_xmin, cell_ymin, cell_xmax, cell_ymax) == GRID_COLLISION_FREE;
+        var collision_grid_fused_state = ds_grid_get_max(collision_grid_fused, cell_xmin, cell_ymin, cell_xmax, cell_ymax) == GRID_COLLISION_FREE;
+        return (collision_grid_state && collision_grid_fused_state);
     };
     
     CollisionIsPath = function(entity) {
@@ -350,6 +354,10 @@ function Game() constructor {
     FuseMapEntities = function() {
         var vbuff = vertex_create_buffer();
         vertex_begin(vbuff, format);
+        ds_grid_clear(collision_grid_fused, GRID_COLLISION_FREE);
+        
+        var actual_collision_grid = collision_grid;
+        collision_grid = collision_grid_fused;
         
         for (var i = 0; i < ds_list_size(all_env_entities); i++) {
             var ent = all_env_entities[| i];
@@ -392,12 +400,16 @@ function Game() constructor {
             
             buffer_delete(raw_buffer);
             ds_list_delete(all_entities, ds_list_find_index(all_entities, ent));
+            
+            ent.AddCollision();
         }
         
         vertex_end(vbuff);
         ds_list_clear(all_env_entities);
         
         all_fused_environment_stuff = vbuff;
+        
+        collision_grid = actual_collision_grid;
     };
     
     Update = function() {
@@ -666,6 +678,8 @@ function Game() constructor {
             var hh = room_height div GRID_CELL_SIZE;
             ds_grid_resize(collision_grid, ww, hh);
             ds_grid_clear(collision_grid, GRID_COLLISION_FREE);
+            ds_grid_resize(collision_grid_fused, ww, hh);
+            ds_grid_clear(collision_grid_fused, GRID_COLLISION_FREE);
             
             for (var i = 0; i < array_length(load_json.entities); i++) {
                 var data = load_json.entities[i];
