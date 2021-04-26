@@ -158,6 +158,7 @@ function Game() constructor {
     all_foes = ds_list_create();
     all_towers = ds_list_create();
     all_env_entities = ds_list_create();
+    all_fused_environment_stuff = undefined;
     
     selected_entity = undefined;
     selected_entity_hover = undefined;
@@ -374,7 +375,7 @@ function Game() constructor {
                 var nz = buffer_peek(raw_buffer, j + 20, buffer_f32);
                 var xt = buffer_peek(raw_buffer, j + 24, buffer_f32);
                 var yt = buffer_peek(raw_buffer, j + 28, buffer_f32);
-                var cc = buffer_peek(raw_buffer, j + 32, buffer_f32);
+                var cc = buffer_peek(raw_buffer, j + 32, buffer_u32);
                 
                 var new_position = matrix_transform_vertex(entity_matrix, xx, yy, zz);
                 var new_normal = matrix_transform_vertex(entity_matrix_normals, nx, ny, nz);
@@ -395,6 +396,8 @@ function Game() constructor {
         
         vertex_end(vbuff);
         ds_list_clear(all_env_entities);
+        
+        all_fused_environment_stuff = vbuff;
     };
     
     Update = function() {
@@ -703,12 +706,16 @@ function Game() constructor {
         
         ds_list_clear(semi_transparent_stuff);
         
-        gpu_set_cullmode(cull_counterclockwise);
+        gpu_set_cullmode(cull_noculling);
         cluck_set_light_ambient(0x202020);
         cluck_set_light_direction(0, c_white, -1, -1, -1);
         cluck_apply(shd_cluck_fragment);
         
         vertex_submit(ground, pr_trianglelist, sprite_get_texture(spr_ground, 0));
+        
+        if (all_fused_environment_stuff != undefined) {
+            vertex_submit(all_fused_environment_stuff, pr_trianglelist, -1);
+        }
         
         for (var i = 0; i < ds_list_size(all_entities); i++) {
             all_entities[| i].Render();
