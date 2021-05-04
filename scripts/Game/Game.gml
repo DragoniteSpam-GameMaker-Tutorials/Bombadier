@@ -1,6 +1,10 @@
 #macro GAME Backbone.game
 show_debug_overlay(true);
 
+surface_resize(application_surface, 640, 360);
+application_surface_draw_enable(false);
+display_set_gui_maximize();
+
 function Game() constructor {
     camera = new Camera();
     
@@ -851,6 +855,7 @@ function Game() constructor {
     };
     
     GUI = function() {
+        draw_surface_stretched(application_surface, 0, 0, window_get_width(), window_get_height());
         if (gameplay_mode == GameModes.GAMEPLAY) {
             GetGUILayer("UI_Game_Overlay").Render();
             ActiveGUILayer().Render();

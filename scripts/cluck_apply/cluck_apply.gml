@@ -6,7 +6,7 @@ function cluck_apply(shader) {
     if (shader == shd_cluck_vertex_stripped) {
         shader_set(shader);
         shader_set_uniform_f(shader_get_uniform(shader, "lightAmbientColor"), (ambient_color & 0x0000ff) / 0xff, ((ambient_color & 0x00ff00) >> 8) / 0xff, ((ambient_color & 0xff0000) >> 16) / 0xff);
-        shader_set_uniform_f(shader_get_uniform(shader, "lightNormal"), global.__cluck_light_data[1], global.__cluck_light_data[2], global.__cluck_light_data[3]);
+        shader_set_uniform_f(shader_get_uniform(shader, "lightNormal"), global.__cluck_light_data[0], global.__cluck_light_data[1], global.__cluck_light_data[2]);
         return;
     }
     

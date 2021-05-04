@@ -14,7 +14,7 @@ void main() {
     vec4 finalColor = vec4(in_Colour);
     
     vec4 color = vec4(lightAmbientColor, 1.);
-    finalColor *= (color + vec4(clamp(dot(worldNormal, -normalize(lightNormal)), 0., 1.)));
+    finalColor *= (color + vec4(max(dot(worldNormal, -normalize(lightNormal)), 0.)));
     
     finalColor.a = in_Colour.a;
     gl_Position = gm_Matrices[MATRIX_WORLD_VIEW_PROJECTION] * vec4(in_Position, 1.);
