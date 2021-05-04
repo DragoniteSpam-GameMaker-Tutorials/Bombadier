@@ -1,4 +1,4 @@
-#define MAX_LIGHTS 2
+#define MAX_LIGHTS 1
 #define LIGHT_DIRECTIONAL 1.
 #define LIGHT_POINT 2.
 #define LIGHT_SPOT 3.

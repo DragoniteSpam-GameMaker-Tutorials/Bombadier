@@ -761,7 +761,7 @@ function Game() constructor {
         gpu_set_cullmode(cull_counterclockwise);
         cluck_set_light_ambient(0x202020);
         cluck_set_light_direction(0, c_white, -1, -1, -1);
-        cluck_apply(shd_cluck_fragment);
+        cluck_apply(shd_cluck_vertex_stripped);
         
         vertex_submit(ground, pr_trianglelist, sprite_get_texture(spr_ground, 0));
         
@@ -785,7 +785,7 @@ function Game() constructor {
             matrix_set(matrix_world, matrix_build(player_tower_spawn.position.x, player_tower_spawn.position.y, 0, 0, 0, 0, 1, 1, 1));
             vertex_submit(player_tower_spawn.class.model.vbuff, pr_trianglelist, -1);
             matrix_set(matrix_world, matrix_build_identity());
-            cluck_apply(shd_cluck_fragment);
+            cluck_apply(shd_cluck_vertex_stripped);
         }
         
         if (gameplay_mode == GameModes.EDITOR) {

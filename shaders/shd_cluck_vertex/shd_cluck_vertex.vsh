@@ -3,7 +3,7 @@ attribute vec3 in_Normal;                    // (x,y,z)
 attribute vec2 in_TextureCoord;              // (u,v)
 attribute vec4 in_Colour;                    // (r,g,b,a)
 
-#define MAX_LIGHTS 2
+#define MAX_LIGHTS 1
 #define LIGHT_DIRECTIONAL 1.
 #define LIGHT_POINT 2.
 #define LIGHT_SPOT 3.

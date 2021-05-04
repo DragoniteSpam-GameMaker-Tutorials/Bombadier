@@ -118,7 +118,7 @@ function EntityEnv(x, y, z, model, savename) : Entity(x, y, z) constructor {
         matrix_set(matrix_world, matrix_build_identity());
         // reset the shader if you are selected
         if (GAME.selected_entity == self || GAME.editor_hover_entity == self) {
-            cluck_apply(shd_cluck_fragment);
+            cluck_apply(shd_cluck_vertex_stripped);
         }
     };
 }

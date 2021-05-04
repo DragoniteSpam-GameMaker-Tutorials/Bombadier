@@ -56,6 +56,7 @@
     {"id":{"name":"cluck_set_light_spot","path":"scripts/cluck_set_light_spot/cluck_set_light_spot.yy",},"order":10,},
     {"id":{"name":"spr_foe_gnat","path":"sprites/spr_foe_gnat/spr_foe_gnat.yy",},"order":2,},
     {"id":{"name":"cluck_set_alpha_test_enable","path":"scripts/cluck_set_alpha_test_enable/cluck_set_alpha_test_enable.yy",},"order":4,},
+    {"id":{"name":"shd_cluck_vertex_stripped","path":"shaders/shd_cluck_vertex_stripped/shd_cluck_vertex_stripped.yy",},"order":3,},
     {"id":{"name":"rm_test","path":"rooms/rm_test/rm_test.yy",},"order":3,},
   ],
   "Options": [
