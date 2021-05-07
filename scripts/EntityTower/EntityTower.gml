@@ -128,7 +128,7 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
         matrix_set(matrix_world, matrix_build_identity());
         // reset the shader if you are selected
         if (GAME.selected_entity == self || GAME.selected_entity_hover == self) {
-            cluck_apply(shd_cluck_fragment);
+            cluck_apply(SHADER_WORLD);
         }
     };
     
@@ -246,7 +246,7 @@ function EntityTowerGlass(x, y, z, class) : EntityTower(x, y, z, class) construc
             ));
         }
         matrix_set(matrix_world, matrix_build_identity());
-        cluck_apply(shd_cluck_fragment);
+        cluck_apply(SHADER_WORLD);
     };
     
     toString = function() {
