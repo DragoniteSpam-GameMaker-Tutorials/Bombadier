@@ -22,7 +22,7 @@ void CommonFog(inout vec4 baseColor) {
 void main() {
     vec4 color = v_vColour * texture2D(gm_BaseTexture, v_vTexcoord);
     
-    CommonFog(color);
+    //CommonFog(color);
     
     if (color.a < (alphaRef * alphaTest)) {
         discard;

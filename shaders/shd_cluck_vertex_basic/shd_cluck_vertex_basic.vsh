@@ -57,5 +57,5 @@ void main() {
     v_vTexcoord = in_TextureCoord;
     v_vColour = finalColor;
     
-    CommonFogSetup();
+    //CommonFogSetup();
 }
