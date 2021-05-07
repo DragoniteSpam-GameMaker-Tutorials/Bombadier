@@ -1,7 +1,7 @@
 #macro GAME Backbone.game
 show_debug_overlay(true);
 
-surface_resize(application_surface, 683, 384);
+surface_resize(application_surface, APP_SURFACE_DEFAULT_WIDTH, APP_SURFACE_DEFAULT_HEIGHT);
 display_set_gui_maximize();
 application_surface_draw_enable(false);
 
