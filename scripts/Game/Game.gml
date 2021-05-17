@@ -528,6 +528,9 @@ function Game() constructor {
             }
             #endregion
         } else if (gameplay_mode == GameModes.PAUSED) {
+            if (keyboard_check_pressed(vk_escape)) {
+                gameplay_mode = GameModes.GAMEPLAY;
+            }
         } else if (gameplay_mode == GameModes.EDITOR) {
             camera.Update();
             #region Editor stuff
