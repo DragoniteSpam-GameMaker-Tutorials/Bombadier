@@ -232,7 +232,7 @@ function Game() constructor {
     semi_transparent_stuff = ds_list_create();
     
     enum GameModes {
-        GAMEPLAY, EDITOR,
+        GAMEPLAY, EDITOR, PAUSED,
     }
     
     gameplay_mode = GameModes.GAMEPLAY;
@@ -456,6 +456,11 @@ function Game() constructor {
         }
         
         if (gameplay_mode == GameModes.GAMEPLAY) {
+            if (keyboard_check_pressed(vk_escape)) {
+                gameplay_mode = GameModes.PAUSED;
+                return;
+            }
+            
             #region Gameplay stuff
             selected_entity_hover = undefined;
             if (!player_cursor_over_ui) {
@@ -515,7 +520,8 @@ function Game() constructor {
                 }
             }
             #endregion
-        } else {
+        } else if (gameplay_mode == GameModes.PAUSED) {
+        } else if (gameplay_mode == GameModes.EDITOR) {
             #region Editor stuff
             if (keyboard_check_pressed(vk_f2)) {
                 editor_path_mode = !editor_path_mode;
@@ -862,7 +868,9 @@ function Game() constructor {
             ActiveGUILayer().Render();
             
             player_cursor_over_ui = false;
-        } else {
+        } else if (gameplay_mode == GameModes.PAUSED) {
+            
+        } else if (gameplay_mode == GameModes.EDITOR) {
             if (editor_path_mode) {
                 draw_text(32, 32, "Click to spawn or select a path node");
             } else {
