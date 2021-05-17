@@ -445,8 +445,6 @@ function Game() constructor {
     };
     
     Update = function() {
-        camera.Update();
-        
         if (keyboard_check_pressed(vk_tab)) {
             gameplay_mode = (gameplay_mode == GameModes.GAMEPLAY) ? GameModes.EDITOR : GameModes.GAMEPLAY;
             selected_entity = undefined;
@@ -456,6 +454,7 @@ function Game() constructor {
         }
         
         if (gameplay_mode == GameModes.GAMEPLAY) {
+            camera.Update();
             if (keyboard_check_pressed(vk_escape)) {
                 gameplay_mode = GameModes.PAUSED;
                 return;
@@ -522,6 +521,7 @@ function Game() constructor {
             #endregion
         } else if (gameplay_mode == GameModes.PAUSED) {
         } else if (gameplay_mode == GameModes.EDITOR) {
+            camera.Update();
             #region Editor stuff
             if (keyboard_check_pressed(vk_f2)) {
                 editor_path_mode = !editor_path_mode;
@@ -869,7 +869,9 @@ function Game() constructor {
             
             player_cursor_over_ui = false;
         } else if (gameplay_mode == GameModes.PAUSED) {
+            GetGUILayer("UI_Game_Pause_Menu").Render();
             
+            player_cursor_over_ui = false;
         } else if (gameplay_mode == GameModes.EDITOR) {
             if (editor_path_mode) {
                 draw_text(32, 32, "Click to spawn or select a path node");
