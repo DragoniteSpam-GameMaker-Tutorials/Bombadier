@@ -1,3 +1,3 @@
 OnClick = function() {
-    GAME.Reset();
+    GAME.Initialize();
 };

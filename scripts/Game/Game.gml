@@ -170,35 +170,8 @@ function Game() constructor {
     all_towers = ds_list_create();
     all_env_entities = ds_list_create();
     
-    selected_entity = undefined;
-    selected_entity_hover = undefined;
-    editor_hover_entity = undefined;
-    editor_path_mode = false;
-    editor_model_index = 0;
-    
     all_waves = ds_queue_create();
-    ds_queue_enqueue(all_waves,
-        new Wave(foe_ant,            8, 1, 1),
-        new Wave(foe_pillbugs,       8, 1, 1),
-        new Wave(foe_aphid,         40, 1, 4),
-        new Wave(foe_ant,           10, 3, 1),
-        new Wave(foe_grasshopper,    4, 3, 0.5),
-        new Wave(foe_gnat,          60, 3, 2),
-        new Wave(foe_aphid,         60, 6, 4),
-        new Wave(foe_grasshopper,    4, 5, 0.5),
-    );
-    wave_total = ds_queue_size(all_waves);
     wave_active = ds_list_create();
-    wave_countdown = WAVE_WARMUP_COUNTDOWN;
-    waves_remain = true;
-    
-    game_speed = 1;
-    
-    player_money = 75;
-    player_health = 10;
-    
-    player_cursor_over_ui = false;
-    player_tower_spawn = undefined;
     
     all_ui_elements = { };
     with (ParentUI) {
@@ -231,8 +204,39 @@ function Game() constructor {
     
     semi_transparent_stuff = ds_list_create();
     
-    Reset = function() {
-        show_message("reset the game");
+    Initialize = function() {
+        //show_message("reset the game");
+        for (var i = ds_list_size(all_foes) - 1; i >= 0; i--) {
+            all_foes[| i].Destroy();
+        }
+        for (var i = ds_list_size(all_towers) - 1; i >= 0; i--) {
+            all_towers[| i].RemoveCollision();
+            all_towers[| i].Destroy();
+        }
+        ds_list_clear(all_towers);
+        ds_list_clear(all_foes);
+        
+        game_speed = 1;
+        
+        player_money = 75;
+        player_health = 10;
+        
+        player_cursor_over_ui = false;
+        player_tower_spawn = undefined;
+        
+        selected_entity = undefined;
+        selected_entity_hover = undefined;
+        editor_hover_entity = undefined;
+        editor_path_mode = false;
+        editor_model_index = 0;
+        
+        DefineAllWaves(all_waves);
+        ds_list_clear(wave_active);
+        wave_total = ds_queue_size(all_waves);
+        wave_countdown = WAVE_WARMUP_COUNTDOWN;
+        waves_remain = true;
+        
+        gameplay_mode = GameModes.GAMEPLAY;
     };
     
     enum GameModes {
@@ -907,4 +911,6 @@ function Game() constructor {
             debug_draw_collision(32, 32);
         }
     };
+    
+    Initialize();
 }
