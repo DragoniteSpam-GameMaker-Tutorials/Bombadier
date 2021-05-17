@@ -231,6 +231,10 @@ function Game() constructor {
     
     semi_transparent_stuff = ds_list_create();
     
+    Reset = function() {
+        show_message("reset the game");
+    };
+    
     enum GameModes {
         GAMEPLAY, EDITOR, PAUSED,
     }
