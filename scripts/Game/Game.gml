@@ -205,6 +205,8 @@ function Game() constructor {
     
     semi_transparent_stuff = ds_list_create();
     
+    volume_master = 100;
+    
     Initialize = function() {
         //show_message("reset the game");
         for (var i = ds_list_size(all_foes) - 1; i >= 0; i--) {
