@@ -174,6 +174,7 @@ function Game() constructor {
     wave_active = ds_list_create();
     
     all_ui_elements = { };
+    current_pause_screen = "UI_Game_Pause_Menu";
     with (ParentUI) {
         var layers = other.all_ui_elements[$ string(depth)];
         if (layers == undefined) {
@@ -465,6 +466,7 @@ function Game() constructor {
             camera.Update();
             if (keyboard_check_pressed(vk_escape)) {
                 gameplay_mode = GameModes.PAUSED;
+                current_pause_screen = "UI_Game_Pause_Menu";
                 return;
             }
             
@@ -880,7 +882,7 @@ function Game() constructor {
             
             player_cursor_over_ui = false;
         } else if (gameplay_mode == GameModes.PAUSED) {
-            GetGUILayer("UI_Game_Pause_Menu").Render();
+            GetGUILayer(current_pause_screen).Render();
             
             player_cursor_over_ui = false;
         } else if (gameplay_mode == GameModes.EDITOR) {
