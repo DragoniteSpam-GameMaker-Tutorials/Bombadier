@@ -206,6 +206,14 @@ function Game() constructor {
     semi_transparent_stuff = ds_list_create();
     
     volume_master = 100;
+    screen_sizes = [
+        { x: 1280, y: 720 },
+        { x: 1366, y: 768 },
+        { x: 1600, y: 900 },
+        { x: 1920, y: 1080 },
+        { x: 2560, y: 1440 },
+    ];
+    screen_size_index = 1;
     
     Initialize = function() {
         //show_message("reset the game");
