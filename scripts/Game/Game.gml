@@ -218,6 +218,7 @@ function Game() constructor {
     
     ApplyScreenSize = function() {
         window_set_size(current_screen_size.x, current_screen_size.y);
+        surface_resize(application_surface, current_screen_size.x, current_screen_size.y);
     };
     
     Initialize = function() {
