@@ -219,6 +219,22 @@
             {"properties":[
                 {"propertyId":{"name":"anchor_horizontal","path":"objects/UIBlockRaycast/UIBlockRaycast.yy",},"objectId":{"name":"UIBlockRaycast","path":"objects/UIBlockRaycast/UIBlockRaycast.yy",},"value":"fa_center","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
                 {"propertyId":{"name":"anchor_vertical","path":"objects/UIBlockRaycast/UIBlockRaycast.yy",},"objectId":{"name":"UIBlockRaycast","path":"objects/UIBlockRaycast/UIBlockRaycast.yy",},"value":"fa_middle","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
+              ],"isDnd":false,"objectId":{"name":"UIBlockRaycast","path":"objects/UIBlockRaycast/UIBlockRaycast.yy",},"inheritCode":false,"hasCreationCode":false,"colour":4294967295,"rotation":0.0,"scaleX":14.333333,"scaleY":8.333333,"imageIndex":0,"imageSpeed":1.0,"inheritedItemId":null,"frozen":false,"ignore":false,"inheritItemSettings":false,"x":320.0,"y":192.0,"resourceVersion":"1.0","name":"inst_759A2F29","tags":[],"resourceType":"GMRInstance",},
+            {"properties":[
+                {"propertyId":{"name":"anchor_horizontal","path":"objects/ParentUI/ParentUI.yy",},"objectId":{"name":"ParentUI","path":"objects/ParentUI/ParentUI.yy",},"value":"fa_middle","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
+                {"propertyId":{"name":"anchor_vertical","path":"objects/ParentUI/ParentUI.yy",},"objectId":{"name":"ParentUI","path":"objects/ParentUI/ParentUI.yy",},"value":"fa_center","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
+                {"propertyId":{"name":"text","path":"objects/UIText/UIText.yy",},"objectId":{"name":"UIText","path":"objects/UIText/UIText.yy",},"value":"Bombadier: Credits","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
+              ],"isDnd":false,"objectId":{"name":"UIText","path":"objects/UIText/UIText.yy",},"inheritCode":false,"hasCreationCode":false,"colour":4294967295,"rotation":0.0,"scaleX":13.0,"scaleY":1.0,"imageIndex":0,"imageSpeed":1.0,"inheritedItemId":null,"frozen":false,"ignore":false,"inheritItemSettings":false,"x":352.0,"y":224.0,"resourceVersion":"1.0","name":"inst_85A40E0","tags":[],"resourceType":"GMRInstance",},
+            {"properties":[
+                {"propertyId":{"name":"anchor_horizontal","path":"objects/ParentUI/ParentUI.yy",},"objectId":{"name":"ParentUI","path":"objects/ParentUI/ParentUI.yy",},"value":"fa_center","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
+                {"propertyId":{"name":"anchor_vertical","path":"objects/ParentUI/ParentUI.yy",},"objectId":{"name":"ParentUI","path":"objects/ParentUI/ParentUI.yy",},"value":"fa_middle","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
+                {"propertyId":{"name":"text","path":"objects/UIButton/UIButton.yy",},"objectId":{"name":"UIButton","path":"objects/UIButton/UIButton.yy",},"value":"Back","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
+              ],"isDnd":false,"objectId":{"name":"UIButton","path":"objects/UIButton/UIButton.yy",},"inheritCode":false,"hasCreationCode":true,"colour":4294967295,"rotation":0.0,"scaleX":4.33333349,"scaleY":1.0,"imageIndex":0,"imageSpeed":1.0,"inheritedItemId":null,"frozen":false,"ignore":false,"inheritItemSettings":false,"x":544.0,"y":512.0,"resourceVersion":"1.0","name":"inst_6917A017","tags":[],"resourceType":"GMRInstance",},
+          ],"visible":true,"depth":400,"userdefinedDepth":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"gridX":32,"gridY":32,"layers":[],"hierarchyFrozen":false,"resourceVersion":"1.0","name":"UI_Title_Credits","tags":[],"resourceType":"GMRInstanceLayer",},
+        {"instances":[
+            {"properties":[
+                {"propertyId":{"name":"anchor_horizontal","path":"objects/UIBlockRaycast/UIBlockRaycast.yy",},"objectId":{"name":"UIBlockRaycast","path":"objects/UIBlockRaycast/UIBlockRaycast.yy",},"value":"fa_center","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
+                {"propertyId":{"name":"anchor_vertical","path":"objects/UIBlockRaycast/UIBlockRaycast.yy",},"objectId":{"name":"UIBlockRaycast","path":"objects/UIBlockRaycast/UIBlockRaycast.yy",},"value":"fa_middle","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
               ],"isDnd":false,"objectId":{"name":"UIBlockRaycast","path":"objects/UIBlockRaycast/UIBlockRaycast.yy",},"inheritCode":false,"hasCreationCode":false,"colour":4294967295,"rotation":0.0,"scaleX":7.0,"scaleY":4.333333,"imageIndex":0,"imageSpeed":1.0,"inheritedItemId":null,"frozen":false,"ignore":false,"inheritItemSettings":false,"x":480.0,"y":288.0,"resourceVersion":"1.0","name":"inst_48F776D5","tags":[],"resourceType":"GMRInstance",},
             {"properties":[
                 {"propertyId":{"name":"text","path":"objects/UIText/UIText.yy",},"objectId":{"name":"UIText","path":"objects/UIText/UIText.yy",},"value":"Would you like to quit\\nthe game?","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
@@ -235,7 +251,7 @@
                 {"propertyId":{"name":"anchor_vertical","path":"objects/ParentUI/ParentUI.yy",},"objectId":{"name":"ParentUI","path":"objects/ParentUI/ParentUI.yy",},"value":"fa_middle","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
                 {"propertyId":{"name":"text","path":"objects/UIButton/UIButton.yy",},"objectId":{"name":"UIButton","path":"objects/UIButton/UIButton.yy",},"value":"Yes","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
               ],"isDnd":false,"objectId":{"name":"UIButton","path":"objects/UIButton/UIButton.yy",},"inheritCode":false,"hasCreationCode":true,"colour":4294967295,"rotation":0.0,"scaleX":2.33333325,"scaleY":1.0,"imageIndex":0,"imageSpeed":1.0,"inheritedItemId":null,"frozen":false,"ignore":false,"inheritItemSettings":false,"x":672.0,"y":416.0,"resourceVersion":"1.0","name":"inst_quit_yes","tags":[],"resourceType":"GMRInstance",},
-          ],"visible":true,"depth":400,"userdefinedDepth":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"gridX":32,"gridY":32,"layers":[],"hierarchyFrozen":false,"resourceVersion":"1.0","name":"UI_Title_Quit","tags":[],"resourceType":"GMRInstanceLayer",},
+          ],"visible":false,"depth":500,"userdefinedDepth":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"gridX":32,"gridY":32,"layers":[],"hierarchyFrozen":false,"resourceVersion":"1.0","name":"UI_Title_Quit","tags":[],"resourceType":"GMRInstanceLayer",},
         {"instances":[
             {"properties":[
                 {"propertyId":{"name":"anchor_horizontal","path":"objects/UIBlockRaycast/UIBlockRaycast.yy",},"objectId":{"name":"UIBlockRaycast","path":"objects/UIBlockRaycast/UIBlockRaycast.yy",},"value":"fa_right","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
@@ -251,17 +267,17 @@
             {"properties":[
                 {"propertyId":{"name":"anchor_horizontal","path":"objects/ParentUI/ParentUI.yy",},"objectId":{"name":"ParentUI","path":"objects/ParentUI/ParentUI.yy",},"value":"fa_right","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
                 {"propertyId":{"name":"text","path":"objects/UIButton/UIButton.yy",},"objectId":{"name":"UIButton","path":"objects/UIButton/UIButton.yy",},"value":"Credits","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
-              ],"isDnd":false,"objectId":{"name":"UIButton","path":"objects/UIButton/UIButton.yy",},"inheritCode":false,"hasCreationCode":true,"colour":4294967295,"rotation":0.0,"scaleX":5.0,"scaleY":1.0,"imageIndex":0,"imageSpeed":1.0,"inheritedItemId":null,"frozen":false,"ignore":false,"inheritItemSettings":false,"x":1056.0,"y":192.0,"resourceVersion":"1.0","name":"inst_143C1FFD","tags":[],"resourceType":"GMRInstance",},
+              ],"isDnd":false,"objectId":{"name":"UIButton","path":"objects/UIButton/UIButton.yy",},"inheritCode":false,"hasCreationCode":true,"colour":4294967295,"rotation":0.0,"scaleX":5.0,"scaleY":1.0,"imageIndex":0,"imageSpeed":1.0,"inheritedItemId":null,"frozen":false,"ignore":false,"inheritItemSettings":false,"x":1056.0,"y":192.0,"resourceVersion":"1.0","name":"inst_credits_button","tags":[],"resourceType":"GMRInstance",},
             {"properties":[
                 {"propertyId":{"name":"anchor_horizontal","path":"objects/ParentUI/ParentUI.yy",},"objectId":{"name":"ParentUI","path":"objects/ParentUI/ParentUI.yy",},"value":"fa_right","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
                 {"propertyId":{"name":"text","path":"objects/UIButton/UIButton.yy",},"objectId":{"name":"UIButton","path":"objects/UIButton/UIButton.yy",},"value":"Quit Game","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
               ],"isDnd":false,"objectId":{"name":"UIButton","path":"objects/UIButton/UIButton.yy",},"inheritCode":false,"hasCreationCode":true,"colour":4294967295,"rotation":0.0,"scaleX":5.0,"scaleY":1.0,"imageIndex":0,"imageSpeed":1.0,"inheritedItemId":null,"frozen":false,"ignore":false,"inheritItemSettings":false,"x":1056.0,"y":256.0,"resourceVersion":"1.0","name":"inst_3704165C","tags":[],"resourceType":"GMRInstance",},
             {"properties":[],"isDnd":false,"objectId":{"name":"UISprite","path":"objects/UISprite/UISprite.yy",},"inheritCode":false,"hasCreationCode":true,"colour":4294967295,"rotation":0.0,"scaleX":1.0,"scaleY":1.0,"imageIndex":0,"imageSpeed":1.0,"inheritedItemId":null,"frozen":false,"ignore":false,"inheritItemSettings":false,"x":512.0,"y":384.0,"resourceVersion":"1.0","name":"inst_3C2874D4","tags":[],"resourceType":"GMRInstance",},
-          ],"visible":true,"depth":500,"userdefinedDepth":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"gridX":32,"gridY":32,"layers":[],"hierarchyFrozen":false,"resourceVersion":"1.0","name":"UI_Title_Screen","tags":[],"resourceType":"GMRInstanceLayer",},
+          ],"visible":true,"depth":600,"userdefinedDepth":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"gridX":32,"gridY":32,"layers":[],"hierarchyFrozen":false,"resourceVersion":"1.0","name":"UI_Title_Screen","tags":[],"resourceType":"GMRInstanceLayer",},
       ],"hierarchyFrozen":false,"resourceVersion":"1.0","name":"Title_Screen_Stuff","tags":[],"resourceType":"GMRLayer",},
     {"instances":[
         {"properties":[],"isDnd":false,"objectId":{"name":"Backbone","path":"objects/Backbone/Backbone.yy",},"inheritCode":false,"hasCreationCode":false,"colour":4294967295,"rotation":0.0,"scaleX":1.0,"scaleY":1.0,"imageIndex":0,"imageSpeed":1.0,"inheritedItemId":null,"frozen":false,"ignore":false,"inheritItemSettings":false,"x":160.0,"y":160.0,"resourceVersion":"1.0","name":"inst_6813D8F8","tags":[],"resourceType":"GMRInstance",},
-      ],"visible":true,"depth":600,"userdefinedDepth":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"gridX":32,"gridY":32,"layers":[],"hierarchyFrozen":false,"resourceVersion":"1.0","name":"Instances","tags":[],"resourceType":"GMRInstanceLayer",},
+      ],"visible":true,"depth":700,"userdefinedDepth":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"gridX":32,"gridY":32,"layers":[],"hierarchyFrozen":false,"resourceVersion":"1.0","name":"Instances","tags":[],"resourceType":"GMRInstanceLayer",},
   ],
   "inheritLayers": false,
   "creationCodeFile": "",
@@ -315,13 +331,16 @@
     {"name":"inst_58B3F047","path":"rooms/rm_test/rm_test.yy",},
     {"name":"inst_Start_Button","path":"rooms/rm_test/rm_test.yy",},
     {"name":"inst_settings_button","path":"rooms/rm_test/rm_test.yy",},
-    {"name":"inst_143C1FFD","path":"rooms/rm_test/rm_test.yy",},
+    {"name":"inst_credits_button","path":"rooms/rm_test/rm_test.yy",},
     {"name":"inst_3704165C","path":"rooms/rm_test/rm_test.yy",},
     {"name":"inst_3C2874D4","path":"rooms/rm_test/rm_test.yy",},
     {"name":"inst_48F776D5","path":"rooms/rm_test/rm_test.yy",},
     {"name":"inst_3260629A","path":"rooms/rm_test/rm_test.yy",},
     {"name":"inst_No_Quit","path":"rooms/rm_test/rm_test.yy",},
     {"name":"inst_quit_yes","path":"rooms/rm_test/rm_test.yy",},
+    {"name":"inst_759A2F29","path":"rooms/rm_test/rm_test.yy",},
+    {"name":"inst_85A40E0","path":"rooms/rm_test/rm_test.yy",},
+    {"name":"inst_6917A017","path":"rooms/rm_test/rm_test.yy",},
   ],
   "inheritCreationOrder": false,
   "sequenceId": null,
