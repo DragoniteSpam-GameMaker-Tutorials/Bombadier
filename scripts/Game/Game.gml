@@ -220,13 +220,12 @@ function Game() constructor {
     resolution_scalar_index = APP_SURFACE_DEFAULT_SCALE_INDEX;
     resolution_scalar = resolution_scalar_options[resolution_scalar_index];
     
-    surface_resize(application_surface, resolution_scalar, resolution_scalar);
     display_set_gui_maximize();
     game_set_speed(TARGET_FPS, gamespeed_fps);
     
     ApplyScreenSize = function() {
         window_set_size(current_screen_size.x, current_screen_size.y);
-        surface_resize(application_surface, current_screen_size.x, current_screen_size.y);
+        surface_resize(application_surface, current_screen_size.x * resolution_scalar, current_screen_size.y * resolution_scalar);
     };
     
     SaveSettings = function() {
@@ -237,6 +236,8 @@ function Game() constructor {
             fullscreen: window_get_fullscreen(),
             frame_rate_index: self.frame_rate_index,
             frames_per_second: game_get_speed(gamespeed_fps),
+            resolution_scalar_index: self.resolution_scalar_index,
+            resolution_scalar: self.resolution_scalar,
         };
         var save_buffer = buffer_create(100, buffer_grow, 1);
         buffer_write(save_buffer, buffer_text, json_stringify(json));
@@ -257,22 +258,30 @@ function Game() constructor {
         window_set_fullscreen(json.fullscreen);
         self.frame_rate_index = json.frame_rate_index;
         game_set_speed(json.frames_per_second, gamespeed_fps);
+        self.resolution_scalar_index = json.resolution_scalar_index;
+        self.resolution_scalar = json.resolution_scalar;
         
         if (!is_numeric(self.volume_master)) self.volume_master = 100;
         if (!is_numeric(self.screen_size_index)) self.screen_size_index = 1;
         if (!is_numeric(self.current_screen_size.x)) self.current_screen_size.x = room_width;
         if (!is_numeric(self.current_screen_size.y)) self.current_screen_size.y = room_height;
         if (!is_numeric(self.frame_rate_index)) self.frame_rate_index = 1;
+        if (!is_numeric(self.resolution_scalar_index)) self.resolution_scalar_index = APP_SURFACE_DEFAULT_SCALE_INDEX;
+        if (!is_numeric(self.resolution_scalar)) self.resolution_scalar = self.resolution_scalar_options[self.resolution_scalar_index];
         
         self.volume_master = clamp(self.volume_master, 0, 100);
         self.screen_size_index = clamp(self.screen_size_index, 0, array_length(self.screen_sizes));
         self.current_screen_size.x = max(self.current_screen_size.x, 10);
         self.current_screen_size.y = max(self.current_screen_size.y, 10);
         self.frame_rate_index = clamp(self.frame_rate_index, 0, array_length(self.frame_rates));
-        self.ApplyScreenSize();
+        self.resolution_scalar_index = clamp(self.resolution_scalar_index, 0, array_length(self.resolution_scalar_options));
+        self.resolution_scalar = clamp(self.resolution_scalar, 0.05, 1);
     } catch (e) {
         show_debug_message("Settings could not be loaded");
     }
+    
+    self.ApplyScreenSize();
+    
     #endregion
     
     Initialize = function() {
