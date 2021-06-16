@@ -1,3 +1,5 @@
+event_inherited();
+
 enabled = true;
 
 Render = function() {

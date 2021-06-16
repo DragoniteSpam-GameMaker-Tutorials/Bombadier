@@ -1,3 +1,5 @@
+event_inherited();
+
 Render = function() {
     var subimg = 0;
     
