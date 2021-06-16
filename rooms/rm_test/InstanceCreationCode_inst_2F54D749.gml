@@ -5,3 +5,7 @@ OnClick = function() {
     GAME.current_screen_size.y = size.y;
     GAME.ApplyScreenSize();
 };
+
+Update = function() {
+    self.enabled = !window_get_fullscreen();
+};
