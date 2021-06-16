@@ -1,10 +1,7 @@
 #macro GAME Backbone.game
 show_debug_overlay(true);
 
-surface_resize(application_surface, APP_SURFACE_DEFAULT_WIDTH, APP_SURFACE_DEFAULT_HEIGHT);
-display_set_gui_maximize();
 application_surface_draw_enable(false);
-game_set_speed(TARGET_FPS, gamespeed_fps);
 
 function Game() constructor {
     camera = new Camera();
@@ -218,6 +215,14 @@ function Game() constructor {
     
     frame_rates = [30, 60, 120, 144];
     frame_rate_index = 1;
+    
+    resolution_scalar_options = [0.25, 0.33, 0.4, 0.5, 0.66, 0.75, 1];
+    resolution_scalar_index = APP_SURFACE_DEFAULT_SCALE_INDEX;
+    resolution_scalar = resolution_scalar_options[resolution_scalar_index];
+    
+    surface_resize(application_surface, resolution_scalar, resolution_scalar);
+    display_set_gui_maximize();
+    game_set_speed(TARGET_FPS, gamespeed_fps);
     
     ApplyScreenSize = function() {
         window_set_size(current_screen_size.x, current_screen_size.y);

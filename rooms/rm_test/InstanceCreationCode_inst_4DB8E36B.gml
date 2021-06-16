@@ -1,12 +1,6 @@
 OnClick = function() {
-    GAME.screen_size_index = min(GAME.screen_size_index + 1, array_length(GAME.screen_sizes) - 1);
-    var size = GAME.screen_sizes[GAME.screen_size_index];
-    GAME.current_screen_size.x = size.x;
-    GAME.current_screen_size.y = size.y;
+    GAME.resolution_scalar_index = min(GAME.resolution_scalar_index + 1, array_length(GAME.resolution_scalar_options) - 1);
+    GAME.resolution_scalar = GAME.resolution_scalar_options[GAME.resolution_scalar_index];
     GAME.ApplyScreenSize();
     GAME.SaveSettings();
-};
-
-Update = function() {
-    self.enabled = !window_get_fullscreen();
 };

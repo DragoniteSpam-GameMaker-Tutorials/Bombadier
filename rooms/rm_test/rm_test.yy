@@ -118,7 +118,7 @@
             {"propertyId":{"name":"text","path":"objects/UIText/UIText.yy",},"objectId":{"name":"UIText","path":"objects/UIText/UIText.yy",},"value":"Screen Size","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
             {"propertyId":{"name":"anchor_horizontal","path":"objects/ParentUI/ParentUI.yy",},"objectId":{"name":"ParentUI","path":"objects/ParentUI/ParentUI.yy",},"value":"fa_center","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
             {"propertyId":{"name":"anchor_vertical","path":"objects/ParentUI/ParentUI.yy",},"objectId":{"name":"ParentUI","path":"objects/ParentUI/ParentUI.yy",},"value":"fa_middle","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
-          ],"isDnd":false,"objectId":{"name":"UIText","path":"objects/UIText/UIText.yy",},"inheritCode":false,"hasCreationCode":true,"colour":4294967295,"rotation":0.0,"scaleX":4.33333349,"scaleY":1.0,"imageIndex":0,"imageSpeed":1.0,"inheritedItemId":null,"frozen":false,"ignore":false,"inheritItemSettings":false,"x":576.0,"y":352.0,"resourceVersion":"1.0","name":"inst_22BBCA6C","tags":[],"resourceType":"GMRInstance",},
+          ],"isDnd":false,"objectId":{"name":"UIText","path":"objects/UIText/UIText.yy",},"inheritCode":false,"hasCreationCode":true,"colour":4294967295,"rotation":0.0,"scaleX":4.33333349,"scaleY":1.0,"imageIndex":0,"imageSpeed":1.0,"inheritedItemId":null,"frozen":false,"ignore":false,"inheritItemSettings":false,"x":576.0,"y":352.0,"resourceVersion":"1.0","name":"inst_resolution_scalar_label","tags":[],"resourceType":"GMRInstance",},
       ],"visible":true,"depth":-200,"userdefinedDepth":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"gridX":32,"gridY":32,"layers":[],"hierarchyFrozen":false,"resourceVersion":"1.0","name":"UI_Game_Pause_Menu_Settings","tags":[],"resourceType":"GMRInstanceLayer",},
     {"instances":[
         {"properties":[
@@ -264,7 +264,7 @@
     {"name":"inst_4530007D","path":"rooms/rm_test/rm_test.yy",},
     {"name":"inst_4DB8E36B","path":"rooms/rm_test/rm_test.yy",},
     {"name":"inst_FPS_Label","path":"rooms/rm_test/rm_test.yy",},
-    {"name":"inst_22BBCA6C","path":"rooms/rm_test/rm_test.yy",},
+    {"name":"inst_resolution_scalar_label","path":"rooms/rm_test/rm_test.yy",},
   ],
   "inheritCreationOrder": false,
   "sequenceId": null,
