@@ -1,3 +1,3 @@
 OnClick = function() {
-    show_message("clicked a button");
+    GAME.current_title_screen = "UI_Game_Pause_Menu_Settings";
 };
