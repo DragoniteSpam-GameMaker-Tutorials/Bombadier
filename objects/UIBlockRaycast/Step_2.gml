@@ -3,10 +3,10 @@ switch (anchor_horizontal) {
         x = offset_x;
         break;
     case fa_right:
-        x = room_width - offset_x;
+        x = window_get_width() - offset_x;
         break;
     case fa_center:
-        x = offset_x + (room_width / 2);
+        x = offset_x + (window_get_width() / 2);
         break;
 }
 
@@ -15,9 +15,9 @@ switch (anchor_vertical) {
         y = offset_y;
         break;
     case fa_right:
-        y = room_height - offset_y;
+        y = window_get_height() - offset_y;
         break;
     case fa_center:
-        y = offset_y + (room_height / 2);
+        y = offset_y + (window_get_height() / 2);
         break;
 }

@@ -7,7 +7,7 @@ Render = function() {
     Update();
     
     if (enabled) {
-        if (point_in_rectangle(mouse_x, mouse_y, x, y, x + sprite_width, y + sprite_height)) {
+        if (point_in_rectangle(window_mouse_get_x(), window_mouse_get_y(), x, y, x + sprite_width, y + sprite_height)) {
             subimg = 1;
             if (mouse_check_button_pressed(mb_left)) {
                 OnClick();
