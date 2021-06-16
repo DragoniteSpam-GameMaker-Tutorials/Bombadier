@@ -202,6 +202,7 @@ function Game() constructor {
     
     semi_transparent_stuff = ds_list_create();
     
+    #region settings stuff
     volume_master = 100;
     screen_sizes = [
         { x: 1280, y: 720 },
@@ -246,7 +247,6 @@ function Game() constructor {
         buffer_delete(save_buffer);
     };
     
-    #region load settings from the json, if you can
     try {
         var load_buffer = buffer_load("settings.json");
         var json = json_parse(buffer_read(load_buffer, buffer_text));
@@ -282,11 +282,9 @@ function Game() constructor {
     }
     
     self.ApplyScreenSize();
-    
     #endregion
     
     Initialize = function() {
-        //show_message("reset the game");
         for (var i = ds_list_size(all_foes) - 1; i >= 0; i--) {
             all_foes[| i].Destroy();
         }
@@ -321,10 +319,10 @@ function Game() constructor {
     };
     
     enum GameModes {
-        GAMEPLAY, EDITOR, PAUSED,
+        TITLE, GAMEPLAY, EDITOR, PAUSED,
     }
     
-    gameplay_mode = GameModes.GAMEPLAY;
+    gameplay_mode = GameModes.TITLE;
     
     SetGameSpeed = function(speed) {
         self.game_speed = speed;
@@ -542,7 +540,9 @@ function Game() constructor {
             }
         }
         
-        if (gameplay_mode == GameModes.GAMEPLAY) {
+        if (gameplay_mode== GameModes.TITLE) {
+            camera.Update();
+        } else if (gameplay_mode == GameModes.GAMEPLAY) {
             camera.Update();
             if (keyboard_check_pressed(vk_escape)) {
                 gameplay_mode = GameModes.PAUSED;
@@ -956,7 +956,10 @@ function Game() constructor {
     
     GUI = function() {
         draw_surface_stretched(application_surface, 0, 0, window_get_width(), window_get_height());
-        if (gameplay_mode == GameModes.GAMEPLAY) {
+        if (gameplay_mode == GameModes.TITLE) {
+            GetGUILayer("UI_Title_Screen").Render();
+            
+        } else if (gameplay_mode == GameModes.GAMEPLAY) {
             GetGUILayer("UI_Game_Overlay").Render();
             ActiveGUILayer().Render();
             
@@ -998,4 +1001,6 @@ function Game() constructor {
     };
     
     Initialize();
+    
+    gameplay_mode = GameModes.TITLE;
 }
