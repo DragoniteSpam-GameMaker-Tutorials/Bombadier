@@ -220,6 +220,7 @@ function Game() constructor {
     resolution_scalar_index = APP_SURFACE_DEFAULT_SCALE_INDEX;
     resolution_scalar = resolution_scalar_options[resolution_scalar_index];
     
+    // don't get rid of this, please
     display_set_gui_maximize();
     game_set_speed(TARGET_FPS, gamespeed_fps);
     
