@@ -216,6 +216,9 @@ function Game() constructor {
     screen_size_index = 1;
     current_screen_size = { x: room_width, y: room_height };
     
+    frame_rates = [30, 60, 120, 144];
+    frame_rate_index = 1;
+    
     ApplyScreenSize = function() {
         window_set_size(current_screen_size.x, current_screen_size.y);
         surface_resize(application_surface, current_screen_size.x, current_screen_size.y);
@@ -227,12 +230,45 @@ function Game() constructor {
             screen_size_index: self.screen_size_index,
             current_screen_size: self.current_screen_size,
             fullscreen: window_get_fullscreen(),
+            frame_rate_index: self.frame_rate_index,
+            frames_per_second: game_get_speed(gamespeed_fps),
         };
         var save_buffer = buffer_create(100, buffer_grow, 1);
         buffer_write(save_buffer, buffer_text, json_stringify(json));
         buffer_save_ext(save_buffer, "settings.json", 0, buffer_tell(save_buffer));
         buffer_delete(save_buffer);
     };
+    
+    #region load settings from the json, if you can
+    try {
+        var load_buffer = buffer_load("settings.json");
+        var json = json_parse(buffer_read(load_buffer, buffer_text));
+        buffer_delete(load_buffer);
+        
+        self.volume_master = json.volume_master;
+        self.screen_size_index = json.screen_size_index;
+        self.current_screen_size.x = json.current_screen_size.x;
+        self.current_screen_size.y = json.current_screen_size.y;
+        window_set_fullscreen(json.fullscreen);
+        self.frame_rate_index = json.frame_rate_index;
+        game_set_speed(json.frames_per_second, gamespeed_fps);
+        
+        if (!is_numeric(self.volume_master)) self.volume_master = 100;
+        if (!is_numeric(self.screen_size_index)) self.screen_size_index = 1;
+        if (!is_numeric(self.current_screen_size.x)) self.current_screen_size.x = room_width;
+        if (!is_numeric(self.current_screen_size.y)) self.current_screen_size.y = room_height;
+        if (!is_numeric(self.frame_rate_index)) self.frame_rate_index = 1;
+        
+        self.volume_master = clamp(self.volume_master, 0, 100);
+        self.screen_size_index = clamp(self.screen_size_index, 0, array_length(self.screen_sizes));
+        self.current_screen_size.x = max(self.current_screen_size.x, 10);
+        self.current_screen_size.y = max(self.current_screen_size.y, 10);
+        self.frame_rate_index = clamp(self.frame_rate_index, 0, array_length(self.frame_rates));
+        self.ApplyScreenSize();
+    } catch (e) {
+        show_debug_message("Settings could not be loaded");
+    }
+    #endregion
     
     Initialize = function() {
         //show_message("reset the game");
