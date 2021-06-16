@@ -214,6 +214,11 @@ function Game() constructor {
         { x: 2560, y: 1440 },
     ];
     screen_size_index = 1;
+    current_screen_size = { x: room_width, y: room_height };
+    
+    ApplyScreenSize = function() {
+        window_set_size(current_screen_size.x, current_screen_size.y);
+    };
     
     Initialize = function() {
         //show_message("reset the game");
