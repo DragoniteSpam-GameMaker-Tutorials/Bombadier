@@ -221,6 +221,19 @@ function Game() constructor {
         surface_resize(application_surface, current_screen_size.x, current_screen_size.y);
     };
     
+    SaveSettings = function() {
+        var json = {
+            volume_master: self.volume_master,
+            screen_size_index: self.screen_size_index,
+            current_screen_size: self.current_screen_size,
+            fullscreen: window_get_fullscreen(),
+        };
+        var save_buffer = buffer_create(100, buffer_grow, 1);
+        buffer_write(save_buffer, buffer_text, json_stringify(json));
+        buffer_save_ext(save_buffer, "settings.json", 0, buffer_tell(save_buffer));
+        buffer_delete(save_buffer);
+    };
+    
     Initialize = function() {
         //show_message("reset the game");
         for (var i = ds_list_size(all_foes) - 1; i >= 0; i--) {

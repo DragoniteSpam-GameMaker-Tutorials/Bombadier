@@ -4,6 +4,7 @@ OnClick = function() {
     GAME.current_screen_size.x = size.x;
     GAME.current_screen_size.y = size.y;
     GAME.ApplyScreenSize();
+    GAME.SaveSettings();
 };
 
 Update = function() {
