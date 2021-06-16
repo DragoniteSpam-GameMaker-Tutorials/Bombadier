@@ -172,6 +172,7 @@ function Game() constructor {
     
     all_ui_elements = { };
     current_pause_screen = "UI_Game_Pause_Menu";
+    current_title_screen = "UI_Title_Screen";
     with (ParentUI) {
         var layers = other.all_ui_elements[$ string(depth)];
         if (layers == undefined) {
@@ -957,8 +958,7 @@ function Game() constructor {
     GUI = function() {
         draw_surface_stretched(application_surface, 0, 0, window_get_width(), window_get_height());
         if (gameplay_mode == GameModes.TITLE) {
-            GetGUILayer("UI_Title_Screen").Render();
-            
+            GetGUILayer(current_title_screen).Render();
         } else if (gameplay_mode == GameModes.GAMEPLAY) {
             GetGUILayer("UI_Game_Overlay").Render();
             ActiveGUILayer().Render();

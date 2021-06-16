@@ -1,0 +1,1 @@
+OnClick = game_end;
