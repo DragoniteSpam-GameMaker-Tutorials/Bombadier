@@ -235,6 +235,7 @@
                 {"propertyId":{"name":"anchor_horizontal","path":"objects/ParentUI/ParentUI.yy",},"objectId":{"name":"ParentUI","path":"objects/ParentUI/ParentUI.yy",},"value":"fa_right","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
                 {"propertyId":{"name":"text","path":"objects/UIButton/UIButton.yy",},"objectId":{"name":"UIButton","path":"objects/UIButton/UIButton.yy",},"value":"Quit Game","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
               ],"isDnd":false,"objectId":{"name":"UIButton","path":"objects/UIButton/UIButton.yy",},"inheritCode":false,"hasCreationCode":true,"colour":4294967295,"rotation":0.0,"scaleX":5.0,"scaleY":1.0,"imageIndex":0,"imageSpeed":1.0,"inheritedItemId":null,"frozen":false,"ignore":false,"inheritItemSettings":false,"x":1056.0,"y":256.0,"resourceVersion":"1.0","name":"inst_3704165C","tags":[],"resourceType":"GMRInstance",},
+            {"properties":[],"isDnd":false,"objectId":{"name":"UISprite","path":"objects/UISprite/UISprite.yy",},"inheritCode":false,"hasCreationCode":true,"colour":4294967295,"rotation":0.0,"scaleX":1.0,"scaleY":1.0,"imageIndex":0,"imageSpeed":1.0,"inheritedItemId":null,"frozen":false,"ignore":false,"inheritItemSettings":false,"x":512.0,"y":384.0,"resourceVersion":"1.0","name":"inst_3C2874D4","tags":[],"resourceType":"GMRInstance",},
           ],"visible":true,"depth":400,"userdefinedDepth":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"gridX":32,"gridY":32,"layers":[],"hierarchyFrozen":false,"resourceVersion":"1.0","name":"UI_Title_Screen","tags":[],"resourceType":"GMRInstanceLayer",},
       ],"hierarchyFrozen":false,"resourceVersion":"1.0","name":"Title_Screen_Stuff","tags":[],"resourceType":"GMRLayer",},
     {"instances":[
@@ -295,6 +296,7 @@
     {"name":"inst_settings_button","path":"rooms/rm_test/rm_test.yy",},
     {"name":"inst_143C1FFD","path":"rooms/rm_test/rm_test.yy",},
     {"name":"inst_3704165C","path":"rooms/rm_test/rm_test.yy",},
+    {"name":"inst_3C2874D4","path":"rooms/rm_test/rm_test.yy",},
   ],
   "inheritCreationOrder": false,
   "sequenceId": null,

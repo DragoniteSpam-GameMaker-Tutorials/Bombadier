@@ -1,0 +1,1 @@
+sprite_index = spr_the_title_of_the_game;
