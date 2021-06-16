@@ -543,6 +543,10 @@ function Game() constructor {
         
         if (gameplay_mode== GameModes.TITLE) {
             camera.Update();
+            if (keyboard_check_pressed(vk_escape)) {
+                current_title_screen = "UI_Title_Screen";
+                return;
+            }
         } else if (gameplay_mode == GameModes.GAMEPLAY) {
             camera.Update();
             if (keyboard_check_pressed(vk_escape)) {
