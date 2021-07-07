@@ -1,5 +1,5 @@
 function Camera() constructor {
-    from = new Vector3(640, 720, 160);
+    from = new Vector3(640, 840, 120);
     to = new Vector3(640, 0, 0);
     up = new Vector3(0, 0, 1);
     fov = 60;
