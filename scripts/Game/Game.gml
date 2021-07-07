@@ -809,6 +809,17 @@ function Game() constructor {
     };
     
     LoadMap = function(filename) {
+        if (self.fused.raw != undefined) {
+            vertex_delete_buffer(self.fused.vbuff);
+            buffer_delete(self.fused.raw);
+        }
+        
+        array_resize(self.path_nodes, 0);
+        ds_list_clear(self.all_entities);
+        ds_list_clear(self.all_foes);
+        ds_list_clear(self.all_towers);
+        ds_list_clear(self.all_env_entities);
+        
         var buffer = undefined;
         try {
             buffer = buffer_load(filename);
