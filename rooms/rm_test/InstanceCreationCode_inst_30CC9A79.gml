@@ -1,4 +1,3 @@
 OnClick = function() {
-    GAME.LoadMap("maps/level11.bug");
-    GAME.Initialize();
+    GAME.GoToLevel(11);
 };

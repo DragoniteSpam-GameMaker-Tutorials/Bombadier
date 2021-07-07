@@ -174,6 +174,7 @@ function Game() constructor {
     current_pause_screen = "UI_Game_Pause_Menu";
     current_title_screen = "UI_Title_Screen";
     current_game_over_screen = "UI_Game_Over_Win";
+    current_level_index = 0;
     with (ParentUI) {
         var layers = other.all_ui_elements[$ string(depth)];
         if (layers == undefined) {
@@ -318,6 +319,12 @@ function Game() constructor {
         waves_remain = true;
         
         gameplay_mode = GameModes.GAMEPLAY;
+    };
+    
+    GoToLevel = function(level_index) {
+        self.current_level_index = level_index;
+        self.LoadMap("maps/level" + string(level_index) + ".bug");
+        self.Initialize();
     };
     
     enum GameModes {
