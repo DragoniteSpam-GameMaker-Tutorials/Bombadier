@@ -13,7 +13,7 @@
     {"inherit":false,"visible":false,"xview":0,"yview":0,"wview":1366,"hview":768,"xport":0,"yport":0,"wport":1366,"hport":768,"hborder":32,"vborder":32,"hspeed":-1,"vspeed":-1,"objectId":null,},
   ],
   "layers": [
-    {"visible":true,"depth":-700,"userdefinedDepth":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"gridX":32,"gridY":32,"layers":[
+    {"visible":false,"depth":-700,"userdefinedDepth":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"gridX":32,"gridY":32,"layers":[
         {"instances":[
             {"properties":[
                 {"propertyId":{"name":"anchor_horizontal","path":"objects/UIBlockRaycast/UIBlockRaycast.yy",},"objectId":{"name":"UIBlockRaycast","path":"objects/UIBlockRaycast/UIBlockRaycast.yy",},"value":"fa_center","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
@@ -28,8 +28,8 @@
             {"properties":[
                 {"propertyId":{"name":"text","path":"objects/UIButton/UIButton.yy",},"objectId":{"name":"UIButton","path":"objects/UIButton/UIButton.yy",},"value":"Back to Title","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
               ],"isDnd":false,"objectId":{"name":"UIButton","path":"objects/UIButton/UIButton.yy",},"inheritCode":false,"hasCreationCode":true,"colour":4294967295,"rotation":0.0,"scaleX":5.66666651,"scaleY":1.0,"imageIndex":0,"imageSpeed":1.0,"inheritedItemId":null,"frozen":false,"ignore":false,"inheritItemSettings":false,"x":576.0,"y":416.0,"resourceVersion":"1.0","name":"inst_8CFC42E","tags":[],"resourceType":"GMRInstance",},
-          ],"visible":true,"depth":-600,"userdefinedDepth":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"gridX":32,"gridY":32,"layers":[],"hierarchyFrozen":false,"resourceVersion":"1.0","name":"UI_Game_Over_Lose","tags":[],"resourceType":"GMRInstanceLayer",},
-        {"instances":[],"visible":true,"depth":-500,"userdefinedDepth":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"gridX":32,"gridY":32,"layers":[],"hierarchyFrozen":false,"resourceVersion":"1.0","name":"UI_Game_Over_Win","tags":[],"resourceType":"GMRInstanceLayer",},
+          ],"visible":false,"depth":-600,"userdefinedDepth":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"gridX":32,"gridY":32,"layers":[],"hierarchyFrozen":false,"resourceVersion":"1.0","name":"UI_Game_Over_Lose","tags":[],"resourceType":"GMRInstanceLayer",},
+        {"instances":[],"visible":false,"depth":-500,"userdefinedDepth":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"gridX":32,"gridY":32,"layers":[],"hierarchyFrozen":false,"resourceVersion":"1.0","name":"UI_Game_Over_Win","tags":[],"resourceType":"GMRInstanceLayer",},
       ],"hierarchyFrozen":false,"resourceVersion":"1.0","name":"Game_Over_Screen_Stuff","tags":[],"resourceType":"GMRLayer",},
     {"visible":true,"depth":-400,"userdefinedDepth":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"gridX":32,"gridY":32,"layers":[
         {"instances":[
@@ -56,8 +56,8 @@
                 {"propertyId":{"name":"text","path":"objects/UIButton/UIButton.yy",},"objectId":{"name":"UIButton","path":"objects/UIButton/UIButton.yy",},"value":"Quit to Title","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
                 {"propertyId":{"name":"anchor_horizontal","path":"objects/ParentUI/ParentUI.yy",},"objectId":{"name":"ParentUI","path":"objects/ParentUI/ParentUI.yy",},"value":"fa_center","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
                 {"propertyId":{"name":"anchor_vertical","path":"objects/ParentUI/ParentUI.yy",},"objectId":{"name":"ParentUI","path":"objects/ParentUI/ParentUI.yy",},"value":"fa_middle","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
-              ],"isDnd":false,"objectId":{"name":"UIButton","path":"objects/UIButton/UIButton.yy",},"inheritCode":false,"hasCreationCode":false,"colour":4294967295,"rotation":0.0,"scaleX":7.0,"scaleY":1.0,"imageIndex":0,"imageSpeed":1.0,"inheritedItemId":null,"frozen":false,"ignore":false,"inheritItemSettings":false,"x":512.0,"y":352.0,"resourceVersion":"1.0","name":"inst_73CB643","tags":[],"resourceType":"GMRInstance",},
-          ],"visible":false,"depth":-300,"userdefinedDepth":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"gridX":32,"gridY":32,"layers":[],"hierarchyFrozen":false,"resourceVersion":"1.0","name":"UI_Game_Pause_Menu_Quit","tags":[],"resourceType":"GMRInstanceLayer",},
+              ],"isDnd":false,"objectId":{"name":"UIButton","path":"objects/UIButton/UIButton.yy",},"inheritCode":false,"hasCreationCode":true,"colour":4294967295,"rotation":0.0,"scaleX":7.0,"scaleY":1.0,"imageIndex":0,"imageSpeed":1.0,"inheritedItemId":null,"frozen":false,"ignore":false,"inheritItemSettings":false,"x":512.0,"y":352.0,"resourceVersion":"1.0","name":"inst_73CB643","tags":[],"resourceType":"GMRInstance",},
+          ],"visible":true,"depth":-300,"userdefinedDepth":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"gridX":32,"gridY":32,"layers":[],"hierarchyFrozen":false,"resourceVersion":"1.0","name":"UI_Game_Pause_Menu_Quit","tags":[],"resourceType":"GMRInstanceLayer",},
         {"instances":[
             {"properties":[
                 {"propertyId":{"name":"anchor_horizontal","path":"objects/UIBlockRaycast/UIBlockRaycast.yy",},"objectId":{"name":"UIBlockRaycast","path":"objects/UIBlockRaycast/UIBlockRaycast.yy",},"value":"fa_center","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
