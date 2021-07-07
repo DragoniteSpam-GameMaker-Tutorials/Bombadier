@@ -333,8 +333,9 @@ function Game() constructor {
     SendInWave = function() {
         if (ds_queue_empty(all_waves)) {
             waves_remain = false;
-        } else {
             wave_countdown = -1;
+        } else {
+            wave_countdown = WAVE_COUNTDOWN;
             var wave_current = ds_queue_dequeue(all_waves);
             wave_current.Launch();
             ds_list_add(wave_active, wave_current);
@@ -346,7 +347,7 @@ function Game() constructor {
             if (wave_countdown > 0) {
                 player_money += ceil(wave_countdown);
             } else {
-                player_money += WAVE_COUNTDOWN;
+                //player_money += WAVE_COUNTDOWN;
             }
         }
         SendInWave();
