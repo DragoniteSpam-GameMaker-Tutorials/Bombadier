@@ -361,6 +361,14 @@ function Game() constructor {
         }
     };
     
+    CheckGameOver = function() {
+        if (!ds_list_empty(self.wave_active)) return;
+        if (!ds_queue_empty(self.all_waves)) return;
+        if (!ds_list_empty(self.all_foes)) return;
+        self.gameplay_mode = GameModes.GAME_OVER;
+        self.current_game_over_screen = "UI_Game_Over_Win";
+    };
+    
     SpawnTower = function() {
         var position = camera.GetFloorIntersect();
         

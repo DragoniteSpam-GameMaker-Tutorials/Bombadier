@@ -100,8 +100,9 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
     };
     
     Die = function() {
-        GAME.player_money += reward;
         Destroy();
+        GAME.player_money += reward;
+        GAME.CheckGameOver();
     };
     
     AddToMap = function() {
