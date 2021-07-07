@@ -327,6 +327,14 @@ function Game() constructor {
         self.Initialize();
     };
     
+    GoToNextLevel = function() {
+        if (self.current_level_index < MAX_LEVEL_INDEX) {
+            self.current_level_index++;
+            self.LoadMap("maps/level" + string(self.current_level_index) + ".bug");
+            self.Initialize();
+        }
+    };
+    
     enum GameModes {
         TITLE, GAMEPLAY, EDITOR, PAUSED, GAME_OVER,
     }
