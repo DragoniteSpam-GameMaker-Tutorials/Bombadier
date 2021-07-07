@@ -173,6 +173,7 @@ function Game() constructor {
     all_ui_elements = { };
     current_pause_screen = "UI_Game_Pause_Menu";
     current_title_screen = "UI_Title_Screen";
+    current_game_over_screen = "UI_Game_Over_Win";
     with (ParentUI) {
         var layers = other.all_ui_elements[$ string(depth)];
         if (layers == undefined) {
@@ -320,7 +321,7 @@ function Game() constructor {
     };
     
     enum GameModes {
-        TITLE, GAMEPLAY, EDITOR, PAUSED,
+        TITLE, GAMEPLAY, EDITOR, PAUSED, GAME_OVER,
     }
     
     gameplay_mode = GameModes.TITLE;
@@ -352,8 +353,8 @@ function Game() constructor {
     PlayerDamage = function(amount) {
         player_health -= max(amount, 0);
         if (player_health <= 0) {
-            show_message("aaaaaaaaaaaaaaaaa");
-            game_end();
+            self.gameplay_mode = GameModes.GAME_OVER;
+            self.current_game_over_screen = "UI_Game_Over_Lose";
         }
     };
     
@@ -985,6 +986,10 @@ function Game() constructor {
             player_cursor_over_ui = false;
         } else if (gameplay_mode == GameModes.PAUSED) {
             GetGUILayer(current_pause_screen).Render();
+            
+            player_cursor_over_ui = false;
+        } else if (gameplay_mode == GameModes.GAME_OVER) {
+            GetGUILayer(current_game_over_screen).Render();
             
             player_cursor_over_ui = false;
         } else if (gameplay_mode == GameModes.EDITOR) {
