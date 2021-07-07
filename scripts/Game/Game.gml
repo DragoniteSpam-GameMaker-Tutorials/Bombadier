@@ -342,10 +342,12 @@ function Game() constructor {
     };
     
     SendInWaveEarly = function() {
-        if (wave_countdown > 0) {
-            player_money += ceil(wave_countdown);
-        } else {
-            player_money += WAVE_COUNTDOWN;
+        if (!ds_queue_empty(all_waves)) {
+            if (wave_countdown > 0) {
+                player_money += ceil(wave_countdown);
+            } else {
+                player_money += WAVE_COUNTDOWN;
+            }
         }
         SendInWave();
     };
