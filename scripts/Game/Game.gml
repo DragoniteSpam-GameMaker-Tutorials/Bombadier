@@ -812,6 +812,8 @@ function Game() constructor {
         if (self.fused.raw != undefined) {
             vertex_delete_buffer(self.fused.vbuff);
             buffer_delete(self.fused.raw);
+            self.fused.vbuff = undefined;
+            self.fused.raw = undefined;
         }
         
         array_resize(self.path_nodes, 0);
