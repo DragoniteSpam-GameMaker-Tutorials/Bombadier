@@ -212,7 +212,6 @@
     {"CopyToMask":-1,"filePath":"datafiles/environment","resourceVersion":"1.0","name":"rock_tallh.000.d3d","resourceType":"GMIncludedFile",},
     {"CopyToMask":-1,"filePath":"datafiles/environment","resourceVersion":"1.0","name":"rock_largec.000.d3d","resourceType":"GMIncludedFile",},
     {"CopyToMask":-1,"filePath":"datafiles/environment","resourceVersion":"1.0","name":"rock_smallb.000.d3d","resourceType":"GMIncludedFile",},
-    {"CopyToMask":-1,"filePath":"datafiles/maps","resourceVersion":"1.0","name":"map.bug","resourceType":"GMIncludedFile",},
     {"CopyToMask":-1,"filePath":"datafiles/environment","resourceVersion":"1.0","name":"tree_fat.000.d3d","resourceType":"GMIncludedFile",},
     {"CopyToMask":-1,"filePath":"datafiles/environment","resourceVersion":"1.0","name":"flower_redc.000.d3d","resourceType":"GMIncludedFile",},
     {"CopyToMask":-1,"filePath":"datafiles/environment","resourceVersion":"1.0","name":"tree_pinerounde.000.d3d","resourceType":"GMIncludedFile",},
@@ -251,6 +250,8 @@
     {"CopyToMask":-1,"filePath":"datafiles/maps","resourceVersion":"1.0","name":"level1.fused","resourceType":"GMIncludedFile",},
     {"CopyToMask":-1,"filePath":"datafiles/maps","resourceVersion":"1.0","name":"level1.bug","resourceType":"GMIncludedFile",},
     {"CopyToMask":-1,"filePath":"datafiles/maps","resourceVersion":"1.0","name":"title.bug","resourceType":"GMIncludedFile",},
+    {"CopyToMask":-1,"filePath":"datafiles/maps","resourceVersion":"1.0","name":"title.fused","resourceType":"GMIncludedFile",},
+    {"CopyToMask":-1,"filePath":"datafiles/maps","resourceVersion":"1.0","name":"map.bug","resourceType":"GMIncludedFile",},
   ],
   "MetaData": {
     "IDEVersion": "23.1.1.312",

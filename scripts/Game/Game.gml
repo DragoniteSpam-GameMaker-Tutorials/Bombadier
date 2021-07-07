@@ -803,7 +803,9 @@ function Game() constructor {
         buffer_save(buffer, filename);
         buffer_delete(buffer);
         
-        buffer_save(fused.raw, filename_change_ext(filename, ".fused"));
+        if (fused.raw != undefined) {
+            buffer_save(fused.raw, filename_change_ext(filename, ".fused"));
+        }
     };
     
     LoadMap = function(filename) {
