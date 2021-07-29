@@ -254,7 +254,7 @@
     {"CopyToMask":-1,"filePath":"datafiles/maps","resourceVersion":"1.0","name":"map.bug","resourceType":"GMIncludedFile",},
   ],
   "MetaData": {
-    "IDEVersion": "23.1.1.312",
+    "IDEVersion": "2.3.3.574",
   },
   "resourceVersion": "1.4",
   "name": "Bombadier",
