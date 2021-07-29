@@ -68,7 +68,7 @@ function Game() constructor {
         //var vbuff = load_model("environment/" + file, format);
         var buffer = buffer_load("environment/" + file);
         var obj_name = string_replace(file, ".vbuff", "");
-        env_objects[? obj_name] = vertex_create_buffer_from_buffer(buffer, format);
+        env_objects[? obj_name] = new ModelData("environment/" + file, vertex_create_buffer_from_buffer(buffer, format));
         buffer_delete(buffer);
         ds_list_add(env_object_list, obj_name);
     }
