@@ -64,10 +64,12 @@ function Game() constructor {
     #region environment objects
     env_objects = ds_map_create();
     env_object_list = ds_list_create();
-    for (var file = file_find_first("environment/*.d3d", 0); file != ""; file = file_find_next()) {
-        var vbuff = load_model("environment/" + file, format);
-        var obj_name = string_replace(file, ".000.d3d", "");
-        env_objects[? obj_name] = vbuff;
+    for (var file = file_find_first("environment/*.vbuff", 0); file != ""; file = file_find_next()) {
+        //var vbuff = load_model("environment/" + file, format);
+        var buffer = buffer_load("environment/" + file);
+        var obj_name = string_replace(file, ".vbuff", "");
+        env_objects[? obj_name] = vertex_create_buffer_from_buffer(buffer, format);
+        buffer_delete(buffer);
         ds_list_add(env_object_list, obj_name);
     }
     collision_grid = ds_grid_create(10, 10);
