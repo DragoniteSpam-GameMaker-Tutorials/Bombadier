@@ -508,19 +508,36 @@ function Game() constructor {
                 ent.scale.x, ent.scale.y, ent.scale.z
             );
             
-            for (var j = 0; j < buffer_get_size(raw_buffer); j += 36) {
-                var xx = buffer_peek(raw_buffer, j +  0, buffer_f32);
-                var yy = buffer_peek(raw_buffer, j +  4, buffer_f32);
-                var zz = buffer_peek(raw_buffer, j +  8, buffer_f32);
-                var nx = buffer_peek(raw_buffer, j + 12, buffer_f32);
-                var ny = buffer_peek(raw_buffer, j + 16, buffer_f32);
-                var nz = buffer_peek(raw_buffer, j + 20, buffer_f32);
-                var xt = buffer_peek(raw_buffer, j + 24, buffer_f32);
-                var yt = buffer_peek(raw_buffer, j + 28, buffer_f32);
-                var cc = buffer_peek(raw_buffer, j + 32, buffer_u32);
+            for (var j = 0; j < buffer_get_size(raw_buffer); j += 36 * 3) {
+                var xx1 = buffer_peek(raw_buffer, j +  0, buffer_f32);
+                var yy1 = buffer_peek(raw_buffer, j +  4, buffer_f32);
+                var zz1 = buffer_peek(raw_buffer, j +  8, buffer_f32);
+                var nx1 = buffer_peek(raw_buffer, j + 12, buffer_f32);
+                var ny1 = buffer_peek(raw_buffer, j + 16, buffer_f32);
+                var nz1 = buffer_peek(raw_buffer, j + 20, buffer_f32);
+                var xt1 = buffer_peek(raw_buffer, j + 24, buffer_f32);
+                var yt1 = buffer_peek(raw_buffer, j + 28, buffer_f32);
+                var cc1 = buffer_peek(raw_buffer, j + 32, buffer_u32);
+                var xx2 = buffer_peek(raw_buffer, j + 36, buffer_f32);
+                var yy2 = buffer_peek(raw_buffer, j + 40, buffer_f32);
+                var zz2 = buffer_peek(raw_buffer, j + 44, buffer_f32);
+                var nx2 = buffer_peek(raw_buffer, j + 48, buffer_f32);
+                var ny2 = buffer_peek(raw_buffer, j + 52, buffer_f32);
+                var nz2 = buffer_peek(raw_buffer, j + 56, buffer_f32);
+                var xt2 = buffer_peek(raw_buffer, j + 60, buffer_f32);
+                var yt2 = buffer_peek(raw_buffer, j + 64, buffer_f32);
+                var cc2 = buffer_peek(raw_buffer, j + 68, buffer_u32);
+                var xx3 = buffer_peek(raw_buffer, j + 72, buffer_f32);
+                var yy3 = buffer_peek(raw_buffer, j + 76, buffer_f32);
+                var zz3 = buffer_peek(raw_buffer, j + 80, buffer_f32);
+                var nx3 = buffer_peek(raw_buffer, j + 84, buffer_f32);
+                var ny3 = buffer_peek(raw_buffer, j + 88, buffer_f32);
+                var nz3 = buffer_peek(raw_buffer, j + 92, buffer_f32);
+                var xt3 = buffer_peek(raw_buffer, j + 96, buffer_f32);
+                var yt3 = buffer_peek(raw_buffer, j + 100, buffer_f32);
+                var cc3 = buffer_peek(raw_buffer, j + 104, buffer_u32);
                 
-                var new_position = matrix_transform_vertex(entity_matrix, xx, yy, zz);
-                var new_normal = matrix_transform_vertex(entity_matrix_normals, nx, ny, nz);
+                var new_normal = matrix_transform_vertex(entity_matrix_normals, nx1, ny1, nz1);
                 var normal_magnitude = point_distance_3d(0, 0, 0, new_normal[0], new_normal[1], new_normal[2]);
                 new_normal[0] /= normal_magnitude;
                 new_normal[1] /= normal_magnitude;
@@ -530,10 +547,26 @@ function Game() constructor {
                 var triangle_to_ground = dot_product_3d(new_normal[0], new_normal[1], new_normal[2], 0, 0, -1);
                 
                 if (triangle_to_camera < 0.8 && triangle_to_ground < 0.75) {
-                    vertex_position_3d(vbuff, new_position[0], new_position[1], new_position[2]);
+                    var new_position_1 = matrix_transform_vertex(entity_matrix, xx1, yy1, zz1);
+                    var new_position_2 = matrix_transform_vertex(entity_matrix, xx2, yy2, zz2);
+                    var new_position_3 = matrix_transform_vertex(entity_matrix, xx3, yy3, zz3);
+                    var new_normal_2 = matrix_transform_vertex(entity_matrix_normals, nx2, ny2, nz2);
+                    var new_normal_3 = matrix_transform_vertex(entity_matrix_normals, nx3, ny3, nz3);
+                    
+                    vertex_position_3d(vbuff, new_position_1[0], new_position_1[1], new_position_1[2]);
                     vertex_normal(vbuff, new_normal[0], new_normal[1], new_normal[2]);
-                    vertex_texcoord(vbuff, xt, yt);
-                    vertex_color(vbuff, cc & 0xffffff, (cc >> 24) / 255);
+                    vertex_texcoord(vbuff, xt1, yt1);
+                    vertex_color(vbuff, cc1 & 0xffffff, (cc1 >> 24) / 255);
+                    
+                    vertex_position_3d(vbuff, new_position_2[0], new_position_2[1], new_position_2[2]);
+                    vertex_normal(vbuff, new_normal_2[0], new_normal_2[1], new_normal_2[2]);
+                    vertex_texcoord(vbuff, xt2, yt2);
+                    vertex_color(vbuff, cc2 & 0xffffff, (cc2 >> 24) / 255);
+                    
+                    vertex_position_3d(vbuff, new_position_3[0], new_position_3[1], new_position_3[2]);
+                    vertex_normal(vbuff, new_normal_3[0], new_normal_3[1], new_normal_3[2]);
+                    vertex_texcoord(vbuff, xt3, yt3);
+                    vertex_color(vbuff, cc3 & 0xffffff, (cc3 >> 24) / 255);
                 }
             }
             
