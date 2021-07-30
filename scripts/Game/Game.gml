@@ -586,7 +586,7 @@ function Game() constructor {
             vertex_delete_buffer(fused.vbuff);
         }
         
-        show_message(vertex_get_number(vbuff))
+        show_message(string(vertex_get_number(vbuff)) + " vertices (" + string(vertex_get_number(vbuff) / 3) + " triangles)");
         
         fused.vbuff = vbuff;
         fused.raw = buffer_create_from_vertex_buffer(vbuff, buffer_fixed, 1);
@@ -743,13 +743,15 @@ function Game() constructor {
                         editor_hover_entity.Select();
                     } else {
                         var position = camera.GetFloorIntersect();
-                        var spawn_name = env_object_list[| editor_model_index];
-                        var ent = new EntityEnv(position.x, position.y, 0, env_objects[? spawn_name], spawn_name);
-                        ent.rotation.z = random(360);
-                        ent.scale.x = random_range(1.8, 2.2);
-                        ent.scale.y = ent.scale.x;
-                        ent.scale.z = ent.scale.x;
-                        ent.AddToMap();
+                        if (position) {
+                            var spawn_name = env_object_list[| editor_model_index];
+                            var ent = new EntityEnv(position.x, position.y, 0, env_objects[? spawn_name], spawn_name);
+                            ent.rotation.z = random(360);
+                            ent.scale.x = random_range(1.8, 2.2);
+                            ent.scale.y = ent.scale.x;
+                            ent.scale.z = ent.scale.x;
+                            ent.AddToMap();
+                        }
                     }
                 } else {
                     if (selected_entity) {
