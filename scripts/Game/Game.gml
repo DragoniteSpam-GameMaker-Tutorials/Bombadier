@@ -656,7 +656,9 @@ function Game() constructor {
             }
             
             if (keyboard_check_pressed(vk_f3)) {
-                FuseMapEntities();
+                if (show_question("Would you like to fuse all the map things?")) {
+                    FuseMapEntities();
+                }
             }
             
             if (editor_path_mode) {
@@ -711,7 +713,7 @@ function Game() constructor {
                         var spawn_name = env_object_list[| editor_model_index];
                         var ent = new EntityEnv(position.x, position.y, 0, env_objects[? spawn_name], spawn_name);
                         ent.rotation.z = random(360);
-                        ent.scale.x = random_range(0.9, 1.1);
+                        ent.scale.x = random_range(1.8, 2.2);
                         ent.scale.y = ent.scale.x;
                         ent.scale.z = ent.scale.x;
                         ent.AddToMap();
