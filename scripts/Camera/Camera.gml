@@ -17,20 +17,28 @@ function Camera() constructor {
         
         if (GAME.gameplay_mode != GameModes.TITLE) {
             if (/*keyboard_check(vk_left) || */keyboard_check(ord("A"))) {
-                from.x -= mspd * dt;
-                to.x -= mspd * dt;
+                if (to.x >= 0) {
+                    from.x -= mspd * dt;
+                    to.x -= mspd * dt;
+                }
             }
             if (/*keyboard_check(vk_right) || */keyboard_check(ord("D"))) {
-                from.x += mspd * dt;
-                to.x += mspd * dt;
+                if (to.x <= room_width) {
+                    from.x += mspd * dt;
+                    to.x += mspd * dt;
+                }
             }
             if (/*keyboard_check(vk_up) || */keyboard_check(ord("W"))) {
-                from.y -= mspd * dt;
-                to.y -= mspd * dt;
+                if (to.y >= -room_height / 2) {
+                    from.y -= mspd * dt;
+                    to.y -= mspd * dt;
+                }
             }
             if (/*keyboard_check(vk_down) || */keyboard_check(ord("S"))) {
-                from.y += mspd * dt;
-                to.y += mspd * dt;
+                if (to.y <= room_height / 2) {
+                    from.y += mspd * dt;
+                    to.y += mspd * dt;
+                }
             }
         }
         
