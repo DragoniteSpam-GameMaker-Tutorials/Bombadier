@@ -976,6 +976,21 @@ function Game() constructor {
         }
         
         if (gameplay_mode == GameModes.EDITOR) {
+            // Draw a debug line so you can see where the bounds of the world is
+            var vb_border = vertex_create_buffer();
+            vertex_begin(vb_border, format);
+            vertex_position_3d(vb_border, 0, room_height, 8);
+            vertex_normal(vb_border, 0, 0, 1);
+            vertex_texcoord(vb_border, 0, 0);
+            vertex_colour(vb_border, c_red, 1);
+            vertex_position_3d(vb_border, room_width, room_height, 8);
+            vertex_normal(vb_border, 0, 0, 1);
+            vertex_texcoord(vb_border, 0, 0);
+            vertex_colour(vb_border, c_red, 1);
+            vertex_end(vb_border);
+            vertex_submit(vb_border, pr_linestrip, -1);
+            vertex_delete_buffer(vb_border);
+            
             if (editor_path_mode) {
                 var draw_the_line = array_length(path_nodes) > 1;
                 if (draw_the_line) {
