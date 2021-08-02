@@ -402,6 +402,7 @@ function Game() constructor {
             if (player_tower_spawn && player_money >= player_tower_spawn.class.cost[0] && CollisionFree(player_tower_spawn)) {
                 player_money -= player_tower_spawn.class.cost[0];
                 player_tower_spawn.AddToMap();
+                self.selected_entity = player_tower_spawn;
                 player_tower_spawn = undefined;
             }
         }
