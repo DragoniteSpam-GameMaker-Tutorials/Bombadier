@@ -338,6 +338,14 @@ function Game() constructor {
         }
     };
     
+    GoToTitle = function() {
+        self.LoadMap("maps/title.bug");
+        self.gameplay_mode = GameModes.TITLE;
+        self.current_title_screen = "UI_Title_Screen";
+        self.camera.from = CAMERA_FROM_TITLE;
+        self.camera.to = CAMERA_TO_TITLE;
+    };
+    
     enum GameModes {
         TITLE, GAMEPLAY, EDITOR, PAUSED, GAME_OVER,
     }
