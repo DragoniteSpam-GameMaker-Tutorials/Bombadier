@@ -16,41 +16,38 @@ function Game() constructor {
     
     ground = vertex_create_buffer();
     vertex_begin(ground, format);
-    var sw = 64;
-    for (var i = 0; i < 20; i++) {
-        for (var j = 0; j < 12; j++) {
-            // 0
-            vertex_position_3d(ground, i * 64, j * 64, 0);
-            vertex_normal(ground, 0, 0, 1);
-            vertex_texcoord(ground, 0, 0);
-            vertex_colour(ground, c_white, 1);
-            // 1
-            vertex_position_3d(ground, (i + 1) * 64, j * 64, 0);
-            vertex_normal(ground, 0, 0, 1);
-            vertex_texcoord(ground, 1, 0);
-            vertex_colour(ground, c_white, 1);
-            // 2
-            vertex_position_3d(ground, (i + 1) * 64, (j + 1) * 64, 0);
-            vertex_normal(ground, 0, 0, 1);
-            vertex_texcoord(ground, 1, 1);
-            vertex_colour(ground, c_white, 1);
-            // 3
-            vertex_position_3d(ground, (i + 1) * 64, (j + 1) * 64, 0);
-            vertex_normal(ground, 0, 0, 1);
-            vertex_texcoord(ground, 1, 1);
-            vertex_colour(ground, c_white, 1);
-            // 4
-            vertex_position_3d(ground, i * 64, (j + 1) * 64, 0);
-            vertex_normal(ground, 0, 0, 1);
-            vertex_texcoord(ground, 0, 1);
-            vertex_colour(ground, c_white, 1);
-            // 5
-            vertex_position_3d(ground, i * 64, j * 64, 0);
-            vertex_normal(ground, 0, 0, 1);
-            vertex_texcoord(ground, 0, 0);
-            vertex_colour(ground, c_white, 1);
-        }
-    }
+    
+    // 0
+    vertex_position_3d(ground, 0, 0, 0);
+    vertex_normal(ground, 0, 0, 1);
+    vertex_texcoord(ground, 0, 0);
+    vertex_colour(ground, c_white, 1);
+    // 1
+    vertex_position_3d(ground, room_width, 0, 0);
+    vertex_normal(ground, 0, 0, 1);
+    vertex_texcoord(ground, 1, 0);
+    vertex_colour(ground, c_white, 1);
+    // 2
+    vertex_position_3d(ground, room_width, room_height * 1.5, 0);
+    vertex_normal(ground, 0, 0, 1);
+    vertex_texcoord(ground, 1, 1);
+    vertex_colour(ground, c_white, 1);
+    // 3
+    vertex_position_3d(ground, room_width, room_height * 1.5, 0);
+    vertex_normal(ground, 0, 0, 1);
+    vertex_texcoord(ground, 1, 1);
+    vertex_colour(ground, c_white, 1);
+    // 4
+    vertex_position_3d(ground, 0, room_height * 1.5, 0);
+    vertex_normal(ground, 0, 0, 1);
+    vertex_texcoord(ground, 0, 1);
+    vertex_colour(ground, c_white, 1);
+    // 5
+    vertex_position_3d(ground, 0, 0, 0);
+    vertex_normal(ground, 0, 0, 1);
+    vertex_texcoord(ground, 0, 0);
+    vertex_colour(ground, c_white, 1);
+    
     vertex_end(ground);
     vertex_freeze(ground);
     #endregion
