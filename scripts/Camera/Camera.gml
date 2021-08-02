@@ -14,21 +14,24 @@ function Camera() constructor {
     Update = function() {
         var mspd = 200;
         var dt = DT;
-        if (/*keyboard_check(vk_left) || */keyboard_check(ord("A"))) {
-            from.x -= mspd * dt;
-            to.x -= mspd * dt;
-        }
-        if (/*keyboard_check(vk_right) || */keyboard_check(ord("D"))) {
-            from.x += mspd * dt;
-            to.x += mspd * dt;
-        }
-        if (/*keyboard_check(vk_up) || */keyboard_check(ord("W"))) {
-            from.y -= mspd * dt;
-            to.y -= mspd * dt;
-        }
-        if (/*keyboard_check(vk_down) || */keyboard_check(ord("S"))) {
-            from.y += mspd * dt;
-            to.y += mspd * dt;
+        
+        if (GAME.gameplay_mode != GameModes.TITLE) {
+            if (/*keyboard_check(vk_left) || */keyboard_check(ord("A"))) {
+                from.x -= mspd * dt;
+                to.x -= mspd * dt;
+            }
+            if (/*keyboard_check(vk_right) || */keyboard_check(ord("D"))) {
+                from.x += mspd * dt;
+                to.x += mspd * dt;
+            }
+            if (/*keyboard_check(vk_up) || */keyboard_check(ord("W"))) {
+                from.y -= mspd * dt;
+                to.y -= mspd * dt;
+            }
+            if (/*keyboard_check(vk_down) || */keyboard_check(ord("S"))) {
+                from.y += mspd * dt;
+                to.y += mspd * dt;
+            }
         }
         
         view_mat = matrix_build_lookat(from.x, from.y, from.z, to.x, to.y, to.z, up.x, up.y, up.z);
