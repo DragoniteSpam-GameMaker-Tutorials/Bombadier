@@ -1,6 +1,11 @@
+#macro CAMERA_FROM_LEVEL (new Vector3(640, 840, 200))
+#macro CAMERA_TO_LEVEL (new Vector3(640, 0, 0))
+#macro CAMERA_FROM_TITLE (new Vector3(640, 840, 120))
+#macro CAMERA_TO_TITLE (new Vector3(640, 0, 0))
+
 function Camera() constructor {
-    from = new Vector3(640, 840, 120);
-    to = new Vector3(640, 0, 0);
+    from = CAMERA_FROM_TITLE;
+    to = CAMERA_TO_TITLE;
     up = new Vector3(0, 0, 1);
     fov = 60;
     znear = 0.3;

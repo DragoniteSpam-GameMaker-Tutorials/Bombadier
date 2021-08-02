@@ -324,6 +324,8 @@ function Game() constructor {
         self.current_level_index = level_index;
         self.LoadMap("maps/level" + string(level_index) + ".bug");
         self.Initialize();
+        self.camera.from = CAMERA_FROM_LEVEL;
+        self.camera.to = CAMERA_TO_LEVEL;
     };
     
     GoToNextLevel = function() {
@@ -331,6 +333,8 @@ function Game() constructor {
             self.current_level_index++;
             self.LoadMap("maps/level" + string(self.current_level_index) + ".bug");
             self.Initialize();
+            self.camera.from = CAMERA_FROM_LEVEL;
+            self.camera.to = CAMERA_TO_LEVEL;
         }
     };
     
