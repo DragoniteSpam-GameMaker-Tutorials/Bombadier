@@ -327,7 +327,6 @@ function EntityTowerFlyPaper(x, y, z, class) : EntityTower(x, y, z, class) const
     self.stats = {
         papers: 0,
         hits: 0,
-        duration: 0,
         stuns: 0,
     };
     
@@ -361,8 +360,7 @@ function EntityTowerFlyPaper(x, y, z, class) : EntityTower(x, y, z, class) const
     toString = function() {
         var value = self.name + " (Lv. " + string(self.level) + ")\n" +
             "Papers dispensed: " + string(self.stats.papers) + "\n" +
-            "Victims: " + string(self.stats.hits) + "\n" +
-            "Slow duration: " + string_format(self.stats.duration, 1, 1);
+            "Victims: " + string(self.stats.hits);
         
         if (self.level >= 3) {
             value += "\n" +
