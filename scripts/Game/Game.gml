@@ -746,6 +746,16 @@ function Game() constructor {
                     editor_model_index = (editor_model_index + 1) % ds_list_size(env_object_list);
                 }
                 
+                if (keyboard_check_pressed(vk_f6)) {
+                    var seek_name = string_lower(get_string("What model do you want to jump to?", env_object_list[| editor_model_index]));
+                    for (var i = 1, n = ds_list_size(env_object_list); i <= n; i++) {
+                        var index = (i + editor_model_index) % n;
+                        if (string_count(seek_name, string_lower(env_object_list[| index])) > 0) {
+                            editor_model_index = index;
+                        }
+                    }
+                }
+                
                 if (mouse_check_button_pressed(mb_left)) {
                     if (editor_hover_entity) {
                         if (selected_entity) selected_entity.Deselect();
@@ -1106,6 +1116,7 @@ function Game() constructor {
                 draw_text(window_get_width() - 32, 32, "F1 to save");
                 draw_text(window_get_width() - 32, 64, "F2 to view/hide path nodes");
                 draw_text(window_get_width() - 32, 96, "F3 to fuse all of the environment entities together");
+                draw_text(window_get_width() - 32, 128, "F6 to search for a model");
                 draw_set_halign(fa_left);
             }
         }
