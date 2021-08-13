@@ -484,6 +484,7 @@
     {"CopyToMask":-1,"filePath":"datafiles/environment","resourceVersion":"1.0","name":"cannonball.000.vbuff","resourceType":"GMIncludedFile",},
     {"CopyToMask":-1,"filePath":"datafiles/environment","resourceVersion":"1.0","name":"bottlelarge.000.vbuff","resourceType":"GMIncludedFile",},
     {"CopyToMask":-1,"filePath":"datafiles/maps","resourceVersion":"1.0","name":"level5.bug","resourceType":"GMIncludedFile",},
+    {"CopyToMask":-1,"filePath":"datafiles/maps","resourceVersion":"1.0","name":"level5.fused","resourceType":"GMIncludedFile",},
   ],
   "MetaData": {
     "IDEVersion": "2.3.3.574",
