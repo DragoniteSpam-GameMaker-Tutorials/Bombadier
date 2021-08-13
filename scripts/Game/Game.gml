@@ -973,7 +973,7 @@ function Game() constructor {
         cluck_set_light_direction(0, c_white, -1, -1, -1);
         cluck_apply(SHADER_WORLD);
         
-        vertex_submit(ground, pr_trianglelist, sprite_get_texture(spr_ground, 0));
+        vertex_submit(ground, pr_trianglelist, sprite_get_texture(spr_ground_sand, 0));
         
         if (fused.vbuff != undefined) {
             vertex_submit(fused.vbuff, pr_trianglelist, -1);
