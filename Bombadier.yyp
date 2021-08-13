@@ -485,6 +485,10 @@
     {"CopyToMask":-1,"filePath":"datafiles/environment","resourceVersion":"1.0","name":"bottlelarge.000.vbuff","resourceType":"GMIncludedFile",},
     {"CopyToMask":-1,"filePath":"datafiles/maps","resourceVersion":"1.0","name":"level5.bug","resourceType":"GMIncludedFile",},
     {"CopyToMask":-1,"filePath":"datafiles/maps","resourceVersion":"1.0","name":"level5.fused","resourceType":"GMIncludedFile",},
+    {"CopyToMask":-1,"filePath":"datafiles/maps","resourceVersion":"1.0","name":"level6.bug","resourceType":"GMIncludedFile",},
+    {"CopyToMask":-1,"filePath":"datafiles/maps","resourceVersion":"1.0","name":"level7.bug","resourceType":"GMIncludedFile",},
+    {"CopyToMask":-1,"filePath":"datafiles/maps","resourceVersion":"1.0","name":"level8.bug","resourceType":"GMIncludedFile",},
+    {"CopyToMask":-1,"filePath":"datafiles/maps","resourceVersion":"1.0","name":"level9.bug","resourceType":"GMIncludedFile",},
   ],
   "MetaData": {
     "IDEVersion": "2.3.3.574",
