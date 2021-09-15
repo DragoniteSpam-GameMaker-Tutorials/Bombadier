@@ -355,6 +355,7 @@ function EntityTowerFlyPaper(x, y, z, class) : EntityTower(x, y, z, class) const
             if (GAME.CollisionIsPath(paper)) {
                 ds_list_add(GAME.all_entities, paper);
                 paper_count++;
+                audio_play_sound(se_tower_flypaper, SOUND_PRIORITY_GAMEPLAY_LOW, false);
                 return;
             }
         }
