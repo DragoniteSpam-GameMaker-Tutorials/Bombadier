@@ -232,6 +232,10 @@ function Game() constructor {
         surface_resize(application_surface, current_screen_size.x * resolution_scalar, current_screen_size.y * resolution_scalar);
     };
     
+    ApplyVolume = function() {
+        audio_set_master_gain(0, self.volume_master / 100);
+    };
+    
     SaveSettings = function() {
         var json = {
             volume_master: self.volume_master,
@@ -279,6 +283,8 @@ function Game() constructor {
         self.frame_rate_index = clamp(self.frame_rate_index, 0, array_length(self.frame_rates));
         self.resolution_scalar_index = clamp(self.resolution_scalar_index, 0, array_length(self.resolution_scalar_options));
         self.resolution_scalar = clamp(self.resolution_scalar, 0.05, 1);
+        
+        self.ApplyVolume();
     } catch (e) {
         show_debug_message("Settings could not be loaded");
     }
