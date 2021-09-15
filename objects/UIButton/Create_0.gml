@@ -10,6 +10,9 @@ Render = function() {
         if (point_in_rectangle(window_mouse_get_x(), window_mouse_get_y(), x, y, x + sprite_width, y + sprite_height)) {
             subimg = 1;
             if (mouse_check_button_pressed(mb_left)) {
+                if (self.sound_on_click != noone) {
+                    audio_play_sound(self.sound_on_click, SOUND_PRIORITY_UI, false)
+                }
                 OnClick();
             }
             GAME.player_cursor_over_ui = true;
