@@ -5,7 +5,7 @@
   },
   "soundFile": "se_ambient.wav",
   "name": "se_ambient",
-  "compression": 0,
+  "compression": 3,
   "type": 0,
   "sampleRate": 44100,
   "bitDepth": 1,
