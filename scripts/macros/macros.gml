@@ -31,3 +31,9 @@
 #macro c_env_hover c_lime
 #macro c_path c_blue
 #macro c_path_hover c_lime
+
+#macro SOUND_PRIORITY_AMBIENT           100
+#macro SOUND_PRIORITY_BGM               100
+#macro SOUND_PRIORITY_UI                50
+#macro SOUND_PRIORITY_GAMEPLAY_HIGH     40
+#macro SOUND_PRIORITY_GAMEPLAY_LOW      random_range(1, 25)
