@@ -103,6 +103,7 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
         Destroy();
         GAME.player_money += reward;
         GAME.CheckGameOver();
+        audio_play_sound(se_foe_die, SOUND_PRIORITY_GAMEPLAY_LOW, false);
     };
     
     AddToMap = function() {
