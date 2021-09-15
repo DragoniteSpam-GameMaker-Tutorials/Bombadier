@@ -318,6 +318,7 @@ function EntityTowerBird(x, y, z, class) : EntityTower(x, y, z, class) construct
         var bird = new EntityBulletBird(0, 0, 0, base_bullet_data, self, dist);
         ds_list_add(GAME.all_entities, bird);
         array_push(birds, bird);
+        audio_play_sound(choose(se_tower_bird_a, se_tower_bird_b), SOUND_PRIORITY_GAMEPLAY_LOW, false);
     };
 }
 
