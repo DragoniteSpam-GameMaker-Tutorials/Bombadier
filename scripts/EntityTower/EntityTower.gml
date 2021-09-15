@@ -94,6 +94,7 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
         bullet.AddToMap();
         shot_cooldown = 1 / act_rate;
         self.stats.shots++;
+        audio_play_sound(se_tower_pebble, SOUND_PRIORITY_GAMEPLAY_LOW, false);
     };
     
     // Get the foe in range that's farthest down the track
