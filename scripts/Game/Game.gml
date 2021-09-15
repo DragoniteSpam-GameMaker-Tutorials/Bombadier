@@ -289,7 +289,7 @@ function Game() constructor {
         show_debug_message("Settings could not be loaded");
     }
     
-    audio_play_sound(se_ambient, 100, true);
+    audio_play_sound(se_ambient, SOUND_PRIORITY_AMBIENT, true);
     
     self.ApplyScreenSize();
     #endregion
@@ -412,6 +412,7 @@ function Game() constructor {
                 player_tower_spawn.AddToMap();
                 self.selected_entity = player_tower_spawn;
                 player_tower_spawn = undefined;
+                audio_play_sound(se_build, SOUND_PRIORITY_GAMEPLAY_HIGH, false);
             }
         }
     };
