@@ -206,6 +206,7 @@ function EntityTowerGlass(x, y, z, class) : EntityTower(x, y, z, class) construc
     
     Update = function() {
         target_foe = GetTarget();
+        var is_burning = false;
         if (target_foe) {
             target_foe.Damage(self.act_damage * DT);
             self.stats.damage += self.act_damage * DT;
@@ -214,6 +215,17 @@ function EntityTowerGlass(x, y, z, class) : EntityTower(x, y, z, class) construc
                 target_foe.Burn(BURN_DURATION, self);
             }
             rotation.z = point_direction(self.position.x, self.position.y, target_foe.position.x, target_foe.position.y);
+            is_burning = true;
+        }
+        
+        if (is_burning) {
+            if (!audio_is_playing(se_tower_magnifying_glass)) {
+                audio_play_sound(se_tower_magnifying_glass, SOUND_PRIORITY_GAMEPLAY_HIGH, true);
+            }
+        } else {
+            if (audio_is_playing(se_tower_magnifying_glass)) {
+                audio_stop_sound(se_tower_magnifying_glass);
+            }
         }
     };
     
