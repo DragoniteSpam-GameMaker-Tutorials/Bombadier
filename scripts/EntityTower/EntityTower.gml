@@ -284,6 +284,7 @@ function EntityTowerSpray(x, y, z, class) : EntityTower(x, y, z, class) construc
             cloud.Reposition(position.x + dist * dcos(dir), position.y - dist * dsin(dir), position.z);
             if (GAME.CollisionIsPath(cloud)) {
                 ds_list_add(GAME.all_entities, cloud);
+                audio_play_sound(se_tower_bug_spray, SOUND_PRIORITY_GAMEPLAY_LOW, false);
                 return;
             }
         }
