@@ -289,6 +289,8 @@ function Game() constructor {
         show_debug_message("Settings could not be loaded");
     }
     
+    audio_play_sound(se_ambient, 100, true);
+    
     self.ApplyScreenSize();
     #endregion
     
