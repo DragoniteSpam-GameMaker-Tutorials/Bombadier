@@ -633,6 +633,7 @@ function Game() constructor {
             if (keyboard_check_pressed(vk_escape)) {
                 gameplay_mode = GameModes.PAUSED;
                 current_pause_screen = "UI_Game_Pause_Menu";
+                audio_play_sound(se_menu_pause, SOUND_PRIORITY_UI, false);
                 return;
             }
             
@@ -698,6 +699,7 @@ function Game() constructor {
         } else if (gameplay_mode == GameModes.PAUSED) {
             if (keyboard_check_pressed(vk_escape)) {
                 gameplay_mode = GameModes.GAMEPLAY;
+                audio_play_sound(se_menu_back, SOUND_PRIORITY_UI, false);
             }
         } else if (gameplay_mode == GameModes.EDITOR) {
             camera.Update();
