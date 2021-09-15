@@ -174,6 +174,7 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
         self.SetDamageMod();
         self.SetRangeMod();
         GAME.player_money -= self.class.cost[self.level - 1];
+        audio_play_sound(se_build, SOUND_PRIORITY_GAMEPLAY_HIGH, false);
     };
     
     CanBeUpgraded = function() {
