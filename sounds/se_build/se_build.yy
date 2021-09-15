@@ -11,7 +11,7 @@
   "bitDepth": 1,
   "bitRate": 128,
   "duration": 1.192568,
-  "volume": 1.0,
+  "volume": 0.25,
   "preload": false,
   "parent": {
     "name": "Sound Effects",
