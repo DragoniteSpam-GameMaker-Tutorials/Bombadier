@@ -119,6 +119,7 @@ function EntityBulletBird(x, y, z, bullet_data, parent_tower, nest_radius) : Ent
                     foe.Damage(parent_tower.act_damage);
                     OnHit(foe);
                     damage_cooldown = 1 / parent_tower.act_rate;
+                    Particles.BurstFromEmitter(Particles.emitters.hit_effects, Particles.types.stone_debris, foe.position.x, foe.position.y, foe.position.z + 8, 12);
                     break;
                 }
             }
