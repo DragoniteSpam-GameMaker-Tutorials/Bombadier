@@ -9,13 +9,13 @@ Particles = new (function() constructor {
         //Note: All time values are in seconds, not in steps!
         part_type_stone_debris = new spart_type();
         with (part_type_stone_debris) {
-            //setSize(100, 140, 0, 0, 0, 200);
+            setSize(3, 5, 0, 0, 0, 200);
         	setSprite(spr_particle_main, 0, 1);
-        	setLife(1, 1.5);
+        	setLife(0.2, 0.3);
         	setOrientation(0, 360, 150, 0, true);
-        	setSpeed(300, 400, 0, 0);
-        	setDirection(0, 0, 1, 45, false);
-        	setColour(0x004b96, 1);
+        	setSpeed(120, 160, 0, 0);
+        	setDirection(0, 0, 1, 75, false);
+        	setColour(0x004b96, 1, 0x004b96, 1, 0x004b96, 0);
         	setGravity(1, 0, 0, -1);
         }
 
