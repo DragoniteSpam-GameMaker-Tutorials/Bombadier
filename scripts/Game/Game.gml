@@ -503,7 +503,6 @@ function Game() constructor {
     FuseMapEntities = function() {
         var vbuff = vertex_create_buffer();
         vertex_begin(vbuff, format);
-        ds_grid_clear(fused.collision, GRID_COLLISION_FREE);
         
         var cam_x = camera.to.x - camera.from.x;
         var cam_y = camera.to.y - camera.from.y;
@@ -592,8 +591,6 @@ function Game() constructor {
             
             buffer_delete(raw_buffer);
             ds_list_delete(all_entities, ds_list_find_index(all_entities, ent));
-            
-            ent.AddCollision();
         }
         
         vertex_end(vbuff);
@@ -611,7 +608,6 @@ function Game() constructor {
         fused.vbuff = vbuff;
         fused.raw = buffer_create_from_vertex_buffer(vbuff, buffer_fixed, 1);
         vertex_freeze(vbuff);
-        collision_grid = actual_collision_grid;
     };
     
     Update = function() {
@@ -916,7 +912,6 @@ function Game() constructor {
         var save_json = {
             entities: array_create(ds_list_size(all_env_entities), undefined),
             nodes: array_create(node_count),
-            fused_collision: ds_grid_write(fused.collision),
         };
         for (var i = 0; i < ds_list_size(all_env_entities); i++) {
             all_env_entities[| i].Save(save_json, i);
@@ -960,8 +955,6 @@ function Game() constructor {
             var hh = room_height div GRID_CELL_SIZE;
             ds_grid_resize(collision_grid, ww, hh);
             ds_grid_clear(collision_grid, GRID_COLLISION_FREE);
-            ds_grid_resize(fused.collision, ww, hh);
-            ds_grid_clear(fused.collision, GRID_COLLISION_FREE);
             
             for (var i = 0; i < array_length(load_json.entities); i++) {
                 var data = load_json.entities[i];
@@ -976,8 +969,6 @@ function Game() constructor {
             for (var i = 0; i < array_length(load_json.nodes); i++) {
                 path_nodes[@ i] = new PathNode(load_json.nodes[i].position);
             }
-            
-            ds_grid_read(fused.collision, load_json.fused_collision);
             
             if (file_exists(filename_change_ext(filename, ".fused"))) {
                 fused.raw = buffer_load(filename_change_ext(filename, ".fused"));
