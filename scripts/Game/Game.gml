@@ -57,7 +57,7 @@ function Game() constructor {
     fused = {
         raw: undefined,
         vbuff: undefined,
-        collision: ds_grid_create(10, 10),
+        collision: -1,
     };
     
     #region environment objects
@@ -721,10 +721,27 @@ function Game() constructor {
             }
             
             if (keyboard_check_pressed(vk_f7)) {
-                editor_path_mode =false;
+                editor_path_mode = false;
                 if (editor_collision_mode) {
-                    // convert the surface to a data buffer
+                    var surface_buffer = buffer_create(surface_get_width(collision_surface) * surface_get_height(collision_surface) * 4, buffer_fixed, 1);
+                    buffer_get_surface(surface_buffer, collision_surface, 0);
                     
+                    var collision_data_buffer = buffer_create(surface_get_width(collision_surface) * surface_get_height(collision_surface), buffer_fixed, 1);
+                    
+                    buffer_seek(surface_buffer, buffer_seek_start, 0);
+                    buffer_seek(collision_data_buffer, buffer_seek_start, 0);
+                    
+                    repeat (buffer_get_size(collision_data_buffer)) {
+                        var color = buffer_read(surface_buffer, buffer_u32) & 0xff;
+                        buffer_write(collision_data_buffer, buffer_u8, color);
+                    }
+                    
+                    buffer_delete(surface_buffer);
+                    
+                    if (buffer_exists(fused.collision)) {
+                        buffer_delete(fused.collision);
+                        fused.collision = collision_data_buffer;
+                    }
                 }
                 editor_collision_mode = !editor_collision_mode;
                 selected_entity = undefined;
