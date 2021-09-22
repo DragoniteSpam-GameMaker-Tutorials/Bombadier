@@ -166,6 +166,7 @@ function EntityBulletFlyPaper(x, y, z, bullet_data, parent_tower) : EntityBullet
                 if (foe.status_slow <= 0) {
                     self.hits_remaining--;
                     self.parent_tower.stats.hits++;
+                    Particles.BurstFromEmitter(Particles.emitters.hit_effects, Particles.types.glue, foe.position.x, foe.position.y, foe.position.z + 8, 12);
                 }
                 OnHit(foe);
                 if (hits_remaining <= 0) {

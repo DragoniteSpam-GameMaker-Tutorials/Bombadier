@@ -155,6 +155,9 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
             if (status_slow <= 0) {
                 SetSpeedMod(1);
             }
+            if (irandom(4) == 1) {
+                Particles.BurstFromEmitter(Particles.emitters.hit_effects, Particles.types.glue, self.position.x, self.position.y, self.position.z + 8, 1);
+            }
         }
     };
     
