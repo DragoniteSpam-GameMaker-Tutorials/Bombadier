@@ -57,6 +57,6 @@ Particles = new (function() constructor {
     };
     
     static Render = function() {
-        systems.hit_effects.draw(game_get_speed(gamespeed_microseconds) / 1000000);
+        systems.hit_effects.draw(game_get_speed(gamespeed_microseconds) / 1000000 * GAME.game_speed);
     };
 })();
