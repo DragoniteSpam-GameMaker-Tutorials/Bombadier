@@ -721,8 +721,15 @@ function Game() constructor {
             
             if (keyboard_check_pressed(vk_f7)) {
                 editor_path_mode =false;
+                if (editor_collision_mode) {
+                    // convert the surface to a data buffer
+                    surface_free(collision_surface);
+                }
                 editor_collision_mode = !editor_collision_mode;
                 selected_entity = undefined;
+                if (editor_collision_mode) {
+                    collision_surface = surface_create(room_width / 4, room_height / 4);
+                }
             }
             
             if (editor_path_mode) {
@@ -757,7 +764,12 @@ function Game() constructor {
                     }
                 }
             } else if (editor_collision_mode) {
-                
+                if (!surface_exists(collision_surface)) {
+                    collision_surface = surface_create(room_width / 4, room_height / 4);
+                }
+                surface_set_target(collision_surface);
+                draw_clear(c_white);
+                surface_reset_target();
             } else {
                 editor_hover_entity = GetUnderCursor(all_env_entities);
                 
@@ -1121,6 +1133,9 @@ function Game() constructor {
             if (editor_path_mode) {
                 draw_text(32, 32, "Click to spawn or select a path node");
             } else if (editor_collision_mode) {
+                if (surface_exists(collision_surface)) {
+                    draw_surface_stretched_ext(collision_surface, 0, 0, window_get_width(), window_get_height(), c_white, 0.5);
+                }
                 draw_text(32, 32, "Left click to paint collision information; right click to clear collision information");
             } else {
                 draw_text(32, 32, "Click to spawn a thing (" + env_object_list[| editor_model_index] + ") or select an existing thing; F4 and F5 cycle through models");
