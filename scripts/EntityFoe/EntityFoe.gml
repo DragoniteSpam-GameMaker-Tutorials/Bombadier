@@ -182,12 +182,10 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
             var xx = -ww / 2;
             var yoff = -12;
             if (status_poison) {
-                draw_sprite_ext(spr_status_poison, 0, xx, yoff, s, s, 0, c_white, 1);
-                xx += 12;
+                
             }
             if (status_burn) {
-                draw_sprite_ext(spr_status_burn, 0, xx, yoff, s, s, 0, c_white, 1);
-                xx += 12;
+                
             }
             if (status_slow) {
                 draw_sprite_ext(spr_status_slow, 0, xx, yoff, s, s, 0, c_white, 1);
