@@ -1071,6 +1071,8 @@ function Game() constructor {
         
         matrix_set(matrix_world, matrix_build_identity());
         shader_reset();
+        
+        Particles.Render();
     };
     
     // These are the UI layers that may be turned on or off during gameplay
