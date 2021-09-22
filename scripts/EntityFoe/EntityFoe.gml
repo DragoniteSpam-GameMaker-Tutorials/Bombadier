@@ -185,16 +185,7 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
             draw_sprite_stretched(spr_healthbar_fill, 0, -ww / 2, -hh / 2, ww * f, hh);
             var xx = -ww / 2;
             var yoff = -12;
-            if (status_poison) {
-                
-            }
-            if (status_burn) {
-                
-            }
-            if (status_slow) {
-                draw_sprite_ext(spr_status_slow, 0, xx, yoff, s, s, 0, c_white, 1);
-                xx += 12;
-            }
+            // if you want to draw something above the health bar, do it here
             
             gpu_set_zwriteenable(true);
             shader_reset();

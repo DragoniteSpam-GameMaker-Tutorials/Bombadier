@@ -4,7 +4,6 @@
     {"id":{"name":"shd_passthrough","path":"shaders/shd_passthrough/shd_passthrough.yy",},"order":15,},
     {"id":{"name":"spart_emitter","path":"scripts/spart_emitter/spart_emitter.yy",},"order":1,},
     {"id":{"name":"cluck_set_light_ambient","path":"scripts/cluck_set_light_ambient/cluck_set_light_ambient.yy",},"order":6,},
-    {"id":{"name":"spr_status_slow","path":"sprites/spr_status_slow/spr_status_slow.yy",},"order":4,},
     {"id":{"name":"spr_nineslice","path":"sprites/spr_nineslice/spr_nineslice.yy",},"order":4,},
     {"id":{"name":"shader_set_uniform_color","path":"scripts/shader_set_uniform_color/shader_set_uniform_color.yy",},"order":8,},
     {"id":{"name":"spr_foe_pillbug","path":"sprites/spr_foe_pillbug/spr_foe_pillbug.yy",},"order":1,},
