@@ -31,8 +31,7 @@ function EntityBullet(x, y, z, vx, vy, vz, bullet_data, damage, parent_tower) : 
                 self.parent_tower.stats.damage += damage;
                 OnHit(foe);
                 Destroy();
-                Particles.part_emitter_stone_debris.setRegion(matrix_build(foe.position.x, foe.position.y, foe.position.z + 8, 0, 0, 0, 1, 1, 1), 16, 16, 16, spart_shape_cube, ps_distr_linear, false);
-                Particles.part_emitter_stone_debris.burst(Particles.part_type_stone_debris, 50, true);
+                Particles.BurstFromEmitter(Particles.emitters.hit_effects, Particles.types.stone_debris, foe.position.x, foe.position.y, foe.position.z + 8, 32);
                 return;
             }
         }

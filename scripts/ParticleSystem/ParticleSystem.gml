@@ -3,13 +3,18 @@
 Particles = new (function() constructor {
     static init = function() {
         //Create the particle system
-        part_system_hit_effects = new spart_system([256, 600]);
+        systems = {
+            hit_effects: new spart_system([256, 600]),
+        };
         
         //Create a particle type
         //Note: All time values are in seconds, not in steps!
-        part_type_stone_debris = new spart_type();
-        with (part_type_stone_debris) {
-            setSize(3, 5, 0, 0, 0, 200);
+        types = {
+            stone_debris: new spart_type(),
+        };
+        
+        with (types.stone_debris) {
+            setSize(4, 8, 0, 0, 0, 200);
         	setSprite(spr_particle_main, 0, 1);
         	setLife(0.2, 0.3);
         	setOrientation(0, 360, 150, 0, true);
@@ -20,10 +25,17 @@ Particles = new (function() constructor {
         }
 
         //Create a particle emitter
-        part_emitter_stone_debris = new spart_emitter(part_system_hit_effects);
+        emitters = {
+            hit_effects: new spart_emitter(systems.hit_effects),
+        };
+    };
+    
+    static BurstFromEmitter = function(emitter, type, x, y, z, amount) {
+        emitter.setRegion(matrix_build(x, y, z, 0, 0, 0, 1, 1, 1), 1, 1, 1, spart_shape_cube, spart_distr_linear, false);
+        emitter.burst(type, amount, true);
     };
     
     static Render = function() {
-        part_system_hit_effects.draw(game_get_speed(gamespeed_microseconds) / 1000000);
+        systems.hit_effects.draw(game_get_speed(gamespeed_microseconds) / 1000000);
     };
 })();
