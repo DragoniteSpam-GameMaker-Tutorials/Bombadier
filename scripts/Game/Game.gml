@@ -319,6 +319,7 @@ function Game() constructor {
         selected_entity_hover = undefined;
         editor_hover_entity = undefined;
         editor_path_mode = false;
+        editor_collision_mode = false;
         editor_model_index = 0;
         
         DefineAllWaves(all_waves);
@@ -707,6 +708,7 @@ function Game() constructor {
             camera.Update();
             #region Editor stuff
             if (keyboard_check_pressed(vk_f2)) {
+                editor_collision_mode = false;
                 editor_path_mode = !editor_path_mode;
                 selected_entity = undefined;
             }
@@ -715,6 +717,12 @@ function Game() constructor {
                 if (show_question("Would you like to fuse all the map things?")) {
                     FuseMapEntities();
                 }
+            }
+            
+            if (keyboard_check_pressed(vk_f7)) {
+                editor_path_mode =false;
+                editor_collision_mode = !editor_collision_mode;
+                selected_entity = undefined;
             }
             
             if (editor_path_mode) {
@@ -748,6 +756,8 @@ function Game() constructor {
                         }
                     }
                 }
+            } else if (editor_collision_mode) {
+                
             } else {
                 editor_hover_entity = GetUnderCursor(all_env_entities);
                 
@@ -1110,6 +1120,8 @@ function Game() constructor {
         } else if (gameplay_mode == GameModes.EDITOR) {
             if (editor_path_mode) {
                 draw_text(32, 32, "Click to spawn or select a path node");
+            } else if (editor_collision_mode) {
+                draw_text(32, 32, "Left click to paint collision information; right click to clear collision information");
             } else {
                 draw_text(32, 32, "Click to spawn a thing (" + env_object_list[| editor_model_index] + ") or select an existing thing; F4 and F5 cycle through models");
                 if (selected_entity) {
@@ -1128,10 +1140,12 @@ function Game() constructor {
                     draw_text(32, 192, string(ds_list_size(all_env_entities)) + " total things");
                 }
                 draw_set_halign(fa_right);
-                draw_text(window_get_width() - 32, 32, "F1 to save");
-                draw_text(window_get_width() - 32, 64, "F2 to view/hide path nodes");
-                draw_text(window_get_width() - 32, 96, "F3 to fuse all of the environment entities together");
-                draw_text(window_get_width() - 32, 128, "F6 to search for a model");
+                var n = 0;
+                draw_text(window_get_width() - 32, ++n * 32, "F1 to save");
+                draw_text(window_get_width() - 32, ++n * 32, "F2 to view/hide path nodes");
+                draw_text(window_get_width() - 32, ++n * 32, "F3 to fuse all of the environment entities together");
+                draw_text(window_get_width() - 32, ++n * 32, "F6 to search for a model");
+                draw_text(window_get_width() - 32, ++n * 32, "F7 to go into collision painting mode");
                 draw_set_halign(fa_left);
             }
         }

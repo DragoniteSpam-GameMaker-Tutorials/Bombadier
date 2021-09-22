@@ -67,8 +67,15 @@ function Camera() constructor {
         draw_clear(c_black);
         
         var cam = camera_get_active();
-        camera_set_view_mat(cam, view_mat);
-        camera_set_proj_mat(cam, proj_mat);
+        
+        if (GAME.editor_collision_mode) {
+            camera_set_view_mat(cam, matrix_build_lookat(room_width / 2, room_height / 2, 2000, room_width / 2, room_height / 2, 0, 0, 1, 0));
+            camera_set_proj_mat(cam, matrix_build_projection_ortho(-room_width, room_height, 1, 3000));
+        } else {
+            camera_set_view_mat(cam, view_mat);
+            camera_set_proj_mat(cam, proj_mat);
+        }
+        
         camera_apply(cam);
     };
     
