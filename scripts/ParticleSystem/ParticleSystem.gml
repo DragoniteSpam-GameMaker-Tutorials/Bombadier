@@ -12,6 +12,7 @@ Particles = new (function() constructor {
         types = {
             stone_debris: new spart_type(),
             fire: new spart_type(),
+            poison: new spart_type(),
         };
         
         with (types.stone_debris) {
@@ -35,7 +36,15 @@ Particles = new (function() constructor {
         	setColour(c_orange, 1, c_orange, 1, c_orange, 0.6, c_orange, 0);
         	setBlend(true, true);
         }
-
+        
+        with (types.poison) {
+        	setSprite(spr_particle_bubble, 0, 1);
+        	setLife(1, 1.5);
+        	setSpeed(12, 20, 0, 0);
+        	setDirection(0, 0, 1, 30, false);
+        	setColour(0xff6699, 1, 0xff6699, 1, 0xff6699, 0);
+        }
+        
         //Create a particle emitter
         emitters = {
             hit_effects: new spart_emitter(systems.hit_effects),

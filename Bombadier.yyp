@@ -33,6 +33,7 @@
     {"id":{"name":"UIButton","path":"objects/UIButton/UIButton.yy",},"order":7,},
     {"id":{"name":"se_tower_magnifying_glass","path":"sounds/se_tower_magnifying_glass/se_tower_magnifying_glass.yy",},"order":12,},
     {"id":{"name":"EntityBullet","path":"scripts/EntityBullet/EntityBullet.yy",},"order":2,},
+    {"id":{"name":"spr_particle_bubble","path":"sprites/spr_particle_bubble/spr_particle_bubble.yy",},"order":44,},
     {"id":{"name":"Entities","path":"scripts/Entities/Entities.yy",},"order":0,},
     {"id":{"name":"se_foe_die","path":"sounds/se_foe_die/se_foe_die.yy",},"order":2,},
     {"id":{"name":"Waves","path":"scripts/Waves/Waves.yy",},"order":3,},
