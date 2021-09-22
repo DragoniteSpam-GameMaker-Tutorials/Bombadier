@@ -37,3 +37,6 @@
 #macro SOUND_PRIORITY_UI                50
 #macro SOUND_PRIORITY_GAMEPLAY_HIGH     40
 #macro SOUND_PRIORITY_GAMEPLAY_LOW      random_range(1, 25)
+
+#macro FIELD_WIDTH 1366
+#macro FIELD_HEIGHT 768
