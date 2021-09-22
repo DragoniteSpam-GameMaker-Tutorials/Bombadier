@@ -89,6 +89,12 @@ function EntityBulletBugSprayCloud(x, y, z, bullet_data, lifetime, max_hits, par
             Destroy();
         }
     };
+    
+    Render = function() {
+        if (irandom(4) == 1) {
+            Particles.BurstFromEmitterRadius(Particles.emitters.hit_effects, Particles.types.poison, self.position.x, self.position.y, self.position.z + 8, 16, 1);
+        }
+    };
 };
 
 function EntityBulletBird(x, y, z, bullet_data, parent_tower, nest_radius) : EntityBullet(x, y, z, 0, 0, 0, bullet_data, 0, parent_tower) constructor {

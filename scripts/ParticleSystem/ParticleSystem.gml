@@ -56,6 +56,11 @@ Particles = new (function() constructor {
         emitter.burst(type, amount, true);
     };
     
+    static BurstFromEmitterRadius = function(emitter, type, x, y, z, radius, amount) {
+        emitter.setRegion(matrix_build(x, y, z, 0, 0, 0, 1, 1, 1), radius, radius, radius, spart_shape_sphere, spart_distr_linear, false);
+        emitter.burst(type, amount, true);
+    };
+    
     static Render = function() {
         systems.hit_effects.draw(game_get_speed(gamespeed_microseconds) / 1000000 * GAME.game_speed);
     };
