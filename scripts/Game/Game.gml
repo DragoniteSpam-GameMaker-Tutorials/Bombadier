@@ -95,7 +95,7 @@ function Game() constructor {
             target.Burn(BURN_DURATION, self.parent_tower);
         }
     });
-    bullet_bug_spray =  new BulletData("Bug Spray", load_model("bugspray.d3d", format), function(target) {
+    bullet_bug_spray =  new BulletData("Bug Spray", -1, function(target) {
         target.Poison(POISON_DURATION, self.parent_tower);
     });
     bullet_fly_paper =  new BulletData("Fly Paper", load_model("flypaper.d3d", format), function(target) {
