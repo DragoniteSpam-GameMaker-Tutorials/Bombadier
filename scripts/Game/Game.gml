@@ -4,6 +4,8 @@ show_debug_overlay(true);
 application_surface_draw_enable(false);
 
 function Game() constructor {
+    Particles.init();
+    
     camera = new Camera();
     
     #region graphical stuff
