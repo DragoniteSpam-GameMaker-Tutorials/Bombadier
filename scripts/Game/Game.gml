@@ -25,22 +25,22 @@ function Game() constructor {
     vertex_texcoord(ground, 0, 0);
     vertex_colour(ground, c_white, 1);
     // 1
-    vertex_position_3d(ground, room_width, 0, 0);
+    vertex_position_3d(ground, FIELD_WIDTH, 0, 0);
     vertex_normal(ground, 0, 0, 1);
     vertex_texcoord(ground, 1, 0);
     vertex_colour(ground, c_white, 1);
     // 2
-    vertex_position_3d(ground, room_width, room_height * 1.5, 0);
+    vertex_position_3d(ground, FIELD_WIDTH, FIELD_HEIGHT * 1.5, 0);
     vertex_normal(ground, 0, 0, 1);
     vertex_texcoord(ground, 1, 1);
     vertex_colour(ground, c_white, 1);
     // 3
-    vertex_position_3d(ground, room_width, room_height * 1.5, 0);
+    vertex_position_3d(ground, FIELD_WIDTH, FIELD_HEIGHT * 1.5, 0);
     vertex_normal(ground, 0, 0, 1);
     vertex_texcoord(ground, 1, 1);
     vertex_colour(ground, c_white, 1);
     // 4
-    vertex_position_3d(ground, 0, room_height * 1.5, 0);
+    vertex_position_3d(ground, 0, FIELD_HEIGHT * 1.5, 0);
     vertex_normal(ground, 0, 0, 1);
     vertex_texcoord(ground, 0, 1);
     vertex_colour(ground, c_white, 1);
@@ -57,7 +57,7 @@ function Game() constructor {
     fused = {
         raw: undefined,
         vbuff: undefined,
-        collision: -1,
+        collision: buffer_create((FIELD_WIDTH / 4) * (FIELD_HEIGHT / 4), buffer_fixed, 1),
     };
     
     #region environment objects
@@ -719,22 +719,15 @@ function Game() constructor {
                     var surface_buffer = buffer_create(surface_get_width(collision_surface) * surface_get_height(collision_surface) * 4, buffer_fixed, 1);
                     buffer_get_surface(surface_buffer, collision_surface, 0);
                     
-                    var collision_data_buffer = buffer_create(surface_get_width(collision_surface) * surface_get_height(collision_surface), buffer_fixed, 1);
-                    
                     buffer_seek(surface_buffer, buffer_seek_start, 0);
-                    buffer_seek(collision_data_buffer, buffer_seek_start, 0);
+                    buffer_seek(fused.collision, buffer_seek_start, 0);
                     
-                    repeat (buffer_get_size(collision_data_buffer)) {
+                    repeat (buffer_get_size(fused.collision)) {
                         var color = buffer_read(surface_buffer, buffer_u32) & 0xff;
-                        buffer_write(collision_data_buffer, buffer_u8, color);
+                        buffer_write(fused.collision, buffer_u8, color);
                     }
                     
                     buffer_delete(surface_buffer);
-                    
-                    if (buffer_exists(fused.collision)) {
-                        buffer_delete(fused.collision);
-                        fused.collision = collision_data_buffer;
-                    }
                 }
                 editor_collision_mode = !editor_collision_mode;
                 selected_entity = undefined;
@@ -951,8 +944,8 @@ function Game() constructor {
             var json_string = buffer_read(buffer, buffer_text);
             var load_json = json_parse(json_string);
             
-            var ww = room_width div GRID_CELL_SIZE;
-            var hh = room_height div GRID_CELL_SIZE;
+            var ww = FIELD_WIDTH div GRID_CELL_SIZE;
+            var hh = FIELD_HEIGHT div GRID_CELL_SIZE;
             ds_grid_resize(collision_grid, ww, hh);
             ds_grid_clear(collision_grid, GRID_COLLISION_FREE);
             
@@ -1035,11 +1028,11 @@ function Game() constructor {
             // Draw a debug line so you can see where the bounds of the world is
             var vb_border = vertex_create_buffer();
             vertex_begin(vb_border, format);
-            vertex_position_3d(vb_border, 0, room_height, 8);
+            vertex_position_3d(vb_border, 0, FIELD_HEIGHT, 8);
             vertex_normal(vb_border, 0, 0, 1);
             vertex_texcoord(vb_border, 0, 0);
             vertex_colour(vb_border, c_red, 1);
-            vertex_position_3d(vb_border, room_width, room_height, 8);
+            vertex_position_3d(vb_border, FIELD_WIDTH, FIELD_HEIGHT, 8);
             vertex_normal(vb_border, 0, 0, 1);
             vertex_texcoord(vb_border, 0, 0);
             vertex_colour(vb_border, c_red, 1);
@@ -1132,10 +1125,21 @@ function Game() constructor {
                 draw_text(32, 32, "Click to spawn or select a path node");
             } else if (editor_collision_mode) {
                 if (!surface_exists(collision_surface)) {
-                    collision_surface = surface_create(room_width / 4, room_height / 4);
-                    surface_set_target(collision_surface);
-                    draw_clear(c_black);
-                    surface_reset_target();
+                    collision_surface = surface_create(ceil(FIELD_WIDTH / 4), ceil(FIELD_HEIGHT / 4));
+                    
+                    var surface_buffer = buffer_create(surface_get_width(collision_surface) * surface_get_height(collision_surface) * 4, buffer_fixed, 1);
+                    
+                    buffer_seek(surface_buffer, buffer_seek_start, 0);
+                    buffer_seek(fused.collision, buffer_seek_start, 0);
+                    
+                    repeat (buffer_get_size(fused.collision)) {
+                        var color = buffer_read(fused.collision, buffer_u8);
+                        buffer_write(surface_buffer, buffer_u32, 0xff000000 | make_colour_rgb(color, color, color));
+                    }
+                    
+                    buffer_set_surface(surface_buffer, collision_surface, 0);
+                    
+                    buffer_delete(surface_buffer);
                 }
                 surface_set_target(collision_surface);
                 
