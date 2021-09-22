@@ -137,6 +137,7 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
             self.whodunnit_burn.stats.damage += BURN_DPS * DT;
             Damage(BURN_DPS * DT);
             status_burn -= DT;
+            Particles.BurstFromEmitter(Particles.emitters.hit_effects, Particles.types.fire, self.position.x, self.position.y, self.position.z + 8, 1);
         }
         
         if (status_poison > 0) {

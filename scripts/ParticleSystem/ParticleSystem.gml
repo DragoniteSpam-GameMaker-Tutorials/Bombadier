@@ -11,6 +11,7 @@ Particles = new (function() constructor {
         //Note: All time values are in seconds, not in steps!
         types = {
             stone_debris: new spart_type(),
+            fire: new spart_type(),
         };
         
         with (types.stone_debris) {
@@ -22,6 +23,17 @@ Particles = new (function() constructor {
         	setDirection(0, 0, 1, 75, false);
         	setColour(0x004b96, 1, 0x004b96, 1, 0x004b96, 0);
         	setGravity(1, 0, 0, -1);
+        }
+        
+        with (types.fire) {
+        	setSprite(spr_particle_main, 0, 1);
+        	setSize(1.5, 4, 0, 0, 0, 200);
+        	setLife(0.25, 0.4);
+        	setOrientation(0, 360, 150, 0, true);
+        	setSpeed(120, 160, 0, 0);
+        	setDirection(0, 0, 1, 30, false);
+        	setColour(c_orange, 1, c_orange, 1, c_orange, 0.6, c_orange, 0);
+        	setBlend(true, true);
         }
 
         //Create a particle emitter
