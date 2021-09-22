@@ -505,9 +505,6 @@ function Game() constructor {
         vertex_begin(vbuff, format);
         ds_grid_clear(fused.collision, GRID_COLLISION_FREE);
         
-        var actual_collision_grid = collision_grid;
-        collision_grid = fused.collision;
-        
         var cam_x = camera.to.x - camera.from.x;
         var cam_y = camera.to.y - camera.from.y;
         var cam_z = camera.to.z - camera.from.z;
