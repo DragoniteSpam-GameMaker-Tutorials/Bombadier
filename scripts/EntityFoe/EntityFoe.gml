@@ -103,6 +103,7 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
         Destroy();
         GAME.player_money += reward;
         GAME.CheckGameOver();
+        Particles.BurstFromEmitter(Particles.emitters.hit_effects, Particles.types.death, self.position.x, self.position.y, self.position.z + 8, 12);
         audio_play_sound(se_foe_die, SOUND_PRIORITY_GAMEPLAY_LOW, false);
     };
     

@@ -11,6 +11,7 @@ Particles = new (function() constructor {
         //Note: All time values are in seconds, not in steps!
         types = {
             stone_debris: new spart_type(),
+            death: new spart_type(),
             fire: new spart_type(),
             poison: new spart_type(),
         };
@@ -23,6 +24,17 @@ Particles = new (function() constructor {
         	setSpeed(120, 160, 0, 0);
         	setDirection(0, 0, 1, 75, false);
         	setColour(0x004b96, 1, 0x004b96, 1, 0x004b96, 0);
+        	setGravity(1, 0, 0, -1);
+        }
+        
+        with (types.death) {
+            setSize(4, 8, 0, 0, 0, 200);
+        	setSprite(spr_particle_main, 0, 1);
+        	setLife(0.2, 0.3);
+        	setOrientation(0, 360, 150, 0, true);
+        	setSpeed(120, 160, 0, 0);
+        	setDirection(0, 0, 1, 75, false);
+        	setColour(c_maroon, 1, c_maroon, 1, c_maroon, 0);
         	setGravity(1, 0, 0, -1);
         }
         
