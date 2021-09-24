@@ -441,8 +441,8 @@ function Game() constructor {
         
         for (var i = cell_xmin; i <= cell_xmax; i++) {
             for (var j = cell_ymin; j <= cell_ymax; j++) {
-                var addr = (j * (FIELD_WIDTH div GRID_CELL_SIZE)) + i;
-                if (buffer_peek(fused.collision, addr, buffer_u8)) {
+                var addr = (j * ceil(FIELD_WIDTH / GRID_CELL_SIZE)) + i;
+                if (!buffer_peek(fused.collision, addr, buffer_u8)) {
                     return false;
                 }
             }
