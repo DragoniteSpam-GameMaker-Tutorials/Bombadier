@@ -501,14 +501,6 @@ function Game() constructor {
     
     ResetCollisionData = function() {
         ds_grid_clear(collision_grid, GRID_COLLISION_FREE);
-        for (var i = 0; i < ds_list_size(all_entities); i++) {
-            all_entities[| i].AddCollision();
-        }
-        for (var i = 0; i < array_length(path_nodes); i++) {
-            if (path_nodes[i]) {
-                path_nodes[i].AddCollision();
-            }
-        }
     };
     
     FuseMapEntities = function() {

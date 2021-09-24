@@ -2,7 +2,6 @@ function EntityBullet(x, y, z, vx, vy, vz, bullet_data, damage, parent_tower) : 
     self.velocity = new Vector3(vx, vy, vz);
     self.bullet_data = bullet_data;
     self.damage = damage;
-    self.solid = false;
     self.time_to_live = 1;
     self.parent_tower = parent_tower;
     
@@ -10,10 +9,6 @@ function EntityBullet(x, y, z, vx, vy, vz, bullet_data, damage, parent_tower) : 
     
     AddToMap = function() {
         ds_list_add(GAME.all_entities, self);
-    };
-    
-    AddCollision = function() {
-        
     };
     
     OnHit = method(self, method_get_index(bullet_data.OnHit));

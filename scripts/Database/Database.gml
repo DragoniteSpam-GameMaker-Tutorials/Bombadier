@@ -36,12 +36,12 @@ function ModelData(name, vbuff) constructor {
     self.name = name;
     self.vbuff = vbuff;
     
-    var xmin = 100000000;
-    var ymin = 100000000;
-    var zmin = 100000000;
-    var xmax = -100000000;
-    var ymax = -100000000;
-    var zmax = -100000000;
+    var xmin = infinity;
+    var ymin = infinity;
+    var zmin = infinity;
+    var xmax = -infinity;
+    var ymax = -infinity;
+    var zmax = -infinity;
     
     var data_buffer = buffer_create_from_vertex_buffer(vbuff, buffer_fixed, 1);
     
@@ -58,6 +58,4 @@ function ModelData(name, vbuff) constructor {
     }
     
     collision = new BBox(new Vector3(xmin, ymin, zmin), new Vector3(xmax, ymax, zmax));
-    
-    solid = ((xmin - xmax) * (ymin - ymax)) >= 256;
 }

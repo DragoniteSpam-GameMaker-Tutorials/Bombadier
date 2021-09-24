@@ -43,16 +43,6 @@ function PathNode(position) constructor {
     collision = new BBox(new Vector3(position.x - 8, position.y - 8, position.z - 8), new Vector3(position.x + 8, position.y + 8, position.z + 8));
     raycast = coll_ray_aabb;
     
-    AddCollision = function() {
-        var cell_xmin = collision.p1.x div GRID_CELL_SIZE;
-        var cell_ymin = collision.p1.y div GRID_CELL_SIZE;
-        var cell_xmax = ceil(collision.p2.x / GRID_CELL_SIZE);
-        var cell_ymax = ceil(collision.p2.y / GRID_CELL_SIZE);
-        ds_grid_set_region(GAME.collision_grid, cell_xmin, cell_ymin, cell_xmax, cell_ymax, GRID_COLLISION_PATH);
-    };
-    
-    AddCollision();
-    
     Render = function() {
         // set the shader if you are selected
         if (GAME.selected_entity == self || GAME.editor_hover_entity == self) {
