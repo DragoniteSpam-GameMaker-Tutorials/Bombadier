@@ -922,6 +922,8 @@ function Game() constructor {
         if (fused.raw != undefined) {
             buffer_save(fused.raw, filename_change_ext(filename, ".fused"));
         }
+        
+        buffer_save(fused.collision, filename_change_ext(filename, ".collision"));
     };
     
     LoadMap = function(filename) {
@@ -967,6 +969,11 @@ function Game() constructor {
                 fused.raw = buffer_load(filename_change_ext(filename, ".fused"));
                 fused.vbuff = vertex_create_buffer_from_buffer(fused.raw, format);
                 vertex_freeze(fused.vbuff);
+            }
+            
+            if (file_exists(filename_change_ext(filename, ".collision"))) {
+                if (buffer_exists(fused.collision)) buffer_delete(fused.collision);
+                fused.collision = buffer_load(filename_change_ext(filename, ".collision"));
             }
         } catch (e) {
             show_debug_message("Something bad happened loading the file:");

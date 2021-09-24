@@ -522,6 +522,7 @@
     {"CopyToMask":-1,"filePath":"datafiles/maps","resourceVersion":"1.0","name":"level7.bug","resourceType":"GMIncludedFile",},
     {"CopyToMask":-1,"filePath":"datafiles/maps","resourceVersion":"1.0","name":"level7.fused","resourceType":"GMIncludedFile",},
     {"CopyToMask":-1,"filePath":"datafiles/maps","resourceVersion":"1.0","name":"level8.fused","resourceType":"GMIncludedFile",},
+    {"CopyToMask":-1,"filePath":"datafiles/maps","resourceVersion":"1.0","name":"level1.collision","resourceType":"GMIncludedFile",},
   ],
   "MetaData": {
     "IDEVersion": "2.3.4.583",
