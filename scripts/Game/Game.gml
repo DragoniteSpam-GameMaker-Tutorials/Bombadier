@@ -57,7 +57,7 @@ function Game() constructor {
     fused = {
         raw: undefined,
         vbuff: undefined,
-        collision: buffer_create((FIELD_WIDTH / 4) * (FIELD_HEIGHT / 4), buffer_fixed, 1),
+        collision: buffer_create((FIELD_WIDTH / GRID_CELL_SIZE) * (FIELD_HEIGHT / GRID_CELL_SIZE), buffer_fixed, 1),
     };
     
     #region environment objects
@@ -1135,7 +1135,7 @@ function Game() constructor {
                 draw_text(32, 32, "Click to spawn or select a path node");
             } else if (editor_collision_mode) {
                 if (!surface_exists(collision_surface)) {
-                    collision_surface = surface_create(ceil(FIELD_WIDTH / 4), ceil(FIELD_HEIGHT / 4));
+                    collision_surface = surface_create(ceil(FIELD_WIDTH / GRID_CELL_SIZE), ceil(FIELD_HEIGHT / GRID_CELL_SIZE));
                     
                     var surface_buffer = buffer_create(surface_get_width(collision_surface) * surface_get_height(collision_surface) * 4, buffer_fixed, 1);
                     
