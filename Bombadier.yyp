@@ -69,7 +69,6 @@
     {"id":{"name":"cluck_apply","path":"scripts/cluck_apply/cluck_apply.yy",},"order":0,},
     {"id":{"name":"EntityFoe","path":"scripts/EntityFoe/EntityFoe.yy",},"order":3,},
     {"id":{"name":"Database","path":"scripts/Database/Database.yy",},"order":4,},
-    {"id":{"name":"Debug","path":"scripts/Debug/Debug.yy",},"order":0,},
     {"id":{"name":"spart_type","path":"scripts/spart_type/spart_type.yy",},"order":3,},
     {"id":{"name":"Collision","path":"scripts/Collision/Collision.yy",},"order":3,},
     {"id":{"name":"Vector","path":"scripts/Vector/Vector.yy",},"order":2,},

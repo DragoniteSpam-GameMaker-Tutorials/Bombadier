@@ -1196,9 +1196,6 @@ function Game() constructor {
                 draw_set_halign(fa_left);
             }
         }
-        if (keyboard_check(vk_f11)) {
-            debug_draw_collision(32, 32);
-        }
     };
     
     Initialize();
