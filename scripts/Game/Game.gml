@@ -431,9 +431,20 @@ function Game() constructor {
         var cell_xmax = ceil(xmax / GRID_CELL_SIZE);
         var cell_ymax = ceil(ymax / GRID_CELL_SIZE);
         
-        var collision_grid_state = ds_grid_get_max(collision_grid, cell_xmin, cell_ymin, cell_xmax, cell_ymax) == GRID_COLLISION_FREE;
-        var collision_grid_fused_state = ds_grid_get_max(fused.collision, cell_xmin, cell_ymin, cell_xmax, cell_ymax) == GRID_COLLISION_FREE;
-        return (collision_grid_state && collision_grid_fused_state);
+        if (ds_grid_get_max(collision_grid, cell_xmin, cell_ymin, cell_xmax, cell_ymax) != GRID_COLLISION_FREE) {
+            return false;
+        }
+        
+        for (var i = cell_xmin; i <= cell_xmax; i++) {
+            for (var j = cell_ymin; j <= cell_ymax; j++) {
+                var addr = (j * (FIELD_WIDTH div GRID_CELL_SIZE)) + i;
+                if (buffer_peek(fused.collision, addr, buffer_u8)) {
+                    return false;
+                }
+            }
+        }
+        
+        return true;
     };
     
     CollisionIsPath = function(entity) {
