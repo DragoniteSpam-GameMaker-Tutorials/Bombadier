@@ -224,14 +224,16 @@ function EntityTowerGlass(x, y, z, class) : EntityTower(x, y, z, class) construc
         target_foe = GetTarget();
         var is_burning = false;
         if (target_foe) {
-            target_foe.Damage(self.act_damage * DT);
-            self.stats.damage += self.act_damage * DT;
-            self.stats.duration += DT;
-            if (self.level >= 3) {
-                target_foe.Burn(BURN_DURATION, self);
+            if (target_foe.shield == 0) {
+                target_foe.Damage(self.act_damage * DT);
+                self.stats.damage += self.act_damage * DT;
+                self.stats.duration += DT;
+                if (self.level >= 3) {
+                    target_foe.Burn(BURN_DURATION, self);
+                }
+                Particles.BurstFromEmitter(Particles.emitters.hit_effects, Particles.types.fire, target_foe.position.x, target_foe.position.y, target_foe.position.z + 8, 1);
             }
             rotation.z = point_direction(self.position.x, self.position.y, target_foe.position.x, target_foe.position.y);
-            Particles.BurstFromEmitter(Particles.emitters.hit_effects, Particles.types.fire, target_foe.position.x, target_foe.position.y, target_foe.position.z + 8, 1);
             is_burning = true;
         }
         
