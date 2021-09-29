@@ -16,35 +16,52 @@ function Camera() constructor {
     mouse_cast = undefined;
     floor_intersect = undefined;
     
+    mouse_last = { x: undefined, y: undefined };
+    
     Update = function() {
         var mspd = 200;
         var dt = DT;
+        var mx = 0;
+        var my = 0
         
         if (GAME.gameplay_mode != GameModes.TITLE) {
-            if (/*keyboard_check(vk_left) || */keyboard_check(ord("A"))) {
-                if (to.x >= 0) {
-                    from.x -= mspd * dt;
-                    to.x -= mspd * dt;
-                }
+            if (keyboard_check(ord("A"))) {
+                mx -= mspd * dt;
+                mx -= mspd * dt;
             }
-            if (/*keyboard_check(vk_right) || */keyboard_check(ord("D"))) {
-                if (to.x <= room_width) {
-                    from.x += mspd * dt;
-                    to.x += mspd * dt;
-                }
+            if (keyboard_check(ord("D"))) {
+                mx += mspd * dt;
+                mx += mspd * dt;
             }
-            if (/*keyboard_check(vk_up) || */keyboard_check(ord("W"))) {
-                if (to.y >= -room_height / 2) {
-                    from.y -= mspd * dt;
-                    to.y -= mspd * dt;
-                }
+            if (keyboard_check(ord("W"))) {
+                my -= mspd * dt;
+                my -= mspd * dt;
             }
-            if (/*keyboard_check(vk_down) || */keyboard_check(ord("S"))) {
-                if (to.y <= room_height / 2) {
-                    from.y += mspd * dt;
-                    to.y += mspd * dt;
-                }
+            if (keyboard_check(ord("S"))) {
+                my += mspd * dt;
+                my += mspd * dt;
             }
+        }
+        
+        if (GAME.gameplay_mode == GameModes.GAMEPLAY) {
+            if (self.mouse_last.x != undefined && mouse_check_button(mb_middle)) {
+                var mouse_drag_speed = 0.4;
+                mx += (window_mouse_get_x() - self.mouse_last.x) * mouse_drag_speed;
+                my += (window_mouse_get_y() - self.mouse_last.y) * mouse_drag_speed;
+            }
+            
+            self.mouse_last.x = window_mouse_get_x();
+            self.mouse_last.y = window_mouse_get_y();
+        }
+        
+        if (to.x + mx >= 0 && to.x + mx <= room_width) {
+            from.x += mx;
+            to.x += mx;
+        }
+        
+        if (to.y + my >= 0 && to.y + my <= room_height / 2) {
+            from.y += my;
+            to.y += my;
         }
         
         view_mat = matrix_build_lookat(from.x, from.y, from.z, to.x, to.y, to.z, up.x, up.y, up.z);
