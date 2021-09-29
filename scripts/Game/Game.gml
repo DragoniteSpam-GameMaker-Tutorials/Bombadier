@@ -1128,15 +1128,25 @@ function Game() constructor {
             ActiveGUILayer().Render();
             
             player_cursor_over_ui = false;
+            
+            if (mouse_check_button(mb_middle)) {
+                draw_sprite(spr_cursor_pan, 0, window_mouse_get_x(), window_mouse_get_y());
+                window_set_cursor(cr_none);
+            } else {
+                window_set_cursor(cr_default);
+            }
         } else if (gameplay_mode == GameModes.PAUSED) {
+            window_set_cursor(cr_default);
             GetGUILayer(current_pause_screen).Render();
             
             player_cursor_over_ui = false;
         } else if (gameplay_mode == GameModes.GAME_OVER) {
+            window_set_cursor(cr_default);
             GetGUILayer(current_game_over_screen).Render();
             
             player_cursor_over_ui = false;
         } else if (gameplay_mode == GameModes.EDITOR) {
+            window_set_cursor(cr_default);
             if (editor_path_mode) {
                 draw_text(32, 32, "Click to spawn or select a path node");
             } else if (editor_collision_mode) {
