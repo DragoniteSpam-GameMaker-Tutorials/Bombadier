@@ -43,6 +43,10 @@ function EntityBullet(x, y, z, vx, vy, vz, bullet_data, damage, parent_tower) : 
         vertex_submit(bullet_data.model.vbuff, pr_trianglelist, -1);
         matrix_set(matrix_world, matrix_build_identity());
     };
+    
+    GameOver = function() {
+        self.Destroy();
+    };
 }
 
 // Clouds last for (x) seconds or (y) hits on the foe

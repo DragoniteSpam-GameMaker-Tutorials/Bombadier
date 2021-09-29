@@ -351,6 +351,7 @@ function Game() constructor {
     };
     
     GoToTitle = function() {
+        self.CallEntityGameOver();
         self.LoadMap("maps/title.bug");
         self.gameplay_mode = GameModes.TITLE;
         self.current_title_screen = "UI_Title_Screen";
@@ -396,9 +397,7 @@ function Game() constructor {
         if (player_health <= 0) {
             self.gameplay_mode = GameModes.GAME_OVER;
             self.current_game_over_screen = "UI_Game_Over_Lose";
-            for (var i = 0, n = ds_list_size(self.all_entities); i < n; i++) {
-                self.all_entities[| i].GameOver();
-            }
+            self.CallEntityGameOver();
         }
     };
     
@@ -408,7 +407,11 @@ function Game() constructor {
         if (!ds_list_empty(self.all_foes)) return;
         self.gameplay_mode = GameModes.GAME_OVER;
         self.current_game_over_screen = "UI_Game_Over_Win";
-        for (var i = 0, n = ds_list_size(self.all_entities); i < n; i++) {
+        self.CallEntityGameOver();
+    };
+    
+    CallEntityGameOver = function() {
+        for (var i = ds_list_size(self.all_entities) - 1; i >= 0; i--) {
             self.all_entities[| i].GameOver();
         }
     };
