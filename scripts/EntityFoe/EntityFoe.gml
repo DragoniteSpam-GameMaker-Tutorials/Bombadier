@@ -9,6 +9,7 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
     self.base_def = class.def;
     self.base_mdef = class.mdef;
     self.base_speed = class.speed;
+    self.shield = 0;
     
     self.mod_def = 1;
     self.mod_mdef = 1;
@@ -89,6 +90,10 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
     self.destination = clone(self.path[1].position);
     
     Damage = function(amount) {
+        if (self.shield > 0) {
+            self.shield--;
+            return;
+        }
         hp -= max(amount, 0);
         if (hp < 0) {
             Die();
@@ -207,13 +212,4 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
 
 function EntityFoeMidge(class, level) : EntityFoe(class, level) constructor {
     self.shield = 1;
-    
-    self._oldDamage = Damage;
-    Damage = function(amount) {
-        if (self.shield > 0) {
-            self.shield--;
-            return;
-        }
-        self._oldDamage(amount);
-    };
 }
