@@ -396,6 +396,9 @@ function Game() constructor {
         if (player_health <= 0) {
             self.gameplay_mode = GameModes.GAME_OVER;
             self.current_game_over_screen = "UI_Game_Over_Lose";
+            for (var i = 0, n = ds_list_size(self.all_entities); i < n; i++) {
+                self.all_entities[| i].GameOver();
+            }
         }
     };
     
@@ -405,6 +408,9 @@ function Game() constructor {
         if (!ds_list_empty(self.all_foes)) return;
         self.gameplay_mode = GameModes.GAME_OVER;
         self.current_game_over_screen = "UI_Game_Over_Win";
+        for (var i = 0, n = ds_list_size(self.all_entities); i < n; i++) {
+            self.all_entities[| i].GameOver();
+        }
     };
     
     SpawnTower = function() {
@@ -670,33 +676,35 @@ function Game() constructor {
                 SendInWaveEarly();
             }
             
-            // Speed up the game by running the update tick multiple times per step
-            repeat (self.game_speed) {
-                // Check to see if a new wave should be launched
-                if (wave_countdown > 0 && waves_remain) {
-                    wave_countdown -= DT;
-                    if (wave_countdown <= 0) {
-                        SendInWave();
-                    }
-                }
-                
-                // Check to see if the currently active wave(s) can still update
-                for (var i = ds_list_size(wave_active) - 1; i >= 0; i--) {
-                    wave_active[| i].Update();
-                    if (wave_active[| i].Finished()) {
-                        ds_list_delete(wave_active, i);
-                        if (ds_list_empty(wave_active)) {
-                            wave_countdown = WAVE_COUNTDOWN;
+            if (self.player_health > 0) {
+                // Speed up the game by running the update tick multiple times per step
+                repeat (self.game_speed) {
+                    // Check to see if a new wave should be launched
+                    if (wave_countdown > 0 && waves_remain) {
+                        wave_countdown -= DT;
+                        if (wave_countdown <= 0) {
+                            SendInWave();
                         }
                     }
-                }
-                
-                for (var i = 0; i < ds_list_size(all_entities); i++) {
-                    all_entities[| i].BeginUpdate();
-                }
-            
-                for (var i = 0; i < ds_list_size(all_entities); i++) {
-                    all_entities[| i].Update();
+                    
+                    // Check to see if the currently active wave(s) can still update
+                    for (var i = ds_list_size(wave_active) - 1; i >= 0; i--) {
+                        wave_active[| i].Update();
+                        if (wave_active[| i].Finished()) {
+                            ds_list_delete(wave_active, i);
+                            if (ds_list_empty(wave_active)) {
+                                wave_countdown = WAVE_COUNTDOWN;
+                            }
+                        }
+                    }
+                    
+                    for (var i = 0; i < ds_list_size(all_entities); i++) {
+                        all_entities[| i].BeginUpdate();
+                    }
+                    
+                    for (var i = 0; i < ds_list_size(all_entities); i++) {
+                        all_entities[| i].Update();
+                    }
                 }
             }
             #endregion
@@ -762,13 +770,11 @@ function Game() constructor {
                     if (selected_entity) {
                         for (var i = 0; i < array_length(path_nodes); i++) {
                             if (path_nodes[i] == selected_entity) {
-                                for (var j = i; j < array_length(path_nodes) - 1; j++) {
-                                    path_nodes[j] = path_nodes[j + 1];
-                                }
-                                path_nodes[array_length(path_nodes) - 1] = undefined;
+                                array_delete(path_nodes, i, 1);
                                 break;
                             }
                         }
+                        selected_entity = undefined;
                     }
                 }
             } else if (editor_collision_mode) {
@@ -905,19 +911,12 @@ function Game() constructor {
         var filename = get_save_filename("Bombadier maps|*.bug", "map.bug");
         if (filename == "") return;
         
-        for (var node_count = array_length(path_nodes) - 1; node_count >= 0; node_count--) {
-            if (path_nodes[node_count] != undefined) break;
-        }
-        
         var save_json = {
             entities: array_create(ds_list_size(all_env_entities), undefined),
-            nodes: array_create(node_count),
+            nodes: path_nodes,
         };
         for (var i = 0; i < ds_list_size(all_env_entities); i++) {
             all_env_entities[| i].Save(save_json, i);
-        }
-        for (var i = 0; i < node_count; i++) {
-            save_json.nodes[@ i] = path_nodes[i];
         }
         
         var json_string = json_stringify(save_json);

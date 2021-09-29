@@ -286,6 +286,10 @@ function EntityTowerGlass(x, y, z, class) : EntityTower(x, y, z, class) construc
             "Focus duration: " + string_format(self.stats.duration, 1, 1) + " s\n" +
             "Damange dealt: " + string_format(self.stats.damage, 1, 1);
     };
+    
+    GameOver = function() {
+        audio_stop_sound(se_tower_magnifying_glass);
+    };
 }
 
 function EntityTowerSpray(x, y, z, class) : EntityTower(x, y, z, class) constructor {

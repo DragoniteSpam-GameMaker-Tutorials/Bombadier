@@ -37,6 +37,10 @@ function Entity(x, y, z) constructor {
             ds_list_delete(GAME.all_entities, current_index);
         }
     };
+    
+    GameOver = function() {
+        
+    };
 }
 
 function EntityEnv(x, y, z, model, savename) : Entity(x, y, z) constructor {
