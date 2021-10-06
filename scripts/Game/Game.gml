@@ -225,6 +225,7 @@ function Game() constructor {
     resolution_scalar_options = [0.25, 0.33, 0.4, 0.5, 0.66, 0.75, 1];
     resolution_scalar_index = APP_SURFACE_DEFAULT_SCALE_INDEX;
     resolution_scalar = resolution_scalar_options[resolution_scalar_index];
+    outline_surface = surface_create(1280, 720);
     
     // don't get rid of this, please
     display_set_gui_maximize();
@@ -998,6 +999,16 @@ function Game() constructor {
     };
     
     Render = function() {
+        surface_set_target(self.outline_surface);
+        
+        camera.Render();
+        
+        if (selected_entity) selected_entity.Render();
+        
+        
+        surface_reset_target();
+        
+        
         camera.Render();
         
         gpu_set_ztestenable(false);
@@ -1121,6 +1132,11 @@ function Game() constructor {
     
     GUI = function() {
         draw_surface_stretched(application_surface, 0, 0, window_get_width(), window_get_height());
+        
+        if (keyboard_check(ord("P"))) {
+            draw_surface_stretched(self.outline_surface, 0, 0, window_get_width(), window_get_height());
+        }
+        
         if (gameplay_mode == GameModes.TITLE) {
             GetGUILayer(current_title_screen).Render();
         } else if (gameplay_mode == GameModes.GAMEPLAY) {
