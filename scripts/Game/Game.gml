@@ -58,6 +58,33 @@ function Game() constructor {
         raw: undefined,
         vbuff: undefined,
         collision: buffer_create((FIELD_WIDTH / GRID_CELL_SIZE) * (FIELD_HEIGHT / GRID_CELL_SIZE), buffer_fixed, 1),
+        collision_sprite: -1,
+        
+        GenerateCollisionSprite: function() {
+            var csurf = surface_create(ceil(FIELD_WIDTH / GRID_CELL_SIZE), ceil(FIELD_HEIGHT / GRID_CELL_SIZE));
+            var surface_buffer = buffer_create(surface_get_width(csurf) * surface_get_height(csurf) * 4, buffer_fixed, 1);
+            buffer_seek(surface_buffer, buffer_seek_start, 0);
+            buffer_seek(self.collision, buffer_seek_start, 0);
+            
+            surface_set_target(csurf);
+            draw_clear(c_black);
+            surface_reset_target();
+            
+            repeat (buffer_get_size(self.collision)) {
+                var color = buffer_read(self.collision, buffer_u8);
+                buffer_write(surface_buffer, buffer_u32, 0xff000000 | make_colour_rgb(color, color, color));
+            }
+            
+            buffer_set_surface(surface_buffer, csurf, 0);
+            
+            if (sprite_exists(self.collision_sprite)) {
+                sprite_delete(self.collision_sprite);
+            }
+            
+            self.collision_sprite = sprite_create_from_surface(csurf, 0, 0, surface_get_width(csurf), surface_get_height(csurf), false, false, 0, 0);
+            
+            surface_free(csurf);
+        },
     };
     
     #region environment objects
@@ -747,6 +774,8 @@ function Game() constructor {
                     }
                     
                     buffer_delete(surface_buffer);
+                    
+                    self.fused.GenerateCollisionSprite();
                 }
                 editor_collision_mode = !editor_collision_mode;
                 selected_entity = undefined;
@@ -984,6 +1013,7 @@ function Game() constructor {
             if (file_exists(filename_change_ext(filename, ".collision"))) {
                 if (buffer_exists(fused.collision)) buffer_delete(fused.collision);
                 fused.collision = buffer_load(filename_change_ext(filename, ".collision"));
+                fused.GenerateCollisionSprite();
             }
         } catch (e) {
             show_debug_message("Something bad happened loading the file:");
