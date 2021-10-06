@@ -87,6 +87,10 @@ void CommonFog(inout vec4 baseColor) {
     baseColor.rgb = mix(baseColor.rgb, fogColor, f);
 }
 
+uniform sampler2D samplerCollision;
+uniform vec2 samplerCollisionScale;
+uniform float samplerCollisionStrength;
+
 void main() {
     vec4 color = v_vColour * texture2D(gm_BaseTexture, v_vTexcoord);
     
@@ -97,5 +101,6 @@ void main() {
         discard;
     }
     
-    gl_FragColor = color;
+    vec4 colorFromCollision = texture2D(samplerCollision, vec2(v_LightWorldPosition.x, v_LightWorldPosition.y) / samplerCollisionScale);
+    gl_FragColor = mix(color, colorFromCollision, samplerCollisionStrength);
 }
