@@ -138,7 +138,7 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
     Sell = function() {
         Destroy();
         RemoveCollision();
-        ds_list_add(GAME.all_towers, self);
+        ds_list_delete(GAME.all_towers, ds_list_find_index(GAME.all_towers, self));
         GAME.player_money += GetSellValue();
         audio_play_sound(se_sell, SOUND_PRIORITY_GAMEPLAY_HIGH, false);
     };
