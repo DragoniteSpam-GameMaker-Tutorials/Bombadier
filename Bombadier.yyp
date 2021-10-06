@@ -29,6 +29,7 @@
     {"id":{"name":"spr_foe_ant","path":"sprites/spr_foe_ant/spr_foe_ant.yy",},"order":0,},
     {"id":{"name":"sh_spart","path":"shaders/sh_spart/sh_spart.yy",},"order":0,},
     {"id":{"name":"UIButton","path":"objects/UIButton/UIButton.yy",},"order":7,},
+    {"id":{"name":"shd_solid_color","path":"shaders/shd_solid_color/shd_solid_color.yy",},"order":46,},
     {"id":{"name":"se_tower_magnifying_glass","path":"sounds/se_tower_magnifying_glass/se_tower_magnifying_glass.yy",},"order":12,},
     {"id":{"name":"EntityBullet","path":"scripts/EntityBullet/EntityBullet.yy",},"order":2,},
     {"id":{"name":"spr_particle_bubble","path":"sprites/spr_particle_bubble/spr_particle_bubble.yy",},"order":44,},
@@ -83,6 +84,7 @@
     {"id":{"name":"se_tower_bug_spray","path":"sounds/se_tower_bug_spray/se_tower_bug_spray.yy",},"order":10,},
     {"id":{"name":"sh_spart_mesh","path":"shaders/sh_spart_mesh/sh_spart_mesh.yy",},"order":1,},
     {"id":{"name":"cluck_set_alpha_test_enable","path":"scripts/cluck_set_alpha_test_enable/cluck_set_alpha_test_enable.yy",},"order":4,},
+    {"id":{"name":"shd_outline","path":"shaders/shd_outline/shd_outline.yy",},"order":47,},
     {"id":{"name":"rm_test","path":"rooms/rm_test/rm_test.yy",},"order":3,},
   ],
   "Options": [

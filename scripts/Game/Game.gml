@@ -1003,8 +1003,9 @@ function Game() constructor {
         
         camera.Render();
         
+        shader_set(shd_solid_color);
         if (selected_entity) selected_entity.Render();
-        
+        shader_reset();
         
         surface_reset_target();
         
@@ -1133,9 +1134,11 @@ function Game() constructor {
     GUI = function() {
         draw_surface_stretched(application_surface, 0, 0, window_get_width(), window_get_height());
         
-        if (keyboard_check(ord("P"))) {
-            draw_surface_stretched(self.outline_surface, 0, 0, window_get_width(), window_get_height());
-        }
+        shader_set(shd_outline);
+        gpu_set_texfilter(true);
+        draw_surface_stretched(self.outline_surface, 0, 0, window_get_width(), window_get_height());
+        gpu_set_texfilter(false);
+        shader_reset();
         
         if (gameplay_mode == GameModes.TITLE) {
             GetGUILayer(current_title_screen).Render();
