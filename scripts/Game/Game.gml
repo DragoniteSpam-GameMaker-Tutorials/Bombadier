@@ -1007,18 +1007,9 @@ function Game() constructor {
         
         camera.Render();
         
+        if (self.selected_entity) self.selected_entity.RenderRadius();
+        if (self.player_tower_spawn) self.player_tower_spawn.RenderRadius();
         
-        if (self.selected_entity) {
-            var u_tower_position = shader_get_uniform(shd_tower_radius, "u_TowerPosition");
-            var u_tower_radius = shader_get_uniform(shd_tower_radius, "u_TowerRadius");
-            var tower_position = self.selected_entity.position;
-            var tower_range = self.selected_entity.act_range;
-            shader_set(shd_tower_radius);
-            shader_set_uniform_f(u_tower_position, tower_position.x, tower_position.y);
-            shader_set_uniform_f(u_tower_radius, tower_range);
-            matrix_set(matrix_world, matrix_build(tower_position.x, tower_position.y, tower_position.z + 1, 0, 0, 0, tower_range, tower_range, 1));
-            draw_sprite(spr_tower_radius, 0, 0, 0);
-        }
         shader_set(shd_solid_color);
         if (self.selected_entity) self.selected_entity.Render();
         if (self.player_tower_spawn) self.player_tower_spawn.Render();

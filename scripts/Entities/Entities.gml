@@ -41,6 +41,10 @@ function Entity(x, y, z) constructor {
     GameOver = function() {
         
     };
+    
+    RenderRadius = function() {
+        
+    };
 }
 
 function EntityEnv(x, y, z, model, savename) : Entity(x, y, z) constructor {

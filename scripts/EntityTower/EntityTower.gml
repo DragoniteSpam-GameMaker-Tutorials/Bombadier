@@ -196,6 +196,18 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
             "Shots: " + string(self.stats.shots) + "\n" +
             "Damange dealt: " + string_format(self.stats.damage, 1, 1);
     };
+    
+    RenderRadius = function() {
+        var u_tower_position = shader_get_uniform(shd_tower_radius, "u_TowerPosition");
+        var u_tower_radius = shader_get_uniform(shd_tower_radius, "u_TowerRadius");
+        var tower_position = self.position;
+        var tower_range = self.act_range;
+        shader_set(shd_tower_radius);
+        shader_set_uniform_f(u_tower_position, tower_position.x, tower_position.y);
+        shader_set_uniform_f(u_tower_radius, tower_range);
+        matrix_set(matrix_world, matrix_build(tower_position.x, tower_position.y, tower_position.z + 1, 0, 0, 0, tower_range, tower_range, 1));
+        draw_sprite(spr_tower_radius, 0, 0, 0);
+    }
 }
 
 function EntityTowerGlass(x, y, z, class) : EntityTower(x, y, z, class) constructor {
