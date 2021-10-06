@@ -225,7 +225,7 @@ function Game() constructor {
     resolution_scalar_options = [0.25, 0.33, 0.4, 0.5, 0.66, 0.75, 1];
     resolution_scalar_index = APP_SURFACE_DEFAULT_SCALE_INDEX;
     resolution_scalar = resolution_scalar_options[resolution_scalar_index];
-    outline_surface = surface_create(1280, 720);
+    outline_surface = surface_create(OUTLINE_SURFACE_WIDTH, OUTLINE_SURFACE_HEIGHT);
     
     // don't get rid of this, please
     display_set_gui_maximize();
@@ -999,6 +999,10 @@ function Game() constructor {
     };
     
     Render = function() {
+        if (!surface_exists(self.outline_surface)) {
+            self.outline_surface = surface_create(OUTLINE_SURFACE_WIDTH, OUTLINE_SURFACE_HEIGHT);
+        }
+        
         surface_set_target(self.outline_surface);
         
         camera.Render();
@@ -1009,9 +1013,7 @@ function Game() constructor {
         if (self.editor_hover_entity) self.editor_hover_entity.Render();
         if (self.selected_entity_hover) self.selected_entity_hover.Render();
         shader_reset();
-        
         surface_reset_target();
-        
         
         camera.Render();
         
