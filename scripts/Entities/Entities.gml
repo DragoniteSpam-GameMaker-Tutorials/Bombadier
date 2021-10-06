@@ -89,23 +89,8 @@ function EntityEnv(x, y, z, model, savename) : Entity(x, y, z) constructor {
     };
     
     Render = function() {
-        // set the shader if you are selected
-        if (GAME.selected_entity == self || GAME.editor_hover_entity == self) {
-            shader_set(shd_selected);
-            shader_set_uniform_f(shader_get_uniform(shd_selected, "time"), current_time / 1000);
-            if (GAME.selected_entity == self) {
-                shader_set_uniform_color(shader_get_uniform(shd_selected, "color"), c_env);
-            } else if (GAME.editor_hover_entity == self) {
-                shader_set_uniform_color(shader_get_uniform(shd_selected, "color"), c_env_hover);
-            }
-        }
-        
         matrix_set(matrix_world, matrix_build(position.x, position.y, position.z, rotation.x, rotation.y, rotation.z, scale.x, scale.y, scale.z));
         vertex_submit(model.vbuff, pr_trianglelist, -1);
         matrix_set(matrix_world, matrix_build_identity());
-        // reset the shader if you are selected
-        if (GAME.selected_entity == self || GAME.editor_hover_entity == self) {
-            cluck_apply(SHADER_WORLD);
-        }
     };
 }

@@ -1004,7 +1004,10 @@ function Game() constructor {
         camera.Render();
         
         shader_set(shd_solid_color);
-        if (selected_entity) selected_entity.Render();
+        if (self.selected_entity) self.selected_entity.Render();
+        if (self.player_tower_spawn) self.player_tower_spawn.Render();
+        if (self.editor_hover_entity) self.editor_hover_entity.Render();
+        if (self.selected_entity_hover) self.selected_entity_hover.Render();
         shader_reset();
         
         surface_reset_target();
@@ -1041,16 +1044,7 @@ function Game() constructor {
             all_foes[| i].RenderHealthBar();
         }
         
-        if (player_tower_spawn) {
-            var can_build = CollisionFree(player_tower_spawn);
-            shader_set(shd_selected);
-            shader_set_uniform_f(shader_get_uniform(shd_selected, "time"), current_time / 1000);
-            shader_set_uniform_color(shader_get_uniform(shd_selected, "color"), can_build ? c_phantom_tower : c_phantom_tower_unavailable);
-            matrix_set(matrix_world, matrix_build(player_tower_spawn.position.x, player_tower_spawn.position.y, 0, 0, 0, 0, 1, 1, 1));
-            vertex_submit(player_tower_spawn.class.model.vbuff, pr_trianglelist, -1);
-            matrix_set(matrix_world, matrix_build_identity());
-            cluck_apply(SHADER_WORLD);
-        }
+        if (player_tower_spawn) player_tower_spawn.Render();
         
         if (gameplay_mode == GameModes.EDITOR) {
             // Draw a debug line so you can see where the bounds of the world is
