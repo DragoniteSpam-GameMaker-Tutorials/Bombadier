@@ -102,5 +102,7 @@ void main() {
     }
     
     vec4 colorFromCollision = texture2D(samplerCollision, vec2(v_LightWorldPosition.x, v_LightWorldPosition.y) / samplerCollisionScale);
-    gl_FragColor = mix(color, colorFromCollision, samplerCollisionStrength);
+    
+    gl_FragColor = color;
+    gl_FragColor.rgb = mix(gl_FragColor.rgb, vec3(0), clamp((1.0 - colorFromCollision.r) * samplerCollisionStrength, 0.0, 1.0));
 }
