@@ -7,7 +7,6 @@ uniform float fogStart;
 uniform float fogEnd;
 uniform vec3 fogColor;
 
-varying vec2 v_vTexcoord;
 varying vec4 v_vColour;
 varying vec3 v_FogCameraRelativePosition;
 
@@ -20,7 +19,7 @@ void CommonFog(inout vec4 baseColor) {
 }
 
 void main() {
-    vec4 color = v_vColour * texture2D(gm_BaseTexture, v_vTexcoord);
+    vec4 color = v_vColour;
     
     CommonFog(color);
     
