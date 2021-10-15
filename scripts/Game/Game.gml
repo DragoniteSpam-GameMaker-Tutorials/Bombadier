@@ -108,11 +108,11 @@ function Game() constructor {
     magnifying_glass_glass = load_model("tower-glass-glass.d3d", format).vbuff;
     
     #region database
-    foe_ant =       new FoeData("Ant",               5, 0, 0, 100, 1, 2, load_vbuff("foes/ant0.vbuff", format),          EntityFoe);
-    foe_pillbugs =  new FoeData("Pillbug",          10, 1, 0,  50, 1, 3, load_vbuff("foes/pillbug0.vbuff", format),      EntityFoe);
-    foe_gnat =    new FoeData("Midge",               1, 0, 1, 100, 1, 2, load_vbuff("foes/gnat0.vbuff", format),         EntityFoeMidge);
-    foe_aphid = new FoeData("Aphid",                 3, 0, 0,  50, 1, 1, load_vbuff("foes/aphid0.vbuff", format),        EntityFoe);
-    foe_grasshopper = new FoeData("Grasshopper",    20, 0, 0, 150, 2, 8, load_vbuff("foes/grasshopper0.vbuff", format),  EntityFoe);
+    foe_ant =       new FoeData("Ant",               5, 0, 0, 100, 1, 2, [load_vbuff("foes/ant0.vbuff", format),          load_vbuff("foes/ant1.vbuff", format),       ],   EntityFoe);
+    foe_pillbugs =  new FoeData("Pillbug",          10, 1, 0,  50, 1, 3, [load_vbuff("foes/pillbug0.vbuff", format),      load_vbuff("foes/pillbug1.vbuff", format),   ],   EntityFoe);
+    foe_gnat =    new FoeData("Midge",               1, 0, 1, 100, 1, 2, [load_vbuff("foes/gnat0.vbuff", format),         load_vbuff("foes/gnat1.vbuff", format),      ],   EntityFoeMidge);
+    foe_aphid = new FoeData("Aphid",                 3, 0, 0,  50, 1, 1, [load_vbuff("foes/aphid0.vbuff", format),        load_vbuff("foes/aphid1.vbuff", format),     ],   EntityFoe);
+    foe_grasshopper = new FoeData("Grasshopper",    20, 0, 0, 150, 2, 8, [load_vbuff("foes/grasshopper0.vbuff", format),  load_vbuff("foes/grasshopper1.vbuff", format)],   EntityFoe);
     
     bullet_pebble =     new BulletData("Pebble", load_model("testbullet.d3d", format), function(target) { });
     bullet_fire =       new BulletData("Fire", load_model("bullet-fire.d3d", format), function(target) {

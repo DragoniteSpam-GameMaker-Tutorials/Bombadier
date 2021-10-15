@@ -25,6 +25,8 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
     self.whodunnit_slow = undefined;
     self.whodunnit_immobilize = undefined;
     
+    self.lifetime = 0;
+    
     Burn = function(duration, whodunnit) {
         if (duration == undefined) duration = BURN_DURATION;
         self.status_burn = duration;
@@ -118,6 +120,8 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
     };
     
     Update = function() {
+        self.lifetime += DT;
+        
         if (self.status_immobilize <= 0) {
             var dt = DT;
             var dir = point_direction(position.x, position.y, destination.x, destination.y);
@@ -171,7 +175,7 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
         transform = matrix_multiply(transform, matrix_build(0, 0, 0, rotation.x, rotation.y, rotation.z, 1, 1, 1));
         transform = matrix_multiply(transform, matrix_build(position.x, position.y, position.z, 0, 0, 0, 1, 1, 1));
         matrix_set(matrix_world, transform);
-        vertex_submit(class.model.vbuff, pr_trianglelist, -1);
+        vertex_submit(class.models[(self.lifetime * 4) % 2].vbuff, pr_trianglelist, -1);
         matrix_set(matrix_world, matrix_build_identity());
     };
     
