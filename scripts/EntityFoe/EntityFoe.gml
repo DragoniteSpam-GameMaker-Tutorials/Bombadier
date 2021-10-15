@@ -184,7 +184,7 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
     
     Render = function() {
         var bearing = point_direction(self.previous_position.x, self.previous_position.y, self.position.x, self.position.y);
-        var transform = matrix_build(0, 0, 0, 0, 0, 0, scale.x, scale.y, scale.z);
+        var transform = matrix_build(0, 0, 0, 0, 0, 0, scale.x, scale.y , scale.z);
         transform = matrix_multiply(transform, matrix_build(0, 0, 0, rotation.x, rotation.y, rotation.z + bearing, 1, 1, 1));
         transform = matrix_multiply(transform, matrix_build(position.x, position.y, position.z, 0, 0, 0, 1, 1, 1));
         matrix_set(matrix_world, transform);
