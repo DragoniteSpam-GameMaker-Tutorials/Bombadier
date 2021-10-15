@@ -26,6 +26,11 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
     self.whodunnit_immobilize = undefined;
     
     self.lifetime = 0;
+    self.previous_position = {
+        x: self.position.x,
+        y: self.position.y,
+        z: self.position.z
+    };
     
     Burn = function(duration, whodunnit) {
         if (duration == undefined) duration = BURN_DURATION;
@@ -119,8 +124,15 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
         ds_list_add(GAME.all_foes, self);
     };
     
+    UpdatePreviousPositions = function() {
+        self.previous_position.x = self.position.x;
+        self.previous_position.y = self.position.y;
+        self.previous_position.z = self.position.z;
+    };
+    
     Update = function() {
         self.lifetime += DT;
+        self.UpdatePreviousPositions();
         
         if (self.status_immobilize <= 0) {
             var dt = DT;
@@ -171,8 +183,9 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
     };
     
     Render = function() {
+        var bearing = point_direction(self.previous_position.x, self.previous_position.y, self.position.x, self.position.y);
         var transform = matrix_build(0, 0, 0, 0, 0, 0, scale.x, scale.y, scale.z);
-        transform = matrix_multiply(transform, matrix_build(0, 0, 0, rotation.x, rotation.y, rotation.z, 1, 1, 1));
+        transform = matrix_multiply(transform, matrix_build(0, 0, 0, rotation.x, rotation.y, rotation.z + bearing, 1, 1, 1));
         transform = matrix_multiply(transform, matrix_build(position.x, position.y, position.z, 0, 0, 0, 1, 1, 1));
         matrix_set(matrix_world, transform);
         vertex_submit(class.models[(self.lifetime * 4) % 2].vbuff, pr_trianglelist, -1);
