@@ -81,8 +81,6 @@ function Camera() constructor {
         gpu_set_alphatestenable(true);
         gpu_set_alphatestref(10);
         
-        draw_clear(c_black);
-        
         var cam = camera_get_active();
         
         if (GAME.editor_collision_mode) {

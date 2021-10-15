@@ -84,7 +84,6 @@ function Game() constructor {
     env_objects = ds_map_create();
     env_object_list = ds_list_create();
     for (var file = file_find_first("environment/*.vbuff", 0); file != ""; file = file_find_next()) {
-        //var vbuff = load_model("environment/" + file, format);
         var buffer = buffer_load("environment/" + file);
         var obj_name = string_replace(file, ".000.vbuff", "");
         env_objects[? obj_name] = new ModelData("environment/" + file, vertex_create_buffer_from_buffer(buffer, format));
@@ -95,7 +94,6 @@ function Game() constructor {
     #endregion
     
     test_ball = load_model("testball.d3d", format).vbuff;
-    skybox_cube = load_model("skybox.d3d", format).vbuff;
     
     magnifying_glass_beam = load_model("tower-glass-beam.d3d", format).vbuff;
     magnifying_glass_glass = load_model("tower-glass-glass.d3d", format).vbuff;
@@ -1013,11 +1011,15 @@ function Game() constructor {
     };
     
     Render = function() {
+        gpu_set_zwriteenable(false);
+        draw_sprite_stretched(spr_skybox, 0, 0, 0, window_get_width(), window_get_height());
+        
         if (!surface_exists(self.outline_surface)) {
             self.outline_surface = surface_create(OUTLINE_SURFACE_WIDTH, OUTLINE_SURFACE_HEIGHT);
         }
         
         surface_set_target(self.outline_surface);
+        draw_clear_alpha(c_black, 1);
         
         camera.Render();
         
@@ -1034,14 +1036,8 @@ function Game() constructor {
         
         camera.Render();
         
-        gpu_set_ztestenable(false);
-        gpu_set_zwriteenable(false);
-        matrix_set(matrix_world, matrix_build(camera.from.x, camera.from.y, camera.from.z, 0, 0, 0, 1, 1, 1));
-        vertex_submit(skybox_cube, pr_trianglelist, sprite_get_texture(spr_skybox, 0));
-        matrix_set(matrix_world, matrix_build_identity());
         gpu_set_ztestenable(true);
         gpu_set_zwriteenable(true);
-        
         ds_list_clear(semi_transparent_stuff);
         
         gpu_set_cullmode(cull_counterclockwise);
