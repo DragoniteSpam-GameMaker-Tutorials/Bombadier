@@ -564,15 +564,13 @@ function Game() constructor {
                 ent.scale.x, ent.scale.y, ent.scale.z
             );
             
-            for (var j = 0; j < buffer_get_size(raw_buffer); j += 36 * 3) {
+            for (var j = 0; j < buffer_get_size(raw_buffer); j += 28 * 3) {
                 var xx1 = buffer_peek(raw_buffer, j +  0, buffer_f32);
                 var yy1 = buffer_peek(raw_buffer, j +  4, buffer_f32);
                 var zz1 = buffer_peek(raw_buffer, j +  8, buffer_f32);
                 var nx1 = buffer_peek(raw_buffer, j + 12, buffer_f32);
                 var ny1 = buffer_peek(raw_buffer, j + 16, buffer_f32);
                 var nz1 = buffer_peek(raw_buffer, j + 20, buffer_f32);
-                var xt1 = buffer_peek(raw_buffer, j + 24, buffer_f32);
-                var yt1 = buffer_peek(raw_buffer, j + 28, buffer_f32);
                 var cc1 = buffer_peek(raw_buffer, j + 32, buffer_u32);
                 var xx2 = buffer_peek(raw_buffer, j + 36, buffer_f32);
                 var yy2 = buffer_peek(raw_buffer, j + 40, buffer_f32);
@@ -580,8 +578,6 @@ function Game() constructor {
                 var nx2 = buffer_peek(raw_buffer, j + 48, buffer_f32);
                 var ny2 = buffer_peek(raw_buffer, j + 52, buffer_f32);
                 var nz2 = buffer_peek(raw_buffer, j + 56, buffer_f32);
-                var xt2 = buffer_peek(raw_buffer, j + 60, buffer_f32);
-                var yt2 = buffer_peek(raw_buffer, j + 64, buffer_f32);
                 var cc2 = buffer_peek(raw_buffer, j + 68, buffer_u32);
                 var xx3 = buffer_peek(raw_buffer, j + 72, buffer_f32);
                 var yy3 = buffer_peek(raw_buffer, j + 76, buffer_f32);
@@ -589,8 +585,6 @@ function Game() constructor {
                 var nx3 = buffer_peek(raw_buffer, j + 84, buffer_f32);
                 var ny3 = buffer_peek(raw_buffer, j + 88, buffer_f32);
                 var nz3 = buffer_peek(raw_buffer, j + 92, buffer_f32);
-                var xt3 = buffer_peek(raw_buffer, j + 96, buffer_f32);
-                var yt3 = buffer_peek(raw_buffer, j + 100, buffer_f32);
                 var cc3 = buffer_peek(raw_buffer, j + 104, buffer_u32);
                 
                 var new_normal = matrix_transform_vertex(entity_matrix_normals, nx1, ny1, nz1);
@@ -611,17 +605,14 @@ function Game() constructor {
                     
                     vertex_position_3d(vbuff, new_position_1[0], new_position_1[1], new_position_1[2]);
                     vertex_normal(vbuff, new_normal[0], new_normal[1], new_normal[2]);
-                    vertex_texcoord(vbuff, xt1, yt1);
                     vertex_color(vbuff, cc1 & 0xffffff, (cc1 >> 24) / 255);
                     
                     vertex_position_3d(vbuff, new_position_2[0], new_position_2[1], new_position_2[2]);
                     vertex_normal(vbuff, new_normal_2[0], new_normal_2[1], new_normal_2[2]);
-                    vertex_texcoord(vbuff, xt2, yt2);
                     vertex_color(vbuff, cc2 & 0xffffff, (cc2 >> 24) / 255);
                     
                     vertex_position_3d(vbuff, new_position_3[0], new_position_3[1], new_position_3[2]);
                     vertex_normal(vbuff, new_normal_3[0], new_normal_3[1], new_normal_3[2]);
-                    vertex_texcoord(vbuff, xt3, yt3);
                     vertex_color(vbuff, cc3 & 0xffffff, (cc3 >> 24) / 255);
                 }
             }
@@ -1092,11 +1083,9 @@ function Game() constructor {
             vertex_begin(vb_border, format);
             vertex_position_3d(vb_border, 0, FIELD_HEIGHT, 8);
             vertex_normal(vb_border, 0, 0, 1);
-            vertex_texcoord(vb_border, 0, 0);
             vertex_colour(vb_border, c_red, 1);
             vertex_position_3d(vb_border, FIELD_WIDTH, FIELD_HEIGHT, 8);
             vertex_normal(vb_border, 0, 0, 1);
-            vertex_texcoord(vb_border, 0, 0);
             vertex_colour(vb_border, c_red, 1);
             vertex_end(vb_border);
             vertex_submit(vb_border, pr_linestrip, -1);
@@ -1119,7 +1108,6 @@ function Game() constructor {
                             // rainbow path node connections
                             vertex_position_3d(vb_path_nodes, node.position.x, node.position.y, node.position.z + 8);
                             vertex_normal(vb_path_nodes, 0, 0, 1);
-                            vertex_texcoord(vb_path_nodes, 0, 0);
                             vertex_colour(vb_path_nodes, make_colour_hsv(node_hue, 255, 255), 1);
                             node_hue += node_hue_interval;
                         }

@@ -16,7 +16,6 @@ uniform float fogStart;
 uniform float fogEnd;
 uniform vec3 fogColor;
 
-varying vec2 v_vTexcoord;
 varying vec4 v_vColour;
 varying vec3 v_LightWorldNormal;
 varying vec3 v_LightWorldPosition;
@@ -92,7 +91,7 @@ uniform vec2 samplerCollisionScale;
 uniform float samplerCollisionStrength;
 
 void main() {
-    vec4 color = v_vColour * texture2D(gm_BaseTexture, v_vTexcoord);
+    vec4 color = v_vColour;
     
     CommonLight(color);
     CommonFog(color);
