@@ -171,7 +171,7 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
         transform = matrix_multiply(transform, matrix_build(0, 0, 0, rotation.x, rotation.y, rotation.z, 1, 1, 1));
         transform = matrix_multiply(transform, matrix_build(position.x, position.y, position.z, 0, 0, 0, 1, 1, 1));
         matrix_set(matrix_world, transform);
-        vertex_submit(class.model.vbuff, pr_trianglelist, sprite_get_texture(class.sprite, 0));
+        vertex_submit(class.model.vbuff, pr_trianglelist, -1);
         matrix_set(matrix_world, matrix_build_identity());
     };
     

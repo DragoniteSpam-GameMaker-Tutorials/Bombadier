@@ -1,4 +1,4 @@
-function FoeData(name, hp, def, mdef, speed, damage, reward, sprite, model, entity_type) constructor {
+function FoeData(name, hp, def, mdef, speed, damage, reward, model, entity_type) constructor {
     self.name = name;
     self.hp = hp;
     self.def = def;
@@ -6,7 +6,6 @@ function FoeData(name, hp, def, mdef, speed, damage, reward, sprite, model, enti
     self.speed = speed;
     self.damage = damage;
     self.reward = reward;
-    self.sprite = sprite;
     self.model = model;
     
     self.weaknesses = 0;
