@@ -12,7 +12,6 @@ function Game() constructor {
     vertex_format_begin();
     vertex_format_add_position_3d();
     vertex_format_add_normal();
-    vertex_format_add_texcoord();
     vertex_format_add_color();
     format = vertex_format_end();
     
@@ -22,32 +21,26 @@ function Game() constructor {
     // 0
     vertex_position_3d(ground, 0, 0, 0);
     vertex_normal(ground, 0, 0, 1);
-    vertex_texcoord(ground, 0, 0);
     vertex_colour(ground, c_white, 1);
     // 1
     vertex_position_3d(ground, FIELD_WIDTH, 0, 0);
     vertex_normal(ground, 0, 0, 1);
-    vertex_texcoord(ground, 1, 0);
     vertex_colour(ground, c_white, 1);
     // 2
     vertex_position_3d(ground, FIELD_WIDTH, FIELD_HEIGHT * 1.5, 0);
     vertex_normal(ground, 0, 0, 1);
-    vertex_texcoord(ground, 1, 1);
     vertex_colour(ground, c_white, 1);
     // 3
     vertex_position_3d(ground, FIELD_WIDTH, FIELD_HEIGHT * 1.5, 0);
     vertex_normal(ground, 0, 0, 1);
-    vertex_texcoord(ground, 1, 1);
     vertex_colour(ground, c_white, 1);
     // 4
     vertex_position_3d(ground, 0, FIELD_HEIGHT * 1.5, 0);
     vertex_normal(ground, 0, 0, 1);
-    vertex_texcoord(ground, 0, 1);
     vertex_colour(ground, c_white, 1);
     // 5
     vertex_position_3d(ground, 0, 0, 0);
     vertex_normal(ground, 0, 0, 1);
-    vertex_texcoord(ground, 0, 0);
     vertex_colour(ground, c_white, 1);
     
     vertex_end(ground);

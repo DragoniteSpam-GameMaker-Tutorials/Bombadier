@@ -29,7 +29,6 @@ function load_model(filename, format) {
         if (line[0] == 9) {
             vertex_position_3d(model, line[1], line[2], line[3]);
             vertex_normal(model, line[4], line[5], line[6]);
-            vertex_texcoord(model, line[7], line[8]);
             vertex_colour(model, line[9], line[10]);
         }
     }
