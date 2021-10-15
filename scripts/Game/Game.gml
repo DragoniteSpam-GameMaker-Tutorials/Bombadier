@@ -1154,6 +1154,8 @@ function Game() constructor {
         
         shader_set(shd_outline);
         gpu_set_texfilter(true);
+        var u_tex_size = shader_get_uniform(shd_outline, "texSize");
+        shader_set_uniform_f(u_tex_size, surface_get_width(self.outline_surface), surface_get_height(self.outline_surface));
         draw_surface_stretched(self.outline_surface, 0, 0, window_get_width(), window_get_height());
         gpu_set_texfilter(false);
         shader_reset();
