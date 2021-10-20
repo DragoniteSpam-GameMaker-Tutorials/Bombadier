@@ -1043,7 +1043,13 @@ function Game() constructor {
             }
         }
         
-        vertex_submit(ground, pr_trianglelist, sprite_get_texture(spr_ground, 0));
+        vertex_submit(ground, pr_trianglelist, -1);
+        
+        if (self.gameplay_mode == GameModes.EDITOR && editor_terrain_mode) {
+            shader_set(shd_debug_wireframe);
+            vertex_submit(ground, pr_linelist, -1);
+            cluck_apply(SHADER_WORLD);
+        }
         
         if (fused.vbuff != undefined) {
             vertex_submit(fused.vbuff, pr_trianglelist, -1);
