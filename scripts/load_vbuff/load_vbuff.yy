@@ -2,8 +2,8 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Bombadier",
-    "path": "Bombadier.yyp",
+    "name": "Core Stuff",
+    "path": "folders/Core Stuff.yy",
   },
   "resourceVersion": "1.0",
   "name": "load_vbuff",

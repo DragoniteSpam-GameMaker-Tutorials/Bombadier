@@ -1,8 +1,8 @@
 {
   "type": 1,
   "parent": {
-    "name": "Bombadier",
-    "path": "Bombadier.yyp",
+    "name": "Shaders",
+    "path": "folders/Graphical stuff/Shaders.yy",
   },
   "resourceVersion": "1.0",
   "name": "shd_tower_radius",

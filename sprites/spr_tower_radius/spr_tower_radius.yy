@@ -69,8 +69,8 @@
   ],
   "nineSlice": null,
   "parent": {
-    "name": "Bombadier",
-    "path": "Bombadier.yyp",
+    "name": "Graphical stuff",
+    "path": "folders/Graphical stuff.yy",
   },
   "resourceVersion": "1.0",
   "name": "spr_tower_radius",

@@ -23,15 +23,6 @@
 #macro GRID_COLLISION_FILLED 1
 #macro GRID_COLLISION_PATH 2
 
-#macro c_phantom_tower c_white
-#macro c_phantom_tower_unavailable c_red
-#macro c_tower c_white
-#macro c_tower_hover c_lime
-#macro c_env c_white
-#macro c_env_hover c_lime
-#macro c_path c_blue
-#macro c_path_hover c_lime
-
 #macro SOUND_PRIORITY_AMBIENT           100
 #macro SOUND_PRIORITY_BGM               100
 #macro SOUND_PRIORITY_UI                50
