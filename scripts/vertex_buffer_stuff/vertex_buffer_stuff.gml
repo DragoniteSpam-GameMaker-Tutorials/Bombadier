@@ -81,6 +81,27 @@ function edit_ground_height(source, floor_intersect, edit_direction, format) {
     return new_vertex_buffer;
 }
 
+function edit_ground_reset_height(source, format) {
+    var ground_buffer = buffer_create_from_vertex_buffer(source, buffer_fixed, 1);
+    
+    for (var i = 0, n = buffer_get_size(ground_buffer); i < n; i += 28) {
+        var zz = buffer_peek(ground_buffer, i + 08, buffer_f32);
+        var nx = buffer_peek(ground_buffer, i + 12, buffer_f32);
+        var ny = buffer_peek(ground_buffer, i + 16, buffer_f32);
+        var nz = buffer_peek(ground_buffer, i + 20, buffer_f32);
+        
+        buffer_poke(ground_buffer, i + 08, buffer_f32, 0);
+        buffer_poke(ground_buffer, i + 12, buffer_f32, 0);
+        buffer_poke(ground_buffer, i + 16, buffer_f32, 0);
+        buffer_poke(ground_buffer, i + 20, buffer_f32, 1);
+    }
+    
+    vertex_delete_buffer(source);
+    var new_vertex_buffer = vertex_create_buffer_from_buffer(ground_buffer, format);
+    buffer_delete(ground_buffer);
+    return new_vertex_buffer;
+}
+
 function edit_ground_color(source, color, format) {
     var ground_buffer = buffer_create_from_vertex_buffer(source, buffer_fixed, 1);
     

@@ -790,6 +790,12 @@ function Game() constructor {
                     edit_ground_color(self.ground, 0x89c6fd, self.format);
                 }
                 
+                if (keyboard_check(ord("0"))) {
+                    if (show_question("Would you like to reset the terrain height?")) {
+                        edit_ground_reset_height(self.ground, self.format);
+                    }
+                }
+                
                 if (self.camera.floor_intersect && (go_up || go_down)) {
                     edit_ground_height(self.ground, self.camera.floor_intersect, go_up ? 1 : -1, self.format);
                 }
@@ -1258,7 +1264,7 @@ function Game() constructor {
                 draw_text(32, 32, "Left click to paint collision information; right click to clear collision information");
             } else if (editor_terrain_mode) {
                 draw_text(32, 32, "Left click to raise the terrain, right click to lower it");
-                draw_text(32, 64, "1: color dark green; 2: color light green; 3: color sand");
+                draw_text(32, 64, "1: color dark green; 2: color light green; 3: color sand; 0 to reset the terrain height");
             } else {
                 draw_text(32, 32, "Click to spawn a thing (" + env_object_list[| editor_model_index] + ") or select an existing thing; F4 and F5 cycle through models");
                 if (selected_entity) {
