@@ -1069,6 +1069,15 @@ function Game() constructor {
             vertex_position_3d(vb_border, FIELD_WIDTH, FIELD_HEIGHT, 8);
             vertex_normal(vb_border, 0, 0, 1);
             vertex_colour(vb_border, c_red, 1);
+            vertex_position_3d(vb_border, FIELD_WIDTH, 0, 8);
+            vertex_normal(vb_border, 0, 0, 1);
+            vertex_colour(vb_border, c_red, 1);
+            vertex_position_3d(vb_border, 0, 0, 8);
+            vertex_normal(vb_border, 0, 0, 1);
+            vertex_colour(vb_border, c_red, 1);
+            vertex_position_3d(vb_border, 0, FIELD_HEIGHT, 8);
+            vertex_normal(vb_border, 0, 0, 1);
+            vertex_colour(vb_border, c_red, 1);
             vertex_end(vb_border);
             vertex_submit(vb_border, pr_linestrip, -1);
             vertex_delete_buffer(vb_border);
