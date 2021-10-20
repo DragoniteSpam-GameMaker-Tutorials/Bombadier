@@ -47,7 +47,7 @@
     {"id":{"name":"se_menu_select","path":"sounds/se_menu_select/se_menu_select.yy",},"order":6,},
     {"id":{"name":"macros","path":"scripts/macros/macros.yy",},"order":2,},
     {"id":{"name":"se_sell","path":"sounds/se_sell/se_sell.yy",},"order":7,},
-    {"id":{"name":"create_ground_vbuffer","path":"scripts/create_ground_vbuffer/create_ground_vbuffer.yy",},"order":14,},
+    {"id":{"name":"vertex_buffer_stuff","path":"scripts/vertex_buffer_stuff/vertex_buffer_stuff.yy",},"order":14,},
     {"id":{"name":"EntityTower","path":"scripts/EntityTower/EntityTower.yy",},"order":1,},
     {"id":{"name":"spr_skybox","path":"sprites/spr_skybox/spr_skybox.yy",},"order":1,},
     {"id":{"name":"UIText","path":"objects/UIText/UIText.yy",},"order":7,},

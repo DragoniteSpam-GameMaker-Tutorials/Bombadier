@@ -779,53 +779,19 @@ function Game() constructor {
             } else if (editor_collision_mode) {
                 
             } else if (editor_terrain_mode) {
-                var floor_intersect = self.camera.floor_intersect;
                 var go_up = mouse_check_button(mb_left);
                 var go_down = mouse_check_button(mb_right);
-                if (floor_intersect && (go_up || go_down)) {
-                    var ground_buffer = buffer_create_from_vertex_buffer(self.ground, buffer_fixed, 1);
-                    
-                    var edit_radius = 100;
-                    var edit_rate = 0.25;
-                    
-                    for (var i = 0, n = buffer_get_size(ground_buffer); i < n; i += 28) {
-                        var xx = buffer_peek(ground_buffer, i + 00, buffer_f32);
-                        var yy = buffer_peek(ground_buffer, i + 04, buffer_f32);
-                        var zz = buffer_peek(ground_buffer, i + 08, buffer_f32);
-                        
-                        if (point_distance(floor_intersect.x, floor_intersect.y, xx, yy) < edit_radius) {
-                            if (go_up) {
-                                buffer_poke(ground_buffer, i + 08, buffer_f32, zz + edit_rate);
-                            } else {
-                                buffer_poke(ground_buffer, i + 08, buffer_f32, zz - edit_rate);
-                            }
-                            
-                            var base_index = (i div 84) * 84;
-                            var x1 = buffer_peek(ground_buffer, base_index + 00, buffer_f32);
-                            var y1 = buffer_peek(ground_buffer, base_index + 04, buffer_f32);
-                            var z1 = buffer_peek(ground_buffer, base_index + 08, buffer_f32);
-                            var x2 = buffer_peek(ground_buffer, base_index + 28, buffer_f32);
-                            var y2 = buffer_peek(ground_buffer, base_index + 32, buffer_f32);
-                            var z2 = buffer_peek(ground_buffer, base_index + 36, buffer_f32);
-                            var x3 = buffer_peek(ground_buffer, base_index + 56, buffer_f32);
-                            var y3 = buffer_peek(ground_buffer, base_index + 60, buffer_f32);
-                            var z3 = buffer_peek(ground_buffer, base_index + 64, buffer_f32);
-                            var normals = triangle_normal(x1, y1, z1, x2, y2, z2, x3, y3, z3);
-                            buffer_poke(ground_buffer, base_index + 12, buffer_f32, normals.x);
-                            buffer_poke(ground_buffer, base_index + 16, buffer_f32, normals.y);
-                            buffer_poke(ground_buffer, base_index + 20, buffer_f32, normals.z);
-                            buffer_poke(ground_buffer, base_index + 40, buffer_f32, normals.x);
-                            buffer_poke(ground_buffer, base_index + 44, buffer_f32, normals.y);
-                            buffer_poke(ground_buffer, base_index + 48, buffer_f32, normals.z);
-                            buffer_poke(ground_buffer, base_index + 68, buffer_f32, normals.x);
-                            buffer_poke(ground_buffer, base_index + 72, buffer_f32, normals.y);
-                            buffer_poke(ground_buffer, base_index + 76, buffer_f32, normals.z);
-                        }
-                    }
-                    
-                    vertex_delete_buffer(self.ground);
-                    self.ground = vertex_create_buffer_from_buffer(ground_buffer, self.format);
-                    buffer_delete(ground_buffer);
+                
+                if (keyboard_check(ord("1"))) {
+                    // 004C25
+                } else if (keyboard_check(ord("2"))) {
+                    // 00A651
+                } else if (keyboard_check(ord("3"))) {
+                    // FDC689
+                }
+                
+                if (self.camera.floor_intersect && (go_up || go_down)) {
+                    edit_ground_height(self.ground, self.camera.floor_intersect, go_up ? 1 : -1, self.format);
                 }
             } else {
                 editor_hover_entity = GetUnderCursor(all_env_entities);
@@ -1280,6 +1246,7 @@ function Game() constructor {
                 draw_text(32, 32, "Left click to paint collision information; right click to clear collision information");
             } else if (editor_terrain_mode) {
                 draw_text(32, 32, "Left click to raise the terrain, right click to lower it");
+                draw_text(32, 64, "1: color dark green; 2: color light green; 3: color sand");
             } else {
                 draw_text(32, 32, "Click to spawn a thing (" + env_object_list[| editor_model_index] + ") or select an existing thing; F4 and F5 cycle through models");
                 if (selected_entity) {

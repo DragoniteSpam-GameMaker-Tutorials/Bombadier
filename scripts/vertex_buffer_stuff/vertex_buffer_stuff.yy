@@ -6,7 +6,7 @@
     "path": "folders/Graphical stuff.yy",
   },
   "resourceVersion": "1.0",
-  "name": "create_ground_vbuffer",
+  "name": "vertex_buffer_stuff",
   "tags": [],
   "resourceType": "GMScript",
 }
