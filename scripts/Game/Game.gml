@@ -780,15 +780,17 @@ function Game() constructor {
                 
             } else if (editor_terrain_mode) {
                 var floor_intersect = self.camera.floor_intersect;
-                if (mouse_check_button(mb_left)) {
+                if (floor_intersect && mouse_check_button(mb_left)) {
                     var ground_buffer = buffer_create_from_vertex_buffer(self.ground, buffer_fixed, 1);
+                    
+                    var edit_radius = 100;
                     
                     for (var i = 0, n = buffer_get_size(ground_buffer); i < n; i += 28) {
                         var xx = buffer_peek(ground_buffer, i + 00, buffer_f32);
                         var yy = buffer_peek(ground_buffer, i + 04, buffer_f32);
                         var zz = buffer_peek(ground_buffer, i + 08, buffer_f32);
                         
-                        if (point_distance(floor_intersect.x, floor_intersect.y, xx, yy) < 100) {
+                        if (point_distance(floor_intersect.x, floor_intersect.y, xx, yy) < edit_radius) {
                             buffer_poke(ground_buffer, i + 08, buffer_f32, zz + 1);
                             
                             var base_index = (i div 84) * 84;
@@ -1085,6 +1087,12 @@ function Game() constructor {
         
         if (self.gameplay_mode == GameModes.EDITOR && editor_terrain_mode) {
             shader_set(shd_debug_wireframe);
+            shader_set_uniform_f(shader_get_uniform(shd_debug_wireframe, "radius"), 100);
+            if (self.camera.floor_intersect) {
+                shader_set_uniform_f(shader_get_uniform(shd_debug_wireframe, "mouse_position"), self.camera.floor_intersect.x, self.camera.floor_intersect.y);
+            } else {
+                shader_set_uniform_f(shader_get_uniform(shd_debug_wireframe, "mouse_position"), -1000000, -1000000);
+            }
             vertex_submit(ground, pr_linelist, -1);
             cluck_apply(SHADER_WORLD);
         }
