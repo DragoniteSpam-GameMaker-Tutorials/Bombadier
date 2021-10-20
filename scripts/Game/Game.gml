@@ -787,12 +787,30 @@ function Game() constructor {
                         var xx = buffer_peek(ground_buffer, i + 00, buffer_f32);
                         var yy = buffer_peek(ground_buffer, i + 04, buffer_f32);
                         var zz = buffer_peek(ground_buffer, i + 08, buffer_f32);
-                        var nx = buffer_peek(ground_buffer, i + 12, buffer_f32);
-                        var ny = buffer_peek(ground_buffer, i + 16, buffer_f32);
-                        var nz = buffer_peek(ground_buffer, i + 20, buffer_f32);
                         
                         if (point_distance(floor_intersect.x, floor_intersect.y, xx, yy) < 100) {
                             buffer_poke(ground_buffer, i + 08, buffer_f32, zz + 1);
+                            
+                            var base_index = (i div 84) * 84;
+                            var x1 = buffer_peek(ground_buffer, base_index + 00, buffer_f32);
+                            var y1 = buffer_peek(ground_buffer, base_index + 04, buffer_f32);
+                            var z1 = buffer_peek(ground_buffer, base_index + 08, buffer_f32);
+                            var x2 = buffer_peek(ground_buffer, base_index + 28, buffer_f32);
+                            var y2 = buffer_peek(ground_buffer, base_index + 32, buffer_f32);
+                            var z2 = buffer_peek(ground_buffer, base_index + 36, buffer_f32);
+                            var x3 = buffer_peek(ground_buffer, base_index + 56, buffer_f32);
+                            var y3 = buffer_peek(ground_buffer, base_index + 60, buffer_f32);
+                            var z3 = buffer_peek(ground_buffer, base_index + 64, buffer_f32);
+                            var normals = triangle_normal(x1, y1, z1, x2, y2, z2, x3, y3, z3);
+                            buffer_poke(ground_buffer, base_index + 12, buffer_f32, normals.x);
+                            buffer_poke(ground_buffer, base_index + 16, buffer_f32, normals.y);
+                            buffer_poke(ground_buffer, base_index + 20, buffer_f32, normals.z);
+                            buffer_poke(ground_buffer, base_index + 40, buffer_f32, normals.x);
+                            buffer_poke(ground_buffer, base_index + 44, buffer_f32, normals.y);
+                            buffer_poke(ground_buffer, base_index + 48, buffer_f32, normals.z);
+                            buffer_poke(ground_buffer, base_index + 68, buffer_f32, normals.x);
+                            buffer_poke(ground_buffer, base_index + 72, buffer_f32, normals.y);
+                            buffer_poke(ground_buffer, base_index + 76, buffer_f32, normals.z);
                         }
                     }
                     
