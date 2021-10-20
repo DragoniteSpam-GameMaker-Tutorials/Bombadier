@@ -779,7 +779,27 @@ function Game() constructor {
             } else if (editor_collision_mode) {
                 
             } else if (editor_terrain_mode) {
-                
+                var floor_intersect = self.camera.floor_intersect;
+                if (mouse_check_button(mb_left)) {
+                    var ground_buffer = buffer_create_from_vertex_buffer(self.ground, buffer_fixed, 1);
+                    
+                    for (var i = 0, n = buffer_get_size(ground_buffer); i < n; i += 28) {
+                        var xx = buffer_peek(ground_buffer, i + 00, buffer_f32);
+                        var yy = buffer_peek(ground_buffer, i + 04, buffer_f32);
+                        var zz = buffer_peek(ground_buffer, i + 08, buffer_f32);
+                        var nx = buffer_peek(ground_buffer, i + 12, buffer_f32);
+                        var ny = buffer_peek(ground_buffer, i + 16, buffer_f32);
+                        var nz = buffer_peek(ground_buffer, i + 20, buffer_f32);
+                        
+                        if (point_distance(floor_intersect.x, floor_intersect.y, xx, yy) < 100) {
+                            buffer_poke(ground_buffer, i + 08, buffer_f32, zz + 1);
+                        }
+                    }
+                    
+                    vertex_delete_buffer(self.ground);
+                    self.ground = vertex_create_buffer_from_buffer(ground_buffer, self.format);
+                    buffer_delete(ground_buffer);
+                }
             } else {
                 editor_hover_entity = GetUnderCursor(all_env_entities);
                 
