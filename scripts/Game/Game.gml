@@ -944,6 +944,9 @@ function Game() constructor {
         }
         
         buffer_save(fused.collision, filename_change_ext(filename, ".collision"));
+        var ground_buffer = buffer_create_from_vertex_buffer(self.ground, buffer_fixed, 1);
+        buffer_save(ground_buffer, filename_change_ext(filename, ".ground"));
+        buffer_delete(ground_buffer);
     };
     
     LoadMap = function(filename) {
@@ -995,6 +998,15 @@ function Game() constructor {
                 if (buffer_exists(fused.collision)) buffer_delete(fused.collision);
                 fused.collision = buffer_load(filename_change_ext(filename, ".collision"));
                 fused.GenerateCollisionSprite();
+            }
+            
+            vertex_delete_buffer(self.ground);
+            if (file_exists(filename_change_ext(filename, ".ground"))) {
+                var ground_buffer = buffer_load(filename_change_ext(filename, ".ground"));
+                self.ground = vertex_create_buffer_from_buffer(ground_buffer, self.format);
+                buffer_delete(ground_buffer);
+            } else {
+                self.ground = create_ground_vbuffer(self.format);
             }
         } catch (e) {
             show_debug_message("Something bad happened loading the file:");
