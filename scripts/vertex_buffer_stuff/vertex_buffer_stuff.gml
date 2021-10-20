@@ -80,3 +80,21 @@ function edit_ground_height(source, floor_intersect, edit_direction, format) {
     buffer_delete(ground_buffer);
     return new_vertex_buffer;
 }
+
+function edit_ground_color(source, color, format) {
+    var ground_buffer = buffer_create_from_vertex_buffer(source, buffer_fixed, 1);
+    
+    var edit_radius = 100;
+    
+    for (var i = 0, n = buffer_get_size(ground_buffer); i < n; i += 28) {
+        var cc = buffer_peek(ground_buffer, i + 24, buffer_u32);
+        var aa = cc & 0xff000000;
+        cc = color | aa;
+        buffer_poke(ground_buffer, i + 24, buffer_u32, cc);
+    }
+    
+    vertex_delete_buffer(source);
+    var new_vertex_buffer = vertex_create_buffer_from_buffer(ground_buffer, format);
+    buffer_delete(ground_buffer);
+    return new_vertex_buffer;
+}

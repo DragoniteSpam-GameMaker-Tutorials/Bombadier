@@ -783,11 +783,11 @@ function Game() constructor {
                 var go_down = mouse_check_button(mb_right);
                 
                 if (keyboard_check(ord("1"))) {
-                    // 004C25
+                    edit_ground_color(self.ground, 0x254c00, self.format);
                 } else if (keyboard_check(ord("2"))) {
-                    // 00A651
+                    edit_ground_color(self.ground, 0x51a600, self.format);
                 } else if (keyboard_check(ord("3"))) {
-                    // FDC689
+                    edit_ground_color(self.ground, 0x89c6fd, self.format);
                 }
                 
                 if (self.camera.floor_intersect && (go_up || go_down)) {
