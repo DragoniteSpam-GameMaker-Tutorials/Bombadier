@@ -340,6 +340,7 @@ function Game() constructor {
         editor_hover_entity = undefined;
         editor_path_mode = false;
         editor_collision_mode = false;
+        editor_terrain_mode = false;
         editor_model_index = 0;
         
         DefineAllWaves(all_waves);
@@ -731,6 +732,7 @@ function Game() constructor {
             #region Editor stuff
             if (keyboard_check_pressed(vk_f2)) {
                 editor_collision_mode = false;
+                editor_terrain_mode = false;
                 editor_path_mode = !editor_path_mode;
                 selected_entity = undefined;
             }
@@ -743,6 +745,7 @@ function Game() constructor {
             
             if (keyboard_check_pressed(vk_f7)) {
                 editor_path_mode = false;
+                editor_terrain_mode = false;
                 if (editor_collision_mode) {
                     var surface_buffer = buffer_create(surface_get_width(collision_surface) * surface_get_height(collision_surface) * 4, buffer_fixed, 1);
                     buffer_get_surface(surface_buffer, collision_surface, 0);
@@ -760,6 +763,16 @@ function Game() constructor {
                     self.fused.GenerateCollisionSprite();
                 }
                 editor_collision_mode = !editor_collision_mode;
+                selected_entity = undefined;
+            }
+            
+            if (keyboard_check_pressed(vk_f8)) {
+                editor_path_mode = false;
+                editor_collision_mode = false;
+                editor_terrain_mode = !editor_terrain_mode;
+                // on exiting terrain mode
+                if (!editor_terrain_mode) {
+                }
                 selected_entity = undefined;
             }
             
@@ -793,6 +806,8 @@ function Game() constructor {
                     }
                 }
             } else if (editor_collision_mode) {
+                
+            } else if (editor_terrain_mode) {
                 
             } else {
                 editor_hover_entity = GetUnderCursor(all_env_entities);
@@ -1224,6 +1239,8 @@ function Game() constructor {
                 draw_surface_stretched_ext(collision_surface, 0, 0, window_get_width(), window_get_height(), c_white, 0.5);
                 draw_circle_color(window_mouse_get_x(), window_mouse_get_y(), collision_brush_radius * (window_get_width() / surface_get_width(collision_surface)), c_aqua, c_aqua, true);
                 draw_text(32, 32, "Left click to paint collision information; right click to clear collision information");
+            } else if (editor_terrain_mode) {
+                draw_text(32, 32, "Left click to raise the terrain, right click to lower it");
             } else {
                 draw_text(32, 32, "Click to spawn a thing (" + env_object_list[| editor_model_index] + ") or select an existing thing; F4 and F5 cycle through models");
                 if (selected_entity) {
@@ -1248,6 +1265,7 @@ function Game() constructor {
                 draw_text(window_get_width() - 32, ++n * 32, "F3 to fuse all of the environment entities together");
                 draw_text(window_get_width() - 32, ++n * 32, "F6 to search for a model");
                 draw_text(window_get_width() - 32, ++n * 32, "F7 to go into collision painting mode");
+                draw_text(window_get_width() - 32, ++n * 32, "F8 to go into terrain editing mode");
                 draw_set_halign(fa_left);
             }
         }
