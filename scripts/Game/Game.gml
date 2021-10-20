@@ -780,10 +780,13 @@ function Game() constructor {
                 
             } else if (editor_terrain_mode) {
                 var floor_intersect = self.camera.floor_intersect;
-                if (floor_intersect && mouse_check_button(mb_left)) {
+                var go_up = mouse_check_button(mb_left);
+                var go_down = mouse_check_button(mb_right);
+                if (floor_intersect && (go_up || go_down)) {
                     var ground_buffer = buffer_create_from_vertex_buffer(self.ground, buffer_fixed, 1);
                     
                     var edit_radius = 100;
+                    var edit_rate = 0.25;
                     
                     for (var i = 0, n = buffer_get_size(ground_buffer); i < n; i += 28) {
                         var xx = buffer_peek(ground_buffer, i + 00, buffer_f32);
@@ -791,7 +794,11 @@ function Game() constructor {
                         var zz = buffer_peek(ground_buffer, i + 08, buffer_f32);
                         
                         if (point_distance(floor_intersect.x, floor_intersect.y, xx, yy) < edit_radius) {
-                            buffer_poke(ground_buffer, i + 08, buffer_f32, zz + 1);
+                            if (go_up) {
+                                buffer_poke(ground_buffer, i + 08, buffer_f32, zz + edit_rate);
+                            } else {
+                                buffer_poke(ground_buffer, i + 08, buffer_f32, zz - edit_rate);
+                            }
                             
                             var base_index = (i div 84) * 84;
                             var x1 = buffer_peek(ground_buffer, base_index + 00, buffer_f32);
