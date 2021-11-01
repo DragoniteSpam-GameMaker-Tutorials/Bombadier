@@ -517,8 +517,13 @@ function Game() constructor {
     };
     
     FuseMapEntities = function() {
-        var vbuff = vertex_create_buffer();
-        vertex_begin(vbuff, format);
+        var fused_data = buffer_create(1, buffer_grow, 1);
+        
+        if (self.fused.raw != undefined) {
+            buffer_resize(fused_data, buffer_get_size(self.fused.raw));
+            buffer_copy(self.fused.raw, 0, buffer_get_size(self.fused.raw), fused_data, 0);
+            buffer_seek(fused_data, buffer_seek_end, 0);
+        }
         
         var cam_x = camera.to.x - camera.from.x;
         var cam_y = camera.to.y - camera.from.y;
@@ -582,17 +587,29 @@ function Game() constructor {
                     var new_normal_2 = matrix_transform_vertex(entity_matrix_normals, nx2, ny2, nz2);
                     var new_normal_3 = matrix_transform_vertex(entity_matrix_normals, nx3, ny3, nz3);
                     
-                    vertex_position_3d(vbuff, new_position_1[0], new_position_1[1], new_position_1[2]);
-                    vertex_normal(vbuff, new_normal[0], new_normal[1], new_normal[2]);
-                    vertex_color(vbuff, cc1 & 0xffffff, (cc1 >> 24) / 255);
+                    buffer_write(fused_data, buffer_f32, new_position_1[0]);
+                    buffer_write(fused_data, buffer_f32, new_position_1[1]);
+                    buffer_write(fused_data, buffer_f32, new_position_1[2]);
+                    buffer_write(fused_data, buffer_f32, new_normal[0]);
+                    buffer_write(fused_data, buffer_f32, new_normal[1]);
+                    buffer_write(fused_data, buffer_f32, new_normal[2]);
+                    buffer_write(fused_data, buffer_u32, cc1);
                     
-                    vertex_position_3d(vbuff, new_position_2[0], new_position_2[1], new_position_2[2]);
-                    vertex_normal(vbuff, new_normal_2[0], new_normal_2[1], new_normal_2[2]);
-                    vertex_color(vbuff, cc2 & 0xffffff, (cc2 >> 24) / 255);
+                    buffer_write(fused_data, buffer_f32, new_position_2[0]);
+                    buffer_write(fused_data, buffer_f32, new_position_2[1]);
+                    buffer_write(fused_data, buffer_f32, new_position_2[2]);
+                    buffer_write(fused_data, buffer_f32, new_normal_2[0]);
+                    buffer_write(fused_data, buffer_f32, new_normal_2[1]);
+                    buffer_write(fused_data, buffer_f32, new_normal_2[2]);
+                    buffer_write(fused_data, buffer_u32, cc2);
                     
-                    vertex_position_3d(vbuff, new_position_3[0], new_position_3[1], new_position_3[2]);
-                    vertex_normal(vbuff, new_normal_3[0], new_normal_3[1], new_normal_3[2]);
-                    vertex_color(vbuff, cc3 & 0xffffff, (cc3 >> 24) / 255);
+                    buffer_write(fused_data, buffer_f32, new_position_3[0]);
+                    buffer_write(fused_data, buffer_f32, new_position_3[1]);
+                    buffer_write(fused_data, buffer_f32, new_position_3[2]);
+                    buffer_write(fused_data, buffer_f32, new_normal_3[0]);
+                    buffer_write(fused_data, buffer_f32, new_normal_3[1]);
+                    buffer_write(fused_data, buffer_f32, new_normal_3[2]);
+                    buffer_write(fused_data, buffer_u32, cc3);
                 }
             }
             
@@ -600,22 +617,21 @@ function Game() constructor {
             ds_list_delete(all_entities, ds_list_find_index(all_entities, ent));
         }
         
-        vertex_end(vbuff);
         ds_list_clear(all_env_entities);
         
         if (fused.raw != undefined) {
             buffer_delete(fused.raw);
         }
+        
         if (fused.vbuff) {
             vertex_delete_buffer(fused.vbuff);
         }
         
+        var vbuff = vertex_create_buffer_from_buffer(fused_data, self.format);
         show_message(string(vertex_get_number(vbuff)) + " vertices (" + string(vertex_get_number(vbuff) / 3) + " triangles)");
         
         fused.vbuff = vbuff;
-        if (!RELEASE_MODE) {
-            fused.raw = buffer_create_from_vertex_buffer(vbuff, buffer_fixed, 1);
-        }
+        fused.raw = fused_data;
         vertex_freeze(vbuff);
     };
     
