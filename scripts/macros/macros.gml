@@ -31,3 +31,7 @@
 
 #macro FIELD_WIDTH 1366
 #macro FIELD_HEIGHT 768
+
+#macro RELEASE_MODE false
+#macro release:RELEASE_MODE true
+#macro pi_release:RELEASE_MODE true

@@ -108,7 +108,10 @@
   "configs": {
     "name": "Default",
     "children": [
-      {"name":"pi","children":[],},
+      {"name":"pi","children":[
+          {"name":"pi_release","children":[],},
+        ],},
+      {"name":"release","children":[],},
     ],
   },
   "RoomOrderNodes": [
