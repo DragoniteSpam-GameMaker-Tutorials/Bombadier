@@ -613,7 +613,9 @@ function Game() constructor {
         show_message(string(vertex_get_number(vbuff)) + " vertices (" + string(vertex_get_number(vbuff) / 3) + " triangles)");
         
         fused.vbuff = vbuff;
-        fused.raw = buffer_create_from_vertex_buffer(vbuff, buffer_fixed, 1);
+        if (!RELEASE_MODE) {
+            fused.raw = buffer_create_from_vertex_buffer(vbuff, buffer_fixed, 1);
+        }
         vertex_freeze(vbuff);
     };
     
@@ -976,10 +978,13 @@ function Game() constructor {
     
     LoadMap = function(filename) {
         if (self.fused.raw != undefined) {
-            vertex_delete_buffer(self.fused.vbuff);
             buffer_delete(self.fused.raw);
-            self.fused.vbuff = undefined;
             self.fused.raw = undefined;
+        }
+        
+        if (self.fused.vbuff != undefined) {
+            vertex_delete_buffer(self.fused.vbuff);
+            self.fused.vbuff = undefined;
         }
         
         array_resize(self.path_nodes, 0);
@@ -1017,6 +1022,11 @@ function Game() constructor {
                 fused.raw = buffer_load(filename_change_ext(filename, ".fused"));
                 fused.vbuff = vertex_create_buffer_from_buffer(fused.raw, format);
                 vertex_freeze(fused.vbuff);
+                
+                if (RELEASE_MODE) {
+                    buffer_delete(fused.raw);
+                    fused.raw = undefined;
+                }
             }
             
             if (file_exists(filename_change_ext(filename, ".collision"))) {

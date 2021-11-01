@@ -57,4 +57,8 @@ function ModelData(name, vbuff) constructor {
     }
     
     collision = new BBox(new Vector3(xmin, ymin, zmin), new Vector3(xmax, ymax, zmax));
+    
+    if (RELEASE_MODE) {
+        vertex_freeze(vbuff);
+    }
 }
