@@ -35,6 +35,10 @@ function create_ground_vbuffer(format) {
     
     vertex_end(ground);
     
+    if (RELEASE_MODE) {
+        vertex_freeze(ground);
+    }
+    
     return ground;
 }
 
@@ -77,6 +81,10 @@ function create_water_vbuffer(format) {
     vertex_colour(water, c, a);
     
     vertex_end(water);
+    
+    if (RELEASE_MODE) {
+        vertex_freeze(water);
+    }
     
     return water;
 }
