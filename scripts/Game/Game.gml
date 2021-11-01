@@ -310,10 +310,16 @@ function Game() constructor {
         selected_entity = undefined;
         selected_entity_hover = undefined;
         editor_hover_entity = undefined;
-        editor_path_mode = false;
-        editor_collision_mode = false;
-        editor_terrain_mode = false;
+        editor_mode = EditorModes.MAIN;
         editor_model_index = 0;
+        
+        enum EditorModes {
+            MAIN,
+            PATH,
+            COLLISION,
+            TERRAIN,
+            SETTINGS,
+        }
         
         DefineAllWaves(all_waves);
         ds_list_clear(wave_active);
@@ -609,6 +615,27 @@ function Game() constructor {
         vertex_freeze(vbuff);
     };
     
+    SetEditorMode = function(mode) {
+        if (self.editor_mode == EditorModes.COLLISION) {
+            var surface_buffer = buffer_create(surface_get_width(collision_surface) * surface_get_height(collision_surface) * 4, buffer_fixed, 1);
+            buffer_get_surface(surface_buffer, collision_surface, 0);
+            
+            buffer_seek(surface_buffer, buffer_seek_start, 0);
+            buffer_seek(fused.collision, buffer_seek_start, 0);
+            
+            repeat (buffer_get_size(fused.collision)) {
+                var color = buffer_read(surface_buffer, buffer_u32) & 0xff;
+                buffer_write(fused.collision, buffer_u8, color);
+            }
+            
+            buffer_delete(surface_buffer);
+            
+            self.fused.GenerateCollisionSprite();
+        }
+        self.editor_mode = mode;
+        self.selected_entity = undefined;
+    };
+    
     Update = function() {
         if (keyboard_check_pressed(vk_tab)) {
             gameplay_mode = (gameplay_mode == GameModes.GAMEPLAY) ? GameModes.EDITOR : GameModes.GAMEPLAY;
@@ -703,10 +730,7 @@ function Game() constructor {
             camera.Update();
             #region Editor stuff
             if (keyboard_check_pressed(vk_f2)) {
-                editor_collision_mode = false;
-                editor_terrain_mode = false;
-                editor_path_mode = !editor_path_mode;
-                selected_entity = undefined;
+                SetEditorMode(EditorModes.PATH);
             }
             
             if (keyboard_check_pressed(vk_f3)) {
@@ -716,39 +740,22 @@ function Game() constructor {
             }
             
             if (keyboard_check_pressed(vk_f7)) {
-                editor_path_mode = false;
-                editor_terrain_mode = false;
-                if (editor_collision_mode) {
-                    var surface_buffer = buffer_create(surface_get_width(collision_surface) * surface_get_height(collision_surface) * 4, buffer_fixed, 1);
-                    buffer_get_surface(surface_buffer, collision_surface, 0);
-                    
-                    buffer_seek(surface_buffer, buffer_seek_start, 0);
-                    buffer_seek(fused.collision, buffer_seek_start, 0);
-                    
-                    repeat (buffer_get_size(fused.collision)) {
-                        var color = buffer_read(surface_buffer, buffer_u32) & 0xff;
-                        buffer_write(fused.collision, buffer_u8, color);
-                    }
-                    
-                    buffer_delete(surface_buffer);
-                    
-                    self.fused.GenerateCollisionSprite();
-                }
-                editor_collision_mode = !editor_collision_mode;
-                selected_entity = undefined;
+                SetEditorMode(EditorModes.COLLISION);
             }
             
             if (keyboard_check_pressed(vk_f8)) {
-                editor_path_mode = false;
-                editor_collision_mode = false;
-                editor_terrain_mode = !editor_terrain_mode;
-                // on exiting terrain mode
-                if (!editor_terrain_mode) {
-                }
-                selected_entity = undefined;
+                SetEditorMode(EditorModes.TERRAIN);
             }
             
-            if (editor_path_mode) {
+            if (keyboard_check_pressed(vk_f9)) {
+                SetEditorMode(EditorModes.SETTINGS);
+            }
+            
+            if (keyboard_check_pressed(vk_f10)) {
+                SetEditorMode(EditorModes.MAIN);
+            }
+            
+            if (editor_mode == EditorModes.PATH) {
                 editor_hover_entity = GetUnderCursor(path_nodes);
                 
                 if (mouse_check_button_pressed(mb_left)) {
@@ -777,9 +784,9 @@ function Game() constructor {
                         selected_entity = undefined;
                     }
                 }
-            } else if (editor_collision_mode) {
+            } else if (editor_mode == EditorModes.COLLISION) {
                 
-            } else if (editor_terrain_mode) {
+            } else if (editor_mode == EditorModes.TERRAIN) {
                 var go_up = mouse_check_button(mb_left);
                 var go_down = mouse_check_button(mb_right);
                 
@@ -1084,7 +1091,7 @@ function Game() constructor {
         
         vertex_submit(ground, pr_trianglelist, -1);
         
-        if (self.gameplay_mode == GameModes.EDITOR && editor_terrain_mode) {
+        if (self.gameplay_mode == GameModes.EDITOR && (editor_mode == EditorModes.TERRAIN)) {
             shader_set(shd_debug_wireframe);
             shader_set_uniform_f(shader_get_uniform(shd_debug_wireframe, "radius"), 100);
             if (self.camera.floor_intersect) {
@@ -1133,7 +1140,7 @@ function Game() constructor {
             vertex_submit(vb_border, pr_linestrip, -1);
             vertex_delete_buffer(vb_border);
             
-            if (editor_path_mode) {
+            if (editor_mode == EditorModes.PATH) {
                 var draw_the_line = array_length(path_nodes) > 1;
                 if (draw_the_line) {
                     var vb_path_nodes = vertex_create_buffer();
@@ -1232,9 +1239,9 @@ function Game() constructor {
             player_cursor_over_ui = false;
         } else if (gameplay_mode == GameModes.EDITOR) {
             window_set_cursor(cr_default);
-            if (editor_path_mode) {
+            if (editor_mode == EditorModes.PATH) {
                 draw_text(32, 32, "Click to spawn or select a path node");
-            } else if (editor_collision_mode) {
+            } else if (editor_mode == EditorModes.COLLISION) {
                 if (!surface_exists(collision_surface)) {
                     collision_surface = surface_create(ceil(FIELD_WIDTH / GRID_CELL_SIZE), ceil(FIELD_HEIGHT / GRID_CELL_SIZE));
                     
@@ -1270,7 +1277,7 @@ function Game() constructor {
                 draw_surface_stretched_ext(collision_surface, 0, 0, window_get_width(), window_get_height(), c_white, 0.5);
                 draw_circle_color(window_mouse_get_x(), window_mouse_get_y(), collision_brush_radius * (window_get_width() / surface_get_width(collision_surface)), c_aqua, c_aqua, true);
                 draw_text(32, 32, "Left click to paint collision information; right click to clear collision information");
-            } else if (editor_terrain_mode) {
+            } else if (editor_mode == EditorModes.TERRAIN) {
                 draw_text(32, 32, "Left click to raise the terrain, right click to lower it");
                 draw_text(32, 64, "1: color dark green; 2: color light green; 3: color sand; 0 to reset the terrain height");
             } else {
@@ -1295,9 +1302,12 @@ function Game() constructor {
                 draw_text(window_get_width() - 32, ++n * 32, "F1 to save");
                 draw_text(window_get_width() - 32, ++n * 32, "F2 to view/hide path nodes");
                 draw_text(window_get_width() - 32, ++n * 32, "F3 to fuse all of the environment entities together");
+                draw_text(window_get_width() - 32, ++n * 32, "F4 and F5 to cycle through models");
                 draw_text(window_get_width() - 32, ++n * 32, "F6 to search for a model");
                 draw_text(window_get_width() - 32, ++n * 32, "F7 to go into collision painting mode");
                 draw_text(window_get_width() - 32, ++n * 32, "F8 to go into terrain editing mode");
+                draw_text(window_get_width() - 32, ++n * 32, "F9 to go into map settings mode");
+                draw_text(window_get_width() - 32, ++n * 32, "F10 to go into model mode");
                 draw_set_halign(fa_left);
             }
         }

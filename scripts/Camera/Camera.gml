@@ -84,7 +84,7 @@ function Camera() constructor {
         
         var cam = camera_get_active();
         
-        if (GAME.editor_collision_mode) {
+        if (GAME.editor_mode == EditorModes.COLLISION) {
             camera_set_view_mat(cam, matrix_build_lookat(room_width / 2, room_height / 2, 2000, room_width / 2, room_height / 2, 0, 0, 1, 0));
             camera_set_proj_mat(cam, matrix_build_projection_ortho(-room_width, room_height, 1, 3000));
         } else {
