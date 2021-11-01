@@ -63,6 +63,7 @@ function Game() constructor {
     }
     collision_grid = ds_grid_create(10, 10);
     skybox_type = 0;
+    show_water = false;
     #endregion
     
     test_ball = load_model("testball.d3d", format).vbuff;
@@ -811,6 +812,9 @@ function Game() constructor {
                 if (keyboard_check_pressed(ord("J"))) {
                     self.skybox_type = ++self.skybox_type % sprite_get_number(spr_skybox);
                 }
+                if (keyboard_check_pressed(ord("K"))) {
+                    self.show_water = !self.show_water;
+                }
             } else {
                 editor_hover_entity = GetUnderCursor(all_env_entities);
                 
@@ -947,6 +951,7 @@ function Game() constructor {
             entities: array_create(ds_list_size(all_env_entities), undefined),
             nodes: path_nodes,
             skybox_type: self.skybox_type,
+            show_water: self.show_water,
         };
         for (var i = 0; i < ds_list_size(all_env_entities); i++) {
             all_env_entities[| i].Save(save_json, i);
@@ -1032,6 +1037,12 @@ function Game() constructor {
                 self.skybox_type = load_json.skybox_type;
             } else {
                 self.skybox_type = 0;
+            }
+            
+            if (variable_struct_exists(load_json, "show_water")) {
+                self.show_water = load_json.show_water;
+            } else {
+                self.show_water = false;
             }
         } catch (e) {
             show_debug_message("Something bad happened loading the file:");
