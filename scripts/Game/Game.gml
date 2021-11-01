@@ -382,6 +382,7 @@ function Game() constructor {
     };
     
     SendInWaveEarly = function() {
+        if (self.wave_countdown < WAVE_COUNTDOWN_THRESHOLD) return;
         if (!ds_queue_empty(all_waves)) {
             if (wave_countdown > 0) {
                 player_money += ceil(wave_countdown);
