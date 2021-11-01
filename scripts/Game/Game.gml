@@ -807,6 +807,10 @@ function Game() constructor {
                 if (self.camera.floor_intersect && (go_up || go_down)) {
                     edit_ground_height(self.ground, self.camera.floor_intersect, go_up ? 1 : -1, self.format);
                 }
+            } else if (self.editor_mode == EditorModes.SETTINGS) {
+                if (keyboard_check_pressed(ord("J"))) {
+                    self.skybox_type = ++self.skybox_type % sprite_get_number(spr_skybox);
+                }
             } else {
                 editor_hover_entity = GetUnderCursor(all_env_entities);
                 
