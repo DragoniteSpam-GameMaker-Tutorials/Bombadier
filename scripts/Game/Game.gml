@@ -639,7 +639,7 @@ function Game() constructor {
     };
     
     Update = function() {
-        if (keyboard_check_pressed(vk_tab)) {
+        if (!RELEASE_MODE && keyboard_check_pressed(vk_tab)) {
             gameplay_mode = (gameplay_mode == GameModes.GAMEPLAY) ? GameModes.EDITOR : GameModes.GAMEPLAY;
             selected_entity = undefined;
             if (gameplay_mode == GameModes.GAMEPLAY) {
