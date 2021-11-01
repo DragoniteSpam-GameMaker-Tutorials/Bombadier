@@ -16,6 +16,7 @@ function Game() constructor {
     format = vertex_format_end();
     
     ground = create_ground_vbuffer(format);
+    water = create_water_vbuffer(format);
     #endregion
     
     fused = {
@@ -1183,6 +1184,10 @@ function Game() constructor {
                     vertex_delete_buffer(vb_path_nodes);
                 }
             }
+        }
+        
+        if (self.show_water) {
+            vertex_submit(self.water, pr_trianglelist, -1);
         }
         
         // semi-transparent stuff gets drawn last because the depth buffer sucks

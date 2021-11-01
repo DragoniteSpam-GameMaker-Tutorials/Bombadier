@@ -38,6 +38,49 @@ function create_ground_vbuffer(format) {
     return ground;
 }
 
+function create_water_vbuffer(format) {
+    var water = vertex_create_buffer();
+    vertex_begin(water, format);
+    
+    var padding = 512;
+    var x1 = -padding;
+    var y1 = -padding;
+    var x2 = room_width + padding;
+    var y2 = room_height + padding;
+    var z = -4;
+    var c = c_blue;
+    var a = 1;
+    
+    // 0
+    vertex_position_3d(water, x1, y1, z);
+    vertex_normal(water, 0, 0, 1);
+    vertex_colour(water, c, a);
+    // 1
+    vertex_position_3d(water, x2, y1, z);
+    vertex_normal(water, 0, 0, 1);
+    vertex_colour(water, c, a);
+    // 2
+    vertex_position_3d(water, x2, y2, z);
+    vertex_normal(water, 0, 0, 1);
+    vertex_colour(water, c, a);
+    // 3
+    vertex_position_3d(water, x2, y2, z);
+    vertex_normal(water, 0, 0, 1);
+    vertex_colour(water, c, a);
+    // 4
+    vertex_position_3d(water, x1, y2, z);
+    vertex_normal(water, 0, 0, 1);
+    vertex_colour(water, c, a);
+    // 5
+    vertex_position_3d(water, x1, y1, z);
+    vertex_normal(water, 0, 0, 1);
+    vertex_colour(water, c, a);
+    
+    vertex_end(water);
+    
+    return water;
+}
+
 function edit_ground_height(source, floor_intersect, edit_direction, format) {
     var ground_buffer = buffer_create_from_vertex_buffer(source, buffer_fixed, 1);
     
