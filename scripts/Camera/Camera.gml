@@ -54,15 +54,16 @@ function Camera() constructor {
             self.mouse_last.y = window_mouse_get_y();
         }
         
-        if (to.x + mx >= 0 && to.x + mx <= room_width) {
-            from.x += mx;
-            to.x += mx;
-        }
+        var camera_x_min = (GAME.gameplay_mode == GameModes.GAMEPLAY) ? 200 : 0;
+        var camera_x_max = (GAME.gameplay_mode == GameModes.GAMEPLAY) ? (room_width - 200) : room_width;
+        var camera_y_min = (GAME.gameplay_mode == GameModes.GAMEPLAY) ? 0 : 0;
+        var camera_y_max = (GAME.gameplay_mode == GameModes.GAMEPLAY) ? 128 : (room_height / 2);
         
-        if (to.y + my >= 0 && to.y + my <= room_height / 2) {
-            from.y += my;
-            to.y += my;
-        }
+        to.x = clamp(to.x + mx, camera_x_min, camera_x_max);
+        from.x = clamp(from.x + mx, camera_x_min, camera_x_max);
+        
+        to.y = clamp(to.y + my, camera_y_min, camera_y_max);
+        from.y = to.y + 840;
         
         view_mat = matrix_build_lookat(from.x, from.y, from.z, to.x, to.y, to.z, up.x, up.y, up.z);
         proj_mat = matrix_build_projection_perspective_fov(-fov, -window_get_width() / window_get_height(), znear, zfar);
