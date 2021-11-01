@@ -62,6 +62,7 @@ function Game() constructor {
         ds_list_add(env_object_list, obj_name);
     }
     collision_grid = ds_grid_create(10, 10);
+    skybox_type = 0;
     #endregion
     
     test_ball = load_model("testball.d3d", format).vbuff;
@@ -934,6 +935,7 @@ function Game() constructor {
         var save_json = {
             entities: array_create(ds_list_size(all_env_entities), undefined),
             nodes: path_nodes,
+            skybox_type: self.skybox_type,
         };
         for (var i = 0; i < ds_list_size(all_env_entities); i++) {
             all_env_entities[| i].Save(save_json, i);
@@ -1014,6 +1016,12 @@ function Game() constructor {
             } else {
                 self.ground = create_ground_vbuffer(self.format);
             }
+            
+            if (variable_struct_exists(load_json, "skybox_type")) {
+                self.skybox_type = load_json.skybox_type;
+            } else {
+                self.skybox_type = 0;
+            }
         } catch (e) {
             show_debug_message("Something bad happened loading the file:");
             show_debug_message(e.message);
@@ -1029,7 +1037,7 @@ function Game() constructor {
     
     Render = function() {
         gpu_set_zwriteenable(false);
-        draw_sprite_stretched(spr_skybox, 0, 0, 0, window_get_width(), window_get_height());
+        draw_sprite_stretched(spr_skybox, self.skybox_type, 0, 0, window_get_width(), window_get_height());
         
         if (!surface_exists(self.outline_surface)) {
             self.outline_surface = surface_create(OUTLINE_SURFACE_WIDTH, OUTLINE_SURFACE_HEIGHT);
