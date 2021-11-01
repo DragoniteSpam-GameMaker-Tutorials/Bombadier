@@ -1186,10 +1186,6 @@ function Game() constructor {
             }
         }
         
-        if (self.show_water) {
-            vertex_submit(self.water, pr_trianglelist, -1);
-        }
-        
         // semi-transparent stuff gets drawn last because the depth buffer sucks
         for (var i = 0; i < ds_list_size(semi_transparent_stuff); i++) {
             var thing_to_draw = semi_transparent_stuff[| i];
@@ -1202,6 +1198,12 @@ function Game() constructor {
         }
         
         matrix_set(matrix_world, matrix_build_identity());
+        
+        if (self.show_water) {
+            shader_set(shd_water);
+            vertex_submit(self.water, pr_trianglelist, -1);
+        }
+        
         shader_reset();
         
         Particles.Render();

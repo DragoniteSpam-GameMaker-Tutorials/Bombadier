@@ -48,8 +48,8 @@ function create_water_vbuffer(format) {
     var x2 = room_width + padding;
     var y2 = room_height + padding;
     var z = -4;
-    var c = c_blue;
-    var a = 1;
+    var c = c_aqua;
+    var a = 0.5;
     
     // 0
     vertex_position_3d(water, x1, y1, z);
