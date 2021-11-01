@@ -1239,77 +1239,88 @@ function Game() constructor {
             player_cursor_over_ui = false;
         } else if (gameplay_mode == GameModes.EDITOR) {
             window_set_cursor(cr_default);
-            if (editor_mode == EditorModes.PATH) {
-                draw_text(32, 32, "Click to spawn or select a path node");
-            } else if (editor_mode == EditorModes.COLLISION) {
-                if (!surface_exists(collision_surface)) {
-                    collision_surface = surface_create(ceil(FIELD_WIDTH / GRID_CELL_SIZE), ceil(FIELD_HEIGHT / GRID_CELL_SIZE));
-                    
-                    var surface_buffer = buffer_create(surface_get_width(collision_surface) * surface_get_height(collision_surface) * 4, buffer_fixed, 1);
-                    
-                    buffer_seek(surface_buffer, buffer_seek_start, 0);
-                    buffer_seek(fused.collision, buffer_seek_start, 0);
+            switch (editor_mode) {
+                case EditorModes.PATH:
+                    draw_text(32, 32, "Click to spawn or select a path node");
+                    break;
+                case EditorModes.COLLISION:
+                    if (!surface_exists(collision_surface)) {
+                        collision_surface = surface_create(ceil(FIELD_WIDTH / GRID_CELL_SIZE), ceil(FIELD_HEIGHT / GRID_CELL_SIZE));
+                        
+                        var surface_buffer = buffer_create(surface_get_width(collision_surface) * surface_get_height(collision_surface) * 4, buffer_fixed, 1);
+                        
+                        buffer_seek(surface_buffer, buffer_seek_start, 0);
+                        buffer_seek(fused.collision, buffer_seek_start, 0);
+                        
+                        surface_set_target(collision_surface);
+                        draw_clear(c_black);
+                        surface_reset_target();
+                        
+                        repeat (buffer_get_size(fused.collision)) {
+                            var color = buffer_read(fused.collision, buffer_u8);
+                            buffer_write(surface_buffer, buffer_u32, 0xff000000 | make_colour_rgb(color, color, color));
+                        }
+                        
+                        buffer_set_surface(surface_buffer, collision_surface, 0);
+                    }
                     
                     surface_set_target(collision_surface);
-                    draw_clear(c_black);
+                    var xx = window_mouse_get_x() / window_get_width() * surface_get_width(collision_surface);
+                    var yy = window_mouse_get_y() / window_get_height() * surface_get_height(collision_surface);
+                    
+                    var collision_brush_radius = 4;
+                    
+                    if (mouse_wheel_up()) collision_brush_radius = max(2, collision_brush_radius - 1);
+                    if (mouse_wheel_down()) collision_brush_radius = min(10, collision_brush_radius + 1);
+                    if (mouse_check_button(mb_left)) draw_circle_color(xx, yy, collision_brush_radius, c_white, c_white, false);
+                    if (mouse_check_button(mb_right)) draw_circle_color(xx, yy, collision_brush_radius, c_black, c_black, false);
+                    
                     surface_reset_target();
-                    
-                    repeat (buffer_get_size(fused.collision)) {
-                        var color = buffer_read(fused.collision, buffer_u8);
-                        buffer_write(surface_buffer, buffer_u32, 0xff000000 | make_colour_rgb(color, color, color));
+                    draw_surface_stretched_ext(collision_surface, 0, 0, window_get_width(), window_get_height(), c_white, 0.5);
+                    draw_circle_color(window_mouse_get_x(), window_mouse_get_y(), collision_brush_radius * (window_get_width() / surface_get_width(collision_surface)), c_aqua, c_aqua, true);
+                    draw_text(32, 32, "Left click to paint collision information; right click to clear collision information");
+                    break;
+                case EditorModes.TERRAIN:
+                    draw_text(32, 32, "Left click to raise the terrain, right click to lower it");
+                    draw_text(32, 64, "1: color dark green; 2: color light green; 3: color sand; 0 to reset the terrain height");
+                    break;
+                case EditorModes.SETTINGS:
+                    var n = 0;
+                    draw_text(32, ++n * 32, "Map Settings");
+                    draw_text(32, ++n * 32, "J: cycle the skybox");
+                    draw_text(32, ++n * 32, "K: toggle water");
+                    break;
+                case EditorModes.MAIN:
+                    draw_text(32, 32, "Click to spawn a thing (" + env_object_list[| editor_model_index] + ") or select an existing thing; F4 and F5 cycle through models");
+                    if (selected_entity) {
+                        if (keyboard_check(vk_shift)) {
+                            draw_text(32, 64, "Left, Right, Up, Down, PageUp and Page Down to rotate the selected thing");
+                            draw_text(32, 96, "Backspace to reset the rotation");
+                        } else if (keyboard_check(vk_control)) {
+                            draw_text(32, 64, "Up and Down to scale the selected thing");
+                            draw_text(32, 96, "Backspace to reset the scale");
+                        } else {
+                            draw_text(32, 64, "Left, Right, Up, Down, PageUp and Page Down to move the selected thing");
+                            draw_text(32, 96, "Hold Shift or Control to affect rotation and scale instead");
+                        }
+                        draw_text(32, 128, "F12 to move a thing to a new location");
+                        draw_text(32, 160, "Delete to delete the selected thing");
+                        draw_text(32, 192, string(ds_list_size(all_env_entities)) + " total things");
                     }
-                    
-                    buffer_set_surface(surface_buffer, collision_surface, 0);
-                }
-                
-                surface_set_target(collision_surface);
-                var xx = window_mouse_get_x() / window_get_width() * surface_get_width(collision_surface);
-                var yy = window_mouse_get_y() / window_get_height() * surface_get_height(collision_surface);
-                
-                static collision_brush_radius = 4;
-                
-                if (mouse_wheel_up()) collision_brush_radius = max(2, collision_brush_radius - 1);
-                if (mouse_wheel_down()) collision_brush_radius = min(10, collision_brush_radius + 1);
-                if (mouse_check_button(mb_left)) draw_circle_color(xx, yy, collision_brush_radius, c_white, c_white, false);
-                if (mouse_check_button(mb_right)) draw_circle_color(xx, yy, collision_brush_radius, c_black, c_black, false);
-                
-                surface_reset_target();
-                draw_surface_stretched_ext(collision_surface, 0, 0, window_get_width(), window_get_height(), c_white, 0.5);
-                draw_circle_color(window_mouse_get_x(), window_mouse_get_y(), collision_brush_radius * (window_get_width() / surface_get_width(collision_surface)), c_aqua, c_aqua, true);
-                draw_text(32, 32, "Left click to paint collision information; right click to clear collision information");
-            } else if (editor_mode == EditorModes.TERRAIN) {
-                draw_text(32, 32, "Left click to raise the terrain, right click to lower it");
-                draw_text(32, 64, "1: color dark green; 2: color light green; 3: color sand; 0 to reset the terrain height");
-            } else {
-                draw_text(32, 32, "Click to spawn a thing (" + env_object_list[| editor_model_index] + ") or select an existing thing; F4 and F5 cycle through models");
-                if (selected_entity) {
-                    if (keyboard_check(vk_shift)) {
-                        draw_text(32, 64, "Left, Right, Up, Down, PageUp and Page Down to rotate the selected thing");
-                        draw_text(32, 96, "Backspace to reset the rotation");
-                    } else if (keyboard_check(vk_control)) {
-                        draw_text(32, 64, "Up and Down to scale the selected thing");
-                        draw_text(32, 96, "Backspace to reset the scale");
-                    } else {
-                        draw_text(32, 64, "Left, Right, Up, Down, PageUp and Page Down to move the selected thing");
-                        draw_text(32, 96, "Hold Shift or Control to affect rotation and scale instead");
-                    }
-                    draw_text(32, 128, "F12 to move a thing to a new location");
-                    draw_text(32, 160, "Delete to delete the selected thing");
-                    draw_text(32, 192, string(ds_list_size(all_env_entities)) + " total things");
-                }
-                draw_set_halign(fa_right);
-                var n = 0;
-                draw_text(window_get_width() - 32, ++n * 32, "F1 to save");
-                draw_text(window_get_width() - 32, ++n * 32, "F2 to view/hide path nodes");
-                draw_text(window_get_width() - 32, ++n * 32, "F3 to fuse all of the environment entities together");
-                draw_text(window_get_width() - 32, ++n * 32, "F4 and F5 to cycle through models");
-                draw_text(window_get_width() - 32, ++n * 32, "F6 to search for a model");
-                draw_text(window_get_width() - 32, ++n * 32, "F7 to go into collision painting mode");
-                draw_text(window_get_width() - 32, ++n * 32, "F8 to go into terrain editing mode");
-                draw_text(window_get_width() - 32, ++n * 32, "F9 to go into map settings mode");
-                draw_text(window_get_width() - 32, ++n * 32, "F10 to go into model mode");
-                draw_set_halign(fa_left);
+                    break;
             }
+            draw_set_halign(fa_right);
+            var n = 0;
+            draw_text(window_get_width() - 32, ++n * 32, "F1 to save");
+            draw_text(window_get_width() - 32, ++n * 32, "F2 to view/hide path nodes");
+            draw_text(window_get_width() - 32, ++n * 32, "F3 to fuse all of the environment entities together");
+            draw_text(window_get_width() - 32, ++n * 32, "F4 and F5 to cycle through models");
+            draw_text(window_get_width() - 32, ++n * 32, "F6 to search for a model");
+            draw_text(window_get_width() - 32, ++n * 32, "F7 to go into collision painting mode");
+            draw_text(window_get_width() - 32, ++n * 32, "F8 to go into terrain editing mode");
+            draw_text(window_get_width() - 32, ++n * 32, "F9 to go into map settings mode");
+            draw_text(window_get_width() - 32, ++n * 32, "F10 to go into model mode");
+            draw_set_halign(fa_left);
         }
     };
     
