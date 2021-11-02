@@ -1252,6 +1252,8 @@ function Game() constructor {
     };
     
     GUI = function() {
+        static collision_brush_radius = 4;
+        
         draw_surface_stretched(application_surface, 0, 0, window_get_width(), window_get_height());
         
         shader_set(shd_outline);
@@ -1316,8 +1318,6 @@ function Game() constructor {
                     surface_set_target(collision_surface);
                     var xx = window_mouse_get_x() / window_get_width() * surface_get_width(collision_surface);
                     var yy = window_mouse_get_y() / window_get_height() * surface_get_height(collision_surface);
-                    
-                    var collision_brush_radius = 4;
                     
                     if (mouse_wheel_up()) collision_brush_radius = max(2, collision_brush_radius - 1);
                     if (mouse_wheel_down()) collision_brush_radius = min(10, collision_brush_radius + 1);
