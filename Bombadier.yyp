@@ -148,7 +148,6 @@
     {"CopyToMask":-1,"filePath":"datafiles","resourceVersion":"1.0","name":"testball.d3d","resourceType":"GMIncludedFile",},
     {"CopyToMask":-1,"filePath":"datafiles","resourceVersion":"1.0","name":"testbullet.d3d","resourceType":"GMIncludedFile",},
     {"CopyToMask":-1,"filePath":"datafiles","resourceVersion":"1.0","name":"tower-bird.d3d","resourceType":"GMIncludedFile",},
-    {"CopyToMask":-1,"filePath":"datafiles/maps","resourceVersion":"1.0","name":"map.bug","resourceType":"GMIncludedFile",},
     {"CopyToMask":-1,"filePath":"datafiles","resourceVersion":"1.0","name":"tower-pebble.d3d","resourceType":"GMIncludedFile",},
     {"CopyToMask":-1,"filePath":"datafiles","resourceVersion":"1.0","name":"tower-fire.d3d","resourceType":"GMIncludedFile",},
     {"CopyToMask":-1,"filePath":"datafiles","resourceVersion":"1.0","name":"bullet-fire.d3d","resourceType":"GMIncludedFile",},
