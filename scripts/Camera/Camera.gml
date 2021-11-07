@@ -54,9 +54,9 @@ function Camera() constructor {
             self.mouse_last.y = window_mouse_get_y();
         }
         
-        var camera_x_min = (GAME.gameplay_mode == GameModes.GAMEPLAY) ? 200 : 0;
-        var camera_x_max = (GAME.gameplay_mode == GameModes.GAMEPLAY) ? (room_width - 200) : room_width;
-        var camera_y_min = (GAME.gameplay_mode == GameModes.GAMEPLAY) ? 0 : 0;
+        var camera_x_min = (GAME.gameplay_mode == GameModes.GAMEPLAY) ? 200 : -200;
+        var camera_x_max = (GAME.gameplay_mode == GameModes.GAMEPLAY) ? (room_width - 200) : room_width + 200;
+        var camera_y_min = (GAME.gameplay_mode == GameModes.GAMEPLAY) ? 0 : -1000;
         var camera_y_max = (GAME.gameplay_mode == GameModes.GAMEPLAY) ? 128 : (room_height / 2);
         
         to.x = clamp(to.x + mx, camera_x_min, camera_x_max);
