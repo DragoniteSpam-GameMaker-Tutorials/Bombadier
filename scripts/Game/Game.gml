@@ -871,6 +871,7 @@ function Game() constructor {
                             ent.scale.y = ent.scale.x;
                             ent.scale.z = ent.scale.x;
                             ent.AddToMap();
+                            self.selected_entity = ent;
                         }
                     }
                 } else {
