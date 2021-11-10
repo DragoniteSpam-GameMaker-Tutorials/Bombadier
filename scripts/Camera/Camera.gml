@@ -67,7 +67,7 @@ function Camera() constructor {
         
         view_mat = matrix_build_lookat(from.x, from.y, from.z, to.x, to.y, to.z, up.x, up.y, up.z);
         proj_mat = matrix_build_projection_perspective_fov(-fov, -window_get_width() / window_get_height(), znear, zfar);
-        
+        //proj_mat = matrix_build_projection_ortho(window_get_width() / 2, -window_get_height() / 2, znear, zfar);
         mouse_cast = screen_to_world(window_mouse_get_x(), window_mouse_get_y(), view_mat, proj_mat);
         
         if (mouse_cast.z < 0) {
