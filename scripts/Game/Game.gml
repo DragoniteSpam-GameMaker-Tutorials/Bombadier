@@ -1,5 +1,8 @@
 #macro GAME Backbone.game
-show_debug_overlay(true);
+
+if (!RELEASE_MODE) {
+    show_debug_overlay(true);
+}
 
 application_surface_draw_enable(false);
 
