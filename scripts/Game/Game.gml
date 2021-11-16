@@ -300,6 +300,12 @@ function Game() constructor {
         ds_list_clear(all_towers);
         ds_list_clear(all_foes);
         
+        for (var i = ds_list_size(all_entities) - 1; i >= 0; i--) {
+            if (!all_entities[| i].persist) {
+                all_entities[| i].Destroy();
+            }
+        }
+        
         game_speed = 1;
         
         player_money = 75;

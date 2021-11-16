@@ -1,4 +1,5 @@
 function Entity(x, y, z) constructor {
+    self.persist = false;
     position = new Vector3(x, y, z);
     rotation = new Vector3(0, 0, 0);
     scale = new Vector3(1, 1, 1);
@@ -48,6 +49,7 @@ function Entity(x, y, z) constructor {
 }
 
 function EntityEnv(x, y, z, model, savename) : Entity(x, y, z) constructor {
+    self.persist = true;
     self.model = model;
     self.savename = savename;
     
