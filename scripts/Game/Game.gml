@@ -223,8 +223,10 @@ function Game() constructor {
     game_set_speed(TARGET_FPS, gamespeed_fps);
     
     ApplyScreenSize = function() {
-        window_set_size(current_screen_size.x, current_screen_size.y);
-        surface_resize(application_surface, current_screen_size.x * resolution_scalar, current_screen_size.y * resolution_scalar);
+        if (current_screen_size.x <= display_get_width() && current_screen_size.y <= display_get_height()) {
+            window_set_size(current_screen_size.x, current_screen_size.y);
+            surface_resize(application_surface, current_screen_size.x * resolution_scalar, current_screen_size.y * resolution_scalar);
+        }
     };
     
     ApplyVolume = function() {
@@ -255,8 +257,8 @@ function Game() constructor {
         
         self.volume_master = json.volume_master;
         self.screen_size_index = json.screen_size_index;
-        self.current_screen_size.x = json.current_screen_size.x;
-        self.current_screen_size.y = json.current_screen_size.y;
+        self.current_screen_size.x = min(json.current_screen_size.x, display_get_width());
+        self.current_screen_size.y = min(json.current_screen_size.y, display_get_height());
         window_set_fullscreen(json.fullscreen);
         self.frame_rate_index = json.frame_rate_index;
         game_set_speed(json.frames_per_second, gamespeed_fps);
