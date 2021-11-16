@@ -145,8 +145,8 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
                     path_node++;
                     destination = clone(path[path_node].position);
                 } else {
-                    GAME.PlayerDamage(damage);
                     Destroy();
+                    GAME.PlayerDamage(damage);
                 }
             }
         }

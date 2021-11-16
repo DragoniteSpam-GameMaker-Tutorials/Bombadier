@@ -399,6 +399,8 @@ function Game() constructor {
             self.gameplay_mode = GameModes.GAME_OVER;
             self.current_game_over_screen = "UI_Game_Over_Lose";
             self.CallEntityGameOver();
+        } else {
+            self.CheckGameOver();
         }
     };
     
