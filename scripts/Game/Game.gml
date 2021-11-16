@@ -226,6 +226,7 @@ function Game() constructor {
         if (current_screen_size.x <= display_get_width() && current_screen_size.y <= display_get_height()) {
             window_set_size(current_screen_size.x, current_screen_size.y);
             surface_resize(application_surface, current_screen_size.x * resolution_scalar, current_screen_size.y * resolution_scalar);
+            Backbone.alarm[0] = 1;
         }
     };
     
