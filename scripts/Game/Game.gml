@@ -350,6 +350,7 @@ function Game() constructor {
     };
     
     GoToTitle = function() {
+        self.Initialize();
         self.CallEntityGameOver();
         self.LoadMap("maps/title.bug");
         self.gameplay_mode = GameModes.TITLE;
