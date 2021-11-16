@@ -111,22 +111,21 @@ function Game() constructor {
     tower_pebbles =     new TowerData("Pebble Shooter",
                         /* rate  */ [1, 1, 2],
                         /* range */ [3 * 32, 3 * 32, 3 * 32],
-                        /* dmg   */ [1, 2, 2],
-                        /* cost  */ [10, 40, 50],
+                        /* dmg   */ [1, 3, 4],
+                        /* cost  */ [10, 20, 50],
                             load_model("tower-pebble.d3d", format), bullet_pebble
                         );
     tower_fire =        new TowerData("Fire Shooter",
                         /* rate  */ [0.5, 0.75, 0.5],
                         /* range */ [3 * 32, 3.5 * 32, 3.5 * 32],
                         /* dmg   */ [1, 1, 1],
-                        /* cost  */ [15, 40, 60],
+                        /* cost  */ [15, 30, 60],
                             load_model("tower-fire.d3d", format), bullet_fire
                         );
-    
     tower_magnify =     new TowerData("Magnifying Glass",
                         /* rate  */ [0, 0, 0],
                         /* range */ [2.5 * 32, 3 * 32, 3 * 32],
-                        /* dmg   */ [5, 8, 8],
+                        /* dmg   */ [3, 6, 8],
                         /* cost  */ [50, 150, 200],
                             load_model("tower-glass.d3d", format), bullet_pebble
                         );
@@ -385,7 +384,7 @@ function Game() constructor {
         if (self.wave_countdown < WAVE_COUNTDOWN_THRESHOLD) return;
         if (!ds_queue_empty(all_waves)) {
             if (wave_countdown > 0) {
-                player_money += ceil(wave_countdown);
+                player_money += ceil(wave_countdown / 2);
             } else {
                 //player_money += WAVE_COUNTDOWN;
             }

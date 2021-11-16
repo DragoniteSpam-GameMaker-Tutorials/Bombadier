@@ -5,7 +5,7 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
     self.hp = class.hp;
     self.hp_max = self.hp;
     self.damage = class.damage;
-    self.reward = class.reward;
+    self.reward = class.reward + floor(sqrt(level));
     self.base_def = class.def;
     self.base_mdef = class.mdef;
     self.base_speed = class.speed;
