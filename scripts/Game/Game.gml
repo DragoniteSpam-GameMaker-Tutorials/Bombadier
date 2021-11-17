@@ -712,11 +712,10 @@ function Game() constructor {
                 if (!GetRaycastBlocked()) {
                     selected_entity_hover = GetUnderCursor(all_towers);
                     if (mouse_check_button_pressed(mb_left)) {
-                        selected_entity = selected_entity_hover;
-                        if (selected_entity) {
-                        
+                        if (self.player_tower_spawn) {
+                            self.SpawnTower();
                         } else {
-                            SpawnTower();
+                            self.selected_entity = self.selected_entity_hover;
                         }
                     }
                 }
