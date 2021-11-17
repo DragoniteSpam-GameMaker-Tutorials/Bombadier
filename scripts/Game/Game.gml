@@ -1126,7 +1126,7 @@ function Game() constructor {
         if (self.selected_entity) self.selected_entity.Render();
         if (self.player_tower_spawn) self.player_tower_spawn.Render();
         if (self.editor_hover_entity) self.editor_hover_entity.Render();
-        if (self.selected_entity_hover) self.selected_entity_hover.Render();
+        if (self.selected_entity_hover && !self.player_tower_spawn) self.selected_entity_hover.Render();
         shader_reset();
         surface_reset_target();
         
