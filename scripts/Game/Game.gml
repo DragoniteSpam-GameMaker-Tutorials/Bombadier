@@ -226,6 +226,7 @@ function Game() constructor {
     resolution_scalar_index = APP_SURFACE_DEFAULT_SCALE_INDEX;
     resolution_scalar = resolution_scalar_options[resolution_scalar_index];
     outline_surface = surface_create(OUTLINE_SURFACE_WIDTH, OUTLINE_SURFACE_HEIGHT);
+    particle_density = DEFAULT_PARTICLE_DENSITY;
     
     // don't get rid of this, please
     display_set_gui_maximize();
@@ -253,6 +254,7 @@ function Game() constructor {
             frames_per_second: game_get_speed(gamespeed_fps),
             resolution_scalar_index: self.resolution_scalar_index,
             resolution_scalar: self.resolution_scalar,
+            particle_density: self.particle_density,
         };
         var save_buffer = buffer_create(100, buffer_grow, 1);
         buffer_write(save_buffer, buffer_text, json_stringify(json));
@@ -274,6 +276,7 @@ function Game() constructor {
         game_set_speed(json.frames_per_second, gamespeed_fps);
         self.resolution_scalar_index = json.resolution_scalar_index;
         self.resolution_scalar = json.resolution_scalar;
+        self.particle_density = json.particle_density;
         
         if (!is_numeric(self.volume_master)) self.volume_master = 100;
         if (!is_numeric(self.screen_size_index)) self.screen_size_index = 1;
@@ -282,6 +285,7 @@ function Game() constructor {
         if (!is_numeric(self.frame_rate_index)) self.frame_rate_index = 1;
         if (!is_numeric(self.resolution_scalar_index)) self.resolution_scalar_index = APP_SURFACE_DEFAULT_SCALE_INDEX;
         if (!is_numeric(self.resolution_scalar)) self.resolution_scalar = self.resolution_scalar_options[self.resolution_scalar_index];
+        if (!is_numeric(self.particle_density)) self.particle_density = DEFAULT_PARTICLE_DENSITY;
         
         self.volume_master = clamp(self.volume_master, 0, 100);
         self.screen_size_index = clamp(self.screen_size_index, 0, array_length(self.screen_sizes));
@@ -290,6 +294,7 @@ function Game() constructor {
         self.frame_rate_index = clamp(self.frame_rate_index, 0, array_length(self.frame_rates));
         self.resolution_scalar_index = clamp(self.resolution_scalar_index, 0, array_length(self.resolution_scalar_options));
         self.resolution_scalar = clamp(self.resolution_scalar, 0.05, 1);
+        self.particle_density = clamp(self.particle_density, 0, 1);
         
         self.ApplyVolume();
     } catch (e) {

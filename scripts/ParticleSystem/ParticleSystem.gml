@@ -76,12 +76,26 @@ Particles = new (function() constructor {
     
     static BurstFromEmitter = function(emitter, type, x, y, z, amount) {
         emitter.setRegion(matrix_build(x, y, z, 0, 0, 0, 1, 1, 1), 1, 1, 1, spart_shape_cube, spart_distr_linear, false);
-        emitter.burst(type, amount, true);
+        var n = amount * GAME.particle_density;
+        if (n < 1) {
+            if (random(1) < n) {
+                emitter.burst(type, n, true);
+            }
+        } else {
+            emitter.burst(type, n, true);
+        }
     };
     
     static BurstFromEmitterRadius = function(emitter, type, x, y, z, radius, amount) {
         emitter.setRegion(matrix_build(x, y, z, 0, 0, 0, 1, 1, 1), radius, radius, radius, spart_shape_sphere, spart_distr_linear, false);
-        emitter.burst(type, amount, true);
+        var n = amount * GAME.particle_density;
+        if (n < 1) {
+            if (random(1) < n) {
+                emitter.burst(type, n, true);
+            }
+        } else {
+            emitter.burst(type, n, true);
+        }
     };
     
     static Render = function() {
