@@ -1279,6 +1279,7 @@ function Game() constructor {
     
     GUI = function() {
         static collision_brush_radius = 4;
+        static collision_brush_color = c_white;
         
         draw_surface_stretched(application_surface, 0, 0, window_get_width(), window_get_height());
         
@@ -1347,17 +1348,27 @@ function Game() constructor {
                     
                     if (mouse_wheel_up()) collision_brush_radius = max(2, collision_brush_radius - 1);
                     if (mouse_wheel_down()) collision_brush_radius = min(10, collision_brush_radius + 1);
-                    if (mouse_check_button(mb_left)) draw_circle_color(xx, yy, collision_brush_radius, c_white, c_white, false);
+                    if (mouse_check_button(mb_left)) draw_circle_color(xx, yy, collision_brush_radius, collision_brush_color, collision_brush_color, false);
                     if (mouse_check_button(mb_right)) draw_circle_color(xx, yy, collision_brush_radius, c_black, c_black, false);
                     
                     surface_reset_target();
                     draw_surface_stretched_ext(collision_surface, 0, 0, window_get_width(), window_get_height(), c_white, 0.5);
                     draw_circle_color(window_mouse_get_x(), window_mouse_get_y(), collision_brush_radius * (window_get_width() / surface_get_width(collision_surface)), c_aqua, c_aqua, true);
-                    draw_text(32, 32, "Left click to paint collision information; right click to clear collision information");
+                    var n = 0;
+                    draw_text(32, ++n * 32, "Left click to paint collision information; right click to clear collision information");
+                    draw_text(32, ++n * 32, "1: tower collision; 2: track collision");
+                    
+                    if (keyboard_check(ord("1"))) {
+                        collision_brush_color = c_white;        // tower collision
+                    }
+                    if (keyboard_check(ord("2"))) {
+                        collision_brush_color = c_red;          // track collision
+                    }
                     break;
                 case EditorModes.TERRAIN:
-                    draw_text(32, 32, "Left click to raise the terrain, right click to lower it");
-                    draw_text(32, 64, "1: color dark green; 2: color light green; 3: color sand; 0 to reset the terrain height");
+                    var n = 0;
+                    draw_text(32, ++n * 32, "Left click to raise the terrain, right click to lower it");
+                    draw_text(32, ++n * 32, "1: color dark green; 2: color light green; 3: color sand; 0 to reset the terrain height");
                     break;
                 case EditorModes.SETTINGS:
                     var n = 0;
