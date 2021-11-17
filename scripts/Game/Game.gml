@@ -501,7 +501,21 @@ function Game() constructor {
         var cell_ymin = ymin div GRID_CELL_SIZE;
         var cell_xmax = ceil(xmax / GRID_CELL_SIZE);
         var cell_ymax = ceil(ymax / GRID_CELL_SIZE);
-        return (ds_grid_get_max(collision_grid, cell_xmin, cell_ymin, cell_xmax, cell_ymax) == GRID_COLLISION_PATH);
+        
+        if (xmin < 0 || ymin < 0 || xmax >= FIELD_WIDTH || ymax >= FIELD_WIDTH) {
+            return false;
+        }
+        
+        for (var i = cell_xmin; i <= cell_xmax; i++) {
+            for (var j = cell_ymin; j <= cell_ymax; j++) {
+                var addr = (j * ceil(FIELD_WIDTH / GRID_CELL_SIZE)) + i;
+                if (buffer_peek(fused.collision, addr, buffer_u8) != PAINT_COLLISION_PATH) {
+                    return false;
+                }
+            }
+        }
+        
+        return true;
     };
     
     GetRaycastBlocked = function() {
