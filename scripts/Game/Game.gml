@@ -617,11 +617,7 @@ function Game() constructor {
                 var nz3 = buffer_peek(raw_buffer, j + 76, buffer_f32);
                 var cc3 = buffer_peek(raw_buffer, j + 80, buffer_u32);
                 
-                var new_normal = matrix_transform_vertex(entity_matrix_normals, nx1, ny1, nz1);
-                var normal_magnitude = point_distance_3d(0, 0, 0, new_normal[0], new_normal[1], new_normal[2]);
-                new_normal[0] /= normal_magnitude;
-                new_normal[1] /= normal_magnitude;
-                new_normal[2] /= normal_magnitude;
+                var new_normal = triangle_normal(xx1, yy1, zz1, xx2, yy2, zz2, xx3, yy3, zz3);
                 
                 var triangle_to_camera = dot_product_3d(new_normal[0], new_normal[1], new_normal[2], cam_x, cam_y, cam_z);
                 var triangle_to_ground = dot_product_3d(new_normal[0], new_normal[1], new_normal[2], 0, 0, -1);
