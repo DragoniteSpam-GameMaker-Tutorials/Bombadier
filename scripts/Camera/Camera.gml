@@ -1,4 +1,4 @@
-#macro CAMERA_FROM_LEVEL (new Vector3(640, 840, 200))
+#macro CAMERA_FROM_LEVEL (new Vector3(640, 840, 240))
 #macro CAMERA_TO_LEVEL (new Vector3(640, 0, 0))
 #macro CAMERA_FROM_TITLE (new Vector3(640, 840, 120))
 #macro CAMERA_TO_TITLE (new Vector3(640, 0, 0))
