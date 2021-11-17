@@ -50,7 +50,6 @@
     {"id":{"name":"se_sell","path":"sounds/se_sell/se_sell.yy",},"order":7,},
     {"id":{"name":"vertex_buffer_stuff","path":"scripts/vertex_buffer_stuff/vertex_buffer_stuff.yy",},"order":7,},
     {"id":{"name":"EntityTower","path":"scripts/EntityTower/EntityTower.yy",},"order":1,},
-    {"id":{"name":"spr_skybox","path":"sprites/spr_skybox/spr_skybox.yy",},"order":0,},
     {"id":{"name":"UIText","path":"objects/UIText/UIText.yy",},"order":7,},
     {"id":{"name":"maaaaaaaaaaaaaaaath","path":"scripts/maaaaaaaaaaaaaaaath/maaaaaaaaaaaaaaaath.yy",},"order":7,},
     {"id":{"name":"spr_cursor_pan","path":"sprites/spr_cursor_pan/spr_cursor_pan.yy",},"order":11,},

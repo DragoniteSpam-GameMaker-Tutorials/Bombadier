@@ -22,6 +22,12 @@ function Game() constructor {
     water = create_water_vbuffer(format);
     #endregion
     
+    self.sky_colors = [
+        0xf7d06d,
+        0xa65400,
+        0x5dafba,
+    ];
+    
     fused = {
         raw: undefined,
         vbuff: undefined,
@@ -844,7 +850,7 @@ function Game() constructor {
                 }
             } else if (self.editor_mode == EditorModes.SETTINGS) {
                 if (keyboard_check_pressed(ord("J"))) {
-                    self.skybox_type = ++self.skybox_type % sprite_get_number(spr_skybox);
+                    self.skybox_type = ++self.skybox_type % array_length(self.sky_colors);
                 }
                 if (keyboard_check_pressed(ord("K"))) {
                     self.show_water = !self.show_water;
@@ -1102,7 +1108,7 @@ function Game() constructor {
     
     Render = function() {
         gpu_set_zwriteenable(false);
-        draw_sprite_stretched(spr_skybox, self.skybox_type, 0, 0, window_get_width(), window_get_height());
+        draw_clear(self.sky_colors[self.skybox_type]);
         
         if (!surface_exists(self.outline_surface)) {
             self.outline_surface = surface_create(OUTLINE_SURFACE_WIDTH, OUTLINE_SURFACE_HEIGHT);
