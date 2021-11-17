@@ -46,7 +46,13 @@ function Game() constructor {
             
             repeat (buffer_get_size(self.collision)) {
                 var color = buffer_read(self.collision, buffer_u8);
-                buffer_write(surface_buffer, buffer_u32, 0xff000000 | make_colour_rgb(color, color, color));
+                if (color == PAINT_COLLISION_FILLED) {
+                    buffer_write(surface_buffer, buffer_u32, 0xff000000);
+                } else if (color == PAINT_COLLISION_FREE) {
+                    buffer_write(surface_buffer, buffer_u32, 0xffffffff);
+                } else if (color == PAINT_COLLISION_PATH) {
+                    buffer_write(surface_buffer, buffer_u32, 0xff0000ff);
+                }
             }
             
             buffer_set_surface(surface_buffer, csurf, 0);
@@ -477,7 +483,7 @@ function Game() constructor {
         for (var i = cell_xmin; i <= cell_xmax; i++) {
             for (var j = cell_ymin; j <= cell_ymax; j++) {
                 var addr = (j * ceil(FIELD_WIDTH / GRID_CELL_SIZE)) + i;
-                if (!buffer_peek(fused.collision, addr, buffer_u8)) {
+                if (buffer_peek(fused.collision, addr, buffer_u8) != PAINT_COLLISION_FREE) {
                     return false;
                 }
             }
@@ -670,8 +676,14 @@ function Game() constructor {
             buffer_seek(fused.collision, buffer_seek_start, 0);
             
             repeat (buffer_get_size(fused.collision)) {
-                var color = buffer_read(surface_buffer, buffer_u32) & 0xff;
-                buffer_write(fused.collision, buffer_u8, color);
+                var color = buffer_read(surface_buffer, buffer_u32) & 0x00ffffff;
+                if (color == c_white) {
+                    buffer_write(fused.collision, buffer_u8, PAINT_COLLISION_FREE);
+                } else if (color == c_red) {
+                    buffer_write(fused.collision, buffer_u8, PAINT_COLLISION_PATH);
+                } else {
+                    buffer_write(fused.collision, buffer_u8, PAINT_COLLISION_FILLED);
+                }
             }
             
             buffer_delete(surface_buffer);
@@ -983,7 +995,8 @@ function Game() constructor {
             }
             
             if (keyboard_check_pressed(vk_f1)) {
-                SaveMap();
+                self.fused.GenerateCollisionSprite();
+                self.SaveMap();
             }
             #endregion
         }
@@ -1336,7 +1349,13 @@ function Game() constructor {
                         
                         repeat (buffer_get_size(fused.collision)) {
                             var color = buffer_read(fused.collision, buffer_u8);
-                            buffer_write(surface_buffer, buffer_u32, 0xff000000 | make_colour_rgb(color, color, color));
+                            if (color == PAINT_COLLISION_FILLED) {
+                                buffer_write(surface_buffer, buffer_u32, 0xff000000);
+                            } else if (color == PAINT_COLLISION_FREE) {
+                                buffer_write(surface_buffer, buffer_u32, 0xffffffff);
+                            } else if (color == PAINT_COLLISION_PATH) {
+                                buffer_write(surface_buffer, buffer_u32, 0xff0000ff);
+                            }
                         }
                         
                         buffer_set_surface(surface_buffer, collision_surface, 0);

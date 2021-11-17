@@ -24,6 +24,10 @@
 #macro GRID_COLLISION_FILLED 1
 #macro GRID_COLLISION_PATH 2
 
+#macro PAINT_COLLISION_FILLED           0x00
+#macro PAINT_COLLISION_PATH             0x01
+#macro PAINT_COLLISION_FREE             0xff
+
 #macro SOUND_PRIORITY_AMBIENT           100
 #macro SOUND_PRIORITY_BGM               100
 #macro SOUND_PRIORITY_UI                50
