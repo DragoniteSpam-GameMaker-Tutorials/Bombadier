@@ -148,7 +148,7 @@ function Game() constructor {
                         /* rate  */ [1, 1, 2],
                         /* range */ [4 * 32, 4 * 32, 4 * 32],
                         /* dmg   */ [0, 0, 0],
-                        /* cost  */ [40, 60, 80],
+                        /* cost  */ [40, 60, 100],
                             load_model("tower-spray.d3d", format), bullet_bug_spray
                         );
     tower_flypaper =    new TowerData("Fly Paper Dispenser",
@@ -509,13 +509,16 @@ function Game() constructor {
         for (var i = cell_xmin; i <= cell_xmax; i++) {
             for (var j = cell_ymin; j <= cell_ymax; j++) {
                 var addr = (j * ceil(FIELD_WIDTH / GRID_CELL_SIZE)) + i;
-                if (buffer_peek(fused.collision, addr, buffer_u8) != PAINT_COLLISION_PATH) {
-                    return false;
+                // check for the opposite of CollisionFree here - if ANY of
+                // the cells in the bounds you're checking are marked as a
+                // path, it's automatically a path
+                if (buffer_peek(fused.collision, addr, buffer_u8) == PAINT_COLLISION_PATH) {
+                    return true;
                 }
             }
         }
         
-        return true;
+        return false;
     };
     
     GetRaycastBlocked = function() {

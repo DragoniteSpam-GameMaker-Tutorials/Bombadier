@@ -11,8 +11,8 @@
 #macro BURN_DURATION 2
 #macro BURN_DPS 2
 
-#macro POISON_DURATION 2
-#macro POISON_DPS 2
+#macro POISON_DURATION 1.5
+#macro POISON_DPS 1.5
 
 #macro SLOW_DURATION 2
 #macro SLOW_FACTOR 0.5
