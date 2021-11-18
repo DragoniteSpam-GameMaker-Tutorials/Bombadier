@@ -20,7 +20,7 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
         damage: 0,
     };
     
-    Reposition = function(x, y, z) {
+    static Reposition = function(x, y, z) {
         position.x = x;
         position.y = y;
         position.z = z;
@@ -32,30 +32,30 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
         collision.p2.z = z + 64;
     };
     
-    SetRateMod = function(value) {
+    static SetRateMod = function(value) {
         if (value != undefined) mod_rate = value;
         act_rate = CalcRate() * mod_rate;
     }
     
-    SetRangeMod = function(value) {
+    static SetRangeMod = function(value) {
         if (value != undefined) mod_range = value;
         act_range = CalcRange() * mod_range;
     }
     
-    SetDamageMod = function(value) {
+    static SetDamageMod = function(value) {
         if (value != undefined) mod_damage = value;
         act_damage = CalcDamage() * mod_damage;
     }
     
-    CalcRate = function() {
+    static CalcRate = function() {
         return base_rate;
     }
     
-    CalcRange = function() {
+    static CalcRange = function() {
         return base_range;
     }
     
-    CalcDamage = function() {
+    static CalcDamage = function() {
         return base_damage;
     }
     
@@ -63,14 +63,14 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
     SetRangeMod();
     SetDamageMod();
     
-    LevelUp = function() {
+    static LevelUp = function() {
         level++;
         act_rate = CalcRate() * mod_rate;
         act_range = CalcRange() * mod_range;
         act_damage = CalcDamage() * mod_damage;
     }
     
-    AddCollision = function() {
+    static AddCollision = function() {
         var xmin = min(collision.p1.x * scale.x, collision.p2.x * scale.x);
         var ymin = min(collision.p1.y * scale.y, collision.p2.y * scale.y);
         var xmax = max(collision.p1.x * scale.x, collision.p2.x * scale.x);
@@ -86,13 +86,13 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
         }
     }
     
-    AddToMap = function() {
+    static AddToMap = function() {
         ds_list_add(GAME.all_entities, self);
         ds_list_add(GAME.all_towers, self);
         AddCollision();
     };
     
-    Update = function() {
+    static Update = function() {
         if (shot_cooldown <= 0) {
             var target_foe = GetTarget();
             if (target_foe) {
@@ -103,7 +103,7 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
         }
     };
     
-    Shoot = function(target_foe) {
+    static Shoot = function(target_foe) {
         var dir = point_direction(position.x, position.y, target_foe.position.x, target_foe.position.y);
         var shot_velocity = 10;
         var bullet = new EntityBullet(position.x, position.y, position.z, shot_velocity * dcos(dir), shot_velocity * -dsin(dir), 0, base_bullet_data, act_damage, self);
@@ -114,7 +114,7 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
     };
     
     // Get the foe in range that's farthest down the track
-    GetTarget = function() {
+    static GetTarget = function() {
         var target_foe = undefined;
         for (var i = 0; i < ds_list_size(GAME.all_foes); i++) {
             var foe = GAME.all_foes[| i];
@@ -126,7 +126,7 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
         return target_foe;
     };
     
-    Render = function() {
+    static Render = function() {
         var transform = matrix_build(0, 0, 0, 0, 0, 0, scale.x, scale.y, scale.z);
         transform = matrix_multiply(transform, matrix_build(0, 0, 0, rotation.x, rotation.y, rotation.z, 1, 1, 1));
         transform = matrix_multiply(transform, matrix_build(position.x, position.y, position.z, 0, 0, 0, 1, 1, 1));
@@ -135,7 +135,7 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
         matrix_set(matrix_world, matrix_build_identity());
     };
     
-    Sell = function() {
+    static Sell = function() {
         Destroy();
         RemoveCollision();
         ds_list_delete(GAME.all_towers, ds_list_find_index(GAME.all_towers, self));
@@ -143,7 +143,7 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
         audio_play_sound(se_sell, SOUND_PRIORITY_GAMEPLAY_HIGH, false);
     };
     
-    GetSellValue = function() {
+    static GetSellValue = function() {
         var value = 0;
         for (var i = 0; i < self.level; i++) {
             value += ceil(class.cost[i] * 0.9);
@@ -151,7 +151,7 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
         return value;
     };
     
-    RemoveCollision = function() {
+    static RemoveCollision = function() {
         var xmin = min(collision.p1.x * scale.x, collision.p2.x * scale.x);
         var ymin = min(collision.p1.y * scale.y, collision.p2.y * scale.y);
         var xmax = max(collision.p1.x * scale.x, collision.p2.x * scale.x);
@@ -167,7 +167,7 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
         }
     };
     
-    Upgrade = function() {
+    static Upgrade = function() {
         self.level++;
         self.base_rate = self.class.rate[self.level - 1];
         self.base_range = self.class.range[self.level - 1];
@@ -179,7 +179,7 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
         audio_play_sound(se_build, SOUND_PRIORITY_GAMEPLAY_HIGH, false);
     };
     
-    CanBeUpgraded = function() {
+    static CanBeUpgraded = function() {
         if (self.level >= MAX_TOWER_LEVEL) return ReasonsWhyYouCantUpgradeATower.MAX_LEVEL;
         if (GAME.player_money < self.class.cost[self.level]) return ReasonsWhyYouCantUpgradeATower.NOT_ENOUGH_MONEY;
         return ReasonsWhyYouCantUpgradeATower.YES_YOU_CAN;
@@ -191,13 +191,13 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
         YES_YOU_CAN,
     }
     
-    toString = function() {
+    static toString = function() {
         return self.name + " (Lv. " + string(self.level) + ")\n" +
             "Shots: " + string(self.stats.shots) + "\n" +
             "Damange dealt: " + string_format(self.stats.damage, 1, 1);
     };
     
-    RenderRadius = function() {
+    static RenderRadius = function() {
         var u_tower_position = shader_get_uniform(shd_tower_radius, "u_TowerPosition");
         var u_tower_radius = shader_get_uniform(shd_tower_radius, "u_TowerRadius");
         var tower_position = self.position;
@@ -218,7 +218,7 @@ function EntityTowerGlass(x, y, z, class) : EntityTower(x, y, z, class) construc
         damage: 0,
     };
     
-    Update = function() {
+    static Update = function() {
         target_foe = GetTarget();
         var is_burning = false;
         if (target_foe) {
@@ -246,7 +246,7 @@ function EntityTowerGlass(x, y, z, class) : EntityTower(x, y, z, class) construc
         }
     };
     
-    Render = function() {
+    static Render = function() {
         var transform = matrix_build(0, 0, 0, 0, 0, 0, scale.x, scale.y, scale.z);
         transform = matrix_multiply(transform, matrix_build(0, 0, 0, rotation.x, rotation.y, rotation.z, 1, 1, 1));
         transform = matrix_multiply(transform, matrix_build(position.x, position.y, position.z, 0, 0, 0, 1, 1, 1));
@@ -270,13 +270,13 @@ function EntityTowerGlass(x, y, z, class) : EntityTower(x, y, z, class) construc
         matrix_set(matrix_world, matrix_build_identity());
     };
     
-    toString = function() {
+    static toString = function() {
         return self.name + " (Lv. " + string(self.level) + ")\n" +
             "Focus duration: " + string_format(self.stats.duration, 1, 1) + " s\n" +
             "Damange dealt: " + string_format(self.stats.damage, 1, 1);
     };
     
-    GameOver = function() {
+    static GameOver = function() {
         audio_stop_sound(se_tower_magnifying_glass);
     };
 }
@@ -288,7 +288,7 @@ function EntityTowerSpray(x, y, z, class) : EntityTower(x, y, z, class) construc
         damage: 0,
     };
     
-    Update = function() {
+    static Update = function() {
         if (shot_cooldown <= 0) {
             SpawnSpray();
         } else {
@@ -296,7 +296,7 @@ function EntityTowerSpray(x, y, z, class) : EntityTower(x, y, z, class) construc
         }
     };
     
-    SpawnSpray = function() {
+    static SpawnSpray = function() {
         self.stats.clouds++;
         shot_cooldown = 1 / act_rate;
         var lifespan = (self.level >= 2) ? 3 : 2;
@@ -314,7 +314,7 @@ function EntityTowerSpray(x, y, z, class) : EntityTower(x, y, z, class) construc
         }
     };
     
-    toString = function() {
+    static toString = function() {
         return self.name + " (Lv. " + string(self.level) + ")\n" +
             "Clouds spawned: " + string(self.stats.clouds) + "\n" +
             "Victims: " + string(self.stats.hits) + "\n" +
@@ -326,7 +326,7 @@ function EntityTowerBird(x, y, z, class) : EntityTower(x, y, z, class) construct
     birds = [ ];
     bird_limit = 3;
     
-    Update = function() {
+    static Update = function() {
         if (self.level >= 3) {
             bird_limit = 4;
         }
@@ -337,7 +337,7 @@ function EntityTowerBird(x, y, z, class) : EntityTower(x, y, z, class) construct
         }
     };
     
-    HatchBird = function() {
+    static HatchBird = function() {
         shot_cooldown = 1 / act_rate;
         var dist = 32 + array_length(birds) * 16;
         var bird = new EntityBulletBird(0, 0, 0, base_bullet_data, self, dist);
@@ -357,7 +357,7 @@ function EntityTowerFlyPaper(x, y, z, class) : EntityTower(x, y, z, class) const
         stuns: 0,
     };
     
-    Update = function() {
+    static Update = function() {
         if (shot_cooldown <= 0) {
             Dispense();
         } else {
@@ -365,7 +365,7 @@ function EntityTowerFlyPaper(x, y, z, class) : EntityTower(x, y, z, class) const
         }
     };
     
-    Dispense = function() {
+    static Dispense = function() {
         if (paper_count >= paper_limit) {
             return;
         }
@@ -385,7 +385,7 @@ function EntityTowerFlyPaper(x, y, z, class) : EntityTower(x, y, z, class) const
         }
     };
     
-    toString = function() {
+    static toString = function() {
         var value = self.name + " (Lv. " + string(self.level) + ")\n" +
             "Papers dispensed: " + string(self.stats.papers) + "\n" +
             "Victims: " + string(self.stats.hits);

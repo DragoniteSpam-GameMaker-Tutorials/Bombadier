@@ -8,42 +8,42 @@ function Entity(x, y, z) constructor {
     
     raycast = coll_ray_aabb;
     
-    BeginUpdate = function() {
+    static BeginUpdate = function() {
         
     };
     
-    Update = function() {
+    static Update = function() {
         
     };
     
-    Render = function() {
+    static Render = function() {
         
     };
     
-    AddToMap = function() {
+    static AddToMap = function() {
         
     };
     
-    AddCollision = function() {
+    static AddCollision = function() {
         
     };
     
-    Save = function(save_json, i) {
+    static Save = function(save_json, i) {
         save_json.entities[i] = 0;
     };
     
-    Destroy = function() {
+    static Destroy = function() {
         var current_index = ds_list_find_index(GAME.all_entities, self);
         if (current_index > -1) {
             ds_list_delete(GAME.all_entities, current_index);
         }
     };
     
-    GameOver = function() {
+    static GameOver = function() {
         
     };
     
-    RenderRadius = function() {
+    static RenderRadius = function() {
         
     };
 }
@@ -58,7 +58,7 @@ function EntityEnv(x, y, z, model, savename) : Entity(x, y, z) constructor {
     
     collision = new BBox(new Vector3(position.x - 8, position.y - 8, position.z), new Vector3(position.x + 8, position.y + 8, position.z + 16));
     
-    Reposition = function(x, y, z) {
+    static Reposition = function(x, y, z) {
         position.x = x;
         position.y = y;
         position.z = z;
@@ -70,22 +70,22 @@ function EntityEnv(x, y, z, model, savename) : Entity(x, y, z) constructor {
         collision.p2.z = z + 16;
     };
     
-    Select = function() {
+    static Select = function() {
         
     };
     
-    Deselect = function() {
+    static Deselect = function() {
         is_moving = false;
     };
     
-    AddToMap = function() {
+    static AddToMap = function() {
         ds_list_add(GAME.all_entities, self);
         ds_list_add(GAME.all_env_entities, self);
     };
     
     is_moving = false;
     
-    Save = function(save_json, i) {
+    static Save = function(save_json, i) {
         save_json.entities[i] = {
             position: position,
             rotation: rotation,
@@ -94,7 +94,7 @@ function EntityEnv(x, y, z, model, savename) : Entity(x, y, z) constructor {
         };
     };
     
-    Render = function() {
+    static Render = function() {
         matrix_set(matrix_world, matrix_build(position.x, position.y, position.z, rotation.x, rotation.y, rotation.z, scale.x, scale.y, scale.z));
         vertex_submit(model.vbuff, pr_trianglelist, -1);
         matrix_set(matrix_world, matrix_build_identity());

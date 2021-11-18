@@ -32,19 +32,19 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
         z: self.position.z
     };
     
-    Burn = function(duration, whodunnit) {
+    static Burn = function(duration, whodunnit) {
         if (duration == undefined) duration = BURN_DURATION;
         self.status_burn = duration;
         self.whodunnit_burn = whodunnit;
     };
     
-    Poison = function(duration, whodunnit) {
+    static Poison = function(duration, whodunnit) {
         if (duration == undefined) duration = POISON_DURATION;
         self.status_poison = duration;
         self.whodunnit_poison = whodunnit;
     };
     
-    Slow = function(duration, factor, whodunnit) {
+    static Slow = function(duration, factor, whodunnit) {
         if (duration == undefined) duration = BURN_DURATION;
         if (factor == undefined) factor = SLOW_FACTOR;
         self.status_slow = duration;
@@ -52,7 +52,7 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
         self.whodunnit_slow = whodunnit;
     };
     
-    Immobilize = function(duration, whodunnit) {
+    static Immobilize = function(duration, whodunnit) {
         if (duration == undefined) duration = IMMOBILIZE_DURATION;
         if (self.has_been_immobilized) return;
         self.status_immobilize = duration;
@@ -60,30 +60,30 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
         self.whodunnit_immobilize = whodunnit;
     };
     
-    SetDefMod = function(value) {
+    static SetDefMod = function(value) {
         momod_def_damage = value;
         act_def = CalcDef() * mod_def;
     }
     
-    SetMdefMod = function(value) {
+    static SetMdefMod = function(value) {
         mod_mdef = value;
         act_mdef = CalcMDef() * mod_mdef;
     }
     
-    SetSpeedMod = function(value) {
+    static SetSpeedMod = function(value) {
         mod_speed = value;
         act_speed = CalcSpeed() * mod_speed;
     }
     
-    CalcDef = function() {
+    static CalcDef = function() {
         return base_def * level;
     }
     
-    CalcMDef = function() {
+    static CalcMDef = function() {
         return base_mdef * level;
     }
     
-    CalcSpeed = function() {
+    static CalcSpeed = function() {
         return base_speed;
     }
     
@@ -96,7 +96,7 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
     self.position = clone(self.path[0].position);
     self.destination = clone(self.path[1].position);
     
-    Damage = function(amount) {
+    static Damage = function(amount) {
         if (self.shield > 0) {
             self.shield--;
             return;
@@ -107,11 +107,11 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
         }
     };
     
-    Heal = function(amount) {
+    static Heal = function(amount) {
         hp = min(hp + max(amount, 0), hp_max);
     };
     
-    Die = function() {
+    static Die = function() {
         Destroy();
         GAME.player_money += reward;
         GAME.CheckGameOver();
@@ -119,18 +119,18 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
         audio_play_sound(se_foe_die, SOUND_PRIORITY_GAMEPLAY_LOW, false);
     };
     
-    AddToMap = function() {
+    static AddToMap = function() {
         ds_list_add(GAME.all_entities, self);
         ds_list_add(GAME.all_foes, self);
     };
     
-    UpdatePreviousPositions = function() {
+    static UpdatePreviousPositions = function() {
         self.previous_position.x = self.position.x;
         self.previous_position.y = self.position.y;
         self.previous_position.z = self.position.z;
     };
     
-    Update = function() {
+    static Update = function() {
         self.lifetime += DT;
         self.UpdatePreviousPositions();
         
@@ -182,7 +182,7 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
         }
     };
     
-    Render = function() {
+    static Render = function() {
         var bearing = point_direction(self.previous_position.x, self.previous_position.y, self.position.x, self.position.y);
         var transform = matrix_build(0, 0, 0, 0, 0, 0, scale.x, scale.y , scale.z);
         transform = matrix_multiply(transform, matrix_build(0, 0, 0, rotation.x, rotation.y, rotation.z + bearing, 1, 1, 1));
@@ -192,7 +192,7 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
         matrix_set(matrix_world, matrix_build_identity());
     };
     
-    RenderHealthBar = function() {
+    static RenderHealthBar = function() {
         var f = max(hp / hp_max, 0.125);
         if (f < 1 || status_poison || status_burn || status_slow) {
             shader_set(shd_billboard);
@@ -215,7 +215,7 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
         }
     };
     
-    Destroy = function() {
+    static Destroy = function() {
         var current_index = ds_list_find_index(GAME.all_entities, self);
         if (current_index > -1) {
             ds_list_delete(GAME.all_entities, current_index);
