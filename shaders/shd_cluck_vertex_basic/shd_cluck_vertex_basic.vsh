@@ -14,11 +14,8 @@ uniform vec4 lightData[MAX_LIGHTS * 3];
 
 varying vec4 v_vColour;
 
-varying vec3 v_FogCameraRelativePosition;
-
 void CommonLightEvaluate(int i, inout vec4 finalColor, in vec3 position, in vec3 normal);
 void CommonLight(inout vec4 baseColor, in vec3 position, in vec3 normal);
-void CommonFogSetup();
 
 void CommonLight(inout vec4 baseColor, in vec3 position, in vec3 normal) {
     vec4 lightColor = vec4(lightAmbientColor, 1.);
@@ -41,10 +38,6 @@ void CommonLightEvaluate(int i, inout vec4 finalColor, in vec3 position, in vec3
     finalColor += lightColor * NdotL;
 }
 
-void CommonFogSetup() {
-    v_FogCameraRelativePosition = (gm_Matrices[MATRIX_WORLD_VIEW_PROJECTION] * vec4(in_Position, 1.)).xyz;
-}
-
 varying vec3 v_LightWorldPosition;
 
 void main() {
@@ -58,6 +51,4 @@ void main() {
     v_vColour = finalColor;
     
     v_LightWorldPosition = (gm_Matrices[MATRIX_WORLD] * vec4(in_Position, 1.)).xyz;
-    
-    //CommonFogSetup();
 }
