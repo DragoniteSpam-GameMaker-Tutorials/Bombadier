@@ -147,6 +147,7 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
                 } else {
                     Destroy();
                     GAME.PlayerDamage(damage);
+                    if (GAME.gameplay_mode == GameModes.GAME_OVER) return;
                 }
             }
         }
