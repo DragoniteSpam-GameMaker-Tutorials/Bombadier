@@ -729,6 +729,7 @@ function Game() constructor {
                 gameplay_mode = GameModes.PAUSED;
                 current_pause_screen = "UI_Game_Pause_Menu";
                 audio_play_sound(se_menu_pause, SOUND_PRIORITY_UI, false);
+                audio_stop_sound(se_tower_magnifying_glass);
                 return;
             }
             
