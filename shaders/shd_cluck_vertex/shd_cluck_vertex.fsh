@@ -10,7 +10,5 @@ uniform vec3 fogColor;
 varying vec4 v_vColour;
 
 void main() {
-    vec4 color = v_vColour;
-    
-    gl_FragColor = color;
+    gl_FragColor = v_vColour;
 }

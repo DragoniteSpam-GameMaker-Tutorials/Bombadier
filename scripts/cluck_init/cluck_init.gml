@@ -12,6 +12,7 @@ global.__cluck_fog_end = 1024;
 
 #macro CLUCK_MAX_LIGHTS 2
 #macro pi:CLUCK_MAX_LIGHTS 1
+#macro pi_release:CLUCK_MAX_LIGHTS 1
 #macro CLUCK_LIGHT_NONE 0
 #macro CLUCK_LIGHT_DIRECTIONAL 1
 #macro CLUCK_LIGHT_POINT 2

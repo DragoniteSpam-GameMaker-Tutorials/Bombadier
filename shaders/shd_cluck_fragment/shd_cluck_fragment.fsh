@@ -83,12 +83,8 @@ uniform vec2 samplerCollisionScale;
 uniform float samplerCollisionStrength;
 
 void main() {
-    vec4 color = v_vColour;
-    
+    vec4 color = v_vCol
     CommonLight(color);
-    
     vec4 cc = texture2D(samplerCollision, vec2(v_LightWorldPosition.x, v_LightWorldPosition.y) / samplerCollisionScale);
-    
-    gl_FragColor = color;
-    gl_FragColor.rgb = mix(gl_FragColor.rgb, vec3(0), clamp((1.0 - (cc.r + cc.g + cc.b) / 3.0) * samplerCollisionStrength, 0.0, 1.0));
+    gl_FragColor = vec4(mix(color.rgb, vec3(0), clamp((1.0 - (cc.r + cc.g + cc.b) / 3.0) * samplerCollisionStrength, 0.0, 1.0)), color.a);
 }

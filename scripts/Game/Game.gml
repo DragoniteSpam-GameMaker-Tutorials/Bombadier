@@ -1174,8 +1174,8 @@ function Game() constructor {
         
         if (sprite_exists(self.fused.collision_sprite)) {
             texture_set_stage(shader_get_sampler_index(SHADER_WORLD, "samplerCollision"), sprite_get_texture(self.fused.collision_sprite, 0));
-            var tex_size_horizontal = power(2, ceil(log2(room_width)));
-            var tex_size_vertical = power(2, ceil(log2(room_height)));
+            var tex_size_horizontal = FORCE_SQUARE_TEXTURES ? power(2, ceil(log2(room_width))) : room_width;
+            var tex_size_vertical = FORCE_SQUARE_TEXTURES ? power(2, ceil(log2(room_height))) : room_height;
             shader_set_uniform_f(shader_get_uniform(SHADER_WORLD, "samplerCollisionScale"), tex_size_horizontal, tex_size_vertical);
             if (self.player_tower_spawn) {
                 shader_set_uniform_f(shader_get_uniform(SHADER_WORLD, "samplerCollisionStrength"), 0.5);
