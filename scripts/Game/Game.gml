@@ -369,6 +369,7 @@ function Game() constructor {
     };
     
     GoToNextLevel = function() {
+        self.CallEntityGameOver();
         if (self.current_level_index < MAX_LEVEL_INDEX) {
             self.current_level_index++;
             self.LoadMap("maps/level" + string(self.current_level_index) + ".bug");
@@ -379,8 +380,8 @@ function Game() constructor {
     };
     
     GoToTitle = function() {
-        self.Initialize();
         self.CallEntityGameOver();
+        self.Initialize();
         self.LoadMap("maps/title.bug");
         self.gameplay_mode = GameModes.TITLE;
         self.current_title_screen = "UI_Title_Screen";
