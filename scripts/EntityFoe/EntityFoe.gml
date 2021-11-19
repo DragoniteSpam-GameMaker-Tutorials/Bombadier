@@ -147,7 +147,6 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
                 } else {
                     Destroy();
                     GAME.PlayerDamage(damage);
-                    if (GAME.gameplay_mode == GameModes.GAME_OVER) return;
                 }
             }
         }
@@ -159,6 +158,7 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
         if (status_burn > 0) {
             self.whodunnit_burn.stats.damage += BURN_DPS * DT;
             Damage(BURN_DPS * DT);
+            if (GAME.gameplay_mode == GameModes.GAME_OVER) return;
             status_burn -= DT;
             Particles.BurstFromEmitter(Particles.emitters.hit_effects, Particles.types.fire, self.position.x, self.position.y, self.position.z + 8, 1);
         }
@@ -166,6 +166,7 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
         if (status_poison > 0) {
             self.whodunnit_poison.stats.damage += POISON_DPS * DT;
             Damage(POISON_DPS * DT);
+            if (GAME.gameplay_mode == GameModes.GAME_OVER) return;
             status_poison -= DT;
             if (irandom(4) == 1) {
                 Particles.BurstFromEmitter(Particles.emitters.hit_effects, Particles.types.poison, self.position.x, self.position.y, self.position.z + 8, 1);
