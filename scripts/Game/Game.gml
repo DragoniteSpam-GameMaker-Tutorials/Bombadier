@@ -82,10 +82,10 @@ function Game() constructor {
     show_water = false;
     #endregion
     
-    test_ball = load_model("testball.d3d", format).vbuff;
+    test_ball = load_vbuff("towers_and_whatnot/testball.vbuff", format).vbuff;
     
-    magnifying_glass_beam = load_model("tower-glass-beam.d3d", format).vbuff;
-    magnifying_glass_glass = load_model("tower-glass-glass.d3d", format).vbuff;
+    magnifying_glass_beam = load_vbuff("towers_and_whatnot/tower-glass-beam.vbuff", format).vbuff;
+    magnifying_glass_glass = load_vbuff("towers_and_whatnot/tower-glass-glass.vbuff", format).vbuff;
     
     #region database
     foe_ant =       new FoeData("Ant",               5, 0, 0, 100, 1, 2, [load_vbuff("foes/ant0.vbuff", format),          load_vbuff("foes/ant1.vbuff", format),       ],   EntityFoe);
@@ -94,8 +94,8 @@ function Game() constructor {
     foe_aphid = new FoeData("Aphid",                 3, 0, 0,  50, 1, 1, [load_vbuff("foes/aphid0.vbuff", format),        load_vbuff("foes/aphid1.vbuff", format),     ],   EntityFoe);
     foe_grasshopper = new FoeData("Grasshopper",    20, 0, 0, 150, 2, 8, [load_vbuff("foes/grasshopper0.vbuff", format),  load_vbuff("foes/grasshopper1.vbuff", format)],   EntityFoe);
     
-    bullet_pebble =     new BulletData("Pebble", load_model("testbullet.d3d", format), function(target) { });
-    bullet_fire =       new BulletData("Fire", load_model("bullet-fire.d3d", format), function(target) {
+    bullet_pebble =     new BulletData("Pebble", load_vbuff("towers_and_whatnot/pebble.vbuff", format), function(target) { });
+    bullet_fire =       new BulletData("Fire", load_vbuff("towers_and_whatnot/bullet-fire.vbuff", format), function(target) {
         if (self.parent_tower.level >= 3) {
             target.Burn(BURN_DURATION * 2, self.parent_tower);
         } else {
@@ -105,7 +105,7 @@ function Game() constructor {
     bullet_bug_spray =  new BulletData("Bug Spray", -1, function(target) {
         target.Poison(POISON_DURATION, self.parent_tower);
     });
-    bullet_fly_paper =  new BulletData("Fly Paper", load_model("flypaper.d3d", format), function(target) {
+    bullet_fly_paper =  new BulletData("Fly Paper", load_vbuff("towers_and_whatnot/flypaper.vbuff", format), function(target) {
         if (self.parent_tower.level >= 3) {
             target.Immobilize(self.parent_tower);
             self.parent_tower.stats.stuns++;
@@ -117,10 +117,10 @@ function Game() constructor {
             target.Slow(SLOW_DURATION, SLOW_FACTOR, self.parent_tower);
         }
     });
-    bullet_bird =       new BulletData("Bird", load_model("bullet-bird-down.d3d", format), function(target) { });
+    bullet_bird =       new BulletData("Bird", load_vbuff("towers_and_whatnot/bullet-bird-down.vbuff", format), function(target) { });
     bullet_bird.anim_frames = [
-        load_model("bullet-bird-down.d3d", format),
-        load_model("bullet-bird-up.d3d", format)
+        load_vbuff("towers_and_whatnot/bullet-bird-down.vbuff", format),
+        load_vbuff("towers_and_whatnot/bullet-bird-up.vbuff", format)
     ];
     
     tower_pebbles =     new TowerData("Pebble Shooter",
@@ -128,42 +128,42 @@ function Game() constructor {
                         /* range */ [3 * 32, 3 * 32, 3 * 32],
                         /* dmg   */ [1, 3, 4],
                         /* cost  */ [10, 20, 50],
-                            load_model("tower-pebble.d3d", format), bullet_pebble
+                            load_vbuff("towers_and_whatnot/tower-pebble.vbuff", format), bullet_pebble
                         );
     tower_fire =        new TowerData("Fire Shooter",
                         /* rate  */ [0.5, 0.75, 0.5],
                         /* range */ [3 * 32, 3.5 * 32, 3.5 * 32],
                         /* dmg   */ [1, 1, 1],
                         /* cost  */ [15, 30, 60],
-                            load_model("tower-fire.d3d", format), bullet_fire
+                            load_vbuff("towers_and_whatnot/tower-fire.vbuff", format), bullet_fire
                         );
     tower_magnify =     new TowerData("Magnifying Glass",
                         /* rate  */ [0, 0, 0],
                         /* range */ [2.5 * 32, 3 * 32, 3 * 32],
                         /* dmg   */ [3, 6, 8],
                         /* cost  */ [50, 150, 200],
-                            load_model("tower-glass.d3d", format), bullet_pebble
+                            load_vbuff("towers_and_whatnot/tower-glass.vbuff", format), bullet_pebble
                         );
     tower_spray =       new TowerData("Bug Spray",
                         /* rate  */ [1, 1, 2],
                         /* range */ [4 * 32, 4 * 32, 4 * 32],
                         /* dmg   */ [0, 0, 0],
                         /* cost  */ [40, 60, 100],
-                            load_model("tower-spray.d3d", format), bullet_bug_spray
+                            load_vbuff("towers_and_whatnot/tower-spray.vbuff", format), bullet_bug_spray
                         );
     tower_flypaper =    new TowerData("Fly Paper Dispenser",
                         /* rate  */ [1, 1, 1],
                         /* range */ [4 * 32, 4 * 32, 4 * 32],
                         /* dmg   */ [0, 0, 0],
                         /* cost  */ [60, 100, 100],
-                            load_model("tower-flypaper.d3d", format), bullet_fly_paper
+                            load_vbuff("towers_and_whatnot/tower-flypaper.vbuff", format), bullet_fly_paper
                         );
     tower_bird =        new TowerData("Bird Nest",
                         /* rate  */ [0.5, 1, 1],
                         /* range */ [4 * 32, 4 * 32, 4 * 32],
                         /* dmg   */ [8, 12, 12],
                         /* cost  */ [60, 80, 120],
-                            load_model("tower-bird.d3d", format), bullet_bird
+                            load_vbuff("towers_and_whatnot/tower-bird.vbuff", format), bullet_bird
                         );
     #endregion
     
