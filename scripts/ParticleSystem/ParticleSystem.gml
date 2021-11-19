@@ -42,7 +42,7 @@ Particles = new (function() constructor {
         
         with (types.fire) {
         	setSprite(spr_particle_main, 0, 1);
-        	setSize(1.5, 4, 0, 0, 0, 200);
+        	setSize(4, 10, 0, 0, 0, 200);
         	setLife(0.25, 0.4);
         	setOrientation(0, 360, 150, 0, true);
         	setSpeed(120, 160, 0, 0);
