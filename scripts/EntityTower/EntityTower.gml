@@ -210,6 +210,15 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
     }
 }
 
+function EntityTowerFire(x, y, z, class) : EntityTower(x, y, z, class) constructor {
+    self.baseUpdate = self.Update;
+    
+    self.Update = function() {
+        Particles.BurstFromEmitter(Particles.emitters.tower_effects, Particles.types.tower_fire, self.position.x, self.position.y, self.position.z + 44, 1);
+        self.baseUpdate();
+    };
+}
+
 function EntityTowerGlass(x, y, z, class) : EntityTower(x, y, z, class) constructor {
     self.target_foe = undefined;
     

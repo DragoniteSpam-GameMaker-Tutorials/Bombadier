@@ -13,6 +13,7 @@ Particles = new (function() constructor {
             stone_debris: new spart_type(),
             death: new spart_type(),
             fire: new spart_type(),
+            tower_fire: new spart_type(),
             poison: new spart_type(),
             glue: new spart_type(),
         };
@@ -50,6 +51,17 @@ Particles = new (function() constructor {
         	setBlend(true, true);
         }
         
+        with (types.tower_fire) {
+        	setSprite(spr_particle_main, 0, 1);
+        	setSize(4, 10, 0, 0, 0, 200);
+        	setLife(0.3, 0.5);
+        	setOrientation(0, 360, 150, 0, true);
+        	setSpeed(60, 100, 0, 0);
+        	setDirection(0, 0, 1, 30, false);
+        	setColour(c_yellow, 1, c_orange, 1, c_red, 0.6, c_red, 0);
+        	setBlend(true, false);
+        }
+        
         with (types.poison) {
         	setSprite(spr_particle_bubble, 0, 1);
         	setLife(1, 1.5);
@@ -71,6 +83,7 @@ Particles = new (function() constructor {
         //Create a particle emitter
         emitters = {
             hit_effects: new spart_emitter(systems.hit_effects),
+            tower_effects: new spart_emitter(systems.hit_effects),
         };
     };
     

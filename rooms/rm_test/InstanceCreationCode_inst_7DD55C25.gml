@@ -1,5 +1,5 @@
 OnClick = function() {
-    GAME.player_tower_spawn = new EntityTower(0, 0, 0, GAME.tower_fire);
+    GAME.player_tower_spawn = new EntityTowerFire(0, 0, 0, GAME.tower_fire);
 };
 
 Update = function() {
