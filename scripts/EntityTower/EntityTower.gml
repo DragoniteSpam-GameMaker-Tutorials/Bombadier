@@ -309,6 +309,7 @@ function EntityTowerSpray(x, y, z, class) : EntityTower(x, y, z, class) construc
             if (GAME.CollisionIsPath(cloud)) {
                 ds_list_add(GAME.all_entities, cloud);
                 audio_play_sound(se_tower_bug_spray, SOUND_PRIORITY_GAMEPLAY_LOW, false);
+                self.rotation.z = point_direction(self.position.x, self.position.y, cloud.position.x, cloud.position.y);
                 return;
             }
         }
