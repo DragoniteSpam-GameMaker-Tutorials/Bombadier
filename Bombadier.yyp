@@ -42,7 +42,6 @@
     {"id":{"name":"se_menu_back","path":"sounds/se_menu_back/se_menu_back.yy",},"order":3,},
     {"id":{"name":"se_tower_flypaper","path":"sounds/se_tower_flypaper/se_tower_flypaper.yy",},"order":11,},
     {"id":{"name":"fnt_game_buttons","path":"fonts/fnt_game_buttons/fnt_game_buttons.yy",},"order":0,},
-    {"id":{"name":"spr_grid","path":"sprites/spr_grid/spr_grid.yy",},"order":2,},
     {"id":{"name":"shd_water","path":"shaders/shd_water/shd_water.yy",},"order":7,},
     {"id":{"name":"se_menu_select","path":"sounds/se_menu_select/se_menu_select.yy",},"order":6,},
     {"id":{"name":"macros","path":"scripts/macros/macros.yy",},"order":2,},
@@ -80,7 +79,6 @@
     {"id":{"name":"se_tower_bug_spray","path":"sounds/se_tower_bug_spray/se_tower_bug_spray.yy",},"order":10,},
     {"id":{"name":"sh_spart_mesh","path":"shaders/sh_spart_mesh/sh_spart_mesh.yy",},"order":1,},
     {"id":{"name":"cluck_set_alpha_test_enable","path":"scripts/cluck_set_alpha_test_enable/cluck_set_alpha_test_enable.yy",},"order":4,},
-    {"id":{"name":"process_vbuff","path":"scripts/process_vbuff/process_vbuff.yy",},"order":3,},
     {"id":{"name":"shd_outline","path":"shaders/shd_outline/shd_outline.yy",},"order":0,},
     {"id":{"name":"rm_test","path":"rooms/rm_test/rm_test.yy",},"order":3,},
   ],
@@ -117,7 +115,6 @@
   ],
   "Folders": [
     {"folderPath":"folders/Core Stuff.yy","order":15,"resourceVersion":"1.0","name":"Core Stuff","tags":[],"resourceType":"GMFolder",},
-    {"folderPath":"folders/Temporary stuff.yy","order":18,"resourceVersion":"1.0","name":"Temporary stuff","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Core Stuff/Gameplay/Game entity stuff.yy","order":0,"resourceVersion":"1.0","name":"Game entity stuff","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Core Stuff/Gameplay.yy","order":0,"resourceVersion":"1.0","name":"Gameplay","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Core Stuff/Help.yy","order":1,"resourceVersion":"1.0","name":"Help","tags":[],"resourceType":"GMFolder",},
