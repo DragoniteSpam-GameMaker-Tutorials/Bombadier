@@ -135,12 +135,16 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
         matrix_set(matrix_world, matrix_build_identity());
     };
     
-    static Sell = function() {
+    static BaseSell = function() {
         Destroy();
         RemoveCollision();
         ds_list_delete(GAME.all_towers, ds_list_find_index(GAME.all_towers, self));
         GAME.player_money += GetSellValue();
         audio_play_sound(se_sell, SOUND_PRIORITY_GAMEPLAY_HIGH, false);
+    };
+    
+    static Sell = function() {
+        self.BaseSell();
     };
     
     static GetSellValue = function() {
@@ -354,6 +358,13 @@ function EntityTowerBird(x, y, z, class) : EntityTower(x, y, z, class) construct
         ds_list_add(GAME.all_entities, bird);
         array_push(birds, bird);
         audio_play_sound(choose(se_tower_bird_a, se_tower_bird_b), SOUND_PRIORITY_GAMEPLAY_LOW, false);
+    };
+    
+    static Sell = function() {
+        for (var i = array_length(self.birds) - 1; i >=0; i--) {
+            self.birds[i].Destroy();
+        }
+        self.BaseSell();
     };
 }
 
