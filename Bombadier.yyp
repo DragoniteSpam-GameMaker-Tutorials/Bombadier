@@ -560,7 +560,7 @@
     {"CopyToMask":-1,"filePath":"datafiles/towers_and_whatnot","resourceVersion":"1.0","name":"tower-pebble.vbuff","resourceType":"GMIncludedFile",},
   ],
   "MetaData": {
-    "IDEVersion": "23.1.1.432",
+    "IDEVersion": "2.3.7.603",
   },
   "resourceVersion": "1.4",
   "name": "Bombadier",
