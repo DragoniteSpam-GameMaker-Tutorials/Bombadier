@@ -14,7 +14,12 @@ When the game is complete - or complete-ish - whenever that happens - the major 
 
 ## Credits
 
-I'm aiming to write this mostly from scratch, but to save time a few native GML extensions are used.
+I'm aiming to write this mostly from scratch, but to save time a few native GML extensions are used, plus a bunch of other assets.
 
  - [Luminous Chickens](https://dragonite.itch.io/luminous-chicken-3d-lighting-shaders-for-gamemaker) - a lighting shader collection that I assembled based on past tutorials (with some fancy bells and whistles)
- - [SNAP](https://github.com/JujuAdams/SNAP) - a struct-and-array parser by Juju Adams
+ - Icon is "No bugs" by Juicy Fish from the Noun Project
+ - Many assets from [kenney.nl](https://kenney.nl/)
+ - Some audio from [Sonniss](https://sonniss.com/gameaudiogdc)
+ - Music by [RyanAvx](https://twitter.com/RyanAndBreezy)
+ - spart by [TheSnidr](https://forum.yoyogames.com/index.php?threads/spart-3d-particle-system-new-update-sept-2019-now-entirely-free.52130/)
+ - Special thanks to Michael's sister
