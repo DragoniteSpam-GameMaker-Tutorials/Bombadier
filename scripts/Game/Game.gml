@@ -175,7 +175,7 @@ function Game() constructor {
                             [
                                 "Burn foes with the power\nof the sun!",
                                 "Increased damage and\nattack radius!",
-                                "Does yet more damage and\nburns foes for good measure!"
+                                "Does yet more damage\nand burns foes for\ngood measure!"
                             ],
                         );
     tower_spray =       new TowerData("Bug Spray",

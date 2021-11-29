@@ -26,3 +26,15 @@ Update = function() {
         }
     }
 };
+
+OnHover = function() {
+    var tower = GAME.selected_entity;
+    if (tower != undefined) {
+        var upgrade_status = tower.CanBeUpgraded();
+        if (upgrade_status != ReasonsWhyYouCantUpgradeATower.MAX_LEVEL) {
+            GAME.show_tooltip_tower = true;
+            inst_tooltip_tower.text = tower.class.name + "\n\n" +
+                tower.class.descriptions[tower.level];
+        }
+    }
+};
