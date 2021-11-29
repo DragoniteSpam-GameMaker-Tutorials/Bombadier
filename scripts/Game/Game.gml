@@ -224,11 +224,12 @@ function Game() constructor {
     all_waves = ds_queue_create();
     wave_active = ds_list_create();
     
-    all_ui_elements = { };
-    current_pause_screen = "UI_Game_Pause_Menu";
-    current_title_screen = "UI_Title_Screen";
-    current_game_over_screen = "UI_Game_Over_Win";
-    current_level_index = 0;
+    self.all_ui_elements = { };
+    self.current_pause_screen = "UI_Game_Pause_Menu";
+    self.current_title_screen = "UI_Title_Screen";
+    self.current_game_over_screen = "UI_Game_Over_Win";
+    self.current_level_index = 0;
+    self.show_tooltip_tower = false;
     with (ParentUI) {
         var layers = other.all_ui_elements[$ string(depth)];
         if (layers == undefined) {
@@ -769,6 +770,7 @@ function Game() constructor {
     };
     
     Update = function() {
+        self.show_tooltip_tower = false;
         if (!RELEASE_MODE && keyboard_check_pressed(vk_tab)) {
             gameplay_mode = (gameplay_mode == GameModes.GAMEPLAY) ? GameModes.EDITOR : GameModes.GAMEPLAY;
             selected_entity = undefined;
@@ -1388,6 +1390,10 @@ function Game() constructor {
                 window_set_cursor(cr_none);
             } else {
                 window_set_cursor(cr_default);
+            }
+            
+            if (self.show_tooltip_tower) {
+                GetGUILayer("UI_Tooltip_Tower").Render();
             }
         } else if (gameplay_mode == GameModes.PAUSED) {
             window_set_cursor(cr_default);
