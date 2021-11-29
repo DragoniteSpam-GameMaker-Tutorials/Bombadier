@@ -498,7 +498,9 @@ function Game() constructor {
         if (!ds_list_empty(self.all_foes)) return;
         self.gameplay_mode = GameModes.GAME_OVER;
         self.current_game_over_screen = "UI_Game_Over_Win";
+        self.player_save.highest_level = self.current_level_index;
         self.CallEntityGameOver();
+        self.SavePlayerData();
     };
     
     CallEntityGameOver = function() {
