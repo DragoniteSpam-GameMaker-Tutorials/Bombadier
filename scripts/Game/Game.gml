@@ -28,6 +28,22 @@ function Game() constructor {
         0x5dafba,
     ];
     
+    self.level_names = [
+        "Title screen",
+        "Level 1: The Campsite",
+        "Level 2: The Woods",
+        "Level 3: The Farm",
+        "Level 4: The Canyon",
+        "Level 5: The Flower Fields",
+        "Level 6: The Graveyard",
+        "Level 7: The Beach",
+        "Level 8: The Pirate Cove",
+        "Level 9: The Buttes",
+        "Level 10: The Outskirts",
+        "Level 11: The City",
+        "Level 12: The Castle",
+    ];
+    
     fused = {
         raw: undefined,
         vbuff: undefined,
