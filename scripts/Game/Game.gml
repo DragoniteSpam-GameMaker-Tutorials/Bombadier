@@ -405,6 +405,18 @@ function Game() constructor {
         self.camera.to = CAMERA_TO_TITLE;
     };
     
+    self.PauseGame = function() {
+        gameplay_mode = GameModes.PAUSED;
+        current_pause_screen = "UI_Game_Pause_Menu";
+        audio_play_sound(se_menu_pause, SOUND_PRIORITY_UI, false);
+        audio_stop_sound(se_tower_magnifying_glass);
+    };
+    
+    self.UnpauseGame = function() {
+        gameplay_mode = GameModes.GAMEPLAY;
+        audio_play_sound(se_menu_back, SOUND_PRIORITY_UI, false);
+    };
+    
     enum GameModes {
         TITLE, GAMEPLAY, EDITOR, PAUSED, GAME_OVER,
     }
@@ -742,10 +754,7 @@ function Game() constructor {
         } else if (gameplay_mode == GameModes.GAMEPLAY) {
             camera.Update();
             if (keyboard_check_pressed(vk_escape)) {
-                gameplay_mode = GameModes.PAUSED;
-                current_pause_screen = "UI_Game_Pause_Menu";
-                audio_play_sound(se_menu_pause, SOUND_PRIORITY_UI, false);
-                audio_stop_sound(se_tower_magnifying_glass);
+                self.PauseGame();
                 return;
             }
             
@@ -812,8 +821,7 @@ function Game() constructor {
             #endregion
         } else if (gameplay_mode == GameModes.PAUSED) {
             if (keyboard_check_pressed(vk_escape)) {
-                gameplay_mode = GameModes.GAMEPLAY;
-                audio_play_sound(se_menu_back, SOUND_PRIORITY_UI, false);
+                self.UnpauseGame();
             }
         } else if (gameplay_mode == GameModes.EDITOR) {
             camera.Update();
