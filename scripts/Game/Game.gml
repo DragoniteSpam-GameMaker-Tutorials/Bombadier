@@ -183,6 +183,36 @@ function Game() constructor {
                         );
     #endregion
     
+    self.player_save = {
+        highest_level: 0,
+    };
+    
+    self.SavePlayerData = function() {
+        var save_buffer = buffer_create(1000, buffer_grow, 1);
+        buffer_write(save_buffer, buffer_string, json_stringify(self.player_save));
+        buffer_save_ext(save_buffer, SAVE_FILE_NAME, 0, buffer_tell(save_buffer));
+        buffer_delete(save_buffer);
+    };
+    
+    self.LoadPlayerData = function() {
+        try {
+            var load_buffer = buffer_load(SAVE_FILE_NAME);
+            self.player_save = json_parse(buffer_read(load_buffer, buffer_string));
+            buffer_delete(load_buffer);
+            
+            if (!is_numeric(self.player_save[$ "highest_level"])) {
+                throw "";
+            }
+        } catch (e) {
+            show_debug_message("No valid player save found");
+            self.player_save = {
+                highest_level: 0,
+            };
+        }
+    };
+    
+    self.LoadPlayerData();
+    
     collision_surface = -1;
     path_nodes = array_create(0);
     

@@ -44,3 +44,5 @@
 #macro RELEASE_MODE                     false
 #macro release:RELEASE_MODE             true
 #macro pi_release:RELEASE_MODE          true
+
+#macro SAVE_FILE_NAME                   "player.json"
