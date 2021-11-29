@@ -9,4 +9,6 @@ Update = function() {
 
 OnHover = function() {
     GAME.show_tooltip_tower = true;
+    inst_tooltip_tower.text = GAME.tower_pebbles.name + "\n\n" +
+        GAME.tower_pebbles.descriptions[0];
 };

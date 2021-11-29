@@ -144,7 +144,13 @@ function Game() constructor {
                         /* range */ [3 * 32, 3 * 32, 3 * 32],
                         /* dmg   */ [1, 3, 4],
                         /* cost  */ [10, 20, 50],
-                            load_vbuff("towers_and_whatnot/tower-pebble.vbuff", format), bullet_pebble
+                            load_vbuff("towers_and_whatnot/tower-pebble.vbuff", format),
+                            bullet_pebble,
+                            [
+                                "A basic pebble-shooting tower!",
+                                "Pebble shooter damage increased!",
+                                "Shoots twice as fast!"
+                            ],
                         );
     tower_fire =        new TowerData("Fire Shooter",
                         /* rate  */ [0.5, 0.75, 0.5],

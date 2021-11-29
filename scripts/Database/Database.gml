@@ -14,7 +14,7 @@ function FoeData(name, hp, def, mdef, speed, damage, reward, models, entity_type
     self.entity_type = entity_type;
 }
 
-function TowerData(name, rate_arr, range_arr, damage_arr, cost_arr, model, bullet_data) constructor {
+function TowerData(name, rate_arr, range_arr, damage_arr, cost_arr, model, bullet_data, descriptions) constructor {
     self.name = name;
     self.rate = rate_arr;           // shots per second
     self.range = range_arr;
@@ -22,6 +22,8 @@ function TowerData(name, rate_arr, range_arr, damage_arr, cost_arr, model, bulle
     self.cost = cost_arr;
     self.model = model;
     self.bullet_data = bullet_data;
+    
+    self.descriptions = descriptions;
 }
 
 function BulletData(name, model, on_hit) constructor {
