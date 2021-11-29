@@ -1,9 +1,9 @@
 {
-  "option_linux_display_name": "Created with GameMaker Studio 2",
+  "option_linux_display_name": "Bombadier",
   "option_linux_version": "1.0.0.0",
   "option_linux_maintainer_email": "",
-  "option_linux_homepage": "http://www.yoyogames.com",
-  "option_linux_short_desc": "",
+  "option_linux_homepage": "",
+  "option_linux_short_desc": "Show those bugs who's boss",
   "option_linux_long_desc": "",
   "option_linux_splash_screen": "${base_options_dir}/linux/splash/splash.png",
   "option_linux_display_splash": false,
