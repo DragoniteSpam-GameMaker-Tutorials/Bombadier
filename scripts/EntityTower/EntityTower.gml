@@ -392,7 +392,8 @@ function EntityTowerFlyPaper(x, y, z, class) : EntityTower(x, y, z, class) const
         }
         self.stats.papers++;
         shot_cooldown = 1 / act_rate;
-        var paper = new EntityBulletFlyPaper(0, 0, 0, base_bullet_data, self);
+        var lifespan = 3;
+        var paper = new EntityBulletFlyPaper(0, 0, 0, lifespan, base_bullet_data, self);
         repeat (15) {
             var dist = random_range(12, act_range);
             var dir = random(360);

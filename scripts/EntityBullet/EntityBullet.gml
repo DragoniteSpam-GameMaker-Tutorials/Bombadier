@@ -142,8 +142,9 @@ function EntityBulletBird(x, y, z, bullet_data, parent_tower, nest_radius) : Ent
     };
 };
 
-function EntityBulletFlyPaper(x, y, z, bullet_data, parent_tower) : EntityBullet(x, y, z, 0, 0, 0, bullet_data, 0, parent_tower) constructor {
-    self.radius = 40;
+function EntityBulletFlyPaper(x, y, z, lifetime, bullet_data, parent_tower) : EntityBullet(x, y, z, 0, 0, 0, bullet_data, 0, parent_tower) constructor {
+    self.lifetime = lifetime;
+    self.radius = 60;
     self.hits_remaining = 2;
     
     static Reposition = function(x, y, z) {
@@ -174,6 +175,12 @@ function EntityBulletFlyPaper(x, y, z, bullet_data, parent_tower) : EntityBullet
                     return;
                 }
             }
+        }
+        
+        self.lifetime -= DT;
+        if (self.lifetime <= 0) {
+            self.Destroy();
+            self.parent_tower.paper_count--;
         }
     };
 };
