@@ -32,28 +32,23 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
         z: self.position.z
     };
     
-    static Burn = function(duration, whodunnit) {
-        if (duration == undefined) duration = BURN_DURATION;
+    static Burn = function(whodunnit, duration = BURN_DURATION) {
         self.status_burn = duration;
         self.whodunnit_burn = whodunnit;
     };
     
-    static Poison = function(duration, whodunnit) {
-        if (duration == undefined) duration = POISON_DURATION;
+    static Poison = function(whodunnit, duration = POISON_DURATION) {
         self.status_poison = duration;
         self.whodunnit_poison = whodunnit;
     };
     
-    static Slow = function(duration, factor, whodunnit) {
-        if (duration == undefined) duration = BURN_DURATION;
-        if (factor == undefined) factor = SLOW_FACTOR;
+    static Slow = function(whodunnit, duration = BURN_DURATION, factor = SLOW_FACTOR) {
         self.status_slow = duration;
         self.SetSpeedMod(factor);
         self.whodunnit_slow = whodunnit;
     };
     
-    static Immobilize = function(duration, whodunnit) {
-        if (duration == undefined) duration = IMMOBILIZE_DURATION;
+    static Immobilize = function(whodunnit, duration = IMMOBILIZE_DURATION) {
         if (self.has_been_immobilized) return;
         self.status_immobilize = duration;
         self.has_been_immobilized = true;

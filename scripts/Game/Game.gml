@@ -113,13 +113,13 @@ function Game() constructor {
     bullet_pebble =     new BulletData("Pebble", load_vbuff("towers_and_whatnot/pebble.vbuff", format), function(target) { });
     bullet_fire =       new BulletData("Fire", load_vbuff("towers_and_whatnot/bullet-fire.vbuff", format), function(target) {
         if (self.parent_tower.level >= 3) {
-            target.Burn(BURN_DURATION * 2, self.parent_tower);
+            target.Burn(self.parent_tower, BURN_DURATION * 2);
         } else {
-            target.Burn(BURN_DURATION, self.parent_tower);
+            target.Burn(self.parent_tower, BURN_DURATION);
         }
     });
     bullet_bug_spray =  new BulletData("Bug Spray", -1, function(target) {
-        target.Poison(POISON_DURATION, self.parent_tower);
+        target.Poison(self.parent_tower, POISON_DURATION);
     });
     bullet_fly_paper =  new BulletData("Fly Paper", load_vbuff("towers_and_whatnot/flypaper.vbuff", format), function(target) {
         if (self.parent_tower.level >= 3) {
@@ -128,9 +128,9 @@ function Game() constructor {
         }
         
         if (self.parent_tower.level >= 2) {
-            target.Slow(SLOW_DURATION * 1.5, SLOW_FACTOR * 0.75, self.parent_tower);
+            target.Slow(self.parent_tower, SLOW_DURATION * 1.5, SLOW_FACTOR * 0.75);
         } else {
-            target.Slow(SLOW_DURATION, SLOW_FACTOR, self.parent_tower);
+            target.Slow(self.parent_tower, SLOW_DURATION, SLOW_FACTOR);
         }
     });
     bullet_bird =       new BulletData("Bird", load_vbuff("towers_and_whatnot/bullet-bird-down.vbuff", format), function(target) { });
