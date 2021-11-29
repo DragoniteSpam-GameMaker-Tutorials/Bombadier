@@ -147,45 +147,75 @@ function Game() constructor {
                             load_vbuff("towers_and_whatnot/tower-pebble.vbuff", format),
                             bullet_pebble,
                             [
-                                "A basic pebble-shooting tower!",
-                                "Pebble shooter damage increased!",
+                                "A basic pebble-shooting\ntower!",
+                                "Pebble shooter damage\nincreased!",
                                 "Shoots twice as fast!"
                             ],
                         );
     tower_fire =        new TowerData("Fire Shooter",
-                        /* rate  */ [0.5, 0.75, 0.5],
+                        /* rate  */ [0.5, 0.75, 0.75],
                         /* range */ [3 * 32, 3.5 * 32, 3.5 * 32],
                         /* dmg   */ [1, 1, 1],
                         /* cost  */ [15, 30, 60],
-                            load_vbuff("towers_and_whatnot/tower-fire.vbuff", format), bullet_fire
+                            load_vbuff("towers_and_whatnot/tower-fire.vbuff", format),
+                            bullet_fire,
+                            [
+                                "Kill foes with fire!",
+                                "Shoots fire faster!",
+                                "Burn effect lasts longer!"
+                            ],
                         );
     tower_magnify =     new TowerData("Magnifying Glass",
                         /* rate  */ [0, 0, 0],
                         /* range */ [2.5 * 32, 3 * 32, 3 * 32],
                         /* dmg   */ [3, 6, 8],
                         /* cost  */ [50, 150, 200],
-                            load_vbuff("towers_and_whatnot/tower-glass.vbuff", format), bullet_pebble
+                            load_vbuff("towers_and_whatnot/tower-glass.vbuff", format),
+                            bullet_pebble,
+                            [
+                                "Burn foes with the power\nof the sun!",
+                                "Increased damage and\nattack radius!",
+                                "Does yet more damage and\nburns foes for good measure!"
+                            ],
                         );
     tower_spray =       new TowerData("Bug Spray",
                         /* rate  */ [1, 1, 2],
                         /* range */ [4 * 32, 4 * 32, 4 * 32],
                         /* dmg   */ [0, 0, 0],
                         /* cost  */ [40, 60, 100],
-                            load_vbuff("towers_and_whatnot/tower-spray.vbuff", format), bullet_bug_spray
+                            load_vbuff("towers_and_whatnot/tower-spray.vbuff", format),
+                            bullet_bug_spray,
+                            [
+                                "Spray the track with bug\nrepellent!",
+                                "Clouds last longer and\naffect more foes!",
+                                "Spray much faster!"
+                            ],
                         );
     tower_flypaper =    new TowerData("Fly Paper Dispenser",
                         /* rate  */ [1, 1, 1],
                         /* range */ [4 * 32, 4 * 32, 4 * 32],
                         /* dmg   */ [0, 0, 0],
                         /* cost  */ [60, 100, 100],
-                            load_vbuff("towers_and_whatnot/tower-flypaper.vbuff", format), bullet_fly_paper
+                            load_vbuff("towers_and_whatnot/tower-flypaper.vbuff", format),
+                            bullet_fly_paper,
+                            [
+                                "Slow down the incoming\nfoes with sticky paper!",
+                                "Duration and magnitude of\nslow increased!",
+                                "Fly paper momentarily\nimmobilizes anything\nthat walks over it!"
+                            ],
                         );
     tower_bird =        new TowerData("Bird Nest",
                         /* rate  */ [0.5, 1, 1],
                         /* range */ [4 * 32, 4 * 32, 4 * 32],
                         /* dmg   */ [8, 12, 12],
                         /* cost  */ [60, 80, 120],
-                            load_vbuff("towers_and_whatnot/tower-bird.vbuff", format), bullet_bird
+                            load_vbuff("towers_and_whatnot/tower-bird.vbuff", format),
+                            bullet_bird,
+                            [
+                                "Call on local birds to snack\non the foes!",
+                                "Birds do more damage!",
+                                "Summon an fourth bird!"
+                            ],
                         );
     #endregion
     

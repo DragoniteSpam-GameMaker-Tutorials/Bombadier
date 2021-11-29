@@ -6,3 +6,9 @@ Update = function() {
     var tower = GAME.tower_flypaper;
     text = tower.name + " ($" + string(tower.cost[0]) + ")";
 };
+
+OnHover = function() {
+    GAME.show_tooltip_tower = true;
+    inst_tooltip_tower.text = GAME.tower_flypaper.name + "\n\n" +
+        GAME.tower_flypaper.descriptions[0];
+};
