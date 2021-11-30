@@ -1,6 +1,7 @@
 {
   "ConfigValues": {
     "release": {"option_android_launchscreen_fill":"0","option_android_splashscreen_background_colour":"4278190080","option_android_tv_banner":"tv_banner.png","option_android_splash_screens_landscape":"splash/landscape.png","option_android_splash_screens_portrait":"splash/portrait.png","option_android_icon_mdpi":"icons/mdpi.png","option_android_icon_hdpi":"icons/hdpi.png","option_android_icon_ldpi":"icons/ldpi.png","option_android_icon_xxhdpi":"icons/xxhdpi.png","option_android_icon_xxxhdpi":"icons/xxxhdpi.png","option_android_icon_xhdpi":"icons/xhdpi.png",},
+    "pi_release": {"option_android_launchscreen_fill":"0","option_android_splashscreen_background_colour":"4278190080","option_android_icon_xhdpi":"icons/xhdpi.png","option_android_icon_mdpi":"icons/mdpi.png","option_android_icon_hdpi":"icons/hdpi.png","option_android_icon_xxhdpi":"icons/xxhdpi.png","option_android_icon_ldpi":"icons/ldpi.png","option_android_icon_xxxhdpi":"icons/xxxhdpi.png",},
   },
   "option_android_sync_amazon": false,
   "option_android_display_name": "Created with GameMaker Studio 2",

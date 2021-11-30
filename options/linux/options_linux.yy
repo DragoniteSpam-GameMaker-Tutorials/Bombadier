@@ -1,6 +1,7 @@
 {
   "ConfigValues": {
     "release": {"option_linux_splash_screen":"splash/splash.png","option_linux_icon":"icons/64.png",},
+    "pi_release": {"option_linux_icon":"icons/64.png",},
   },
   "option_linux_display_name": "Bombadier",
   "option_linux_version": "1.0.0.0",

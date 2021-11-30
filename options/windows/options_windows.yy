@@ -1,6 +1,7 @@
 {
   "ConfigValues": {
     "release": {"option_windows_installer_header":"installer/header.bmp","option_windows_installer_finished":"installer/finished.bmp","option_windows_splash_screen":"splash/splash.png","option_windows_icon":"icons/icon.ico",},
+    "pi_release": {"option_windows_icon":"icons/icon.ico",},
   },
   "option_windows_display_name": "Bombadier",
   "option_windows_executable_name": "Bombadier.exe",
