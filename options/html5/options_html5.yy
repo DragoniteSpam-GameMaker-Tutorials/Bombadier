@@ -1,4 +1,7 @@
 {
+  "ConfigValues": {
+    "release": {"option_html5_splash_png":"splash.png","option_html5_icon":"fav.ico",},
+  },
   "option_html5_browser_title": "Created with GameMaker Studio 2",
   "option_html5_version": "1.0.0.0",
   "option_html5_foldername": "html5game",

@@ -1,4 +1,7 @@
 {
+  "ConfigValues": {
+    "release": {"option_windowsuap_splash_png":"splash/SplashScreen.scale-100.png","option_windowsuap_small_logo":"logos/SmallLogo.scale-100.png","option_windowsuap_store_logo":"logos/StoreLogo.scale-100.png","option_windowsuap_smallish_logo":"logos/SmallishLogo.scale-100.png","option_windowsuap_large_logo":"logos/LargeLogo.scale-100.png","option_windowsuap_logo":"logos/Logo.scale-100.png","option_windowsuap_wide_logo":"logos/WideLogo.scale-100.png",},
+  },
   "option_windowsuap_display_name": "Created with GameMaker Studio 2",
   "option_windowsuap_package_name": "YourPackageName",
   "option_windowsuap_publisher_display_name": "YourPublisherName",

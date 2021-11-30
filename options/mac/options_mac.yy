@@ -1,4 +1,7 @@
 {
+  "ConfigValues": {
+    "release": {"option_mac_splash_png":"splash/splash.png","option_mac_icon_png":"icons/1024.png","option_mac_installer_background_png":"splash/installer_background.png",},
+  },
   "option_mac_display_name": "Created with GameMaker Studio 2",
   "option_mac_app_id": "com.company.game",
   "option_mac_version": "1.0.0.0",
