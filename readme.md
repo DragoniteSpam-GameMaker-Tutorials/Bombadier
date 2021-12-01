@@ -10,7 +10,9 @@ The video playlist can be found here:
 
 If you're following the series, I'm creating a release each week so that the state of the project at the end of a video can be marked. Each release has two numbers - a major and a minor version number - with each week being the minor version number. This means that the Week 1 project will be 0.1, Week 5 will be 0.5, Week 12 will be 0.12, etc.
 
-When the game is complete - or complete-ish - whenever that happens - the major version number will change from 0 to 1 and any subsequent updates will continue from there.
+The game recieves a "1.0" release upon completion.
+
+The finished product can be found on itch.io [here](https://dragonite.itch.io/bombadier).
 
 ## Credits
 
