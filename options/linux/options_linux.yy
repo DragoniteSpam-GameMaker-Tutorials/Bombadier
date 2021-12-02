@@ -4,7 +4,7 @@
     "pi_release": {"option_linux_icon":"icons/64.png",},
   },
   "option_linux_display_name": "Bombadier",
-  "option_linux_version": "1.0.0.0",
+  "option_linux_version": "1.0.1",
   "option_linux_maintainer_email": "",
   "option_linux_homepage": "",
   "option_linux_short_desc": "Show those bugs who's boss",
