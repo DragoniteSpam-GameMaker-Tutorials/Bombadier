@@ -14,6 +14,10 @@ The game recieves a "1.0" release upon completion.
 
 The finished product can be found on itch.io [here](https://dragonite.itch.io/bombadier).
 
+## Building
+
+This project was built using **GameMaker Studio 2.3.7.** Later stable releases of 2.x should work.
+
 ## Credits
 
 I'm aiming to write this mostly from scratch, but to save time a few native GML extensions are used, plus a bunch of other assets.
