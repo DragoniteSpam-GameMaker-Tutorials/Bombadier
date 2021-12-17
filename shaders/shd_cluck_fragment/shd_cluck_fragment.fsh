@@ -5,10 +5,6 @@
 #define LIGHT_TYPES 4.
 #define PI 3.141592653
 
-// not sure why gm_AlphaRefValue does not work so we have to do this ourselves
-uniform float alphaRef;
-uniform float alphaTest;
-
 uniform vec3 lightAmbientColor;
 uniform vec4 lightData[MAX_LIGHTS * 3];
 uniform float fogStrength;

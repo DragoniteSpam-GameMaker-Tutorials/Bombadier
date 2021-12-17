@@ -1,6 +1,3 @@
-global.__cluck_alpha_ref = 0.9;
-global.__cluck_alpha_test = 1;
-
 global.__cluck_light_ambient = c_white;
 global.__cluck_light_data = array_create(CLUCK_MAX_LIGHTS * __cluck_light_data_size);
 
