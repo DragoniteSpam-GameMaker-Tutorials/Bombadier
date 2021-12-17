@@ -233,17 +233,11 @@ function Game() constructor {
     self.LoadPlayerData = function() {
         try {
             var load_buffer = buffer_load(SAVE_FILE_NAME);
-            self.player_save = json_parse(buffer_read(load_buffer, buffer_string));
+            self.player_save = new SaveData(json_parse(buffer_read(load_buffer, buffer_string)));
             buffer_delete(load_buffer);
-            
-            if (!is_numeric(self.player_save[$ "highest_level"])) {
-                throw "";
-            }
         } catch (e) {
-            show_debug_message("No valid player save found");
-            self.player_save = {
-                highest_level: 0,
-            };
+            show_debug_message("No valid player save found!");
+            self.player_save = new SaveData();
         }
     };
     
