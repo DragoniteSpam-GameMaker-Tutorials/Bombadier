@@ -1,6 +1,6 @@
 #macro SHADER_WORLD shd_cluck_fragment
-#macro pi:SHADER_WORLD shd_cluck_vertex_basic
-#macro pi_release:SHADER_WORLD shd_cluck_vertex_basic
+#macro pi:SHADER_WORLD shd_cluck_vertex
+#macro pi_release:SHADER_WORLD shd_cluck_vertex
 
 #macro APP_SURFACE_DEFAULT_SCALE_INDEX 6
 #macro pi:APP_SURFACE_DEFAULT_SCALE_INDEX 3
