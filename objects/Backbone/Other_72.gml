@@ -31,20 +31,6 @@ if (async_id == global.__async_player_settings) {
         show_debug_message("aaaaa! could not load the settings data");
         return;
     }
-    show_message(buffer_peek(global.__async_player_settings_buffer, 0, buffer_text))
-    var json = json_parse(buffer_read(global.__async_player_settings_buffer, buffer_text));
-    buffer_delete(global.__async_player_settings_buffer);
-    
-    self.volume_master = json.volume_master;
-    self.screen_size_index = json.screen_size_index;
-    self.current_screen_size.x = min(json.current_screen_size.x, display_get_width());
-    self.current_screen_size.y = min(json.current_screen_size.y, display_get_height());
-    window_set_fullscreen(json.fullscreen);
-    self.frame_rate_index = json.frame_rate_index;
-    game_set_speed(json.frames_per_second, gamespeed_fps);
-    self.resolution_scalar_index = json.resolution_scalar_index;
-    self.resolution_scalar = json.resolution_scalar;
-    self.particle_density = json.particle_density;
     
     if (!is_numeric(self.volume_master)) self.volume_master = 100;
     if (!is_numeric(self.screen_size_index)) self.screen_size_index = 1;
