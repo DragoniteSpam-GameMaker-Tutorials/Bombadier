@@ -46,3 +46,4 @@
 #macro pi_release:RELEASE_MODE          true
 
 #macro SAVE_FILE_NAME                   "player.json"
+#macro SETTINGS_FILE_NAME               "settings.json"

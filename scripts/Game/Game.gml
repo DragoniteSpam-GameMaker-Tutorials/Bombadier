@@ -331,12 +331,12 @@ function Game() constructor {
         };
         var save_buffer = buffer_create(100, buffer_grow, 1);
         buffer_write(save_buffer, buffer_text, json_stringify(json));
-        buffer_save_ext(save_buffer, "settings.json", 0, buffer_tell(save_buffer));
+        buffer_save_ext(save_buffer, SETTINGS_FILE_NAME, 0, buffer_tell(save_buffer));
         buffer_delete(save_buffer);
     };
     
     global.__async_player_settings_buffer = buffer_create(1, buffer_grow, 1);
-    global.__async_player_settings = buffer_load_async(global.__async_player_settings_buffer, "settings.json", 0, -1);
+    global.__async_player_settings = buffer_load_async(global.__async_player_settings_buffer, SETTINGS_FILE_NAME, 0, -1);
     
     LoadSettingsAsyncHandle = function() {
         var json = json_parse(buffer_read(global.__async_player_settings_buffer, buffer_text));
