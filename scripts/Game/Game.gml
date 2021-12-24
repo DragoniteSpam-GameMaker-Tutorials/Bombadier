@@ -335,48 +335,9 @@ function Game() constructor {
         buffer_delete(save_buffer);
     };
     
-    try {
-        var load_buffer = buffer_load("settings.json");
-        var json = json_parse(buffer_read(load_buffer, buffer_text));
-        buffer_delete(load_buffer);
-        
-        self.volume_master = json.volume_master;
-        self.screen_size_index = json.screen_size_index;
-        self.current_screen_size.x = min(json.current_screen_size.x, display_get_width());
-        self.current_screen_size.y = min(json.current_screen_size.y, display_get_height());
-        window_set_fullscreen(json.fullscreen);
-        self.frame_rate_index = json.frame_rate_index;
-        game_set_speed(json.frames_per_second, gamespeed_fps);
-        self.resolution_scalar_index = json.resolution_scalar_index;
-        self.resolution_scalar = json.resolution_scalar;
-        self.particle_density = json.particle_density;
-        
-        if (!is_numeric(self.volume_master)) self.volume_master = 100;
-        if (!is_numeric(self.screen_size_index)) self.screen_size_index = 1;
-        if (!is_numeric(self.current_screen_size.x)) self.current_screen_size.x = room_width;
-        if (!is_numeric(self.current_screen_size.y)) self.current_screen_size.y = room_height;
-        if (!is_numeric(self.frame_rate_index)) self.frame_rate_index = 1;
-        if (!is_numeric(self.resolution_scalar_index)) self.resolution_scalar_index = APP_SURFACE_DEFAULT_SCALE_INDEX;
-        if (!is_numeric(self.resolution_scalar)) self.resolution_scalar = self.resolution_scalar_options[self.resolution_scalar_index];
-        if (!is_numeric(self.particle_density)) self.particle_density = DEFAULT_PARTICLE_DENSITY;
-        
-        self.volume_master = clamp(self.volume_master, 0, 100);
-        self.screen_size_index = clamp(self.screen_size_index, 0, array_length(self.screen_sizes));
-        self.current_screen_size.x = max(self.current_screen_size.x, 10);
-        self.current_screen_size.y = max(self.current_screen_size.y, 10);
-        self.frame_rate_index = clamp(self.frame_rate_index, 0, array_length(self.frame_rates));
-        self.resolution_scalar_index = clamp(self.resolution_scalar_index, 0, array_length(self.resolution_scalar_options));
-        self.resolution_scalar = clamp(self.resolution_scalar, 0.05, 1);
-        self.particle_density = clamp(self.particle_density, 0, 1);
-        
-        self.ApplyVolume();
-    } catch (e) {
-        show_debug_message("Settings could not be loaded");
-    }
+    global.__async_player_settings_buffer = buffer_create(1, buffer_grow, 1);
+    global.__async_player_settings = buffer_load_async(global.__async_player_settings_buffer, "settings.json", 0, -1);
     
-    audio_play_sound(se_ambient, SOUND_PRIORITY_AMBIENT, true);
-    
-    self.ApplyScreenSize();
     #endregion
     
     Initialize = function() {
