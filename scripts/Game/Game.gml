@@ -88,8 +88,8 @@ function Game() constructor {
     global.env_object_list = ds_list_create();
     for (var file = file_find_first("environment/*.vbuff", 0); file != ""; file = file_find_next()) {
         var obj_name = string_replace(file, ".000.vbuff", "");
-        var buffer = buffer_create(1, buffer_fixed, 1);
-        var async_id = buffer_load_async(buffer, "environment/" + file, 0, 1);
+        var buffer = buffer_create(1, buffer_grow, 1);
+        var async_id = buffer_load_async(buffer, "environment/" + file, 0, -1);
         global.env_objects[? obj_name] = { buffer: buffer, name: obj_name, id: async_id };
         ds_list_add(global.env_object_list, obj_name);
     }
@@ -230,7 +230,7 @@ function Game() constructor {
         buffer_delete(save_buffer);
     };
     
-    global.__async_player_save_buffer = buffer_create(1, buffer_fixed, 1);
+    global.__async_player_save_buffer = buffer_create(1, buffer_grow, 1);
     global.__async_player_save = buffer_load_async(global.__async_player_save_buffer, SAVE_FILE_NAME, 0, -1);
     
     collision_surface = -1;
