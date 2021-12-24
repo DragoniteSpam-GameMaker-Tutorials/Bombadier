@@ -87,10 +87,10 @@ function Game() constructor {
     env_objects = ds_map_create();
     env_object_list = ds_list_create();
     for (var file = file_find_first("environment/*.vbuff", 0); file != ""; file = file_find_next()) {
-        var buffer = buffer_load("environment/" + file);
         var obj_name = string_replace(file, ".000.vbuff", "");
-        env_objects[? obj_name] = new ModelData("environment/" + file, vertex_create_buffer_from_buffer(buffer, format));
-        buffer_delete(buffer);
+        var buffer = buffer_create(1, buffer_fixed, 1);
+        buffer_load_async(buffer, "environment/" + file, 0, 1);
+        env_objects[? obj_name] = { buffer: buffer, name: obj_name };
         ds_list_add(env_object_list, obj_name);
     }
     collision_grid = ds_grid_create(10, 10);
