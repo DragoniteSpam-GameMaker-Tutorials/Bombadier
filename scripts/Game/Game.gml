@@ -16,10 +16,10 @@ function Game() constructor {
     vertex_format_add_position_3d();
     vertex_format_add_normal();
     vertex_format_add_color();
-    format = vertex_format_end();
+    global.format = vertex_format_end();
     
-    ground = create_ground_vbuffer(format);
-    water = create_water_vbuffer(format);
+    ground = create_ground_vbuffer (global.format);
+    water = create_water_vbuffer (global.format);
     #endregion
     
     self.sky_colors = [
@@ -84,34 +84,34 @@ function Game() constructor {
     };
     
     #region environment objects
-    env_objects = ds_map_create();
-    env_object_list = ds_list_create();
+    global.env_objects = ds_map_create();
+    global.env_object_list = ds_list_create();
     for (var file = file_find_first("environment/*.vbuff", 0); file != ""; file = file_find_next()) {
         var obj_name = string_replace(file, ".000.vbuff", "");
         var buffer = buffer_create(1, buffer_fixed, 1);
         var async_id = buffer_load_async(buffer, "environment/" + file, 0, 1);
-        env_objects[? obj_name] = { buffer: buffer, name: obj_name, id: async_id };
-        ds_list_add(env_object_list, obj_name);
+        global.env_objects[? obj_name] = { buffer: buffer, name: obj_name, id: async_id };
+        ds_list_add(global.env_object_list, obj_name);
     }
     collision_grid = ds_grid_create(10, 10);
     skybox_type = 0;
     show_water = false;
     #endregion
     
-    test_ball = load_vbuff("towers_and_whatnot/testball.vbuff", format).vbuff;
+    test_ball = load_vbuff("towers_and_whatnot/testball.vbuff", global.format).vbuff;
     
-    magnifying_glass_beam = load_vbuff("towers_and_whatnot/tower-glass-beam.vbuff", format).vbuff;
-    magnifying_glass_glass = load_vbuff("towers_and_whatnot/tower-glass-glass.vbuff", format).vbuff;
+    magnifying_glass_beam = load_vbuff("towers_and_whatnot/tower-glass-beam.vbuff", global.format).vbuff;
+    magnifying_glass_glass = load_vbuff("towers_and_whatnot/tower-glass-glass.vbuff", global.format).vbuff;
     
     #region database
-    foe_ant =       new FoeData("Ant",               5, 0, 0, 100, 1, 2, [load_vbuff("foes/ant0.vbuff", format),          load_vbuff("foes/ant1.vbuff", format),       ],   EntityFoe);
-    foe_pillbugs =  new FoeData("Pillbug",          10, 1, 0,  50, 1, 3, [load_vbuff("foes/pillbug0.vbuff", format),      load_vbuff("foes/pillbug1.vbuff", format),   ],   EntityFoe);
-    foe_gnat =    new FoeData("Midge",               1, 0, 1, 100, 1, 2, [load_vbuff("foes/gnat0.vbuff", format),         load_vbuff("foes/gnat1.vbuff", format),      ],   EntityFoeMidge);
-    foe_aphid = new FoeData("Aphid",                 3, 0, 0,  50, 1, 1, [load_vbuff("foes/aphid0.vbuff", format),        load_vbuff("foes/aphid1.vbuff", format),     ],   EntityFoe);
-    foe_grasshopper = new FoeData("Grasshopper",    20, 0, 0, 150, 2, 8, [load_vbuff("foes/grasshopper0.vbuff", format),  load_vbuff("foes/grasshopper1.vbuff", format)],   EntityFoe);
+    foe_ant =       new FoeData("Ant",               5, 0, 0, 100, 1, 2, [load_vbuff("foes/ant0.vbuff", global.format),          load_vbuff("foes/ant1.vbuff", global.format),       ],   EntityFoe);
+    foe_pillbugs =  new FoeData("Pillbug",          10, 1, 0,  50, 1, 3, [load_vbuff("foes/pillbug0.vbuff", global.format),      load_vbuff("foes/pillbug1.vbuff", global.format),   ],   EntityFoe);
+    foe_gnat =    new FoeData("Midge",               1, 0, 1, 100, 1, 2, [load_vbuff("foes/gnat0.vbuff", global.format),         load_vbuff("foes/gnat1.vbuff", global.format),      ],   EntityFoeMidge);
+    foe_aphid = new FoeData("Aphid",                 3, 0, 0,  50, 1, 1, [load_vbuff("foes/aphid0.vbuff", global.format),        load_vbuff("foes/aphid1.vbuff", global.format),     ],   EntityFoe);
+    foe_grasshopper = new FoeData("Grasshopper",    20, 0, 0, 150, 2, 8, [load_vbuff("foes/grasshopper0.vbuff", global.format),  load_vbuff("foes/grasshopper1.vbuff", global.format)],   EntityFoe);
     
-    bullet_pebble =     new BulletData("Pebble", load_vbuff("towers_and_whatnot/pebble.vbuff", format), function(target) { });
-    bullet_fire =       new BulletData("Fire", load_vbuff("towers_and_whatnot/bullet-fire.vbuff", format), function(target) {
+    bullet_pebble =     new BulletData("Pebble", load_vbuff("towers_and_whatnot/pebble.vbuff", global.format), function(target) { });
+    bullet_fire =       new BulletData("Fire", load_vbuff("towers_and_whatnot/bullet-fire.vbuff", global.format), function(target) {
         if (self.parent_tower.level >= 3) {
             target.Burn(self.parent_tower, BURN_DURATION * 2);
         } else {
@@ -121,7 +121,7 @@ function Game() constructor {
     bullet_bug_spray =  new BulletData("Bug Spray", -1, function(target) {
         target.Poison(self.parent_tower, POISON_DURATION);
     });
-    bullet_fly_paper =  new BulletData("Fly Paper", load_vbuff("towers_and_whatnot/flypaper.vbuff", format), function(target) {
+    bullet_fly_paper =  new BulletData("Fly Paper", load_vbuff("towers_and_whatnot/flypaper.vbuff", global.format), function(target) {
         if (self.parent_tower.level >= 3) {
             target.Immobilize(self.parent_tower);
             self.parent_tower.stats.stuns++;
@@ -133,10 +133,10 @@ function Game() constructor {
             target.Slow(self.parent_tower, SLOW_DURATION, SLOW_FACTOR);
         }
     });
-    bullet_bird =       new BulletData("Bird", load_vbuff("towers_and_whatnot/bullet-bird-down.vbuff", format), function(target) { });
+    bullet_bird =       new BulletData("Bird", load_vbuff("towers_and_whatnot/bullet-bird-down.vbuff", global.format), function(target) { });
     bullet_bird.anim_frames = [
-        load_vbuff("towers_and_whatnot/bullet-bird-down.vbuff", format),
-        load_vbuff("towers_and_whatnot/bullet-bird-up.vbuff", format)
+        load_vbuff("towers_and_whatnot/bullet-bird-down.vbuff", global.format),
+        load_vbuff("towers_and_whatnot/bullet-bird-up.vbuff", global.format)
     ];
     
     tower_pebbles =     new TowerData("Pebble Shooter",
@@ -144,7 +144,7 @@ function Game() constructor {
                         /* range */ [3 * 32, 3 * 32, 3 * 32],
                         /* dmg   */ [1, 3, 4],
                         /* cost  */ [10, 20, 50],
-                            load_vbuff("towers_and_whatnot/tower-pebble.vbuff", format),
+                            load_vbuff("towers_and_whatnot/tower-pebble.vbuff", global.format),
                             bullet_pebble,
                             [
                                 "A basic pebble-shooting\ntower!",
@@ -157,7 +157,7 @@ function Game() constructor {
                         /* range */ [3 * 32, 3.5 * 32, 3.5 * 32],
                         /* dmg   */ [1, 1, 1],
                         /* cost  */ [15, 30, 60],
-                            load_vbuff("towers_and_whatnot/tower-fire.vbuff", format),
+                            load_vbuff("towers_and_whatnot/tower-fire.vbuff", global.format),
                             bullet_fire,
                             [
                                 "Kill foes with fire!",
@@ -170,7 +170,7 @@ function Game() constructor {
                         /* range */ [2.5 * 32, 3 * 32, 3 * 32],
                         /* dmg   */ [3, 6, 8],
                         /* cost  */ [50, 150, 200],
-                            load_vbuff("towers_and_whatnot/tower-glass.vbuff", format),
+                            load_vbuff("towers_and_whatnot/tower-glass.vbuff", global.format),
                             bullet_pebble,
                             [
                                 "Burn foes with the power\nof the sun!",
@@ -183,7 +183,7 @@ function Game() constructor {
                         /* range */ [4 * 32, 4 * 32, 4 * 32],
                         /* dmg   */ [0, 0, 0],
                         /* cost  */ [40, 60, 100],
-                            load_vbuff("towers_and_whatnot/tower-spray.vbuff", format),
+                            load_vbuff("towers_and_whatnot/tower-spray.vbuff", global.format),
                             bullet_bug_spray,
                             [
                                 "Spray the track with bug\nrepellent!",
@@ -196,7 +196,7 @@ function Game() constructor {
                         /* range */ [4 * 32, 4 * 32, 4 * 32],
                         /* dmg   */ [0, 0, 0],
                         /* cost  */ [60, 100, 100],
-                            load_vbuff("towers_and_whatnot/tower-flypaper.vbuff", format),
+                            load_vbuff("towers_and_whatnot/tower-flypaper.vbuff", global.format),
                             bullet_fly_paper,
                             [
                                 "Slow down the incoming\nfoes with sticky paper!",
@@ -209,7 +209,7 @@ function Game() constructor {
                         /* range */ [4 * 32, 4 * 32, 4 * 32],
                         /* dmg   */ [8, 12, 12],
                         /* cost  */ [60, 80, 120],
-                            load_vbuff("towers_and_whatnot/tower-bird.vbuff", format),
+                            load_vbuff("towers_and_whatnot/tower-bird.vbuff", global.format),
                             bullet_bird,
                             [
                                 "Call on local birds to snack\non the foes!",
@@ -754,7 +754,7 @@ function Game() constructor {
             vertex_delete_buffer(fused.vbuff);
         }
         
-        var vbuff = vertex_create_buffer_from_buffer(fused_data, self.format);
+        var vbuff = vertex_create_buffer_from_buffer(fused_data, global.format);
         show_message(string(vertex_get_number(vbuff)) + " vertices (" + string(vertex_get_number(vbuff) / 3) + " triangles)");
         
         fused.vbuff = vbuff;
@@ -942,21 +942,21 @@ function Game() constructor {
                 var go_down = mouse_check_button(mb_right);
                 
                 if (keyboard_check(ord("1"))) {
-                    edit_ground_color(self.ground, 0x254c00, self.format);
+                    edit_ground_color(self.ground, 0x254c00, global.format);
                 } else if (keyboard_check(ord("2"))) {
-                    edit_ground_color(self.ground, 0x51a600, self.format);
+                    edit_ground_color(self.ground, 0x51a600, global.format);
                 } else if (keyboard_check(ord("3"))) {
-                    edit_ground_color(self.ground, 0x89c6fd, self.format);
+                    edit_ground_color(self.ground, 0x89c6fd, global.format);
                 }
                 
                 if (keyboard_check(ord("0"))) {
                     if (show_question("Would you like to reset the terrain height?")) {
-                        edit_ground_reset_height(self.ground, self.format);
+                        edit_ground_reset_height(self.ground, global.format);
                     }
                 }
                 
                 if (self.camera.floor_intersect && (go_up || go_down)) {
-                    edit_ground_height(self.ground, self.camera.floor_intersect, go_up ? 1 : -1, self.format);
+                    edit_ground_height(self.ground, self.camera.floor_intersect, go_up ? 1 : -1, global.format);
                 }
             } else if (self.editor_mode == EditorModes.SETTINGS) {
                 if (keyboard_check_pressed(ord("J"))) {
@@ -969,18 +969,18 @@ function Game() constructor {
                 editor_hover_entity = GetUnderCursor(all_env_entities);
                 
                 if (keyboard_check_pressed(vk_f4)) {
-                    editor_model_index = (editor_model_index + ds_list_size(env_object_list) - 1) % ds_list_size(env_object_list);
+                    editor_model_index = (editor_model_index + ds_list_size(global.env_object_list) - 1) % ds_list_size(global.env_object_list);
                 }
                 
                 if (keyboard_check_pressed(vk_f5)) {
-                    editor_model_index = (editor_model_index + 1) % ds_list_size(env_object_list);
+                    editor_model_index = (editor_model_index + 1) % ds_list_size(global.env_object_list);
                 }
                 
                 if (keyboard_check_pressed(vk_f6)) {
-                    var seek_name = string_lower(get_string("What model do you want to jump to?", env_object_list[| editor_model_index]));
-                    for (var i = 1, n = ds_list_size(env_object_list); i <= n; i++) {
+                    var seek_name = string_lower(get_string("What model do you want to jump to?", global.env_object_list[| editor_model_index]));
+                    for (var i = 1, n = ds_list_size(global.env_object_list); i <= n; i++) {
                         var index = (i + editor_model_index) % n;
-                        if (string_count(seek_name, string_lower(env_object_list[| index])) > 0) {
+                        if (string_count(seek_name, string_lower(global.env_object_list[| index])) > 0) {
                             editor_model_index = index;
                         }
                     }
@@ -994,8 +994,8 @@ function Game() constructor {
                     } else {
                         var position = camera.GetFloorIntersect();
                         if (position) {
-                            var spawn_name = env_object_list[| editor_model_index];
-                            var ent = new EntityEnv(position.x, position.y, 0, env_objects[? spawn_name], spawn_name);
+                            var spawn_name = global.env_object_list[| editor_model_index];
+                            var ent = new EntityEnv(position.x, position.y, 0, global.env_objects[? spawn_name], spawn_name);
                             ent.rotation.z = random(360);
                             ent.scale.x = random_range(1.8, 2.2);
                             ent.scale.y = ent.scale.x;
@@ -1156,7 +1156,7 @@ function Game() constructor {
             for (var i = 0; i < array_length(load_json.entities); i++) {
                 var data = load_json.entities[i];
                 if (is_struct(data)) {
-                    var ent = new EntityEnv(data.position.x, data.position.y, data.position.z, env_objects[? data.name], data.name);
+                    var ent = new EntityEnv(data.position.x, data.position.y, data.position.z, global.env_objects[? data.name], data.name);
                     ent.rotation = data.rotation;
                     ent.scale = data.scale;
                     ent.AddToMap();
@@ -1169,7 +1169,7 @@ function Game() constructor {
             
             if (file_exists(filename_change_ext(filename, ".fused"))) {
                 fused.raw = buffer_load(filename_change_ext(filename, ".fused"));
-                fused.vbuff = vertex_create_buffer_from_buffer(fused.raw, format);
+                fused.vbuff = vertex_create_buffer_from_buffer(fused.raw, global.format);
                 vertex_freeze(fused.vbuff);
                 
                 if (RELEASE_MODE) {
@@ -1187,10 +1187,10 @@ function Game() constructor {
             vertex_delete_buffer(self.ground);
             if (file_exists(filename_change_ext(filename, ".ground"))) {
                 var ground_buffer = buffer_load(filename_change_ext(filename, ".ground"));
-                self.ground = vertex_create_buffer_from_buffer(ground_buffer, self.format);
+                self.ground = vertex_create_buffer_from_buffer(ground_buffer, global.format);
                 buffer_delete(ground_buffer);
             } else {
-                self.ground = create_ground_vbuffer(self.format);
+                self.ground = create_ground_vbuffer(global.format);
             }
             
             if (variable_struct_exists(load_json, "skybox_type")) {
@@ -1296,7 +1296,7 @@ function Game() constructor {
         if (gameplay_mode == GameModes.EDITOR) {
             // Draw a debug line so you can see where the bounds of the world is
             var vb_border = vertex_create_buffer();
-            vertex_begin(vb_border, format);
+            vertex_begin(vb_border, global.format);
             vertex_position_3d(vb_border, 0, FIELD_HEIGHT, 8);
             vertex_normal(vb_border, 0, 0, 1);
             vertex_colour(vb_border, c_red, 1);
@@ -1320,7 +1320,7 @@ function Game() constructor {
                 var draw_the_line = array_length(path_nodes) > 1;
                 if (draw_the_line) {
                     var vb_path_nodes = vertex_create_buffer();
-                    vertex_begin(vb_path_nodes, format);
+                    vertex_begin(vb_path_nodes, global.format);
                     var node_hue = 0;
                     var node_hue_interval = 255 / array_length(path_nodes);
                 }
@@ -1494,7 +1494,7 @@ function Game() constructor {
                     draw_text(32, ++n * 32, "K: toggle water");
                     break;
                 case EditorModes.MAIN:
-                    draw_text(32, 32, "Click to spawn a thing (" + env_object_list[| editor_model_index] + ") or select an existing thing; F4 and F5 cycle through models");
+                    draw_text(32, 32, "Click to spawn a thing (" + global.env_object_list[| editor_model_index] + ") or select an existing thing; F4 and F5 cycle through models");
                     if (selected_entity) {
                         if (keyboard_check(vk_shift)) {
                             draw_text(32, 64, "Left, Right, Up, Down, PageUp and Page Down to rotate the selected thing");
