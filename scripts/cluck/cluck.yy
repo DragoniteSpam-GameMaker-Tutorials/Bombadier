@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Scripts",
-    "path": "folders/Luminous Chickens/Scripts.yy",
+    "name": "Luminous Chickens",
+    "path": "folders/Luminous Chickens.yy",
   },
   "resourceVersion": "1.0",
-  "name": "cluck_apply",
+  "name": "cluck",
   "tags": [],
   "resourceType": "GMScript",
 }

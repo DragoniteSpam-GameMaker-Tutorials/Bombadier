@@ -1259,7 +1259,8 @@ function Game() constructor {
         
         gpu_set_cullmode(cull_counterclockwise);
         cluck_set_light_ambient(0x202020);
-        cluck_set_light_direction(0, c_white, -1, -1, -1);
+        cluck_set_light_direction(-1, -1, -1);
+        cluck_set_light_color(c_white);
         cluck_apply(SHADER_WORLD);
         
         if (sprite_exists(self.fused.collision_sprite)) {
