@@ -294,6 +294,8 @@ function Game() constructor {
     
     frame_rates = [30, 60, 120, 144];
     frame_rate_index = 1;
+    self.languages = ["English", "English (Pirate)"];
+    self.language_index = 0;
     
     resolution_scalar_options = [0.25, 0.33, 0.4, 0.5, 0.66, 0.75, 1];
     resolution_scalar_index = APP_SURFACE_DEFAULT_SCALE_INDEX;
@@ -328,6 +330,7 @@ function Game() constructor {
             resolution_scalar_index: self.resolution_scalar_index,
             resolution_scalar: self.resolution_scalar,
             particle_density: self.particle_density,
+            language_index: self.language_index,
         };
         var save_buffer = buffer_create(100, buffer_grow, 1);
         buffer_write(save_buffer, buffer_text, json_stringify(json));
@@ -352,6 +355,7 @@ function Game() constructor {
         self.resolution_scalar_index = json.resolution_scalar_index;
         self.resolution_scalar = json.resolution_scalar;
         self.particle_density = json.particle_density;
+        self.language_index = json.language_index;
         
         if (!is_numeric(self.volume_master)) self.volume_master = 100;
         if (!is_numeric(self.screen_size_index)) self.screen_size_index = 1;
@@ -361,6 +365,7 @@ function Game() constructor {
         if (!is_numeric(self.resolution_scalar_index)) self.resolution_scalar_index = APP_SURFACE_DEFAULT_SCALE_INDEX;
         if (!is_numeric(self.resolution_scalar)) self.resolution_scalar = self.resolution_scalar_options[self.resolution_scalar_index];
         if (!is_numeric(self.particle_density)) self.particle_density = DEFAULT_PARTICLE_DENSITY;
+        if (!is_numeric(self.language_index)) self.language_index = 1;
         
         self.volume_master = clamp(self.volume_master, 0, 100);
         self.screen_size_index = clamp(self.screen_size_index, 0, array_length(self.screen_sizes));
@@ -370,6 +375,7 @@ function Game() constructor {
         self.resolution_scalar_index = clamp(self.resolution_scalar_index, 0, array_length(self.resolution_scalar_options));
         self.resolution_scalar = clamp(self.resolution_scalar, 0.05, 1);
         self.particle_density = clamp(self.particle_density, 0, 1);
+        self.language_index = clamp(self.language_index, 0, array_length(self.languages));
         
         self.ApplyVolume();
         self.ApplyScreenSize();
