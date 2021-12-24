@@ -31,26 +31,53 @@ if (async_id == global.__async_player_settings) {
         show_debug_message("aaaaa! could not load the settings data");
         return;
     }
+    GAME.LoadSettingsAsyncHandle();    
+    return;
+}
+
+if (async_id == global.__async_map_main) {
+    if (!async_status) {
+        show_debug_message("aaaaa! could not load the map");
+        return;
+    }
+    GAME.LoadMapAsyncHandle();
+    return;
+}
+
+
+if (async_id == global.__async_map_fused) {
+    if (!async_status) {
+        show_debug_message("aaaaa! could not load the fused map data");
+        return;
+    }
     
-    if (!is_numeric(self.volume_master)) self.volume_master = 100;
-    if (!is_numeric(self.screen_size_index)) self.screen_size_index = 1;
-    if (!is_numeric(self.current_screen_size.x)) self.current_screen_size.x = room_width;
-    if (!is_numeric(self.current_screen_size.y)) self.current_screen_size.y = room_height;
-    if (!is_numeric(self.frame_rate_index)) self.frame_rate_index = 1;
-    if (!is_numeric(self.resolution_scalar_index)) self.resolution_scalar_index = APP_SURFACE_DEFAULT_SCALE_INDEX;
-    if (!is_numeric(self.resolution_scalar)) self.resolution_scalar = self.resolution_scalar_options[self.resolution_scalar_index];
-    if (!is_numeric(self.particle_density)) self.particle_density = DEFAULT_PARTICLE_DENSITY;
+    GAME.fused.raw = global.__async_map_fused_buffer;
+    GAME.fused.vbuff = vertex_create_buffer_from_buffer(GAME.fused.raw, global.format);
+    vertex_freeze(GAME.fused.vbuff);
     
-    self.volume_master = clamp(self.volume_master, 0, 100);
-    self.screen_size_index = clamp(self.screen_size_index, 0, array_length(self.screen_sizes));
-    self.current_screen_size.x = max(self.current_screen_size.x, 10);
-    self.current_screen_size.y = max(self.current_screen_size.y, 10);
-    self.frame_rate_index = clamp(self.frame_rate_index, 0, array_length(self.frame_rates));
-    self.resolution_scalar_index = clamp(self.resolution_scalar_index, 0, array_length(self.resolution_scalar_options));
-    self.resolution_scalar = clamp(self.resolution_scalar, 0.05, 1);
-    self.particle_density = clamp(self.particle_density, 0, 1);
+    if (RELEASE_MODE) {
+        buffer_delete(GAME.fused.raw);
+        GAME.fused.raw = undefined;
+    }
+}
+        
+if (async_id == global.__async_map_collision) {
+    if (!async_status) {
+        show_debug_message("aaaaa! could not load the map collision data");
+        return;
+    }
     
-    self.ApplyVolume();
-    audio_play_sound(se_ambient, SOUND_PRIORITY_AMBIENT, true);
-    self.ApplyScreenSize();
+    if (buffer_exists(GAME.fused.collision)) buffer_delete(GAME.fused.collision);
+    GAME.fused.collision = global.__async_map_main_buffer;
+    fused.GenerateCollisionSprite();
+}
+        
+if (async_id == global.__async_map_ground) {
+    if (!async_status) {
+        show_debug_message("aaaaa! could not load the map ground data");
+        return;
+    }
+    vertex_delete_buffer(GAME.ground);
+    GAME.ground = vertex_create_buffer_from_buffer(global.__async_map_ground_buffer, global.format);
+    buffer_delete(global.__async_map_ground_buffer);
 }

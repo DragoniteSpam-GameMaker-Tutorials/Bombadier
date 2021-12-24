@@ -1140,78 +1140,49 @@ function Game() constructor {
         ds_list_clear(self.all_towers);
         ds_list_clear(self.all_env_entities);
         
-        var buffer = undefined;
-        try {
-            buffer = buffer_load(filename);
-            var json_string = buffer_read(buffer, buffer_text);
-            var load_json = json_parse(json_string);
-            
-            var ww = FIELD_WIDTH div GRID_CELL_SIZE;
-            var hh = FIELD_HEIGHT div GRID_CELL_SIZE;
-            ds_grid_resize(collision_grid, ww, hh);
-            ds_grid_clear(collision_grid, GRID_COLLISION_FREE);
-            
-            for (var i = 0; i < array_length(load_json.entities); i++) {
-                var data = load_json.entities[i];
-                if (is_struct(data)) {
-                    var ent = new EntityEnv(data.position.x, data.position.y, data.position.z, global.env_objects[? data.name], data.name);
-                    ent.rotation = data.rotation;
-                    ent.scale = data.scale;
-                    ent.AddToMap();
-                }
+        global.__async_map_main_buffer = buffer_create(1, buffer_grow, 1);
+        global.__async_map_main = buffer_load_async(global.__async_map_main_buffer, filename, 0, -1);
+        global.__async_map_fused_buffer = buffer_create(1, buffer_grow, 1);
+        global.__async_map_fused = buffer_load_async(global.__async_map_fused_buffer, filename_change_ext(filename, ".fused"), 0, -1);
+        global.__async_map_collision_buffer = buffer_create(1, buffer_grow, 1);
+        global.__async_map_collision = buffer_load_async(global.__async_map_collision_buffer, filename_change_ext(filename, ".collision"), 0, -1);
+        global.__async_map_ground_buffer = buffer_create(1, buffer_grow, 1);
+        global.__async_map_ground = buffer_load_async(global.__async_map_ground_buffer, filename_change_ext(filename, ".ground"), 0, -1);
+    };
+    
+    LoadMapAsyncHandle = function() {
+        var json_string = buffer_read(global.__async_map_main_buffer, buffer_text);
+        var load_json = json_parse(json_string);
+        
+        var ww = FIELD_WIDTH div GRID_CELL_SIZE;
+        var hh = FIELD_HEIGHT div GRID_CELL_SIZE;
+        ds_grid_resize(self.collision_grid, ww, hh);
+        ds_grid_clear(self.collision_grid, GRID_COLLISION_FREE);
+        
+        for (var i = 0; i < array_length(load_json.entities); i++) {
+            var data = load_json.entities[i];
+            if (is_struct(data)) {
+                var ent = new EntityEnv(data.position.x, data.position.y, data.position.z, global.env_objects[? data.name], data.name);
+                ent.rotation = data.rotation;
+                ent.scale = data.scale;
+                ent.AddToMap();
             }
-            path_nodes = array_create(array_length(load_json.nodes));
-            for (var i = 0; i < array_length(load_json.nodes); i++) {
-                path_nodes[@ i] = new PathNode(load_json.nodes[i].position);
-            }
-            
-            if (file_exists(filename_change_ext(filename, ".fused"))) {
-                fused.raw = buffer_load(filename_change_ext(filename, ".fused"));
-                fused.vbuff = vertex_create_buffer_from_buffer(fused.raw, global.format);
-                vertex_freeze(fused.vbuff);
-                
-                if (RELEASE_MODE) {
-                    buffer_delete(fused.raw);
-                    fused.raw = undefined;
-                }
-            }
-            
-            if (file_exists(filename_change_ext(filename, ".collision"))) {
-                if (buffer_exists(fused.collision)) buffer_delete(fused.collision);
-                fused.collision = buffer_load(filename_change_ext(filename, ".collision"));
-                fused.GenerateCollisionSprite();
-            }
-            
-            vertex_delete_buffer(self.ground);
-            if (file_exists(filename_change_ext(filename, ".ground"))) {
-                var ground_buffer = buffer_load(filename_change_ext(filename, ".ground"));
-                self.ground = vertex_create_buffer_from_buffer(ground_buffer, global.format);
-                buffer_delete(ground_buffer);
-            } else {
-                self.ground = create_ground_vbuffer(global.format);
-            }
-            
-            if (variable_struct_exists(load_json, "skybox_type")) {
-                self.skybox_type = load_json.skybox_type;
-            } else {
-                self.skybox_type = 0;
-            }
-            
-            if (variable_struct_exists(load_json, "show_water")) {
-                self.show_water = load_json.show_water;
-            } else {
-                self.show_water = false;
-            }
-        } catch (e) {
-            show_debug_message("Something bad happened loading the file:");
-            show_debug_message(e.message);
-            show_debug_message(e.longMessage);
-            show_debug_message(e.script);
-            show_debug_message(e.stacktrace);
+        }
+        self.path_nodes = array_create(array_length(load_json.nodes));
+        for (var i = 0; i < array_length(load_json.nodes); i++) {
+            self.path_nodes[@ i] = new PathNode(load_json.nodes[i].position);
         }
         
-        if (buffer != undefined) {
-            buffer_delete(buffer);
+        if (variable_struct_exists(load_json, "skybox_type")) {
+            self.skybox_type = load_json.skybox_type;
+        } else {
+            self.skybox_type = 0;
+        }
+        
+        if (variable_struct_exists(load_json, "show_water")) {
+            self.show_water = load_json.show_water;
+        } else {
+            self.show_water = false;
         }
     };
     
