@@ -4,8 +4,10 @@ L = new (function() constructor {
     };
     
     static Load = function(language) {
+        var filename = "lang/" + language + ".csv";
+        
         try {
-            var filename = "lang/" + language + ".csv";
+            
         } catch (e) {
             show_debug_message("could not load the language data: " + language);
         }
