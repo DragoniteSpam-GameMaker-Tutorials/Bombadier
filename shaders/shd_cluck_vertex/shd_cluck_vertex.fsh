@@ -1,19 +1,9 @@
-// not sure why gm_AlphaRefValue does not work so we have to do this ourselves
-uniform float alphaRef;
-uniform float alphaTest;
-
-uniform float fogStrength;
-uniform float fogStart;
-uniform float fogEnd;
-uniform vec3 fogColor;
-
 varying vec4 v_vColour;
+varying vec3 v_LightWorldPosition;
 
 uniform sampler2D samplerCollision;
 uniform vec2 samplerCollisionScale;
 uniform float samplerCollisionStrength;
-
-varying vec3 v_LightWorldPosition;
 
 void main() {
     vec4 cc = texture2D(samplerCollision, vec2(v_LightWorldPosition.x, v_LightWorldPosition.y) / samplerCollisionScale);
