@@ -232,13 +232,11 @@ function Game() constructor {
     
     self.LoadPlayerData = function() {
         try {
+            if (!file_exists(SAVE_FILE_NAME)) throw "";
             var load_buffer = buffer_load(SAVE_FILE_NAME);
             self.player_save = json_parse(buffer_read(load_buffer, buffer_string));
             buffer_delete(load_buffer);
-            
-            if (!is_numeric(self.player_save[$ "highest_level"])) {
-                throw "";
-            }
+            if (!is_numeric(self.player_save.highest_level)) throw "";
         } catch (e) {
             show_debug_message("No valid player save found");
             self.player_save = {
@@ -352,6 +350,7 @@ function Game() constructor {
     };
     
     try {
+        if (!file_exists("settings.json")) throw "";
         var load_buffer = buffer_load("settings.json");
         var json = json_parse(buffer_read(load_buffer, buffer_text));
         buffer_delete(load_buffer);
