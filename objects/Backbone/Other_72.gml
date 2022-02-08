@@ -84,3 +84,12 @@ if (async_id == global.__async_map_ground) {
     buffer_delete(global.__async_map_ground_buffer);
     return;
 }
+        
+if (async_id == global.__async_language) {
+    if (!async_status) {
+        show_debug_message("aaaaa! could not load the language data");
+        return;
+    }
+    global.__async_language = json_decode(buffer_peek(global.__async_language_buffer, 0, buffer_text));
+    return;
+}

@@ -57,7 +57,6 @@
     {"id":{"name":"shd_debug_wireframe","path":"shaders/shd_debug_wireframe/shd_debug_wireframe.yy",},"order":6,},
     {"id":{"name":"shd_billboard","path":"shaders/shd_billboard/shd_billboard.yy",},"order":3,},
     {"id":{"name":"spr_particle_main","path":"sprites/spr_particle_main/spr_particle_main.yy",},"order":4,},
-    {"id":{"name":"Localization","path":"scripts/Localization/Localization.yy",},"order":9,},
     {"id":{"name":"EntityFoe","path":"scripts/EntityFoe/EntityFoe.yy",},"order":3,},
     {"id":{"name":"Database","path":"scripts/Database/Database.yy",},"order":4,},
     {"id":{"name":"spr_tower_radius","path":"sprites/spr_tower_radius/spr_tower_radius.yy",},"order":5,},
