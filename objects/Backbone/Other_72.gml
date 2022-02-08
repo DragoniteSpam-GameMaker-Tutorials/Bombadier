@@ -21,7 +21,7 @@ if (async_id == global.__async_player_save) {
         show_debug_message("aaaaa! could not load the player save");
         return;
     }
-    self.player_save = new SaveData(json_parse(buffer_read(global.__async_player_save_buffer, buffer_string)));
+    GAME.player_save = new SaveData(json_parse(buffer_peek(global.__async_player_save_buffer, 0, buffer_string)));
     buffer_delete(global.__async_player_save_buffer);
     return;
 }
