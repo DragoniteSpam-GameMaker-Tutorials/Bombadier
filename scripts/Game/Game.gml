@@ -73,13 +73,17 @@ function Game() constructor {
             
             buffer_set_surface(surface_buffer, csurf, 0);
             
+            var adjusted_surface = surface_create(power(2, ceil(log2(surface_get_width(csurf)))), power(2, ceil(log2(surface_get_height(csurf)))));
+            surface_copy(adjusted_surface, 0, 0, csurf);
+            
             if (sprite_exists(self.collision_sprite)) {
                 sprite_delete(self.collision_sprite);
             }
             
-            self.collision_sprite = sprite_create_from_surface(csurf, 0, 0, surface_get_width(csurf), surface_get_height(csurf), false, false, 0, 0);
+            self.collision_sprite = sprite_create_from_surface(adjusted_surface, 0, 0, surface_get_width(adjusted_surface), surface_get_height(adjusted_surface), false, false, 0, 0);
             
             surface_free(csurf);
+            surface_free(adjusted_surface);
         },
     };
     
@@ -1234,14 +1238,10 @@ function Game() constructor {
         
         if (sprite_exists(self.fused.collision_sprite)) {
             texture_set_stage(shader_get_sampler_index(SHADER_WORLD, "samplerCollision"), sprite_get_texture(self.fused.collision_sprite, 0));
-            var tex_size_horizontal = FORCE_SQUARE_TEXTURES ? power(2, ceil(log2(room_width))) : room_width;
-            var tex_size_vertical = FORCE_SQUARE_TEXTURES ? power(2, ceil(log2(room_height))) : room_height;
+            var tex_size_horizontal = sprite_get_width(self.fused.collision_sprite) * GRID_CELL_SIZE;
+            var tex_size_vertical = sprite_get_height(self.fused.collision_sprite) * GRID_CELL_SIZE;
             shader_set_uniform_f(shader_get_uniform(SHADER_WORLD, "samplerCollisionScale"), tex_size_horizontal, tex_size_vertical);
-            if (self.player_tower_spawn) {
-                shader_set_uniform_f(shader_get_uniform(SHADER_WORLD, "samplerCollisionStrength"), 0.5);
-            } else {
-                shader_set_uniform_f(shader_get_uniform(SHADER_WORLD, "samplerCollisionStrength"), 0);
-            }
+            shader_set_uniform_f(shader_get_uniform(SHADER_WORLD, "samplerCollisionStrength"), self.player_tower_spawn ? 0.5 : 0);
         }
         
         vertex_submit(ground, pr_trianglelist, -1);

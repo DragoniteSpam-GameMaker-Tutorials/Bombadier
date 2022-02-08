@@ -37,10 +37,6 @@
 #macro FIELD_WIDTH                      1366
 #macro FIELD_HEIGHT                     768
 
-#macro FORCE_SQUARE_TEXTURES            true
-#macro pi:FORCE_SQUARE_TEXTURES         false
-#macro pi_release:FORCE_SQUARE_TEXTURES false
-
 #macro RELEASE_MODE                     false
 #macro release:RELEASE_MODE             true
 #macro pi_release:RELEASE_MODE          true
