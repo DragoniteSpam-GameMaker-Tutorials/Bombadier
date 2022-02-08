@@ -131,6 +131,27 @@
     },
 
 
+    "@TOWER_SUMMARY": {
+        "English": "%0 (Lv. %1)\nShots: %2\nDamange dealt: %3"
+    },
+    "@TOWER_SUMMARY_GLASS": {
+        "English": "%0 (Lv. %1)\nFocus duration: %2\nDamange dealt: %3"
+    },
+    "@TOWER_SUMMARY_SPRAY": {
+        "English": "%0 (Lv. %1)\nClouds spawned: %2\nVictims: %3\nDamange dealt: %4"
+    },
+    "@TOWER_SUMMARY_PAPER": {
+        "English": "%0 (Lv. %1)\nPapers dispensed: %2\nVictims: %3"
+    },
+    "@TOWER_SUMMARY_PAPER_ADVANCED": {
+        "English": "%0 (Lv. %1)\nPapers dispensed: %2\nVictims: %3\nImmobilizations: %4"
+    },
+
+
+    
+    "@TOWER_TOOLTIP": {
+        "English": "%0\n\n%1"
+    },
 
     
     "Pebble Shooter ($%0)": {
