@@ -1,0 +1,333 @@
+{
+    "You win!" : {
+        "English": "You win!"
+    },
+    "You lose!" : {
+        "English": "You lose!"
+    },
+    "Retry" : {
+        "English": "Retry"
+    },
+    "Back to Title" : {
+        "English": "Back to Title"
+    },
+    "Next Level" : {
+        "English": "Next Level"
+    },
+    "Would you like to quit the game?" : {
+        "English": "Would you like to quit the game?"
+    },
+    "Quit to Desktop" : {
+        "English": "Quit to Desktop"
+    },
+    "Quit to Title" : {
+        "English": "Quit to Title"
+    },
+    "Yes" : {
+        "English": "Yes"
+    },
+    "No" : {
+        "English": "No"
+    },
+
+
+
+    "English" : {
+        "English": "English",
+        "English (Pirate)": "English"
+    },
+    "English (Pirate)" : {
+        "English": "English (Pirate)",
+        "English (Pirate)": "English (Pirate)"
+    },
+
+    
+    "Settings" : {
+        "English": "Settings"
+    },
+    "-" : {
+        "English": "-",
+        "English (Pirate)": "-"
+    },
+    "+" : {
+        "English": "+",
+        "English (Pirate)": "+"
+    },
+    "%0 x %1" : {
+        "English": "%0 x %1"
+    },
+    "FPS: %0" : {
+        "English": "FPS: %0"
+    },
+    "Scale: %0%" : {
+        "English": "Scale: %0%"
+    },
+    "Fullscreen: On" : {
+        "English": "Fullscreen: On"
+    },
+    "Fullscreen: Off" : {
+        "English": "Fullscreen: Off"
+    },
+    "Particle Density: %0%" : {
+        "English": "Particle Density: %0%"
+    },
+    "Volume: %0%" : {
+        "English": "Volume: %0%"
+    },
+    "Language: %0" : {
+        "English": "Language: %0",
+        "English (Pirate)": "Language: %0"
+    },
+    "Back": {
+        "English": "Back"
+    },
+
+
+
+
+    
+    "Pause Game": {
+        "English": "Pause Game"
+    },
+    "Resume": {
+        "English": "Resume"
+    },
+    "Restart": {
+        "English": "Restart"
+    },
+    "Quit Game": {
+        "English": "Quit Game"
+    },
+
+
+
+    
+    "@GAME_SUMMARY": {
+        "English": "%0 to next wave\nMoney: %1\nHealth: %2\nWave: %3"
+    },
+    "Next Wave": {
+        "English": "Next Wave"
+    },
+    "||": {
+        "English": "||"
+    },
+    "1x": {
+        "English": "1x"
+    },
+    "2x": {
+        "English": "2x"
+    },
+
+
+    
+    "Upgrade ($%0)": {
+        "English": "Upgrade ($%0)"
+    },
+    "(Max Level)": {
+        "English": "(Max Level)"
+    },
+    "Sell ($%0)": {
+        "English": "Sell ($%0)"
+    },
+
+
+
+    
+    "Pebble Shooter ($%0)": {
+        "English": "Pebble Shooter ($%0)"
+    },
+    "Fire Blaster ($%0)": {
+        "English": "Fire Blaster ($%0)"
+    },
+    "Magnifying Glass ($%0)": {
+        "English": "Magnifying Glass ($%0)"
+    },
+    "Bug Spray ($%0)": {
+        "English": "Bug Spray ($%0)"
+    },
+    "Fly Paper Dispenser ($%0)": {
+        "English": "Fly Paper Dispenser ($%0)"
+    },
+    "Bird Nest ($%0)": {
+        "English": "Bird Nest ($%0)"
+    },
+
+
+
+
+
+    
+    "Pebble Shooter": {
+        "English": "Pebble Shooter"
+    },
+    "A basic pebble-shooting\ntower!": {
+        "English": "A basic pebble-shooting\ntower!"
+    },
+    "Pebble shooter damage\nincreased!": {
+        "English": "Pebble shooter damage\nincreased!"
+    },
+    "Shoots twice as fast!": {
+        "English": "Shoots twice as fast!"
+    },
+    "Fire Blaster": {
+        "English": "Fire Blaster"
+    },
+    "Kill foes with fire!": {
+        "English": "Kill foes with fire!"
+    },
+    "Shoots fire faster!": {
+        "English": "Shoots fire faster!"
+    },
+    "Burn effect lasts longer!": {
+        "English": "Burn effect lasts longer!"
+    },
+    "Magnifying Glass": {
+        "English": "Magnifying Glass"
+    },
+    "Burn foes with the power\nof the sun!": {
+        "English": "Burn foes with the power\nof the sun!"
+    },
+    "Increased damage and\nattack radius!": {
+        "English": "Increased damage and\nattack radius!"
+    },
+    "Does yet more damage\nand burns foes for\ngood measure!": {
+        "English": "Does yet more damage\nand burns foes for\ngood measure!"
+    },
+    "Bug Spray": {
+        "English": "Bug Spray"
+    },
+    "Spray the track with bug\nrepellent!": {
+        "English": "Spray the track with bug\nrepellent!"
+    },
+    "Clouds last longer and\naffect more foes!": {
+        "English": "Clouds last longer and\naffect more foes!"
+    },
+    "Spray much faster!": {
+        "English": "Spray much faster!"
+    },
+    "Fly Paper Dispenser": {
+        "English": "Fly Paper Dispenser"
+    },
+    "Slow down the incoming\nfoes with sticky paper!": {
+        "English": "Slow down the incoming\nfoes with sticky paper!"
+    },
+    "Duration and magnitude of\nslow increased!": {
+        "English": "Duration and magnitude of\nslow increased!"
+    },
+    "Fly paper momentarily\nimmobilizes anything\nthat walks over it!": {
+        "English": "Fly paper momentarily\nimmobilizes anything\nthat walks over it!"
+    },
+    "Bird Nest": {
+        "English": "Bird Nest"
+    },
+    "Call on local birds to snack\non the foes!": {
+        "English": "Call on local birds to snack\non the foes!"
+    },
+    "Birds do more damage!": {
+        "English": "Birds do more damage!"
+    },
+    "Summon an fourth bird!": {
+        "English": "Summon an fourth bird!"
+    },
+
+
+
+    
+    "1. The Campsite": {
+        "English": "1. The Campsite"
+    },
+    "2. The Woods": {
+        "English": "2. The Woods"
+    },
+    "3. The Farm": {
+        "English": "3. The Farm"
+    },
+    "4. The Canyon": {
+        "English": "4. The Canyon"
+    },
+    "5. The\nFlower Fields": {
+        "English": "5. The\nFlower Fields"
+    },
+    "6. The Graveyard": {
+        "English": "6. The Graveyard"
+    },
+    "7. The Beach": {
+        "English": "7. The Beach"
+    },
+    "8. The Pirate Cove": {
+        "English": "8. The Pirate Cove"
+    },
+    "9. The Buttes": {
+        "English": "9. The Buttes"
+    },
+    "10. The Outskirts": {
+        "English": "10. The Outskirts"
+    },
+    "11. The City": {
+        "English": "11. The City"
+    },
+    "12. The Castle": {
+        "English": "12. The Castle"
+    },
+
+
+
+    "How To Play": {
+        "English": "How To Play"
+    },
+    "@HOWTOPLAY": {
+        "English": "Build towers to stop the ever-advancing wave of insects!\nPan around the map with WASD or with the middle mouse button!\n\nBuild and upgrade towers along the track!\nClick on a tower to view its stats or upgrade it!\nSend in waves early to get bonus money!\nIf too many foes make it to the end of the track,\nit's game over!\n\nEscape pauses the game!\nIf the game performs poorly, try turning down some graphical\noptions in the Settings menu!"
+    },
+
+
+
+
+
+    "Bombadier: Credits": {
+        "English": "Bombadier: Credits"
+    },
+    "Made by Michael, who likes wizards and dragons and making games": {
+        "English": "Made by Michael, who likes wizards and dragons and making games"
+    },
+    "Many assets from kenney.nl": {
+        "English": "Many assets from kenney.nl"
+    },
+    "Music by RyanAvx": {
+        "English": "Music by RyanAvx"
+    },
+    "Some audio from Sonniss": {
+        "English": "Some audio from Sonniss"
+    },
+    "spart by TheSnidr": {
+        "English": "spart by TheSnidr"
+    },
+    "Special thanks to Michael's sister": {
+        "English": "Special thanks to Michael's sister"
+    },
+    "@PATRONS": {
+        "English": "Thank you to my Patreon supporters!\n\nAugustín Molina Uasuf, bryin lyin, Catherine Cruickshank, Ciara\nElizabeth, Connor, David A. Key, Death, Edward Holt, Emilie Coyo,\nGilly, gizmo199, Gunnar Clovis, HaloFactory, Jason, Johnny Serup,\nJonah Gurnsey, Jonathon Calsolaro, IndiePunch, Karlstens, Peardox,\nPerpetua, Posho, Robert Tester, Shortbread, Snidre Larsen,\nsquarecr0w Stepen Loney, Tusk, Zennith"
+    },
+
+
+    
+    "Would you like to delete\nyour save data?": {
+        "English": "Would you like to delete\nyour save data?"
+    },
+
+
+
+    "Would you like to quit\nthe game?": {
+        "English": "Would you like to quit\nthe game?"
+    },
+
+    
+    "Start": {
+        "English": "Start"
+    },
+    "Delete Save": {
+        "English": "Delete Save"
+    },
+    "Credits": {
+        "English": "Credits"
+    }
+}

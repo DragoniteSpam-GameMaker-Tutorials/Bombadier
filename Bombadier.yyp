@@ -547,6 +547,7 @@
     {"CopyToMask":-1,"filePath":"datafiles/towers_and_whatnot","resourceVersion":"1.0","name":"tower-glass-glass.vbuff","resourceType":"GMIncludedFile",},
     {"CopyToMask":-1,"filePath":"datafiles/towers_and_whatnot","resourceVersion":"1.0","name":"bullet-bird-down.vbuff","resourceType":"GMIncludedFile",},
     {"CopyToMask":-1,"filePath":"datafiles/towers_and_whatnot","resourceVersion":"1.0","name":"tower-pebble.vbuff","resourceType":"GMIncludedFile",},
+    {"CopyToMask":-1,"filePath":"datafiles","resourceVersion":"1.0","name":"lang.json","resourceType":"GMIncludedFile",},
   ],
   "MetaData": {
     "IDEVersion": "2.3.7.606",
