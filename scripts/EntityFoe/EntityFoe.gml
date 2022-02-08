@@ -192,7 +192,6 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
     static RenderHealthBar = function() {
         var f = max(hp / hp_max, 0.125);
         if (f < 1 || status_poison || status_burn || status_slow) {
-            shader_set(shd_billboard);
             gpu_set_zwriteenable(false);
             
             var transform = matrix_build(position.x, position.y, position.z + 48, 0, 0, 0, 1, 1, 1);
@@ -207,7 +206,6 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
             // if you want to draw something above the health bar, do it here
             
             gpu_set_zwriteenable(true);
-            shader_reset();
             matrix_set(matrix_world, matrix_build_identity());
         }
     };

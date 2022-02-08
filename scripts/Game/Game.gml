@@ -1267,19 +1267,21 @@ function Game() constructor {
             vertex_submit(fused.vbuff, pr_trianglelist, -1);
         }
         
-        for (var i = 0; i < ds_list_size(all_entities); i++) {
-            all_entities[| i].Render();
-        }
-        
-        for (var i = 0; i < ds_list_size(all_foes); i++) {
-            all_foes[| i].RenderHealthBar();
-        }
-        
         if (player_tower_spawn) {
             shader_set_uniform_f(shader_get_uniform(SHADER_WORLD, "canBuildBlend"), self.CanBuild() ? 1 : 0.25);
             player_tower_spawn.Render();
             shader_set_uniform_f(shader_get_uniform(SHADER_WORLD, "canBuildBlend"), 1);
         }
+        
+        for (var i = 0; i < ds_list_size(all_entities); i++) {
+            all_entities[| i].Render();
+        }
+        
+        shader_set(shd_billboard);
+        for (var i = 0; i < ds_list_size(all_foes); i++) {
+            all_foes[| i].RenderHealthBar();
+        }
+        shader_reset();
         
         if (gameplay_mode == GameModes.EDITOR) {
             // Draw a debug line so you can see where the bounds of the world is
