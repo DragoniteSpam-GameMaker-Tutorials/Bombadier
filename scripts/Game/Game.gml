@@ -1165,7 +1165,7 @@ function Game() constructor {
     };
     
     LoadMapAsyncHandle = function() {
-        var json_string = buffer_read(global.__async_map_main_buffer, buffer_text);
+        var json_string = buffer_peek(global.__async_map_main_buffer, 0, buffer_text);
         var load_json = json_parse(json_string);
         
         var ww = FIELD_WIDTH div GRID_CELL_SIZE;

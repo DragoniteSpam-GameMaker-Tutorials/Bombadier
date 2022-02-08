@@ -68,8 +68,8 @@ if (async_id == global.__async_map_collision) {
     }
     
     if (buffer_exists(GAME.fused.collision)) buffer_delete(GAME.fused.collision);
-    GAME.fused.collision = global.__async_map_main_buffer;
-    fused.GenerateCollisionSprite();
+    GAME.fused.collision = global.__async_map_collision_buffer;
+    GAME.fused.GenerateCollisionSprite();
 }
         
 if (async_id == global.__async_map_ground) {
