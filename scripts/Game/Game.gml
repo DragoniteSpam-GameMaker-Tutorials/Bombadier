@@ -301,8 +301,8 @@ function Game() constructor {
     self.languages = ["English", "English (Pirate)"];
     self.language_index = 0;
     
-    global.__async_laynguage_buffer = buffer_create(1, buffer_grow, 1);
-    global.__async_language = buffer_load_async(global.__async_laynguage_buffer, LANGUAGE_FILE_NAME, 0, -1);
+    global.__async_language_buffer = buffer_create(1, buffer_grow, 1);
+    global.__async_language = buffer_load_async(global.__async_language_buffer, LANGUAGE_FILE_NAME, 0, -1);
     
     GetLanguageName = function(index = self.language_index) {
         return self.languages[index];
@@ -311,7 +311,7 @@ function Game() constructor {
     #macro L GAME.Localize
     Localize = function(text, args) {
         var lang = global.__async_language[$ self.languages[self.language_index]];
-        if (!is_struct(lang)) return;
+        if (!is_struct(lang)) return "!" + text + "!";
         
         var translation = lang[$ text] ?? "!" + text + "!";
         for (var i = 0; i < array_length(args); i++) {
