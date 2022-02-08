@@ -90,6 +90,6 @@ if (async_id == global.__async_language) {
         show_debug_message("aaaaa! could not load the language data");
         return;
     }
-    global.__async_language = json_decode(buffer_peek(global.__async_language_buffer, 0, buffer_text));
+    global.__async_language = json_parse(buffer_peek(global.__async_language_buffer, 0, buffer_text));
     return;
 }
