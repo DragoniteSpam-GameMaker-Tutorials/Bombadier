@@ -6,22 +6,21 @@ OnClick = function() {
 
 Update = function() {
     var tower = GAME.selected_entity;
-    enabled = false;
-    text = "Upgrade";
+    self.text = "Upgrade ($%0)";
     if (tower != undefined) {
         var upgrade_status = tower.CanBeUpgraded();
         switch (upgrade_status) {
             case ReasonsWhyYouCantUpgradeATower.YES_YOU_CAN:
-                enabled = true;
-                text = "Upgrade ($" + string(tower.class.cost[tower.level]) + ")";
+                self.text_args = [string(tower.class.cost[tower.level])];
+                self.enabled = true;
                 break;
             case ReasonsWhyYouCantUpgradeATower.MAX_LEVEL:
-                enabled = false;
-                text = "(Max Level)";
+                self.enabled = false;
+                self.text = "(Max Level)";
                 break;
             case ReasonsWhyYouCantUpgradeATower.NOT_ENOUGH_MONEY:
-                enabled = false;
-                text = "Upgrade ($" + string(tower.class.cost[tower.level]) + ")";
+                self.text_args = [string(tower.class.cost[tower.level])];
+                self.enabled = false;
                 break;
         }
     }
@@ -33,8 +32,8 @@ OnHover = function() {
         var upgrade_status = tower.CanBeUpgraded();
         if (upgrade_status != ReasonsWhyYouCantUpgradeATower.MAX_LEVEL) {
             GAME.show_tooltip_tower = true;
-            inst_tooltip_tower.text = tower.class.name + "\n\n" +
-                tower.class.descriptions[tower.level];
+            inst_tooltip_tower.text = "@TOWER_TOOLTIP";
+            inst_tooltip_tower.text_args = [tower.class.name, tower.class.descriptions[tower.level]];
         }
     }
 };

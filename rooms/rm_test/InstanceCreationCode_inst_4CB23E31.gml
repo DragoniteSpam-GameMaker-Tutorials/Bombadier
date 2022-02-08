@@ -1,3 +1,3 @@
-GetText = function() {
-    self.text = "Language: " + GAME.languages[GAME.language_index];
+self.GetText = function() {
+    self.text_args = [GAME.languages[GAME.language_index]];
 };

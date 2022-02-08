@@ -1,3 +1,3 @@
 GetText = function() {
-    self.text = "Particle Density: " + string(GAME.particle_density * 100) + "%";
+    self.text_args = [string(GAME.particle_density * 100)];
 };

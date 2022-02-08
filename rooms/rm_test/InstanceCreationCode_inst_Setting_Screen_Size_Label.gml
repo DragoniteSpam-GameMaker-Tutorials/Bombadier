@@ -1,3 +1,3 @@
 GetText = function() {
-    self.text = string(window_get_width()) + " x " + string(window_get_height());
+    self.text_args = [string(window_get_width()), string(window_get_height())];
 };

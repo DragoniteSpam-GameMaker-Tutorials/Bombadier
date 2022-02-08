@@ -1,6 +1,8 @@
 GetText = function() {
     var tower = GAME.selected_entity;
     if (tower != undefined) {
-        text = tower.toString();
+        var summary = tower.GetSummary();
+        self.text = summary.base;
+        self.text_args = summary.args;
     }
 };

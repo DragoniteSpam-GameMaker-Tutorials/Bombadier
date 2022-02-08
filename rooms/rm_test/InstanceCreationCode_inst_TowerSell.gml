@@ -8,9 +8,8 @@ OnClick = function() {
 Update = function() {
     var tower = GAME.selected_entity;
     enabled = false;
-    text = "Sell";
     if (tower != undefined) {
         enabled = true;
-        text = "Sell ($" + string(tower.GetSellValue()) + ")";
+        text_args = [string(tower.GetSellValue())];
     }
 };

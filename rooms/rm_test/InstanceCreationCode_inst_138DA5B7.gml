@@ -9,9 +9,5 @@ GetText = function() {
     } else {
         var wave_text = string(GAME.wave_total - ds_queue_size(GAME.all_waves)) + "/" + string(GAME.wave_total);
     }
-    text = wave_time + " to next wave\n" +
-        "Money: " + string(GAME.player_money) + "\n" +
-        "Health: " + string(GAME.player_health) + "\n" +
-        "Wave " + wave_text;
-        
+    self.text_args = [wave_time, string(GAME.player_money), string(GAME.player_health), wave_text];
 };

@@ -1,3 +1,3 @@
 GetText = function() {
-    self.text = "Volume: " + string(GAME.volume_master) + "%";
+    self.text_args = [string(GAME.volume_master)];
 };

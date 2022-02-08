@@ -4,11 +4,11 @@ OnClick = function() {
 
 Update = function() {
     var tower = GAME.tower_fire;
-    text = tower.name + " ($" + string(tower.cost[0]) + ")";
+    self.text_args = [string(tower.cost[0])];
 };
 
 OnHover = function() {
     GAME.show_tooltip_tower = true;
-    inst_tooltip_tower.text = GAME.tower_fire.name + "\n\n" +
-        GAME.tower_fire.descriptions[0];
+    inst_tooltip_tower.text = "@TOWER_TOOLTIP";
+    inst_tooltip_tower.text_args = [GAME.tower_fire.name, GAME.tower_fire.descriptions[0]];
 };

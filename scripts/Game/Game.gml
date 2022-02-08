@@ -156,7 +156,7 @@ function Game() constructor {
                                 "Shoots twice as fast!"
                             ],
                         );
-    tower_fire =        new TowerData("Fire Shooter",
+    tower_fire =        new TowerData("Fire Blaster",
                         /* rate  */ [0.5, 0.75, 0.75],
                         /* range */ [3 * 32, 3.5 * 32, 3.5 * 32],
                         /* dmg   */ [1, 1, 1],

@@ -195,10 +195,16 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
         YES_YOU_CAN,
     }
     
-    static toString = function() {
-        return self.name + " (Lv. " + string(self.level) + ")\n" +
-            "Shots: " + string(self.stats.shots) + "\n" +
-            "Damange dealt: " + string_format(self.stats.damage, 1, 1);
+    static GetSummary = function() {
+        return {
+            base: "@TOWER_SUMMARY",
+            args: [
+                self.name,
+                string(self.level),
+                string(self.stats.shots),
+                string_format(self.stats.damage, 1, 1)
+            ]
+        };
     };
     
     static RenderRadius = function() {
@@ -283,6 +289,18 @@ function EntityTowerGlass(x, y, z, class) : EntityTower(x, y, z, class) construc
         matrix_set(matrix_world, matrix_build_identity());
     };
     
+    static GetSummary = function() {
+        return {
+            base: "@TOWER_SUMMARY_GLASS",
+            args: [
+                self.name,
+                string(self.level),
+                string_format(self.stats.duration, 1, 1),
+                string_format(self.stats.damage, 1, 1)
+            ]
+        };
+    };
+    
     static toString = function() {
         return self.name + " (Lv. " + string(self.level) + ")\n" +
             "Focus duration: " + string_format(self.stats.duration, 1, 1) + " s\n" +
@@ -328,11 +346,17 @@ function EntityTowerSpray(x, y, z, class) : EntityTower(x, y, z, class) construc
         }
     };
     
-    static toString = function() {
-        return self.name + " (Lv. " + string(self.level) + ")\n" +
-            "Clouds spawned: " + string(self.stats.clouds) + "\n" +
-            "Victims: " + string(self.stats.hits) + "\n" +
-            "Damange dealt: " + string_format(self.stats.damage, 1, 1);
+    static GetSummary = function() {
+        return {
+            base: "@TOWER_SUMMARY_SPRAY",
+            args: [
+                self.name,
+                string(self.level),
+                string(self.stats.clouds),
+                string(self.stats.hits),
+                string_format(self.stats.damage, 1, 1)
+            ]
+        };
     };
 }
 
@@ -407,16 +431,28 @@ function EntityTowerFlyPaper(x, y, z, class) : EntityTower(x, y, z, class) const
         }
     };
     
-    static toString = function() {
-        var value = self.name + " (Lv. " + string(self.level) + ")\n" +
-            "Papers dispensed: " + string(self.stats.papers) + "\n" +
-            "Victims: " + string(self.stats.hits);
-        
+    static GetSummary = function() {
         if (self.level >= 3) {
-            value += "\n" +
-                "Immobilizations: " + string(self.stats.stuns);
+            return {
+                base: "@TOWER_SUMMARY_PAPER_ADVANCED",
+                args: [
+                    self.name,
+                    string(self.level),
+                    string(self.stats.papers),
+                    string(self.stats.hits),
+                    string(self.stats.stuns)
+                ]
+            };
+        } else {
+            return {
+                base: "@TOWER_SUMMARY_PAPER",
+                args: [
+                    self.name,
+                    string(self.level),
+                    string(self.stats.papers),
+                    string(self.stats.hits),
+                ]
+            };
         }
-        
-        return value;
     };
 }
