@@ -31,7 +31,7 @@ if (async_id == global.__async_player_settings) {
         show_debug_message("aaaaa! could not load the settings data");
         return;
     }
-    GAME.LoadSettingsAsyncHandle();    
+    GAME.LoadSettingsAsyncHandle();
     return;
 }
 
@@ -59,6 +59,7 @@ if (async_id == global.__async_map_fused) {
         buffer_delete(GAME.fused.raw);
         GAME.fused.raw = undefined;
     }
+    return;
 }
         
 if (async_id == global.__async_map_collision) {
@@ -70,6 +71,7 @@ if (async_id == global.__async_map_collision) {
     if (buffer_exists(GAME.fused.collision)) buffer_delete(GAME.fused.collision);
     GAME.fused.collision = global.__async_map_collision_buffer;
     GAME.fused.GenerateCollisionSprite();
+    return;
 }
         
 if (async_id == global.__async_map_ground) {
@@ -80,4 +82,5 @@ if (async_id == global.__async_map_ground) {
     vertex_delete_buffer(GAME.ground);
     GAME.ground = vertex_create_buffer_from_buffer(global.__async_map_ground_buffer, global.format);
     buffer_delete(global.__async_map_ground_buffer);
+    return;
 }
