@@ -91,6 +91,7 @@
   ],
   "isDnDProject": false,
   "isEcma": false,
+  "tutorialPath": "",
   "configs": {
     "name": "Default",
     "children": [
@@ -549,7 +550,7 @@
     {"CopyToMask":-1,"filePath":"datafiles/towers_and_whatnot","resourceVersion":"1.0","name":"tower-pebble.vbuff","resourceType":"GMIncludedFile",},
   ],
   "MetaData": {
-    "IDEVersion": "2022.1.0.465",
+    "IDEVersion": "2.3.7.606",
   },
   "resourceVersion": "1.4",
   "name": "Bombadier",
