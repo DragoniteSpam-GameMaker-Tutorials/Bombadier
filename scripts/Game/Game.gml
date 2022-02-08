@@ -310,10 +310,10 @@ function Game() constructor {
     
     #macro L GAME.Localize
     Localize = function(text, args) {
-        var lang = global.__async_language[$ self.languages[self.language_index]];
-        if (!is_struct(lang)) return "!" + text + "!";
+        var base = global.__async_language[$ text];
+        if (!is_struct(base)) return "!" + text + "!";
         
-        var translation = lang[$ text] ?? "!" + text + "!";
+        var translation = base[$ self.languages[self.language_index]] ?? "!" + text + "!";
         for (var i = 0; i < array_length(args); i++) {
             translation = string_replace_all(translation, "%" + string(i), args[i]);
         }
