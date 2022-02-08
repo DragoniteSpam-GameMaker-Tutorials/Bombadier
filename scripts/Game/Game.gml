@@ -546,7 +546,7 @@ function Game() constructor {
         var position = camera.GetFloorIntersect();
         
         if (position) {
-            if (player_tower_spawn && player_money >= player_tower_spawn.class.cost[0] && CollisionFree(player_tower_spawn)) {
+            if (self.CanBuild()) {
                 player_money -= player_tower_spawn.class.cost[0];
                 player_tower_spawn.AddToMap();
                 self.selected_entity = player_tower_spawn;
@@ -554,6 +554,10 @@ function Game() constructor {
                 audio_play_sound(se_build, SOUND_PRIORITY_GAMEPLAY_HIGH, false);
             }
         }
+    };
+    
+    CanBuild = function() {
+        return self.player_tower_spawn && self.player_money >= self.player_tower_spawn.class.cost[0] && self.CollisionFree(self.player_tower_spawn);
     };
     
     CollisionFree = function(entity) {
@@ -1235,6 +1239,7 @@ function Game() constructor {
         cluck_set_light_direction(-1, -1, -1);
         cluck_set_light_color(c_white);
         cluck_apply(SHADER_WORLD);
+        shader_set_uniform_f(shader_get_uniform(SHADER_WORLD, "canBuildBlend"), 1);
         
         if (sprite_exists(self.fused.collision_sprite)) {
             texture_set_stage(shader_get_sampler_index(SHADER_WORLD, "samplerCollision"), sprite_get_texture(self.fused.collision_sprite, 0));
@@ -1270,7 +1275,11 @@ function Game() constructor {
             all_foes[| i].RenderHealthBar();
         }
         
-        if (player_tower_spawn) player_tower_spawn.Render();
+        if (player_tower_spawn) {
+            shader_set_uniform_f(shader_get_uniform(SHADER_WORLD, "canBuildBlend"), self.CanBuild() ? 1 : 0.25);
+            player_tower_spawn.Render();
+            shader_set_uniform_f(shader_get_uniform(SHADER_WORLD, "canBuildBlend"), 1);
+        }
         
         if (gameplay_mode == GameModes.EDITOR) {
             // Draw a debug line so you can see where the bounds of the world is
