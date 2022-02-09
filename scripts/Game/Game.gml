@@ -296,8 +296,11 @@ function Game() constructor {
     screen_size_index = 1;
     current_screen_size = { x: room_width, y: room_height };
     
-    frame_rates = [30, 60, 120, 144];
-    frame_rate_index = 1;
+    self.current_bgm = -1;
+    self.bgm_fadeout = [];
+    
+    self.frame_rates = [30, 60, 120, 144];
+    self.frame_rate_index = 1;
     self.languages = ["English", "English (Pirate)"];
     self.language_index = 0;
     
@@ -465,6 +468,7 @@ function Game() constructor {
         self.Initialize();
         self.camera.from = CAMERA_FROM_LEVEL;
         self.camera.to = CAMERA_TO_LEVEL;
+        self.FadeBGM();
     };
     
     GoToNextLevel = function() {
@@ -476,6 +480,18 @@ function Game() constructor {
             self.camera.from = CAMERA_FROM_LEVEL;
             self.camera.to = CAMERA_TO_LEVEL;
         }
+        self.FadeBGM();
+    };
+    
+    PlayBGM = function(sound) {
+        self.current_bgm = audio_play_sound(sound, SOUND_PRIORITY_BGM, true);
+    };
+    
+    FadeBGM = function(time = 1000) {
+        if (self.current_bgm == -1) return;
+        audio_sound_gain(self.current_bgm, 0, time);
+        array_push(self.bgm_fadeout, { sound: self.current_bgm, time: time });
+        self.current_bgm = -1;
     };
     
     GoToTitle = function() {
@@ -486,6 +502,7 @@ function Game() constructor {
         self.current_title_screen = "UI_Title_Screen";
         self.camera.from = CAMERA_FROM_TITLE;
         self.camera.to = CAMERA_TO_TITLE;
+        self.FadeBGM();
     };
     
     self.PauseGame = function() {
@@ -826,6 +843,14 @@ function Game() constructor {
     };
     
     Update = function() {
+        for (var i = array_length(self.bgm_fadeout) - 1; i >= 0; i--) {
+            self.bgm_fadeout[i].time -= DT;
+            if (self.bgm_fadeout[i].time <= -0.1) {
+                audio_stop_sound(self.bgm_fadeout[i].sound);
+                array_delete(self.bgm_fadeout, i, 1);
+            }
+        }
+        
         self.show_tooltip_tower = false;
         if (!RELEASE_MODE && keyboard_check_pressed(vk_tab)) {
             gameplay_mode = (gameplay_mode == GameModes.GAMEPLAY) ? GameModes.EDITOR : GameModes.GAMEPLAY;
