@@ -758,8 +758,8 @@ function Game() constructor {
                 
                 var new_normal = triangle_normal(xx1, yy1, zz1, xx2, yy2, zz2, xx3, yy3, zz3);
                 
-                var triangle_to_camera = dot_product_3d(new_normal[0], new_normal[1], new_normal[2], cam_x, cam_y, cam_z);
-                var triangle_to_ground = dot_product_3d(new_normal[0], new_normal[1], new_normal[2], 0, 0, -1);
+                var triangle_to_camera = dot_product_3d(new_normal.x, new_normal.y, new_normal.z, cam_x, cam_y, cam_z);
+                var triangle_to_ground = dot_product_3d(new_normal.x, new_normal.y, new_normal.z, 0, 0, -1);
                 
                 if (triangle_to_camera < 0.8 && triangle_to_ground < 0.75) {
                     var new_position_1 = matrix_transform_vertex(entity_matrix, xx1, yy1, zz1);
@@ -767,6 +767,7 @@ function Game() constructor {
                     var new_position_3 = matrix_transform_vertex(entity_matrix, xx3, yy3, zz3);
                     var new_normal_2 = matrix_transform_vertex(entity_matrix_normals, nx2, ny2, nz2);
                     var new_normal_3 = matrix_transform_vertex(entity_matrix_normals, nx3, ny3, nz3);
+                    new_normal = [new_normal.x, new_normal.y, new_normal.z];
                     
                     buffer_write(fused_data, buffer_f32, new_position_1[0]);
                     buffer_write(fused_data, buffer_f32, new_position_1[1]);
