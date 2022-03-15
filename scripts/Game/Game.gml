@@ -97,6 +97,7 @@ function Game() constructor {
         global.env_objects[? obj_name] = { buffer: buffer, name: obj_name, id: async_id };
         ds_list_add(global.env_object_list, obj_name);
     }
+    global.env_objects_loaded_count = 0;
     collision_grid = ds_grid_create(10, 10);
     skybox_type = 0;
     show_water = false;
