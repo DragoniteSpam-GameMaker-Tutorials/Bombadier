@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_particle_bubble","path":"sprites/spr_particle_bubble/spr_particle_bubble.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_particle_bubble",
     "tags": [],
     "resourceType": "GMSequence",

@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_particle_main","path":"sprites/spr_particle_main/spr_particle_main.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_particle_main",
     "tags": [],
     "resourceType": "GMSequence",

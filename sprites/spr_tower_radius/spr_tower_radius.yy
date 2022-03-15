@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_tower_radius","path":"sprites/spr_tower_radius/spr_tower_radius.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_tower_radius",
     "tags": [],
     "resourceType": "GMSequence",
