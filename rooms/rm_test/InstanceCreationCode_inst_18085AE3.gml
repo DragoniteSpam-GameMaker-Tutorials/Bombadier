@@ -4,5 +4,5 @@ OnClick = function() {
 };
 
 Update = function() {
-    self.enabled = (GAME.player_save.highest_level >= 8);
+    self.enabled = (GAME.player_save.highest_level >= 8) || !RELEASE_MODE;
 };
