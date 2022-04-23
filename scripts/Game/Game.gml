@@ -302,7 +302,7 @@ function Game() constructor {
     
     self.frame_rates = [30, 60, 120, 144];
     self.frame_rate_index = 1;
-    self.languages = ["English", "English (Pirate)"];
+    self.languages = ["English"/*, "English (Pirate)"*/];
     self.language_index = 0;
     
     global.__async_language_buffer = buffer_create(1, buffer_grow, 1);
