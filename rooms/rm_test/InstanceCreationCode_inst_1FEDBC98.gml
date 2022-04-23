@@ -1,3 +1,3 @@
 GetText = function() {
-    text = "FPS: " +string(fps);
+    self.text_args = [string(fps)];
 };
