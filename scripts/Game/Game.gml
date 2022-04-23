@@ -469,7 +469,6 @@ function Game() constructor {
         self.Initialize();
         self.camera.from = CAMERA_FROM_LEVEL;
         self.camera.to = CAMERA_TO_LEVEL;
-        self.FadeBGM();
     };
     
     GoToNextLevel = function() {
@@ -481,11 +480,11 @@ function Game() constructor {
             self.camera.from = CAMERA_FROM_LEVEL;
             self.camera.to = CAMERA_TO_LEVEL;
         }
-        self.FadeBGM();
     };
     
     PlayBGM = function(sound) {
         self.current_bgm = audio_play_sound(sound, SOUND_PRIORITY_BGM, true);
+        audio_sound_gain(self.current_bgm, 1, 0);
     };
     
     FadeBGM = function(time = 1000) {
@@ -503,7 +502,6 @@ function Game() constructor {
         self.current_title_screen = "UI_Title_Screen";
         self.camera.from = CAMERA_FROM_TITLE;
         self.camera.to = CAMERA_TO_TITLE;
-        self.FadeBGM();
     };
     
     self.PauseGame = function() {
@@ -1213,6 +1211,31 @@ function Game() constructor {
         global.__async_map_collision = buffer_load_async(global.__async_map_collision_buffer, filename_change_ext(filename, ".collision"), 0, -1);
         global.__async_map_ground_buffer = buffer_create(1, buffer_grow, 1);
         global.__async_map_ground = buffer_load_async(global.__async_map_ground_buffer, filename_change_ext(filename, ".ground"), 0, -1);
+        
+        static bgm_table = undefined;
+        
+        if (!bgm_table) {
+            bgm_table = { };
+            bgm_table[$ "maps/title.bug"] = bgm_title;
+            bgm_table[$ "maps/level1.bug"] = bgm_forest;
+            bgm_table[$ "maps/level2.bug"] = bgm_forest;
+            bgm_table[$ "maps/level3.bug"] = bgm_forest;
+            bgm_table[$ "maps/level4.bug"] = bgm_adventure;
+            bgm_table[$ "maps/level5.bug"] = bgm_adventure;
+            bgm_table[$ "maps/level6.bug"] = bgm_adventure;
+            bgm_table[$ "maps/level7.bug"] = bgm_pirates;
+            bgm_table[$ "maps/level8.bug"] = bgm_pirates;
+            bgm_table[$ "maps/level9.bug"] = bgm_pirates;
+            bgm_table[$ "maps/level10.bug"] = bgm_adventure;
+            bgm_table[$ "maps/level11.bug"] = bgm_adventure;
+            bgm_table[$ "maps/level12.bug"] = bgm_adventure;
+        }
+        
+        var new_bgm = bgm_table[$ filename];
+        if (new_bgm != undefined && !audio_is_paused((new_bgm))) {
+            self.FadeBGM();
+            self.PlayBGM(bgm_table[$ filename]);
+        }
     };
     
     LoadMapAsyncHandle = function() {
