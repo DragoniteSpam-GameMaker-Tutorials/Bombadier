@@ -1,6 +1,5 @@
 OnClick = function() {
     GAME.GoToLevel(2);
-    GAME.PlayBGM(bgm_forest);
 };
 
 Update = function() {
