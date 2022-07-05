@@ -4,6 +4,7 @@
     {"id":{"name":"shd_passthrough","path":"shaders/shd_passthrough/shd_passthrough.yy",},"order":5,},
     {"id":{"name":"spart_emitter","path":"scripts/spart_emitter/spart_emitter.yy",},"order":1,},
     {"id":{"name":"spr_thumb_04","path":"sprites/spr_thumb_04/spr_thumb_04.yy",},"order":3,},
+    {"id":{"name":"spr_achievement_lock","path":"sprites/spr_achievement_lock/spr_achievement_lock.yy",},"order":0,},
     {"id":{"name":"spr_thumb_01","path":"sprites/spr_thumb_01/spr_thumb_01.yy",},"order":0,},
     {"id":{"name":"spr_nineslice","path":"sprites/spr_nineslice/spr_nineslice.yy",},"order":3,},
     {"id":{"name":"shd_cluck_fragment","path":"shaders/shd_cluck_fragment/shd_cluck_fragment.yy",},"order":0,},
@@ -142,6 +143,7 @@
     {"folderPath":"folders/Audio/Music.yy","order":2,"resourceVersion":"1.0","name":"Music","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Kestrel.yy","order":426,"resourceVersion":"1.0","name":"Kestrel","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Graphical stuff/Title Screen.yy","order":8,"resourceVersion":"1.0","name":"Title Screen","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/Graphical stuff/Achievement stuff.yy","order":9,"resourceVersion":"1.0","name":"Achievement stuff","tags":[],"resourceType":"GMFolder",},
   ],
   "AudioGroups": [
     {"targets":-1,"resourceVersion":"1.3","name":"audiogroup_default","resourceType":"GMAudioGroup",},
