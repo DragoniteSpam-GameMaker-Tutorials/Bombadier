@@ -8,15 +8,20 @@ function Kestrel(name, description, icon_locked, icon_unlocked, callback, hidden
     
     self.progress = 0;
     self.complete = false;
+    self.system = undefined;
     
     self.Check = function(data = undefined) {
+        var was_complete = self.complete;
         self.complete = self.callback(data);
+        if (was_complete != self.complete && self.system) self.system.callback(self);
         return self.complete;
     };
     
     self.Complete = function() {
+        var was_complete = self.complete;
         self.complete = true;
         self.progress = 1;
+        if (was_complete != self.complete && self.system) self.system.callback(self);
         return self;
     };
     
@@ -55,10 +60,10 @@ function Kestrel(name, description, icon_locked, icon_unlocked, callback, hidden
     };
     
     self.load = function(json) {
-        self.progress = json.progress;
-        self.complete = json.complete;
-        
         try {
+            self.progress = json.progress;
+            self.complete = json.complete;
+            
             var test_progress = power(2, self.progress);
             var test_completion = !!self.complete;
         } catch (e) {
@@ -70,11 +75,13 @@ function Kestrel(name, description, icon_locked, icon_unlocked, callback, hidden
 #macro KestrelSystem global.__kestrel__
 
 KestrelSystem = {
+    callback: function() { },
     _: ds_list_create(),
     
     Add: function(kestrel) {
         if (instanceof(kestrel) != "Kestrel") return;
         ds_list_add(self._, kestrel);
+        kestrel.system = self;
         return kestrel;
     },
     
@@ -98,6 +105,10 @@ KestrelSystem = {
         for (var i = 0, n = ds_list_size(self._); i < n; i++) {
             self._[| i].Reset();
         }
+    },
+    
+    SetUnlockCallback: function(callback) {
+        self.callback = method(self, callback);
     },
     
     Save: function() {
