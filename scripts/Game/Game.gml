@@ -959,8 +959,6 @@ function Game() constructor {
                     }
                 }
             }
-            
-            Achievements.Update();
             #endregion
         } else if (gameplay_mode == GameModes.PAUSED) {
             if (keyboard_check_pressed(vk_escape)) {
@@ -1182,6 +1180,8 @@ function Game() constructor {
             }
             #endregion
         }
+        
+        Achievements.Update();
     };
     
     SaveMap = function() {
@@ -1504,8 +1504,6 @@ function Game() constructor {
             if (self.show_tooltip_tower) {
                 GetGUILayer("UI_Tooltip_Tower").Render();
             }
-            
-            Achievements.Render();
         } else if (gameplay_mode == GameModes.PAUSED) {
             window_set_cursor(cr_default);
             GetGUILayer(current_pause_screen).Render();
@@ -1624,6 +1622,8 @@ function Game() constructor {
                 draw_set_halign(fa_left);
             }
         }
+        
+        Achievements.Render();
     };
     
     Initialize();
