@@ -101,6 +101,14 @@ KestrelSystem = {
         return self._[| clamp(index, 0, ds_list_size(self._) - 1)];
     },
     
+    GetProgress: function() {
+        var complete = 0;
+        for (var i = 0, n = ds_list_size(self._); i < n; i++) {
+            if (self._[| i].complete) complete++;
+        }
+        return complete / ds_list_size(self._);
+    },
+    
     Reset: function() {
         for (var i = 0, n = ds_list_size(self._); i < n; i++) {
             self._[| i].Reset();
