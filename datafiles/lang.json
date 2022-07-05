@@ -350,5 +350,15 @@
     },
     "Credits": {
         "English": "Credits"
-    }
+    },
+	
+	
+	
+    "Achievements": {
+        "English": "Achievements"
+    },
+	
+	"@ACHIEVEMENT_PROGRESS": {
+		"English": "Achievement Progress: %0%"
+	}
 }

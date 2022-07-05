@@ -544,7 +544,7 @@ function Game() constructor {
     };
     
     self.SendInWaveEarly = function() {
-        if (self.self.wave_countdown < WAVE_COUNTDOWN_THRESHOLD) return;
+        if (self.wave_countdown < WAVE_COUNTDOWN_THRESHOLD) return;
         if (!ds_queue_empty(self.all_waves)) {
             if (self.wave_countdown > 0) {
                 self.player_money += ceil(self.wave_countdown / 2);
@@ -587,7 +587,7 @@ function Game() constructor {
         if (!self.player_has_taken_damage) {
             KestrelSystem.Update(Achievements.perfect_game);
         }
-        if (!self.player_has_upgarded_tower) {
+        if (!self.player_has_upgraded_tower) {
             KestrelSystem.Update(Achievements.rookie_squad);
         }
         if (!self.player_wave_timer_expired) {
