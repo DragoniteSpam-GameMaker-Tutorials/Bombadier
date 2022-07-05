@@ -9,8 +9,8 @@ function Kestrel(name, description, icon_locked, icon_unlocked, callback, hidden
     self.progress = 0;
     self.complete = false;
     
-    self.Check = function() {
-        self.complete = self.callback();
+    self.Check = function(data = undefined) {
+        self.complete = self.callback(data);
         return self.complete;
     };
     
@@ -78,10 +78,10 @@ KestrelSystem = {
         return kestrel;
     },
     
-    Update: function() {
+    Update: function(data = undefined) {
         for (var i = 0, n = ds_list_size(self._); i < n; i++) {
             if (!self._[| i].complete) {
-                self._[| i].Check();
+                self._[| i].Check(data);
             }
         }
     },
