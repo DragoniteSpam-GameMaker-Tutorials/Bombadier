@@ -433,19 +433,23 @@ function Game() constructor {
             }
         }
         
-        game_speed = 1;
+        self.game_speed = 1;
         
-        player_money = 75;
-        player_health = 10;
+        self.player_money = 75;
+        self.player_max_health = 10;
+        self.player_health = self.player_max_health;
+        self.player_has_taken_damage = false;
+        self.player_has_upgraded_tower = false;
+        self.player_wave_timer_expired = false;
         
-        player_cursor_over_ui = false;
-        player_tower_spawn = undefined;
+        self.player_cursor_over_ui = false;
+        self.player_tower_spawn = undefined;
         
-        selected_entity = undefined;
-        selected_entity_hover = undefined;
-        editor_hover_entity = undefined;
-        editor_mode = EditorModes.MAIN;
-        editor_model_index = 0;
+        self.selected_entity = undefined;
+        self.selected_entity_hover = undefined;
+        self.editor_hover_entity = undefined;
+        self.editor_mode = EditorModes.MAIN;
+        self.editor_model_index = 0;
         
         enum EditorModes {
             MAIN,
@@ -539,21 +543,22 @@ function Game() constructor {
         }
     };
     
-    SendInWaveEarly = function() {
-        if (self.wave_countdown < WAVE_COUNTDOWN_THRESHOLD) return;
-        if (!ds_queue_empty(all_waves)) {
-            if (wave_countdown > 0) {
-                player_money += ceil(wave_countdown / 2);
+    self.SendInWaveEarly = function() {
+        if (self.self.wave_countdown < WAVE_COUNTDOWN_THRESHOLD) return;
+        if (!ds_queue_empty(self.all_waves)) {
+            if (self.wave_countdown > 0) {
+                self.player_money += ceil(self.wave_countdown / 2);
             } else {
                 //player_money += WAVE_COUNTDOWN;
             }
         }
-        SendInWave();
+        self.SendInWave();
     };
     
-    PlayerDamage = function(amount) {
-        player_health -= max(amount, 0);
-        if (player_health <= 0) {
+    self.PlayerDamage = function(amount) {
+        self.player_health -= max(amount, 0);
+        self.player_has_taken_damage = true;
+        if (self.player_health <= 0) {
             self.gameplay_mode = GameModes.GAME_OVER;
             self.current_game_over_screen = "UI_Game_Over_Lose";
             self.CallEntityGameOver();
@@ -911,6 +916,7 @@ function Game() constructor {
                         wave_countdown -= DT;
                         if (wave_countdown <= 0) {
                             SendInWave();
+                            self.player_wave_timer_expired = true;
                         }
                     }
                     
