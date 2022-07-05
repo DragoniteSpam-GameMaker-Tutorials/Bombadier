@@ -36,12 +36,18 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
         self.status_burn = duration;
         self.whodunnit_burn = whodunnit;
         KestrelSystem.Update(Achievements.foul_play);
+        if (self.status_slow  > 0 && self.status_poison > 0 && self.status_burn > 0) {
+            KestrelSystem.Update(Achievements.triple_threat);
+        }
     };
     
     static Poison = function(whodunnit, duration = POISON_DURATION) {
         self.status_poison = duration;
         self.whodunnit_poison = whodunnit;
         KestrelSystem.Update(Achievements.foul_play);
+        if (self.status_slow  > 0 && self.status_poison > 0 && self.status_burn > 0) {
+            KestrelSystem.Update(Achievements.triple_threat);
+        }
     };
     
     static Slow = function(whodunnit, duration = BURN_DURATION, factor = SLOW_FACTOR) {
@@ -49,6 +55,9 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
         self.SetSpeedMod(factor);
         self.whodunnit_slow = whodunnit;
         KestrelSystem.Update(Achievements.foul_play);
+        if (self.status_slow  > 0 && self.status_poison > 0 && self.status_burn > 0) {
+            KestrelSystem.Update(Achievements.triple_threat);
+        }
     };
     
     static Immobilize = function(whodunnit, duration = IMMOBILIZE_DURATION) {
@@ -56,6 +65,7 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
         self.status_immobilize = duration;
         self.has_been_immobilized = true;
         self.whodunnit_immobilize = whodunnit;
+        // this status does not count towards "foul play" or "triple threat"
     };
     
     static SetDefMod = function(value) {
