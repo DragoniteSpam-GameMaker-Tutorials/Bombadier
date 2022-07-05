@@ -2,6 +2,7 @@
   "resources": [
     {"id":{"name":"se_ambient","path":"sounds/se_ambient/se_ambient.yy",},"order":0,},
     {"id":{"name":"shd_passthrough","path":"shaders/shd_passthrough/shd_passthrough.yy",},"order":5,},
+    {"id":{"name":"spr_achievement_generic","path":"sprites/spr_achievement_generic/spr_achievement_generic.yy",},"order":1,},
     {"id":{"name":"spart_emitter","path":"scripts/spart_emitter/spart_emitter.yy",},"order":1,},
     {"id":{"name":"spr_thumb_04","path":"sprites/spr_thumb_04/spr_thumb_04.yy",},"order":3,},
     {"id":{"name":"spr_achievement_lock","path":"sprites/spr_achievement_lock/spr_achievement_lock.yy",},"order":0,},
