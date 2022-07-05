@@ -1,4 +1,4 @@
-function Kestrel(name, description, icon_locked, icon_unlocked, callback, hidden = false) {
+function Kestrel(name, description, icon_locked, icon_unlocked, callback, hidden = false) constructor {
     self.name = name;
     self.description = description;
     self.icon_locked = icon_locked;
@@ -17,10 +17,12 @@ function Kestrel(name, description, icon_locked, icon_unlocked, callback, hidden
     self.Complete = function() {
         self.complete = true;
         self.progress = 1;
+        return self;
     };
     
     self.Reset = function() {
         self.complete = false;
+        return self;
     };
     
     self.GetName = function() {
