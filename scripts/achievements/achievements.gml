@@ -23,7 +23,14 @@ Achievements = {
         self.rookie_squad = KestrelSystem.Add(new Kestrel("Rookie Squad", "Win a map without upgrading any towers", spr_achievement_lock, spr_achievement_generic, achievement_validate, true));
         
         KestrelSystem.SetUnlockCallback(function(kestrel) {
-            array_push(Achievements.badge_queue, { kestrel: kestrel, t: ACHIEVEMENT_BADGE_DURATION });
+            array_push(Achievements.badge_queue, {
+                kestrel: kestrel,
+                t: ACHIEVEMENT_BADGE_DURATION,
+                x: -400,
+                y: (array_length(Achievements.badge_queue) > 0) ? (Achievements.badge_queue[array_length(Achievements.badge_queue) - 1].y - 96) : window_get_height() - 96,
+                w: 400,
+                h: 96,
+            });
         });
     },
     
@@ -35,19 +42,26 @@ Achievements = {
     
     Update: function() {
         for (var i = array_length(self.badge_queue) - 1; i >= 0; i--) {
-            self.badge_queue[i].t -= DT;
-            if (self.badge_queue[i].t <= 0) {
+            var badge = self.badge_queue[i];
+            badge.t -= DT;
+            badge.x = min(badge.x + badge.w * DT / ACHIEVEMENT_BADGE_TRANSITION_TIME, 0);
+            if (badge.y > window_get_height()) {
                 array_delete(self.badge_queue, i, 1);
+            } else if (badge.t <= ACHIEVEMENT_BADGE_TRANSITION_TIME) {
+                if (i == 0) {
+                    badge.y += badge.h * DT / ACHIEVEMENT_BADGE_TRANSITION_TIME;
+                }
             }
+        }
+        for (var i = 1, n = array_length(self.badge_queue); i < n; i++) {
+            self.badge_queue[i].y = min(window_get_width() - 96, self.badge_queue[i - 1].y - 96);
         }
     },
     
     Render: function() {
+        var spr = spr_block_raycast;
         var ww = 400;
         var hh = 96;
-        var xx = 0;
-        var yy = window_get_height() - hh;
-        var spr = spr_block_raycast;
         var icon_xx = 16;
         var icon_yy = 16;
         var header_xx = 240;
@@ -61,12 +75,13 @@ Achievements = {
         draw_set_valign(fa_center);
         static surf = -1;
         for (var i = 0, n = array_length(self.badge_queue); i < n; i++) {
-            var kestrel = self.badge_queue[i].kestrel;
-            surf = surface_validate(surf, ww, hh);
+            var badge = self.badge_queue[i];
+            var kestrel = badge.kestrel;
+            surf = surface_validate(surf, badge.w, badge.h);
             surface_set_target(surf);
             draw_clear_alpha(c_black, 0);
             gpu_set_blendmode(bm_add);
-            draw_sprite_stretched(spr, 0, 0, 0, ww, hh);
+            draw_sprite_stretched(spr, 0, 0, 0, badge.w, badge.h);
             gpu_set_blendmode(bm_normal);
             if (sprite_exists(kestrel.icon_unlocked)) {
                 draw_sprite(kestrel.icon_unlocked, 0, icon_xx, icon_yy);
@@ -75,9 +90,7 @@ Achievements = {
             draw_text_colour(name_xx, name_yy, L(kestrel.name), c_black, c_black, c_black, c_black, 1);
             surface_reset_target();
             
-            draw_surface_ext(surf, xx, yy, 1, 1, 0, c_white, min(1, self.badge_queue[i].t));
-            
-            yy -= hh;
+            draw_surface(surf, badge.x, badge.y);
         }
         draw_set_halign(halign);
         draw_set_valign(valign);
@@ -91,4 +104,5 @@ Achievements = {
 }
 
 #macro ACHIEVEMENT_BUG_STOMPER_THRESHOLD    1000
-#macro ACHIEVEMENT_BADGE_DURATION           5
+#macro ACHIEVEMENT_BADGE_DURATION           6
+#macro ACHIEVEMENT_BADGE_TRANSITION_TIME    0.4
