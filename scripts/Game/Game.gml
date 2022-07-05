@@ -574,6 +574,25 @@ function Game() constructor {
         self.gameplay_mode = GameModes.GAME_OVER;
         self.current_game_over_screen = "UI_Game_Over_Win";
         self.player_save.highest_level = self.current_level_index;
+        KestrelSystem.Update(Achievements.first_victory);
+        if (self.player_save.highest_level >= 6) {
+            KestrelSystem.Update(Achievements.battle_tested);
+        }
+        if (self.player_save.highest_level >= 6) {
+            KestrelSystem.Update(Achievements.battle_veteran);
+        }
+        if (self.player_health == 1) {
+            KestrelSystem.Update(Achievements.living_on_the_edge);
+        }
+        if (!self.player_has_taken_damage) {
+            KestrelSystem.Update(Achievements.perfect_game);
+        }
+        if (!self.player_has_upgarded_tower) {
+            KestrelSystem.Update(Achievements.rookie_squad);
+        }
+        if (!self.player_wave_timer_expired) {
+            KestrelSystem.Update(Achievements.impatience);
+        }
         self.CallEntityGameOver();
         self.SavePlayerData();
     };

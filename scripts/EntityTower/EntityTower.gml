@@ -180,6 +180,7 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
         self.SetDamageMod();
         self.SetRangeMod();
         GAME.player_money -= self.class.cost[self.level - 1];
+        GAME.player_has_upgraded_tower = true;
         audio_play_sound(se_build, SOUND_PRIORITY_GAMEPLAY_HIGH, false);
         KestrelSystem.Update(Achievements.getting_an_upgrade);
         if (self.level == 3) {
