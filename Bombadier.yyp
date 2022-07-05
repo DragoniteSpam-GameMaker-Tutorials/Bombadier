@@ -50,6 +50,7 @@
     {"id":{"name":"se_sell","path":"sounds/se_sell/se_sell.yy",},"order":7,},
     {"id":{"name":"vertex_buffer_stuff","path":"scripts/vertex_buffer_stuff/vertex_buffer_stuff.yy",},"order":7,},
     {"id":{"name":"EntityTower","path":"scripts/EntityTower/EntityTower.yy",},"order":1,},
+    {"id":{"name":"Achievements","path":"scripts/Achievements/Achievements.yy",},"order":9,},
     {"id":{"name":"Kestrel","path":"scripts/Kestrel/Kestrel.yy",},"order":0,},
     {"id":{"name":"bgm_title","path":"sounds/bgm_title/bgm_title.yy",},"order":4,},
     {"id":{"name":"UIText","path":"objects/UIText/UIText.yy",},"order":7,},

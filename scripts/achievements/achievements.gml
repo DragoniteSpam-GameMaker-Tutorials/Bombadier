@@ -1,0 +1,14 @@
+KestrelSystem.Add(new Kestrel("First Blood", "Kill a foe for the first time", -1, -1, function() { }));
+KestrelSystem.Add(new Kestrel("Bug Stomper", "Kill a thousand foes (lifetime)", -1, -1, function() { }));
+KestrelSystem.Add(new Kestrel("First Victory", "Win a map for the first time", -1, -1, function() { }));
+KestrelSystem.Add(new Kestrel("Getting an Upgrade", "Upgrade a tower", -1, -1, function() { }));
+KestrelSystem.Add(new Kestrel("Foul Play", "Inflict a status ailment on a foe", -1, -1, function() { }));
+KestrelSystem.Add(new Kestrel("Battle Tested", "Win six maps", -1, -1, function() { }));
+KestrelSystem.Add(new Kestrel("Perfect Game", "Win a map without letting any foes reach the end", -1, -1, function() { }));
+KestrelSystem.Add(new Kestrel("Battle Veteran", "Win on twelve maps", -1, -1, function() { }));
+KestrelSystem.Add(new Kestrel("Experimentalist", "Build one of every type of tower in the game (lifetime)", -1, -1, function() { }));
+KestrelSystem.Add(new Kestrel("Tower Master", "Fully upgrade all types of tower in the game (lifetime)", -1, -1, function() { }));
+KestrelSystem.Add(new Kestrel("Triple Threat", "Inflict three different status ailments on a single foe", -1, -1, function() { }));
+KestrelSystem.Add(new Kestrel("Impatience", "Call every wave in a level early", -1, -1, function() { }));
+KestrelSystem.Add(new Kestrel("Rookie Squad", "Win a map without upgrading any towers", -1, -1, function() { }));
+KestrelSystem.Add(new Kestrel("Living on the Edge", "Win a map with only one life remaining", -1, -1, function() { }));
