@@ -24,6 +24,17 @@ Render = function() {
     }
     
     draw_sprite_stretched_ext(sprite_index, subimg, x, y, sprite_width, sprite_height, self.color_tint, 1);
+    if (sprite_exists(self.background_sprite)) {
+        if (self.background_sprite_multiply) {
+            gpu_set_blendmode_ext(bm_dest_color, bm_inv_src_alpha);
+        }
+        if (self.background_sprite_stretch) {
+            draw_sprite_stretched(self.background_sprite, 0, self.x, self.y, self.sprite_width, self.sprite_height);
+        } else {
+            draw_sprite(self.background_sprite, 0, self.x + self.sprite_width / 2, self.y + self.sprite_height / 2);
+        }
+        gpu_set_blendmode(bm_normal);
+    }
     draw_set_font(fnt_game_buttons);
     draw_set_colour(c_black);
     draw_set_halign(fa_center);
