@@ -29,6 +29,12 @@ Achievements = {
     badge_queue: [],
     
     Update: function() {
+        for (var i = array_length(self.badge_queue) - 1; i >= 0; i--) {
+            self.badge_queue[i].t -= DT;
+            if (self.badge_queue[i].t <= 0) {
+                array_delete(self.badge_queue, i, 1);
+            }
+        }
     },
     
     Render: function() {
