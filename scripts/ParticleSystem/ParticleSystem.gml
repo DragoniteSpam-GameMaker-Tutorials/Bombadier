@@ -4,7 +4,7 @@ Particles = new (function() constructor {
     static init = function() {
         //Create the particle system
         systems = {
-            hit_effects: new spart_system([256, 600]),
+            hit_effects: new spart_system([400, 640, 1600, 2000]),
         };
         
         //Create a particle type
