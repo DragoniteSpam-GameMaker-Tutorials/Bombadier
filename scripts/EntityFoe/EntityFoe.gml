@@ -35,17 +35,20 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
     static Burn = function(whodunnit, duration = BURN_DURATION) {
         self.status_burn = duration;
         self.whodunnit_burn = whodunnit;
+        KestrelSystem.Update(Achievements.foul_play);
     };
     
     static Poison = function(whodunnit, duration = POISON_DURATION) {
         self.status_poison = duration;
         self.whodunnit_poison = whodunnit;
+        KestrelSystem.Update(Achievements.foul_play);
     };
     
     static Slow = function(whodunnit, duration = BURN_DURATION, factor = SLOW_FACTOR) {
         self.status_slow = duration;
         self.SetSpeedMod(factor);
         self.whodunnit_slow = whodunnit;
+        KestrelSystem.Update(Achievements.foul_play);
     };
     
     static Immobilize = function(whodunnit, duration = IMMOBILIZE_DURATION) {
