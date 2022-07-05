@@ -1430,7 +1430,6 @@ function Game() constructor {
         shader_reset();
         
         Particles.Render();
-        Achievements.Render();
     };
     
     // These are the UI layers that may be turned on or off during gameplay
@@ -1480,6 +1479,8 @@ function Game() constructor {
             if (self.show_tooltip_tower) {
                 GetGUILayer("UI_Tooltip_Tower").Render();
             }
+            
+            Achievements.Render();
         } else if (gameplay_mode == GameModes.PAUSED) {
             window_set_cursor(cr_default);
             GetGUILayer(current_pause_screen).Render();
