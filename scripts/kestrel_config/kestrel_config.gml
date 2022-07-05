@@ -1,0 +1,4 @@
+#macro KESTREL_SHOW_HIDDEN_NAMES            false
+#macro KESTREL_SHOW_HIDDEN_DESCRIPTIONS     false
+#macro KESTREL_HIDDEN_NAME_TEXT             "???"
+#macro KESTREL_HIDDEN_DESCRIPTION_TEXT      ""

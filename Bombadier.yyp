@@ -36,6 +36,7 @@
     {"id":{"name":"se_foe_die","path":"sounds/se_foe_die/se_foe_die.yy",},"order":2,},
     {"id":{"name":"Waves","path":"scripts/Waves/Waves.yy",},"order":3,},
     {"id":{"name":"se_tower_pebble","path":"sounds/se_tower_pebble/se_tower_pebble.yy",},"order":13,},
+    {"id":{"name":"Kestrel_Config","path":"scripts/Kestrel_Config/Kestrel_Config.yy",},"order":1,},
     {"id":{"name":"UIBlockRaycast","path":"objects/UIBlockRaycast/UIBlockRaycast.yy",},"order":5,},
     {"id":{"name":"se_tower_bird_a","path":"sounds/se_tower_bird_a/se_tower_bird_a.yy",},"order":8,},
     {"id":{"name":"spart_system","path":"scripts/spart_system/spart_system.yy",},"order":2,},
@@ -49,6 +50,7 @@
     {"id":{"name":"se_sell","path":"sounds/se_sell/se_sell.yy",},"order":7,},
     {"id":{"name":"vertex_buffer_stuff","path":"scripts/vertex_buffer_stuff/vertex_buffer_stuff.yy",},"order":7,},
     {"id":{"name":"EntityTower","path":"scripts/EntityTower/EntityTower.yy",},"order":1,},
+    {"id":{"name":"Kestrel","path":"scripts/Kestrel/Kestrel.yy",},"order":0,},
     {"id":{"name":"bgm_title","path":"sounds/bgm_title/bgm_title.yy",},"order":4,},
     {"id":{"name":"UIText","path":"objects/UIText/UIText.yy",},"order":7,},
     {"id":{"name":"maaaaaaaaaaaaaaaath","path":"scripts/maaaaaaaaaaaaaaaath/maaaaaaaaaaaaaaaath.yy",},"order":7,},
@@ -125,6 +127,7 @@
     {"folderPath":"folders/sPart/Shaders.yy","order":2,"resourceVersion":"1.0","name":"Shaders","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Graphical stuff/Shaders.yy","order":6,"resourceVersion":"1.0","name":"Shaders","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Audio/Music.yy","order":2,"resourceVersion":"1.0","name":"Music","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/Kestrel.yy","order":426,"resourceVersion":"1.0","name":"Kestrel","tags":[],"resourceType":"GMFolder",},
   ],
   "AudioGroups": [
     {"targets":-1,"resourceVersion":"1.3","name":"audiogroup_default","resourceType":"GMAudioGroup",},
