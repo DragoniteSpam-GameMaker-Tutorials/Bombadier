@@ -8,6 +8,7 @@ application_surface_draw_enable(false);
 
 function Game() constructor {
     Particles.init();
+    Achievements.Init();
     
     camera = new Camera();
     
@@ -933,6 +934,8 @@ function Game() constructor {
                     }
                 }
             }
+            
+            Achievements.Update();
             #endregion
         } else if (gameplay_mode == GameModes.PAUSED) {
             if (keyboard_check_pressed(vk_escape)) {
@@ -1427,6 +1430,7 @@ function Game() constructor {
         shader_reset();
         
         Particles.Render();
+        Achievements.Render();
     };
     
     // These are the UI layers that may be turned on or off during gameplay
