@@ -113,6 +113,10 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
         Particles.BurstFromEmitter(Particles.emitters.hit_effects, Particles.types.death, self.position.x, self.position.y, self.position.z + 8, 12);
         audio_play_sound(se_foe_die, SOUND_PRIORITY_GAMEPLAY_LOW, false);
         KestrelSystem.Update(Achievements.first_blood);
+        Achievements.stats.stomp_count++;
+        if (Achievements.stats.stomp_count >= ACHIEVEMENT_BUG_STOMPER_THRESHOLD) {
+            KestrelSystem.Update(Achievements.bug_stomper);
+        }
     };
     
     static AddToMap = function() {
