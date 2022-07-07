@@ -43,4 +43,3 @@
 
 #macro SAVE_FILE_NAME                   "player.json"
 #macro SETTINGS_FILE_NAME               "settings.json"
-#macro LANGUAGE_FILE_NAME               "lang.json"

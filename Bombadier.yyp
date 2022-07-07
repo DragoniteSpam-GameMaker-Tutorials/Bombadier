@@ -20,6 +20,7 @@
     {"id":{"name":"bgm_forest","path":"sounds/bgm_forest/bgm_forest.yy",},"order":0,},
     {"id":{"name":"spr_block_raycast","path":"sprites/spr_block_raycast/spr_block_raycast.yy",},"order":2,},
     {"id":{"name":"se_build","path":"sounds/se_build/se_build.yy",},"order":1,},
+    {"id":{"name":"Group_Text","path":"scripts/Group_Text/Group_Text.yy",},"order":427,},
     {"id":{"name":"spr_healthbar_fill","path":"sprites/spr_healthbar_fill/spr_healthbar_fill.yy",},"order":1,},
     {"id":{"name":"shd_magnifying_glass_beam","path":"shaders/shd_magnifying_glass_beam/shd_magnifying_glass_beam.yy",},"order":4,},
     {"id":{"name":"ParticleSystem","path":"scripts/ParticleSystem/ParticleSystem.yy",},"order":6,},
