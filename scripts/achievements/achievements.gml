@@ -96,6 +96,11 @@ Achievements = {
         draw_set_valign(valign);
     },
     
+    Reset: function() {
+        self.stats.stomp_count = 0;
+        KestrelSystem.Reset();
+    },
+    
     Save: function() {
     },
     

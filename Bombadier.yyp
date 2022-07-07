@@ -35,6 +35,7 @@
     {"id":{"name":"shd_solid_color","path":"shaders/shd_solid_color/shd_solid_color.yy",},"order":1,},
     {"id":{"name":"se_tower_magnifying_glass","path":"sounds/se_tower_magnifying_glass/se_tower_magnifying_glass.yy",},"order":12,},
     {"id":{"name":"spr_thumb_06","path":"sprites/spr_thumb_06/spr_thumb_06.yy",},"order":5,},
+    {"id":{"name":"spr_reset","path":"sprites/spr_reset/spr_reset.yy",},"order":13,},
     {"id":{"name":"EntityBullet","path":"scripts/EntityBullet/EntityBullet.yy",},"order":2,},
     {"id":{"name":"bgm_pirates","path":"sounds/bgm_pirates/bgm_pirates.yy",},"order":3,},
     {"id":{"name":"spr_thumb_08","path":"sprites/spr_thumb_08/spr_thumb_08.yy",},"order":7,},
