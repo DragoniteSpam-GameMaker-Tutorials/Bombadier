@@ -127,18 +127,18 @@ KestrelSystem = {
         for (var i = 0, n = ds_list_size(self._); i < n; i++) {
             json.items[i] = self._[| i].save();
         }
-        return  base64_encode(json_stringify(json));
+        return json;
     },
     
-    Load: function(blob) {
+    Load: function(json) {
         try {
-            var json = json_decode(base64_decode(blob));
             var version = json.version;
-            for (var i = 0, n = min(ds_list_size(self._), array_length(blob.items)); i < n; i++) {
-                self._[| i].load(blob.items[i]);
+            for (var i = 0, n = min(ds_list_size(self._), array_length(json.items)); i < n; i++) {
+                self._[| i].load(json.items[i]);
             }
         } catch (e) {
             show_debug_message("Failed to load achievement settings: " + e.message + "(" + e.longMessage + ")");
+            self.Reset();
         }
     },
 };

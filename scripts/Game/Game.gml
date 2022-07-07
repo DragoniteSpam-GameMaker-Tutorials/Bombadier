@@ -9,6 +9,7 @@ application_surface_draw_enable(false);
 function Game() constructor {
     Particles.init();
     Achievements.Init();
+    Achievements.Load();
     
     camera = new Camera();
     

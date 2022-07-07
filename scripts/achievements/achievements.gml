@@ -31,6 +31,7 @@ Achievements = {
                 w: 400,
                 h: 96,
             });
+            Achievements.Save();
         });
     },
     
@@ -97,17 +98,38 @@ Achievements = {
     },
     
     Reset: function() {
-        self.stats.stomp_count = 0;
+        self.stats = {
+            stomp_count: 0,
+        };
         KestrelSystem.Reset();
     },
     
     Save: function() {
+        static output = buffer_create(1000, buffer_grow, 1);
+        buffer_seek(output, buffer_seek_start, 0);
+        buffer_write(output, buffer_text, json_stringify({
+            stats: self.stats,
+            data: KestrelSystem.Save(),
+        }));
+        buffer_save_ext(output, ACHIEVEMENT_SAVE_FILE, 0, buffer_tell(output));
     },
     
     Load: function() {
+        try {
+            var data = buffer_load(ACHIEVEMENT_SAVE_FILE);
+            var input = json_parse(buffer_read(data, buffer_text));
+            KestrelSystem.Load(input.data);
+            self.stats = input.stats;
+            self.stats.stomp_count = self.stats[$ "stomp_count"] ? self.stats.stomp_count : 0;
+            buffer_delete(data);
+        } catch (e) {
+            show_debug_message("Failed to load achievement data: " + e.message);
+            self.Reset();
+        }
     },
 }
 
 #macro ACHIEVEMENT_BUG_STOMPER_THRESHOLD    1000
 #macro ACHIEVEMENT_BADGE_DURATION           6
 #macro ACHIEVEMENT_BADGE_TRANSITION_TIME    0.4
+#macro ACHIEVEMENT_SAVE_FILE                "achieve.ments"
