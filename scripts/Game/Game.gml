@@ -158,6 +158,7 @@ function Game() constructor {
                                 "Pebble shooter damage\nincreased!",
                                 "Shoots twice as fast!"
                             ],
+                        /* id    */ "PEBBLES"
                         );
     tower_fire =        new TowerData("Fire Blaster",
                         /* rate  */ [0.5, 0.75, 0.75],
@@ -171,6 +172,7 @@ function Game() constructor {
                                 "Shoots fire faster!",
                                 "Burn effect lasts longer!"
                             ],
+                        /* id    */ "FIRE"
                         );
     tower_magnify =     new TowerData("Magnifying Glass",
                         /* rate  */ [0, 0, 0],
@@ -184,6 +186,7 @@ function Game() constructor {
                                 "Increased damage and\nattack radius!",
                                 "Does yet more damage\nand burns foes for\ngood measure!"
                             ],
+                        /* id    */ "MAGNIFY"
                         );
     tower_spray =       new TowerData("Bug Spray",
                         /* rate  */ [1, 1, 2],
@@ -197,8 +200,9 @@ function Game() constructor {
                                 "Clouds last longer and\naffect more foes!",
                                 "Spray much faster!"
                             ],
+                        /* id    */ "SPRAY"
                         );
-    tower_flypaper =    new TowerData("Fly Paper Dispenser",
+    tower_flypaper =    new TowerData("Fly Paper Trap",
                         /* rate  */ [1, 1, 1],
                         /* range */ [4 * 32, 4 * 32, 4 * 32],
                         /* dmg   */ [0, 0, 0],
@@ -210,6 +214,7 @@ function Game() constructor {
                                 "Duration and magnitude of\nslow increased!",
                                 "Fly paper momentarily\nimmobilizes anything\nthat walks over it!"
                             ],
+                        /* id    */ "FLYPAPER"
                         );
     tower_bird =        new TowerData("Bird Nest",
                         /* rate  */ [0.5, 1, 1],
@@ -223,7 +228,12 @@ function Game() constructor {
                                 "Birds do more damage!",
                                 "Summon an fourth bird!"
                             ],
+                        /* id    */ "BIRD"
                         );
+    self.all_tower_types = [
+        tower_pebbles, tower_fire, tower_magnify,
+        tower_spray, tower_flypaper, tower_bird
+    ];
     #endregion
     
     self.player_save = {
