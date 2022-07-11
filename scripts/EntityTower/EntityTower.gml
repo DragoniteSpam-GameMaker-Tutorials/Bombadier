@@ -186,6 +186,18 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
         if (self.level == 3) {
             KestrelSystem.Update(Achievements.tower_expert);
         }
+        Achievements.SetTowerRank(self.class.id, self.level);
+        var inferior_upgrade_found = false;
+        for (var i = 0, n = array_length(GAME.all_tower_types); i < n; i++) {
+            var tower_record = Achievements.stats.tower_records[$ GAME.all_tower_types[i].id];
+            if (!tower_record || tower_record.highest_rank < MAX_TOWER_LEVEL) {
+                inferior_upgrade_found = true;
+                break;
+            }
+        }
+        if (!inferior_upgrade_found) {
+            KestrelSystem.Update(Achievements.tower_master);
+        }
     };
     
     static CanBeUpgraded = function() {
