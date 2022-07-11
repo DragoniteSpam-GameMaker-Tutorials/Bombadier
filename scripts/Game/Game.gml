@@ -563,7 +563,7 @@ function Game() constructor {
         if (self.player_save.highest_level >= 6) {
             KestrelSystem.Update(Achievements.battle_tested);
         }
-        if (self.player_save.highest_level >= 6) {
+        if (self.player_save.highest_level >= 12) {
             KestrelSystem.Update(Achievements.battle_veteran);
         }
         if (self.player_health == 1) {
