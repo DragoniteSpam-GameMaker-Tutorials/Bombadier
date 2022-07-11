@@ -606,6 +606,7 @@ function Game() constructor {
                 player_money -= player_tower_spawn.class.cost[0];
                 player_tower_spawn.AddToMap();
                 self.selected_entity = player_tower_spawn;
+                Achievements.SetTowerRank(player_tower_spawn.class.id, 1);
                 player_tower_spawn = undefined;
                 audio_play_sound(se_build, SOUND_PRIORITY_GAMEPLAY_HIGH, false);
             }
