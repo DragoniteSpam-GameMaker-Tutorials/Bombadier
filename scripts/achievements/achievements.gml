@@ -33,11 +33,12 @@ Achievements = {
             });
             Achievements.Save();
         });
+        
+        self.Reset();
     },
     
-    stats: {
-        stomp_count: 0,
-    },
+    // this is filled in in Reset() when you call Init()
+    stats: undefined,
     
     badge_queue: [],
     
@@ -100,8 +101,20 @@ Achievements = {
     Reset: function() {
         self.stats = {
             stomp_count: 0,
+            tower_records: { },
         };
         KestrelSystem.Reset();
+    },
+    
+    SetTowerRank: function(id, rank) {
+        if (!self.stats.tower_records[$ id]) {
+            self.stats.tower_records[$ id] = {
+                highest_rank: rank,
+            };
+        } else {
+            self.stats.tower_records[$ id].highest_rank = max(self.stats.tower_records[$ id].highest_rank, rank);
+        }
+        self.Save();
     },
     
     Save: function() {
@@ -119,8 +132,9 @@ Achievements = {
             var data = buffer_load(ACHIEVEMENT_SAVE_FILE);
             var input = json_parse(buffer_read(data, buffer_text));
             KestrelSystem.Load(input.data);
-            self.stats = input.stats;
-            self.stats.stomp_count = self.stats[$ "stomp_count"] ? self.stats.stomp_count : 0;
+            self.stats = input.stats ?? { };
+            self.stats[$ "stomp_count"] ??= 0;
+            self.stats[$ "tower_records"] ??= { };
             buffer_delete(data);
         } catch (e) {
             show_debug_message("Failed to load achievement data: " + e.message);
