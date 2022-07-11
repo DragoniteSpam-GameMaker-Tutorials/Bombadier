@@ -5,6 +5,7 @@ OnClick = function() {
 Update = function() {
     var tower = GAME.tower_bird;
     self.text_args = [string(tower.cost[0])];
+    self.enabled = GAME.player_money >= tower.cost[0];
 };
 
 OnHover = function() {
