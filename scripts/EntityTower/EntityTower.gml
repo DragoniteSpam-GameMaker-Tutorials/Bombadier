@@ -105,7 +105,7 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
     
     static Shoot = function(target_foe) {
         var dir = point_direction(position.x, position.y, target_foe.position.x, target_foe.position.y);
-        var shot_velocity = 10;
+        var shot_velocity = 16;
         var bullet = new EntityBullet(position.x, position.y, position.z, shot_velocity * dcos(dir), shot_velocity * -dsin(dir), 0, base_bullet_data, act_damage, self);
         bullet.AddToMap();
         shot_cooldown = 1 / act_rate;
