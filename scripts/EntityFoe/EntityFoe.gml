@@ -159,7 +159,7 @@ function EntityFoe(class, level) : Entity(0, 0, 0) constructor {
                     destination = clone(path[path_node].position);
                 } else {
                     Destroy();
-                    GAME.PlayerDamage(damage);
+                    GAME.PlayerDamage(damage, self);
                 }
             }
         }

@@ -433,6 +433,7 @@ function Game() constructor {
         self.player_money = 75;
         self.player_max_health = 10;
         self.player_health = self.player_max_health;
+        self.player_damaged_by_grasshoppers_only = true;
         self.player_has_taken_damage = false;
         self.player_has_upgraded_tower = false;
         self.player_wave_timer_expired = false;
@@ -550,15 +551,21 @@ function Game() constructor {
         self.SendInWave();
     };
     
-    self.PlayerDamage = function(amount) {
+    self.PlayerDamage = function(amount, by_whom) {
         self.player_health -= max(amount, 0);
         self.player_has_taken_damage = true;
         if (self.player_health <= 0) {
             self.gameplay_mode = GameModes.GAME_OVER;
             self.current_game_over_screen = "UI_Game_Over_Lose";
             self.CallEntityGameOver();
+            if (self.player_damaged_by_grasshoppers_only) {
+                KestrelSystem.Update(Achievements.locusts);
+            }
         } else {
             self.CheckGameOver();
+        }
+        if (by_whom.class != self.foe_grasshopper) {
+            self.player_damaged_by_grasshoppers_only = false;
         }
     };
     
