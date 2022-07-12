@@ -267,6 +267,15 @@ function Game() constructor {
     self.current_game_over_screen = "UI_Game_Over_Win";
     self.current_level_index = 0;
     self.show_tooltip_tower = false;
+    self.show_tooltip_floating = {
+        x: 0,
+        y: 0,
+        w: 0,
+        h: 0,
+        enabled: false,
+        text: "",
+    };
+    
     with (ParentUI) {
         var layers = other.all_ui_elements[$ string(depth)];
         if (layers == undefined) {
@@ -1185,6 +1194,8 @@ function Game() constructor {
         }
         
         Achievements.Update();
+        
+        self.show_tooltip_floating.enabled = false;
     };
     
     SaveMap = function() {
@@ -1624,6 +1635,15 @@ function Game() constructor {
                 draw_text(window_get_width() - 32, ++n * 32, "The Insert key toggles this overlay");
                 draw_set_halign(fa_left);
             }
+        }
+        
+        if (self.show_tooltip_floating.enabled) {
+            var ww = self.show_tooltip_floating.w;
+            var sw = string_width_ext(self.show_tooltip_floating.text, -1, ww);
+            var sh = string_height_ext(self.show_tooltip_floating.text, -1, ww);
+            draw_sprite_stretched(spr_nineslice, 0, self.show_tooltip_floating.x, self.show_tooltip_floating.y, 32 + sw, 32 + sh);
+            draw_set_valign(fa_top);
+            draw_text_ext(self.show_tooltip_floating.x + 16, self.show_tooltip_floating.y + 16, self.show_tooltip_floating.text, -1, ww);
         }
         
         Achievements.Render();
