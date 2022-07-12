@@ -6,21 +6,21 @@ Achievements = {
             return (data == self);
         };
         
-        self.first_blood = KestrelSystem.Add(new Kestrel("First Blood", "Stomp a foe for the first time", spr_achievement_lock, spr_achievement_generic, achievement_validate, true));
-        self.bug_stomper = KestrelSystem.Add(new Kestrel("Bug Stomper", "Stomp 3,000 foes (lifetime)", spr_achievement_lock, spr_achievement_generic, achievement_validate, true));
-        self.first_victory = KestrelSystem.Add(new Kestrel("First Victory", "Win a map for the first time", spr_achievement_lock, spr_achievement_generic, achievement_validate, true));
-        self.perfect_game = KestrelSystem.Add(new Kestrel("Perfect Game", "Win a map without letting any foes reach the end", spr_achievement_lock, spr_achievement_generic, achievement_validate, true));
-        self.living_on_the_edge = KestrelSystem.Add(new Kestrel("Living on the Edge", "Win a map with only one life remaining", spr_achievement_lock, spr_achievement_generic, achievement_validate, true));
-        self.battle_tested = KestrelSystem.Add(new Kestrel("Battle Tested", "Win six maps", spr_achievement_lock, spr_achievement_generic, achievement_validate, true));
-        self.battle_veteran = KestrelSystem.Add(new Kestrel("Battle Veteran", "Win on twelve maps", spr_achievement_lock, spr_achievement_generic, achievement_validate, true));
-        self.getting_an_upgrade = KestrelSystem.Add(new Kestrel("Getting an Upgrade", "Upgrade a tower", spr_achievement_lock, spr_achievement_generic, achievement_validate, true));
-        self.foul_play = KestrelSystem.Add(new Kestrel("Foul Play", "Inflict a status ailment on a foe", spr_achievement_lock, spr_achievement_generic, achievement_validate, true));
-        self.locusts = KestrelSystem.Add(new Kestrel("Locus Plague", "Lose all of your lives to grasshoppers", spr_achievement_lock, spr_achievement_generic, achievement_validate, true));
-        self.tower_expert = KestrelSystem.Add(new Kestrel("Tower Expert", "Upgrade a tower to Level 3", spr_achievement_lock, spr_achievement_generic, achievement_validate, true));
-        self.tower_master = KestrelSystem.Add(new Kestrel("Tower Master", "Fully upgrade all types of tower in the game (lifetime)", spr_achievement_lock, spr_achievement_generic, achievement_validate, true));
-        self.triple_threat = KestrelSystem.Add(new Kestrel("Triple Threat", "Inflict three different status ailments on a single foe", spr_achievement_lock, spr_achievement_generic, achievement_validate, true));
-        self.impatience = KestrelSystem.Add(new Kestrel("Impatience", "Call every wave in a level early", spr_achievement_lock, spr_achievement_generic, achievement_validate, true));
-        self.rookie_squad = KestrelSystem.Add(new Kestrel("Rookie Squad", "Win a map without upgrading any towers", spr_achievement_lock, spr_achievement_generic, achievement_validate, true));
+        self.first_blood = KestrelSystem.Add(new Kestrel("First Blood", "Stomp a foe for the first time.", spr_achievement_lock, spr_achievement_generic, achievement_validate, true));
+        self.bug_stomper = KestrelSystem.Add(new Kestrel("Bug Stomper", "Stomp 3,000 foes (lifetime).", spr_achievement_lock, spr_achievement_generic, achievement_validate, true));
+        self.first_victory = KestrelSystem.Add(new Kestrel("First Victory", "Win a map for the first time.", spr_achievement_lock, spr_achievement_generic, achievement_validate, true));
+        self.perfect_game = KestrelSystem.Add(new Kestrel("Perfect Game", "Win a map without letting any foes reach the end.", spr_achievement_lock, spr_achievement_generic, achievement_validate, true));
+        self.living_on_the_edge = KestrelSystem.Add(new Kestrel("Living on the Edge", "Win a map with only one life remaining.", spr_achievement_lock, spr_achievement_generic, achievement_validate, true));
+        self.battle_tested = KestrelSystem.Add(new Kestrel("Battle Tested", "Win six maps.", spr_achievement_lock, spr_achievement_generic, achievement_validate, true));
+        self.battle_veteran = KestrelSystem.Add(new Kestrel("Battle Veteran", "Win on twelve maps.", spr_achievement_lock, spr_achievement_generic, achievement_validate, true));
+        self.getting_an_upgrade = KestrelSystem.Add(new Kestrel("Getting an Upgrade", "Upgrade a tower.", spr_achievement_lock, spr_achievement_generic, achievement_validate, true));
+        self.foul_play = KestrelSystem.Add(new Kestrel("Foul Play", "Inflict a status ailment on a foe.", spr_achievement_lock, spr_achievement_generic, achievement_validate, true));
+        self.locusts = KestrelSystem.Add(new Kestrel("Locus Plague", "Lose all of your lives to grasshoppers.", spr_achievement_lock, spr_achievement_generic, achievement_validate, true));
+        self.tower_expert = KestrelSystem.Add(new Kestrel("Tower Expert", "Upgrade a tower to Level 3.", spr_achievement_lock, spr_achievement_generic, achievement_validate, true));
+        self.tower_master = KestrelSystem.Add(new Kestrel("Tower Master", "Fully upgrade all types of tower in the game (lifetime).", spr_achievement_lock, spr_achievement_generic, achievement_validate, true));
+        self.triple_threat = KestrelSystem.Add(new Kestrel("Triple Threat", "Inflict three different status ailments on a single foe.", spr_achievement_lock, spr_achievement_generic, achievement_validate, true));
+        self.impatience = KestrelSystem.Add(new Kestrel("Impatience", "Call every wave in a level early.", spr_achievement_lock, spr_achievement_generic, achievement_validate, true));
+        self.rookie_squad = KestrelSystem.Add(new Kestrel("Rookie Squad", "Win a map without upgrading any towers.", spr_achievement_lock, spr_achievement_generic, achievement_validate, true));
         
         KestrelSystem.SetUnlockCallback(function(kestrel) {
             array_push(Achievements.badge_queue, {
