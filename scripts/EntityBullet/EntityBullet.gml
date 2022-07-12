@@ -101,7 +101,6 @@ function EntityBulletBird(x, y, z, bullet_data, parent_tower, nest_radius) : Ent
     self.attack_radius = 32;
     self.nest_radius = nest_radius;
     self.nest_angle = 270;
-    self.damage_cooldown = 1 / parent_tower.act_rate;
     self.anim_frame = 0;
     
     static Reposition = function(x, y, z) {
@@ -111,20 +110,17 @@ function EntityBulletBird(x, y, z, bullet_data, parent_tower, nest_radius) : Ent
     };
     
     static Update = function() {
-        if (damage_cooldown <= 0) {
-            for (var i = 0; i < ds_list_size(GAME.all_foes); i++) {
-                var foe = GAME.all_foes[| i];
-                if (point_distance_3d(position.x, position.y, position.z, foe.position.x, foe.position.y, foe.position.z) < attack_radius) {
-                    foe.Damage(parent_tower.act_damage);
-                    OnHit(foe);
-                    damage_cooldown = 1 / parent_tower.act_rate;
-                    Particles.BurstFromEmitter(Particles.emitters.hit_effects, Particles.types.stone_debris, foe.position.x, foe.position.y, foe.position.z + 8, 12);
-                    break;
-                }
+        for (var i = 0; i < ds_list_size(GAME.all_foes); i++) {
+            var foe = GAME.all_foes[| i];
+            if (point_distance_3d(position.x, position.y, position.z, foe.position.x, foe.position.y, foe.position.z) < attack_radius) {
+                foe.Damage(parent_tower.act_damage);
+                OnHit(foe);
+                Particles.BurstFromEmitter(Particles.emitters.hit_effects, Particles.types.stone_debris, foe.position.x, foe.position.y, foe.position.z + 8, 12);
+                self.parent_tower.RemoveBird(self);
+                self.Destroy();
+                break;
             }
         }
-        
-        damage_cooldown -= DT;
         
         var linear_velocity = 160;
         

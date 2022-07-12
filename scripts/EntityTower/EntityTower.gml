@@ -401,6 +401,15 @@ function EntityTowerBird(x, y, z, class) : EntityTower(x, y, z, class) construct
         audio_play_sound(choose(se_tower_bird_a, se_tower_bird_b), SOUND_PRIORITY_GAMEPLAY_LOW, false);
     };
     
+    self.RemoveBird = function(bird) {
+        for (var i = 0; i < array_length(self.birds); i++) {
+            if (self.birds[i] == bird) {
+                array_delete(self.birds, i, 1);
+                break;
+            }
+        }
+    };
+    
     static Sell = function() {
         for (var i = array_length(self.birds) - 1; i >=0; i--) {
             self.birds[i].Destroy();
