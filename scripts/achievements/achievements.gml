@@ -31,6 +31,8 @@ Achievements = {
                 w: 400,
                 h: 96,
             });
+            if (!audio_is_playing(se_achievement))
+                audio_play_sound(se_achievement, SOUND_PRIORITY_UI, false);
             Achievements.Save();
         });
         
