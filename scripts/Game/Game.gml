@@ -570,6 +570,7 @@ function Game() constructor {
             if (self.player_damaged_by_grasshoppers_only) {
                 KestrelSystem.Update(Achievements.locusts);
             }
+            audio_play_sound(se_defeat, SOUND_PRIORITY_GAMEPLAY_HIGH, false);
         } else {
             self.CheckGameOver();
         }
@@ -606,6 +607,7 @@ function Game() constructor {
         }
         self.CallEntityGameOver();
         self.SavePlayerData();
+        audio_play_sound(se_victory, SOUND_PRIORITY_GAMEPLAY_HIGH, false);
     };
     
     CallEntityGameOver = function() {
