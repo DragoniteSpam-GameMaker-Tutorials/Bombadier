@@ -8,13 +8,10 @@ function L(text, args = undefined) {
             text = translation;
         }
     } else {
-        if (GAME.language_index == 0) {
-            Text[GAME.language_index][$ text] = text;
-        } else {
-            show_debug_message("Translated string not found: " + text);
-            Text[GAME.language_index][$ text] = undefined;
-            if (SAVE_ON_MISSING_TEXT) save_text_csv(TEXT_FILE);
-        }
+        show_debug_message("Translated string not found: " + text);
+        Text[0][$ text] = text;
+        Text[GAME.language_index][$ text] = undefined;
+        if (SAVE_ON_MISSING_TEXT) save_text_csv("strings.csv");
     }
     
     if (args != undefined) {
@@ -70,7 +67,8 @@ function text_initialize() {
         
         ds_grid_destroy(text_grid);
     } catch (e) {
-        show_debug_message("Couldn't load the language text");
+        show_debug_message("Couldn't load the language text: " + e.message);
+        show_debug_message(e.longMessage);
     } finally {
         if (ds_exists(text_grid, ds_type_grid)) {
             ds_grid_destroy(text_grid);

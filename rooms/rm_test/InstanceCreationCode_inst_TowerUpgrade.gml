@@ -33,7 +33,7 @@ OnHover = function() {
         if (upgrade_status != ReasonsWhyYouCantUpgradeATower.MAX_LEVEL) {
             GAME.show_tooltip_tower = true;
             inst_tooltip_tower.text = "@TOWER_TOOLTIP";
-            inst_tooltip_tower.text_args = [tower.class.name, tower.class.descriptions[tower.level]];
+            inst_tooltip_tower.text_args = [L(tower.class.name), L(tower.class.descriptions[tower.level])];
         }
     }
 };

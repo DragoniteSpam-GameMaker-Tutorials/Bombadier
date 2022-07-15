@@ -1,7 +1,8 @@
 event_inherited();
 
-enabled = true;
-text_args = [];
+self.enabled = true;
+self.text = self.source_text;
+self.text_args = [];
 
 Render = function() {
     var subimg = 0;
@@ -49,7 +50,6 @@ OnClick = function() {
 };
 
 Update = function() {
-    
 };
 
 OnHover = function() {

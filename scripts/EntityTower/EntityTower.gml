@@ -216,7 +216,7 @@ function EntityTower(x, y, z, class) : Entity(x, y, z) constructor {
         return {
             base: "@TOWER_SUMMARY",
             args: [
-                self.name,
+                L(self.name),
                 string(self.level),
                 string(self.stats.shots),
                 string_format(self.stats.damage, 1, 1)
@@ -310,7 +310,7 @@ function EntityTowerGlass(x, y, z, class) : EntityTower(x, y, z, class) construc
         return {
             base: "@TOWER_SUMMARY_GLASS",
             args: [
-                self.name,
+                L(self.name),
                 string(self.level),
                 string_format(self.stats.duration, 1, 1),
                 string_format(self.stats.damage, 1, 1)
@@ -367,7 +367,7 @@ function EntityTowerSpray(x, y, z, class) : EntityTower(x, y, z, class) construc
         return {
             base: "@TOWER_SUMMARY_SPRAY",
             args: [
-                self.name,
+                L(self.name),
                 string(self.level),
                 string(self.stats.clouds),
                 string(self.stats.hits),
@@ -462,7 +462,7 @@ function EntityTowerFlyPaper(x, y, z, class) : EntityTower(x, y, z, class) const
             return {
                 base: "@TOWER_SUMMARY_PAPER_ADVANCED",
                 args: [
-                    self.name,
+                    L(self.name),
                     string(self.level),
                     string(self.stats.papers),
                     string(self.stats.hits),

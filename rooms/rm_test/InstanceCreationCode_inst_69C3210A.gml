@@ -11,5 +11,5 @@ Update = function() {
 OnHover = function() {
     GAME.show_tooltip_tower = true;
     inst_tooltip_tower.text = "@TOWER_TOOLTIP";
-    inst_tooltip_tower.text_args = [GAME.tower_spray.name, GAME.tower_spray.descriptions[0]];
+    inst_tooltip_tower.text_args = [L(GAME.tower_spray.name), L(GAME.tower_spray.descriptions[0])];
 };
