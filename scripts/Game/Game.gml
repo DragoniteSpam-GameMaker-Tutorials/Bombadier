@@ -323,7 +323,7 @@ function Game() constructor {
     
     self.frame_rates = [30, 60, 120, 144];
     self.frame_rate_index = 1;
-    self.languages = ["English"/*, "English (Pirate)"*/];
+    self.languages = ["DEFAULT", "English"/*, "English (Pirate)"*/];
     self.language_index = 0;
     
     GetLanguageName = function(index = self.language_index) {

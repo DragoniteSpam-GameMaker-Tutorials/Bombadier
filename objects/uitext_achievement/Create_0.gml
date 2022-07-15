@@ -23,6 +23,6 @@ Render = function() {
         GAME.show_tooltip_floating.y = y + sprite_height + 32;
         GAME.show_tooltip_floating.w = 320;
         GAME.show_tooltip_floating.enabled = true;
-        GAME.show_tooltip_floating.text = achievement.description;
+        GAME.show_tooltip_floating.text = L(achievement.description);
     }
 }
