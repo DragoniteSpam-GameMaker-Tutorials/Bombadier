@@ -16,7 +16,7 @@ Update = function() {
                 break;
             case ReasonsWhyYouCantUpgradeATower.MAX_LEVEL:
                 self.enabled = false;
-                self.text = "(Max Level)";
+                self.text = "@TOWER_MAX_LEVEL";
                 break;
             case ReasonsWhyYouCantUpgradeATower.NOT_ENOUGH_MONEY:
                 self.text_args = [string(tower.class.cost[tower.level])];

@@ -146,7 +146,7 @@ function Game() constructor {
         load_vbuff("towers_and_whatnot/bullet-bird-up.vbuff", global.format)
     ];
     
-    tower_pebbles =     new TowerData("Pebble Shooter",
+    tower_pebbles =     new TowerData("@TN_PEBBLE_SHOOTER",
                         /* rate  */ [1, 1, 2],
                         /* range */ [3 * 32, 3 * 32, 3 * 32],
                         /* dmg   */ [1, 3, 4],
@@ -154,13 +154,13 @@ function Game() constructor {
                             load_vbuff("towers_and_whatnot/tower-pebble.vbuff", global.format),
                             bullet_pebble,
                             [
-                                "A basic pebble-shooting\ntower!",
-                                "Pebble shooter damage\nincreased!",
-                                "Shoots twice as fast!"
+                                "@TD_PEBBLE_SHOOTER_0",
+                                "@TD_PEBBLE_SHOOTER_1",
+                                "@TD_PEBBLE_SHOOTER_2"
                             ],
                         /* id    */ "PEBBLES"
                         );
-    tower_fire =        new TowerData("Fire Blaster",
+    tower_fire =        new TowerData("@TN_FIRE_BLASTER",
                         /* rate  */ [0.5, 0.75, 0.75],
                         /* range */ [3 * 32, 3.5 * 32, 3.5 * 32],
                         /* dmg   */ [1, 1, 1],
@@ -168,13 +168,13 @@ function Game() constructor {
                             load_vbuff("towers_and_whatnot/tower-fire.vbuff", global.format),
                             bullet_fire,
                             [
-                                "Kill foes with fire!",
-                                "Shoots fire faster!",
-                                "Burn effect lasts longer!"
+                                "@TD_FIRE_BLASTER_0",
+                                "@TD_FIRE_BLASTER_1",
+                                "@TD_FIRE_BLASTER_2"
                             ],
                         /* id    */ "FIRE"
                         );
-    tower_magnify =     new TowerData("Magnifying Glass",
+    tower_magnify =     new TowerData("@TN_MAGNIFYING_GLASS",
                         /* rate  */ [0, 0, 0],
                         /* range */ [2.5 * 32, 3 * 32, 3 * 32],
                         /* dmg   */ [3, 6, 8],
@@ -182,13 +182,13 @@ function Game() constructor {
                             load_vbuff("towers_and_whatnot/tower-glass.vbuff", global.format),
                             bullet_pebble,
                             [
-                                "Burn foes with the power\nof the sun!",
-                                "Increased damage and\nattack radius!",
-                                "Does yet more damage\nand burns foes for\ngood measure!"
+                                "@TD_MAGNIFY_0",
+                                "@TD_MAGNIFY_1",
+                                "@TD_MAGNIFY_2"
                             ],
                         /* id    */ "MAGNIFY"
                         );
-    tower_spray =       new TowerData("Bug Spray",
+    tower_spray =       new TowerData("@TN_BUG_SPRAY",
                         /* rate  */ [1, 1, 2],
                         /* range */ [4 * 32, 4 * 32, 4 * 32],
                         /* dmg   */ [0, 0, 0],
@@ -196,13 +196,13 @@ function Game() constructor {
                             load_vbuff("towers_and_whatnot/tower-spray.vbuff", global.format),
                             bullet_bug_spray,
                             [
-                                "Spray the track with bug\nrepellent!",
-                                "Clouds last longer and\naffect more foes!",
-                                "Spray much faster!"
+                                "@TD_BUG_SPRAY_0",
+                                "@TD_BUG_SPRAY_1",
+                                "@TD_BUG_SPRAY_2"
                             ],
                         /* id    */ "SPRAY"
                         );
-    tower_flypaper =    new TowerData("Fly Paper Trap",
+    tower_flypaper =    new TowerData("@TN_FLY_PAPER",
                         /* rate  */ [1, 1, 1],
                         /* range */ [4 * 32, 4 * 32, 4 * 32],
                         /* dmg   */ [0, 0, 0],
@@ -210,13 +210,13 @@ function Game() constructor {
                             load_vbuff("towers_and_whatnot/tower-flypaper.vbuff", global.format),
                             bullet_fly_paper,
                             [
-                                "Slow down the incoming\nfoes with sticky paper!",
-                                "Duration and magnitude of\nslow increased!",
-                                "Fly paper momentarily\nimmobilizes anything\nthat walks over it!"
+                                "@TD_PAPER_0",
+                                "@TD_PAPER_1",
+                                "@TD_PAPER_2"
                             ],
                         /* id    */ "FLYPAPER"
                         );
-    tower_bird =        new TowerData("Bird Nest",
+    tower_bird =        new TowerData("@TN_BIRD_NEST",
                         /* rate  */ [0.5, 1, 1],
                         /* range */ [4 * 32, 4 * 32, 4 * 32],
                         /* dmg   */ [8, 12, 12],
@@ -224,9 +224,9 @@ function Game() constructor {
                             load_vbuff("towers_and_whatnot/tower-bird.vbuff", global.format),
                             bullet_bird,
                             [
-                                "Call on local birds to snack\non the foes!",
-                                "Birds do more damage!",
-                                "Summon an fourth bird!"
+                                "@TD_NEST_0",
+                                "@TD_NEST_1",
+                                "@TD_NEST_2"
                             ],
                         /* id    */ "BIRD"
                         );
