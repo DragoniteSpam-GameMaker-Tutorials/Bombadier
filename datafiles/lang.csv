@@ -1,0 +1,102 @@
+# Key,# English
+%0 x %1,%0 x %1
+(Max Level),(Max Level)
++,+
+-,-
+1. The Campsite,1. The Campsite
+10. The Outskirts,10. The Outskirts
+11. The City,11. The City
+12. The Castle,12. The Castle
+1x,1x
+2. The Woods,2. The Woods
+2x,2x
+3. The Farm,3. The Farm
+4. The Canyon,4. The Canyon
+5. The\nFlower Fields,5. The\nFlower Fields
+6. The Graveyard,6. The Graveyard
+7. The Beach,7. The Beach
+8. The Pirate Cove,8. The Pirate Cove
+9. The Buttes,9. The Buttes
+Achievement Progress: %0%,Achievement Progress: %0%
+@GAME_SUMMARY,%0 to next wave\nMoney: %1\nHealth: %2\nWave: %3
+@HOWTOPLAY,Build towers to stop the ever-advancing wave of insects!\nPan around the map with WASD or with the middle mouse button!\n\nBuild and upgrade towers along the track!\nClick on a tower to view its stats or upgrade it!\nSend in waves early to get bonus money!\nIf too many foes make it to the end of the track
+@PATRONS,"Thank you to my Patreon supporters!\n\nAugustín Molina Uasuf, bryin lyin, "
+@TOWER_SUMMARY,%0 (Lv. %1)\nShots: %2\nDamange dealt: %3
+@TOWER_SUMMARY_GLASS,%0 (Lv. %1)\nFocus duration: %2\nDamange dealt: %3
+@TOWER_SUMMARY_PAPER,%0 (Lv. %1)\nPapers dispensed: %2\nVictims: %3
+@TOWER_SUMMARY_PAPER_ADVANCED,%0 (Lv. %1)\nPapers dispensed: %2\nVictims: %3\nImmobilizations: %4
+@TOWER_SUMMARY_SPRAY,%0 (Lv. %1)\nClouds spawned: %2\nVictims: %3\nDamange dealt: %4
+@TOWER_TOOLTIP,%0\n\n%1
+A basic pebble-shooting\ntower!,A basic pebble-shooting\ntower!
+Achievements,Achievements
+Back,Back
+Back to Title,Back to Title
+Bird Nest,Bird Nest
+Bird Nest ($%0),Bird Nest ($%0)
+Birds do more damage!,Birds do more damage!
+Bombadier: Credits,Bombadier: Credits
+Bug Spray,Bug Spray
+Bug Spray ($%0),Bug Spray ($%0)
+Burn effect lasts longer!,Burn effect lasts longer!
+Burn foes with the power\nof the sun!,Burn foes with the power\nof the sun!
+Call on local birds to snack\non the foes!,Call on local birds to snack\non the foes!
+Clouds last longer and\naffect more foes!,Clouds last longer and\naffect more foes!
+Credits,Credits
+Delete Save,Delete Save
+Does yet more damage\nand burns foes for\ngood measure!,Does yet more damage\nand burns foes for\ngood measure!
+Duration and magnitude of\nslow increased!,Duration and magnitude of\nslow increased!
+English,English
+English (Pirate),English (Pirate)
+FPS: %0,FPS: %0
+Fire Blaster,Fire Blaster
+Fire Blaster ($%0),Fire Blaster ($%0)
+Fly Paper Dispenser,Fly Paper Dispenser
+Fly Paper Dispenser ($%0),Fly Paper Dispenser ($%0)
+Fly paper momentarily\nimmobilizes anything\nthat walks over it!,Fly paper momentarily\nimmobilizes anything\nthat walks over it!
+Fullscreen: Off,Fullscreen: Off
+Fullscreen: On,Fullscreen: On
+How To Play,How To Play
+Increased damage and\nattack radius!,Increased damage and\nattack radius!
+Kill foes with fire!,Kill foes with fire!
+Language: %0,Language: %0
+Made by Michael,Made by Michael
+Magnifying Glass,Magnifying Glass
+Magnifying Glass ($%0),Magnifying Glass ($%0)
+Many assets from kenney.nl,Many assets from kenney.nl
+Music by RyanAvx,Music by RyanAvx
+Next Level,Next Level
+Next Wave,Next Wave
+No,No
+Particle Density: %0%,Particle Density: %0%
+Pause Game,Pause Game
+Pebble Shooter,Pebble Shooter
+Pebble Shooter ($%0),Pebble Shooter ($%0)
+Pebble shooter damage\nincreased!,Pebble shooter damage\nincreased!
+Quit Game,Quit Game
+Quit to Desktop,Quit to Desktop
+Quit to Title,Quit to Title
+Restart,Restart
+Resume,Resume
+Retry,Retry
+Scale: %0%,Scale: %0%
+Sell ($%0),Sell ($%0)
+Settings,Settings
+Shoots fire faster!,Shoots fire faster!
+Shoots twice as fast!,Shoots twice as fast!
+Slow down the incoming\nfoes with sticky paper!,Slow down the incoming\nfoes with sticky paper!
+Some audio from Sonniss,Some audio from Sonniss
+Special thanks to Michael's sister,Special thanks to Michael's sister
+Spray much faster!,Spray much faster!
+Spray the track with bug\nrepellent!,Spray the track with bug\nrepellent!
+Start,Start
+Summon an fourth bird!,Summon an fourth bird!
+Upgrade ($%0),Upgrade ($%0)
+Volume: %0%,Volume: %0%
+Would you like to delete\nyour save data?,Would you like to delete\nyour save data?
+Would you like to quit\nthe game?,Would you like to quit\nthe game?
+Would you like to quit the game?,Would you like to quit the game?
+Yes,Yes
+You lose!,You lose!
+You win!,You win!
+spart by TheSnidr,spart by TheSnidr
+||,||
