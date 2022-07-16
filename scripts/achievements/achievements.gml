@@ -130,16 +130,21 @@ Achievements = {
     },
     
     Load: function() {
-        try {
-            var data = buffer_load(ACHIEVEMENT_SAVE_FILE);
-            var input = json_parse(buffer_read(data, buffer_text));
-            KestrelSystem.Load(input.data);
-            self.stats = input.stats ?? { };
-            self.stats[$ "stomp_count"] ??= 0;
-            self.stats[$ "tower_records"] ??= { };
-            buffer_delete(data);
-        } catch (e) {
-            show_debug_message("Failed to load achievement data: " + e.message);
+        // OGX doesn't like doing this with try-catch for some reason
+        if (file_exists(ACHIEVEMENT_SAVE_FILE)) {
+            try {
+                var data = buffer_load(ACHIEVEMENT_SAVE_FILE);
+                var input = json_parse(buffer_read(data, buffer_text));
+                KestrelSystem.Load(input.data);
+                self.stats = input.stats ?? { };
+                self.stats[$ "stomp_count"] ??= 0;
+                self.stats[$ "tower_records"] ??= { };
+                buffer_delete(data);
+            } catch (e) {
+                show_debug_message("Failed to load achievement data: " + e.message);
+                self.Reset();
+            }
+        } else {
             self.Reset();
         }
     },
