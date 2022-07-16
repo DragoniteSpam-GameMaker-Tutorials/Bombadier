@@ -67,7 +67,9 @@ Particles = new (function() constructor {
         	setLife(1, 1.5);
         	setSpeed(12, 20, 0, 0);
         	setDirection(0, 0, 1, 30, false);
-        	setColour(0xff6699, 1, 0xff6699, 1, 0xff6699, 0);
+        	setColour(0xff6699, 1, 0xff6699, 1, 0xff6699, 0.5, 0xff6699, 0);
+        	setSize(8, 12, 0, -0.05, 0, 200);
+        	setBlend(true, false);
         }
         
         with (types.glue) {
