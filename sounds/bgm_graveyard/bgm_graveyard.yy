@@ -1,6 +1,6 @@
 {
   "conversionMode": 0,
-  "compression": 0,
+  "compression": 3,
   "volume": 0.5,
   "preload": false,
   "bitRate": 128,
@@ -12,7 +12,7 @@
     "path": "audiogroups/audiogroup_default",
   },
   "soundFile": "bgm_graveyard.mp3",
-  "duration": 128.052231,
+  "duration": 128.05223,
   "parent": {
     "name": "Music",
     "path": "folders/Audio/Music.yy",

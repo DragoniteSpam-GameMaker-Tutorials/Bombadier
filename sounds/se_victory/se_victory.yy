@@ -14,8 +14,8 @@
   "soundFile": "se_victory.wav",
   "duration": 4.604308,
   "parent": {
-    "name": "Bombadier",
-    "path": "Bombadier.yyp",
+    "name": "Sound Effects",
+    "path": "folders/Audio/Sound Effects.yy",
   },
   "resourceVersion": "1.0",
   "name": "se_victory",

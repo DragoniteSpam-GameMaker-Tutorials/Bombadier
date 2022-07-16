@@ -1,6 +1,6 @@
 {
   "conversionMode": 0,
-  "compression": 0,
+  "compression": 3,
   "volume": 0.9,
   "preload": false,
   "bitRate": 128,
@@ -12,7 +12,7 @@
     "path": "audiogroups/audiogroup_default",
   },
   "soundFile": "bgm_adventure.mp3",
-  "duration": 118.204079,
+  "duration": 118.20408,
   "parent": {
     "name": "Music",
     "path": "folders/Audio/Music.yy",

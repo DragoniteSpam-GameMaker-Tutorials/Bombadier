@@ -14,8 +14,8 @@
   "soundFile": "se_defeat.wav",
   "duration": 0.79175,
   "parent": {
-    "name": "Bombadier",
-    "path": "Bombadier.yyp",
+    "name": "Sound Effects",
+    "path": "folders/Audio/Sound Effects.yy",
   },
   "resourceVersion": "1.0",
   "name": "se_defeat",
