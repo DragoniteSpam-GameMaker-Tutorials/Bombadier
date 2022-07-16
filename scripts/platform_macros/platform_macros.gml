@@ -20,3 +20,5 @@
 #macro DEFAULT_PARTICLE_DENSITY 1
 #macro pi:DEFAULT_PARTICLE_DENSITY 0.75
 #macro pi_release:DEFAULT_PARTICLE_DENSITY 0.75
+
+#macro IS_OGX (os_type == os_operagx)

@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Graphical stuff",
-    "path": "folders/Graphical stuff.yy",
+    "name": "Bombadier",
+    "path": "Bombadier.yyp",
   },
   "resourceVersion": "1.0",
-  "name": "Raspberry_Pi_Macros",
+  "name": "Platform_Macros",
   "tags": [],
   "resourceType": "GMScript",
 }

@@ -1,4 +1,7 @@
 {
+  "ConfigValues": {
+    "release": {"option_gameguid":"5a67470e-5c50-4a27-9992-8d89bf7cb1e5",},
+  },
   "option_gameguid": "5a67470e-5c50-4a27-9992-8d89bf7cb1e5",
   "option_gameid": "0",
   "option_game_speed": 60,
@@ -10,7 +13,6 @@
   "option_author": "",
   "option_collision_compatibility": true,
   "option_copy_on_write_enabled": true,
-  "option_lastchanged": "",
   "option_spine_licence": false,
   "option_template_image": "template_image.png",
   "option_template_icon": "template_icon.png",
