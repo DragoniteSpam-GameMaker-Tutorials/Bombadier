@@ -58,7 +58,14 @@ function text_initialize() {
     
     try {
         text_grid = load_csv(TEXT_FILE);
-    
+        
+        // going to re-initialize text here just in case the languages you get
+        // dont match the languages you expect
+        Text = array_create(max(ds_grid_width(text_grid), array_length(GAME.languages)));
+        for (var i = 0, n = array_length(Text); i < n; i++) {
+            Text[i] = { };
+        }
+        
         for (var i = 0, w = ds_grid_width(text_grid); i < w; i++) {
             for (var j = 0, h = ds_grid_height(text_grid); j < h; j++) {
                 Text[i][$ text_grid[# 0, j]] = string_replace_all(text_grid[# i, j], "\\n", "\n");
