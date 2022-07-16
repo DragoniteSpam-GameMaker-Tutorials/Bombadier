@@ -414,7 +414,7 @@ function Game() constructor {
             
             self.language_index = json[$ "language_index"];
             if (!is_numeric(self.language_index)) self.language_index = 1;
-            self.language_index = clamp(self.language_index, 0, array_length(self.languages));
+            self.language_index = clamp(self.language_index, 0, array_length(self.languages) - 1);
         } catch (e) {
         }
     }
