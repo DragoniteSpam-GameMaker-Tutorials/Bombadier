@@ -6,3 +6,7 @@ OnClick = function() {
     window_set_fullscreen(!window_get_fullscreen());
     GAME.SaveSettings();
 };
+
+Update = function() {
+    self.enabled = !IS_OGX;
+};

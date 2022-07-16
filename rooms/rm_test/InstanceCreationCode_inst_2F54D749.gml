@@ -8,5 +8,5 @@ OnClick = function() {
 };
 
 Update = function() {
-    self.enabled = !window_get_fullscreen();
+    self.enabled = !window_get_fullscreen() && !IS_OGX;
 };

@@ -3,3 +3,7 @@ OnClick = function() {
     game_set_speed(GAME.frame_rates[GAME.frame_rate_index], gamespeed_fps);
     GAME.SaveSettings();
 };
+
+Update = function() {
+    self.enabled = !IS_OGX;
+};
