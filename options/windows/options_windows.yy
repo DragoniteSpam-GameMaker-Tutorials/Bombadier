@@ -5,7 +5,7 @@
   },
   "option_windows_display_name": "Bombadier",
   "option_windows_executable_name": "Bombadier.exe",
-  "option_windows_version": "1.0.1.0",
+  "option_windows_version": "1.1.2.0",
   "option_windows_company_info": "Michael the Wizardragon",
   "option_windows_product_info": "Bombadier",
   "option_windows_copyright_info": "2020 - 2021 Michael the Wizardragon",
