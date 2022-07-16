@@ -471,6 +471,8 @@ function Game() constructor {
         waves_remain = true;
         
         gameplay_mode = GameModes.GAMEPLAY;
+        
+        self.DampenBGM(1);
     };
     
     GoToLevel = function(level_index) {
@@ -502,6 +504,11 @@ function Game() constructor {
         audio_sound_gain(self.current_bgm, 0, time);
         array_push(self.bgm_fadeout, { sound: self.current_bgm, time: time });
         self.current_bgm = -1;
+    };
+    
+    DampenBGM = function(level = 0.5, time = 250) {
+        if (self.current_bgm == -1) return;
+        audio_sound_gain(self.current_bgm, level, time);
     };
     
     GoToTitle = function() {
@@ -571,6 +578,7 @@ function Game() constructor {
                 KestrelSystem.Update(Achievements.locusts);
             }
             audio_play_sound(se_defeat, SOUND_PRIORITY_GAMEPLAY_HIGH, false);
+            self.DampenBGM();
         } else {
             self.CheckGameOver();
         }
@@ -608,6 +616,7 @@ function Game() constructor {
         self.CallEntityGameOver();
         self.SavePlayerData();
         audio_play_sound(se_victory, SOUND_PRIORITY_GAMEPLAY_HIGH, false);
+        self.DampenBGM();
     };
     
     CallEntityGameOver = function() {
