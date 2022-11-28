@@ -4,7 +4,7 @@ Individual tutorials are fun, but developing a game from start to finish is also
 
 The video playlist can be found here:
 
-[![YouTube playlist](https://i.ytimg.com/vi/FokSuuxXkQE/hqdefault.jpg)](https://www.youtube.com/watch?v=FokSuuxXkQE&list=PL_hT--4HOvreDB5Kj0BtGBx2yIAaYDPMC&index=2&t=0s)
+[![YouTube playlist](https://i.ytimg.com/vi/FokSuuxXkQE/hqdefault.jpg)](https://www.youtube.com/watch?v=FokSuuxXkQE&list=PL_hT--4HOvreDB5Kj0BtGBx2yIAaYDPMC)
 
 ## Releases
 
