@@ -1,7 +1,10 @@
 {
+  "resourceType": "GMLinuxOptions",
+  "resourceVersion": "1.0",
+  "name": "Linux",
   "ConfigValues": {
     "release": {"option_linux_splash_screen":"splash/splash.png","option_linux_icon":"icons/64.png",},
-    "pi_release": {"option_linux_icon":"icons/64.png",},
+    "pi_release": {"option_linux_icon":"icons/64.png","option_linux_version":"1.1.2",},
   },
   "option_linux_display_name": "Bombadier",
   "option_linux_version": "1.0.1",
@@ -22,8 +25,4 @@
   "option_linux_texture_page": "2048x2048",
   "option_linux_enable_steam": false,
   "option_linux_disable_sandbox": false,
-  "resourceVersion": "1.0",
-  "name": "Linux",
-  "tags": [],
-  "resourceType": "GMLinuxOptions",
 }

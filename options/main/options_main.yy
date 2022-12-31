@@ -1,4 +1,7 @@
 {
+  "resourceType": "GMMainOptions",
+  "resourceVersion": "1.4",
+  "name": "Main",
   "ConfigValues": {
     "release": {"option_gameguid":"5a67470e-5c50-4a27-9992-8d89bf7cb1e5",},
   },
@@ -17,8 +20,4 @@
   "option_template_image": "template_image.png",
   "option_template_icon": "template_icon.png",
   "option_template_description": null,
-  "resourceVersion": "1.4",
-  "name": "Main",
-  "tags": [],
-  "resourceType": "GMMainOptions",
 }

@@ -20,8 +20,8 @@ function Game() constructor {
     vertex_format_add_color();
     global.format = vertex_format_end();
     
-    ground = create_ground_vbuffer (global.format);
-    water = create_water_vbuffer (global.format);
+    ground = create_ground_vbuffer(global.format);
+    water = create_water_vbuffer(global.format);
     #endregion
     
     self.sky_colors = [
