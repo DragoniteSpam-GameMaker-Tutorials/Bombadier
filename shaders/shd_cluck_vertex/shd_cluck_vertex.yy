@@ -1,11 +1,10 @@
 {
-  "type": 1,
+  "resourceType": "GMShader",
+  "resourceVersion": "1.0",
+  "name": "shd_cluck_vertex",
   "parent": {
     "name": "shaders",
     "path": "folders/Luminous Chickens/shaders.yy",
   },
-  "resourceVersion": "1.0",
-  "name": "shd_cluck_vertex",
-  "tags": [],
-  "resourceType": "GMShader",
+  "type": 1,
 }

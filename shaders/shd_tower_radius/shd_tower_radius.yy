@@ -1,11 +1,10 @@
 {
-  "type": 1,
+  "resourceType": "GMShader",
+  "resourceVersion": "1.0",
+  "name": "shd_tower_radius",
   "parent": {
     "name": "Shaders",
     "path": "folders/Graphical stuff/Shaders.yy",
   },
-  "resourceVersion": "1.0",
-  "name": "shd_tower_radius",
-  "tags": [],
-  "resourceType": "GMShader",
+  "type": 1,
 }

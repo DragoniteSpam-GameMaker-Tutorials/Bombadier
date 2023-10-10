@@ -43,3 +43,14 @@
 
 #macro SAVE_FILE_NAME                   "player.json"
 #macro SETTINGS_FILE_NAME               "settings.json"
+
+#macro __window_set_size_source     window_set_size
+#macro window_set_size              __window_set_size_replacement
+
+function __window_set_size_replacement(w, h) {
+    if (os_browser != browser_not_a_browser || os_type == os_operagx) {
+        //__window_set_size_source(browser_width, browser_height);
+    } else {
+        __window_set_size_source(w, h);
+    }
+}

@@ -1,11 +1,10 @@
 {
-  "type": 1,
+  "resourceType": "GMShader",
+  "resourceVersion": "1.0",
+  "name": "shd_debug_wireframe",
   "parent": {
     "name": "Shaders",
     "path": "folders/Graphical stuff/Shaders.yy",
   },
-  "resourceVersion": "1.0",
-  "name": "shd_debug_wireframe",
-  "tags": [],
-  "resourceType": "GMShader",
+  "type": 1,
 }
