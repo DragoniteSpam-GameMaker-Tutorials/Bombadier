@@ -473,7 +473,7 @@ function EntityTowerFlyPaper(x, y, z, class) : EntityTower(x, y, z, class) const
             return {
                 base: "@TOWER_SUMMARY_PAPER",
                 args: [
-                    self.name,
+                    L(self.name),
                     string(self.level),
                     string(self.stats.papers),
                     string(self.stats.hits),
