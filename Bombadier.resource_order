@@ -73,6 +73,7 @@
     {"name":"shd_billboard","order":3,"path":"shaders/shd_billboard/shd_billboard.yy",},
     {"name":"spr_particle_main","order":4,"path":"sprites/spr_particle_main/spr_particle_main.yy",},
     {"name":"EntityFoe","order":3,"path":"scripts/EntityFoe/EntityFoe.yy",},
+    {"name":"Changelog","order":9,"path":"notes/Changelog/Changelog.yy",},
     {"name":"Database","order":4,"path":"scripts/Database/Database.yy",},
     {"name":"UIText_Achievement","order":12,"path":"objects/UIText_Achievement/UIText_Achievement.yy",},
     {"name":"spr_tower_radius","order":5,"path":"sprites/spr_tower_radius/spr_tower_radius.yy",},

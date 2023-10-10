@@ -549,6 +549,7 @@
     {"id":{"name":"shd_billboard","path":"shaders/shd_billboard/shd_billboard.yy",},},
     {"id":{"name":"spr_particle_main","path":"sprites/spr_particle_main/spr_particle_main.yy",},},
     {"id":{"name":"EntityFoe","path":"scripts/EntityFoe/EntityFoe.yy",},},
+    {"id":{"name":"Changelog","path":"notes/Changelog/Changelog.yy",},},
     {"id":{"name":"Database","path":"scripts/Database/Database.yy",},},
     {"id":{"name":"UIText_Achievement","path":"objects/UIText_Achievement/UIText_Achievement.yy",},},
     {"id":{"name":"spr_tower_radius","path":"sprites/spr_tower_radius/spr_tower_radius.yy",},},

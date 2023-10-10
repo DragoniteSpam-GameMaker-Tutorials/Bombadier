@@ -1,0 +1,10 @@
+Changes since 1.1.2
+
+Gameplay changes
+
+ - You can zoom in and out by scrolling the mouse wheel
+
+Bugs fixed
+
+ - Bird tower doesn't track its stats
+ - Fly Paper tower's name is shown on screen
