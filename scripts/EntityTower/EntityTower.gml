@@ -381,6 +381,11 @@ function EntityTowerBird(x, y, z, class) : EntityTower(x, y, z, class) construct
     birds = [ ];
     bird_limit = 3;
     
+    self.stats = {
+        meals_eaten: 0,
+        damage_dealt: 0
+    };
+    
     static Update = function() {
         if (self.level >= 3) {
             bird_limit = 4;
@@ -415,6 +420,18 @@ function EntityTowerBird(x, y, z, class) : EntityTower(x, y, z, class) construct
             self.birds[i].Destroy();
         }
         self.BaseSell();
+    };
+    
+    static GetSummary = function() {
+        return {
+            base: "@TOWER_SUMMARY_BIRD",
+            args: [
+                L(self.name),
+                string(self.level),
+                string(self.stats.meals_eaten),
+                string(self.stats.damage_dealt)
+            ]
+        };
     };
 }
 

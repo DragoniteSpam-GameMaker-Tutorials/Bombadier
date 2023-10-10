@@ -117,6 +117,8 @@ function EntityBulletBird(x, y, z, bullet_data, parent_tower, nest_radius) : Ent
                 OnHit(foe);
                 Particles.BurstFromEmitter(Particles.emitters.hit_effects, Particles.types.stone_debris, foe.position.x, foe.position.y, foe.position.z + 8, 12);
                 self.parent_tower.RemoveBird(self);
+                self.parent_tower.stats.meals_eaten++;
+                self.parent_tower.stats.damage_dealt += self.parent_tower.act_damage;
                 self.Destroy();
                 break;
             }

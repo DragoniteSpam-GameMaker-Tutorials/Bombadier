@@ -46,6 +46,7 @@
 @TN_PEBBLE_SHOOTER,Pebble Shooter,,
 @TOWER_MAX_LEVEL,(Max Level),,
 @TOWER_SUMMARY,%0 (Lv. %1)\nShots: %2\nDamange dealt: %3,,
+@TOWER_SUMMARY_BIRD,%0 (Lv. %1)\nMeals eaten: %2\nDamage dealt: %3,,
 @TOWER_SUMMARY_GLASS,%0 (Lv. %1)\nFocus duration: %2\nDamange dealt: %3,,
 @TOWER_SUMMARY_PAPER,%0 (Lv. %1)\nPapers dispensed: %2\nVictims: %3,,
 @TOWER_SUMMARY_PAPER_ADVANCED,%0 (Lv. %1)\nPapers dispensed: %2\nVictims: %3\nImmobilizations: %4,,
