@@ -2,14 +2,15 @@
 #macro CAMERA_TO_LEVEL (new Vector3(640, 0, 0))
 #macro CAMERA_FROM_TITLE (new Vector3(640, 840, 120))
 #macro CAMERA_TO_TITLE (new Vector3(640, 0, 0))
+#macro CAMERA_DEFAULT_FOV 60
 
 function Camera() constructor {
     from = CAMERA_FROM_TITLE;
     to = CAMERA_TO_TITLE;
     up = new Vector3(0, 0, 1);
-    fov = 60;
+    fov = CAMERA_DEFAULT_FOV;
     znear = 0.3;
-    zfar = 32000;
+    zfar = 10000;
     
     view_mat = undefined;
     proj_mat = undefined;
@@ -19,6 +20,10 @@ function Camera() constructor {
     mouse_last = { x: undefined, y: undefined };
     
     Update = function() {
+        static fov_max = 60;
+        static fov_min = 24;
+        static fov_increment = 3;
+        
         var mspd = 200;
         var dt = DT;
         var mx = 0;
@@ -41,6 +46,13 @@ function Camera() constructor {
                 my += mspd * dt;
                 my += mspd * dt;
             }
+            
+            if (mouse_wheel_up()) {
+                self.fov = max(fov_min, self.fov - fov_increment);
+            }
+            if (mouse_wheel_down()) {
+                self.fov = min(fov_max, self.fov + fov_increment);
+            }
         }
         
         if (GAME.gameplay_mode == GameModes.GAMEPLAY) {
@@ -57,7 +69,7 @@ function Camera() constructor {
         var camera_x_min = (GAME.gameplay_mode == GameModes.GAMEPLAY) ? 200 : -200;
         var camera_x_max = (GAME.gameplay_mode == GameModes.GAMEPLAY) ? (room_width - 200) : room_width + 200;
         var camera_y_min = (GAME.gameplay_mode == GameModes.GAMEPLAY) ? 0 : -1000;
-        var camera_y_max = (GAME.gameplay_mode == GameModes.GAMEPLAY) ? 128 : (room_height / 2);
+        var camera_y_max = (GAME.gameplay_mode == GameModes.GAMEPLAY) ? (128 + (fov_max - self.fov) * 4) : (room_height / 2);
         
         to.x = clamp(to.x + mx, camera_x_min, camera_x_max);
         from.x = clamp(from.x + mx, camera_x_min, camera_x_max);

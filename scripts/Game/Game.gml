@@ -481,6 +481,7 @@ function Game() constructor {
         self.Initialize();
         self.camera.from = CAMERA_FROM_LEVEL;
         self.camera.to = CAMERA_TO_LEVEL;
+        self.camera.fov = CAMERA_DEFAULT_FOV;
     };
     
     GoToNextLevel = function() {
@@ -491,6 +492,7 @@ function Game() constructor {
             self.Initialize();
             self.camera.from = CAMERA_FROM_LEVEL;
             self.camera.to = CAMERA_TO_LEVEL;
+            self.camera.fov = CAMERA_DEFAULT_FOV;
         }
     };
     
@@ -519,6 +521,7 @@ function Game() constructor {
         self.current_title_screen = "UI_Title_Screen";
         self.camera.from = CAMERA_FROM_TITLE;
         self.camera.to = CAMERA_TO_TITLE;
+        self.camera.fov = CAMERA_DEFAULT_FOV;
     };
     
     self.PauseGame = function() {

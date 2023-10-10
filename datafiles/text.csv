@@ -18,7 +18,7 @@
 @ACHIEVEMENT_GET,Achievement get!,,
 @ACHIEVEMENT_PROGRESS,Achievement Progress: %0%,,
 @GAME_SUMMARY,%0 to next wave\nMoney: %1\nHealth: %2\nWave: %3,,
-@HOWTOPLAY,Build towers to stop the ever-advancing wave of insects!\nPan around the map with WASD or with the middle mouse button!\n\nBuild and upgrade towers along the track!\nClick on a tower to view its stats or upgrade it!\nSend in waves early to get bonus money!\nIf too many foes make it to the end of the track,,
+@HOWTOPLAY,Build towers to stop the ever-advancing wave of insects!\nPan around the map with WASD or with the middle mouse button!\nZoom in or out by scrolling the mouse wheel!\n\nBuild and upgrade towers along the track!\nClick on a tower to view its stats or upgrade it!\nSend in waves early to get bonus money!\nIf too many foes make it to the end of the track,,
 @PATRONS,"Thank you to my Patreon supporters!\n\nAugustín Molina Uasuf, bryin lyin, Catherine Cruickshank, Ciara\nElizabeth, Connor, David A. Key, Death, Edward Holt, Emilie Coyo,\nGilly, gizmo199, Gunnar Clovis, HaloFactory, Jason, Johnny Serup,\nJonah Gurnsey, Jonathon Calsolaro, IndiePunch, Karlstens, Peardox,\nPerpetua, Posho, Robert Tester, Shortbread, Snidre Larsen,\nsquarecr0w Stepen Loney, Tusk, Zennith",,
 @TD_BUG_SPRAY_0,Spray the track with bug\nrepellent!,, 
 @TD_BUG_SPRAY_1,Clouds last longer and\naffect more foes!,,
